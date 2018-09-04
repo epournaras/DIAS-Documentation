@@ -1,0 +1,14 @@
+Platforms
+*********
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+   ubuntu
+   osx
+   download
+   install
+   launch
+   monitoring
+   viewing
