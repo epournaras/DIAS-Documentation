@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>7. Appendix &#8212; DIAS-Development v1.0 documentation</title>
+    <title>8. Appendix &#8212; DIAS-Development v1.0 documentation</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -23,8 +23,8 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="7.1. Protopeer" href="appendix/protopeer.html" />
-    <link rel="prev" title="6.2. Network GUI" href="gui/network.gui.html" />
+    <link rel="next" title="8.1. Protopeer" href="appendix/protopeer.html" />
+    <link rel="prev" title="7. DIAS Logging System" href="dias-logging-system.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -41,12 +41,25 @@
           <div class="body" role="main">
             
   <div class="section" id="appendix">
-<h1>7. Appendix<a class="headerlink" href="#appendix" title="Permalink to this headline">¶</a></h1>
+<h1>8. Appendix<a class="headerlink" href="#appendix" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="appendix/protopeer.html">7.1. Protopeer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="appendix/command.flooder.html">7.2. Command Flooder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix/protopeer.html">8.1. Protopeer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="appendix/protopeer.html#introduction">8.1.1. Introduction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="appendix/protopeer.html#memory-leaks">8.2. Memory Leaks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="appendix/protopeer.html#apache-mina">8.2.1. Apache Mina</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix/protopeer.html#bytebuffer-allocate">8.2.2. ByteBuffer.allocate()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix/protopeer.html#measurementlog">8.2.3. MeasurementLog</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="appendix/protopeer.html#networking-optimisations">8.3. Networking Optimisations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="appendix/protopeer.html#references">8.3.1. References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="appendix/command.flooder.html">8.4. Command Flooder</a></li>
 </ul>
 </div>
 </div>
@@ -75,20 +88,23 @@
 <li class="toctree-l1"><a class="reference internal" href="applications.html">4. Applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="architecture.html">5. Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gui.html">6. GUIs</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">7. Appendix</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="appendix/protopeer.html">7.1. Protopeer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="appendix/command.flooder.html">7.2. Command Flooder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dias-logging-system.html">7. DIAS Logging System</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">8. Appendix</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="appendix/protopeer.html">8.1. Protopeer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix/protopeer.html#memory-leaks">8.2. Memory Leaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix/protopeer.html#networking-optimisations">8.3. Networking Optimisations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix/command.flooder.html">8.4. Command Flooder</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="aggregation.html">8. Aggregation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aggregation.html">9. Aggregation</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="gui/network.gui.html" title="previous chapter">6.2. Network GUI</a></li>
-      <li>Next: <a href="appendix/protopeer.html" title="next chapter">7.1. Protopeer</a></li>
+      <li>Previous: <a href="dias-logging-system.html" title="previous chapter">7. DIAS Logging System</a></li>
+      <li>Next: <a href="appendix/protopeer.html" title="next chapter">8.1. Protopeer</a></li>
   </ul></li>
 </ul>
 </div>
