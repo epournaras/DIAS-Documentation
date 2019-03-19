@@ -1,8 +1,6 @@
 DIAS-Documentation
 edward | 2019-03-19
 
-git clone https://github.com/epournaras/DIAS-Documentation
-
 # ------------
 # introduction
 # ------------
