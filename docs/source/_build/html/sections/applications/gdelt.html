@@ -1,0 +1,297 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>GDELT &#8212; DIAS-Documentation  documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Smart Agora" href="smart.agora.html" />
+    <link rel="prev" title="Applications" href="../applications.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="gdelt">
+<h1>GDELT<a class="headerlink" href="#gdelt" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Have you ever wondered how many news event are produced every day in Europe?</p>
+<p>To demonstrate the real-world applicability and feasibility to perform real-time distributed data analytics, we connected DIAS into GDELT to measure the number of news events in Europe, updated every 15 minutes. Such news events are a good indicator of the overall activity level of the continent. Indeed, if more news items are being produced, then it is likely that more physical events are taking place. And vice-versa.</p>
+<p>The following application connects DIAS into GDELT. GDELT is the largest publicly available collection of near real-time news feed in the World, connecting to hundreds of newsfeeds and delivering updates every 15-minutes.</p>
+<p>This DIAS application covers the 28 countries in Europe. Each country is represented by a DIAS node, so there are 28 DIAS nodes in the network that are cooperating to provide analytics about the network. Each DIAS node aggregates the number of news items produced by itself as well as the 27 other nodes in the network.</p>
+</div>
+<div class="section" id="application-setup">
+<h2>Application Setup<a class="headerlink" href="#application-setup" title="Permalink to this headline">¶</a></h2>
+<p>At a high level, data for the 28 European countries are retrieved from GDELT every 15 minutes and published to the 28 Mock Devices. The latter are required to compute selected and possible states from the number of news events generated in the GDELT stream. The selected and possible states  are then passed along to the DIAS nodes in the DIAS Network, each DIAS node being paired with Mock Device. The real-time aggregation takes place inside the DIAS Network.</p>
+<img alt="../../_images/fig4.1.png" src="../../_images/fig4.1.png" />
+<p><strong>Figure 4.1</strong> Overview of the DIAS-GDELT application.</p>
+</div>
+<div class="section" id="screenshots">
+<h2>Screenshots<a class="headerlink" href="#screenshots" title="Permalink to this headline">¶</a></h2>
+<p>Here is a screenshot of DIAS-GDELT in action. You can observe the fluctuations in the numbers of news events generated per 15-minute window.</p>
+<p>For example, the number 200 (on the y-axis) indicates that 200 news events were generated concerning European countries over the relevant 15-minute window.</p>
+<img alt="../../_images/fig4.2.png" src="../../_images/fig4.2.png" />
+<p><strong>Figure 4.2</strong> DIAS-GDELT aggregation process. Each blue dot represents the estimated sum from each DIAS node. The green line shows the true sum of news events from GDELT. The blue line shows the true sum of selected states, whilst the red line shows the sum of the DIAS aggregates.</p>
+<p>You can also view the same aggregation process on the DIAS website, <a class="reference external" href="http://dias-net.org/gdelt/">http://dias-net.org/gdelt/</a></p>
+<img alt="../../_images/fig4.3.png" src="../../_images/fig4.3.png" />
+<p><strong>Figure 4.3</strong> DIAS-GDELT aggregation process as viewed in the webpage <a class="reference external" href="http://dias-net.org/gdelt/">http://dias-net.org/gdelt/</a></p>
+</div>
+<div class="section" id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>This section is organised into the following sub-sections:
+- Installation
+- Start Commands for launching
+- Logging Daemon
+- Protopeer Boostrap Server and DIAS Gateway Server
+- DIAS Nodes
+- GDELT Subscription
+- Mock Devices</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>See DIAS Installation Guide (-&gt; DIAS Installation Guide) for pre-requisites. Assuming the DIAS application has been successfully installed, you only need to install the DIAS-GDELT application to make this demo work.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/epournaras/DIAS-GDELT.git``
+</pre></div>
+</div>
+</div>
+<div class="section" id="start-commands">
+<h2>Start Commands<a class="headerlink" href="#start-commands" title="Permalink to this headline">¶</a></h2>
+<p>First, as with all DIAS applications, we need to start the persistence daemon, so that real-time data can be efficiently stored to a database whilst reducing persistence work to a minimum within each DIAS node.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">DIAS</span><span class="o">-</span><span class="n">Logging</span><span class="o">-</span><span class="n">System</span>
+
+<span class="o">./</span><span class="n">start</span><span class="o">.</span><span class="n">daemon</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="logging-daemon">
+<h2>Logging Daemon<a class="headerlink" href="#logging-daemon" title="Permalink to this headline">¶</a></h2>
+<p>The logging daemon is launched in a separate screen (that is, the GNU screen utility), as shown just below.</p>
+<img alt="../../_images/fig4.4.png" src="../../_images/fig4.4.png" />
+<p><strong>Figure 4.4</strong> DIAS-Logging Daemon receiving messages and persisting them to a PostgreSQL database for offline and online system logging analysis</p>
+</div>
+<div class="section" id="protopeer-bootstrap-server-and-dias-gateway-server">
+<h2>Protopeer Bootstrap Server and DIAS Gateway Server<a class="headerlink" href="#protopeer-bootstrap-server-and-dias-gateway-server" title="Permalink to this headline">¶</a></h2>
+<p>Next, we start a Protopeer Bootstrap Server and DIAS Gateway Server. The bootstrap server allows DIAS nodes to discover each other at the beginning when they initially connect with the bootstrap server. . The gateway, on the other hand, allows mock devices to be assigned to DIAS nodes.</p>
+<p>Note that we are using the gdelt deployment, which contains suitable configuration for running DIAS-GDELT. You can adjust the configuration by editing the file deployments/gdelt/dias.conf. The DIAS Installation Guide (-&gt; DIAS Installation Guide) explains in further detail what can be configured.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">DIAS</span><span class="o">-</span><span class="n">Development</span>
+
+<span class="o">./</span><span class="n">start</span><span class="o">.</span><span class="n">servers</span><span class="o">.</span><span class="n">sh</span> <span class="n">deployments</span><span class="o">/</span><span class="n">gdelt</span>
+</pre></div>
+</div>
+<p>After starting the Protopeer Bootstrap Server and DIAS Gateway Server, you should see something like this.</p>
+<img alt="../../_images/fig4.5.png" src="../../_images/fig4.5.png" />
+<p><strong>Figure 4.5</strong> The Protopeer Boostrap Server, that allows the DIAS nodes to initially connect with each other.</p>
+<img alt="../../_images/fig4.6.png" src="../../_images/fig4.6.png" />
+<p><strong>Figure 4.6</strong> The DIAS Gateway Server, that binds devices such as mobiles phones to DIAS nodes</p>
+</div>
+<div class="section" id="dias-nodes">
+<h2>DIAS Nodes<a class="headerlink" href="#dias-nodes" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have the Protopeer Bootstrap Server and DIAS Gateway Server running, we can launch the DIAS nodes, also known as aggregation peers. As the DIAS-GDELT simulation covers the European countries only, we will launch 28 DIAS nodes, one per European country. Note that, in this application, there is no need for carrier nodes to enable the join+leave process since countries don’t leave the planet (under normal conditions).</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">DIAS</span><span class="o">-</span><span class="n">Development</span>
+
+<span class="o">./</span><span class="n">start</span><span class="o">.</span><span class="n">aggregation</span><span class="o">.</span><span class="n">peers</span><span class="o">.</span><span class="n">sh</span> <span class="n">deployments</span><span class="o">/</span><span class="n">gdelt</span> <span class="mi">28</span> <span class="mi">1</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>You should a screen that looks like below, with one DIAS node per screen tab.</p>
+<p>To move to a different DIAS node, use the command ctrl+A then n or p to cycle forwards or backwards amongst the tabs of the screen. Since we have launched DIAS nodes that perform aggregation, they were given the prefix A (for aggregation), and then suffixed with the id of the DIAS node.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># moving to a different peer within a screen window</span>
+<span class="n">ctrl</span><span class="o">+</span><span class="n">A</span> <span class="n">then</span> <span class="n">n</span> <span class="ow">or</span> <span class="n">p</span>
+</pre></div>
+</div>
+<img alt="../../_images/fig4.7.png" src="../../_images/fig4.7.png" />
+<p><strong>Figure 4.7</strong> The DIAS nodes , that will perform the aggregation. Each DIAS node is launched in a separate tab of the screen utility</p>
+</div>
+<div class="section" id="gdelt-subscription">
+<h2>GDELT Subscription<a class="headerlink" href="#gdelt-subscription" title="Permalink to this headline">¶</a></h2>
+<p>Now we can start the GDELT subscription. GDELT collects data from thousands of websites and makes this data available every 15 minutes as a compressed text file. The GDELT Subscription is a bash script that retrieves this file, decompresses it, and delivers the data to the 28 mock devices.</p>
+<p>The bash and Python scripts obtain an update of the news events from GDELT every 15 minutes. The data is only obtained once from the GDELT website, then broadcast locally to each of the 28 mock devices. More details are provided below.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">DIAS</span><span class="o">-</span><span class="n">GDELT</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">gdeltv2</span><span class="o">.</span><span class="n">count</span>
+
+<span class="o">./</span><span class="n">auto</span><span class="o">.</span><span class="n">update</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<img alt="../../_images/fig4.8.png" src="../../_images/fig4.8.png" />
+<p><strong>Figure 4.8</strong> The script that retrieves the news feed from GDELT every 15 minutes. Once new data has arrived, it is parsed and broadcast over ZeroMQ for the mock devices to process</p>
+</div>
+<div class="section" id="mock-devices">
+<h2>Mock Devices<a class="headerlink" href="#mock-devices" title="Permalink to this headline">¶</a></h2>
+<p>Finally, we are ready to start the mock devices. In the DIAS-GDELT application, each mock device represents a country. Thus we must launch 28 mock devices which listen to data updates over the ZeroMQ broadcast (mentioned just before) and update their selected and possible states accordingly.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">DIAS</span><span class="o">-</span><span class="n">GDELT</span>
+
+<span class="o">./</span><span class="n">start</span><span class="o">.</span><span class="n">mock</span><span class="o">.</span><span class="n">devices</span><span class="o">.</span><span class="n">sh</span> <span class="n">deployments</span><span class="o">/</span><span class="n">gdelt</span> <span class="mi">28</span>
+</pre></div>
+</div>
+<img alt="../../_images/fig4.9.png" src="../../_images/fig4.9.png" />
+<p><strong>Figure 4.9</strong> The mock devices, each processing messages from the ZeroMQ broadcast and listening for changes in the selected state.</p>
+</div>
+<div class="section" id="how-it-works">
+<h2>How it works?<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
+<img alt="../../_images/fig4.10.png" src="../../_images/fig4.10.png" />
+<p><strong>Figure 4.10</strong> High level view of the news flow</p>
+</div>
+<div class="section" id="raw-data-download-from-gdelt">
+<h2>Raw data download from GDELT<a class="headerlink" href="#raw-data-download-from-gdelt" title="Permalink to this headline">¶</a></h2>
+<p>At a high level, the process works as follows. The raw gdelt2 data files are retrieved from the GDELT website using the linux wget command-line utility. Files are decompressed and parsed in order to extract the following fields of interest for the DIAS-GDELT application:</p>
+<p><strong>GDELT fields</strong></p>
+<ul class="simple">
+<li>GKGRECORDID</li>
+<li>sqldate</li>
+<li>src</li>
+<li>event_url</li>
+<li>AvgTone</li>
+<li>LocationType1</li>
+</ul>
+<p>A detailed description of the meanings of these fields can be found in the GDELT 2.0 Event Database Codebook located here (<a class="reference external" href="http://data.gdeltproject.org/documentation/GDELT-Event_Codebook-V2.0.pdf">http://data.gdeltproject.org/documentation/GDELT-Event_Codebook-V2.0.pdf</a>)</p>
+<p>The LocationType1 contains the FIPS 2-letter country code of the location of the event. It is used to assign the event to one of the 28 European countries in our application.</p>
+<p>Note that this field does not capture which countries are affected by events, but rather where the event actually took place. FIPS country codes can be looked up on Wikipedia (<a class="reference external" href="https://en.wikipedia.org/wiki/List_of_FIPS_country_codes">https://en.wikipedia.org/wiki/List_of_FIPS_country_codes</a>).</p>
+</div>
+<div class="section" id="local-publication-service">
+<h2>Local Publication Service<a class="headerlink" href="#local-publication-service" title="Permalink to this headline">¶</a></h2>
+<p>There are 28 DIAS nodes in this application, each representing a European country.</p>
+<p>For sake of efficiency, list of news events (compressed text file) is only pulled once from the GDELT server every 15 minutes. After the decompressing and parsing, data is published using a ZeroMQ publish socket over a TCP port on the server. This allows the 28 mock devices to connect to this port and subscribe to the parsed GDELT events as ZeroMQ subscribers, whilst only retrieving the raw data once from GDELT.</p>
+<p>GDELT provides an update every 15 minutes. The Local Publication Service is responsible for filtering European countries and for computing the number of events per country over this 15-minute time window. The field name for determining the country is LocationType1.</p>
+</div>
+<div class="section" id="mock-device">
+<h2>Mock Device<a class="headerlink" href="#mock-device" title="Permalink to this headline">¶</a></h2>
+<p>As with all DIAS applications, the DIAS nodes that perform the aggregation require selected and possible states as inputs. In the case of the DIAS-GDELT application, we only have the number of events per country provided by the Local Publication Service generated in the last 15 minutes. Thus an intermediate step is required to transform the most recent count of events into a list of possible states and a selected state chosen from the possible states. This task is handled by the mock device.</p>
+<p>Each mock device is a separate JVM process, that subscribes to the Local Publication Service to receive the number of events per country. From this metric, each mock device computes:
+* The list of possible states
+* Selects the selected state from the list of possible states</p>
+<p>Each mock device computes its possible states individually. The possible states are computed using a rolling window of the latest 27 observations. Each observation is the number of GDELT news events generated over a time window of 15 minutes for the relevant country that has been mapped to the mock device. In this case of this application, there are 9 possible states, that are equally spaced between the minimum and maximum of the 27 observations.</p>
+<p>The mock device then communicates the possible and selected state to its assigned DIAS node, so that the DIAS network can perform the aggregation.</p>
+<p>It could be argued that the functionality of the mock devices should be integrated into the DIAS nodes in order to reduce the complexity of the setup. The present design was chosen due to its modularity. Indeed, a number of different applications can use the exact same DIAS nodes. Only the mock devices are application specific. At time of writing, the applications that use DIAS nodes are DIAS-GDELT, Smart Agora, and the basic DIAS testbeds.</p>
+</div>
+<div class="section" id="database-persistence">
+<h2>Database Persistence<a class="headerlink" href="#database-persistence" title="Permalink to this headline">¶</a></h2>
+<p>Following publication over ZeroMQ, the parsed GDELT data is persisted to a PostgreSQL database. This allows the mock DIAS-GDELT devices to “warmup” on recent historical data, so that the queue for computing the possible states can be backfilled on startup, which allows each mock device to recover its state after a restart.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">GitHub repo:</th><td class="field-body"><p class="first"><a class="reference external" href="https://github.com/epournaras/DIAS-GDELT.git">https://github.com/epournaras/DIAS-GDELT.git</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">GDELT:</th><td class="field-body"><p class="first"><a class="reference external" href="http://data.gdeltproject.org/">http://data.gdeltproject.org/</a></p>
+<p><a class="reference external" href="http://data.gdeltproject.org/documentation/GDELT-Event_Codebook-V2.0.pdf">http://data.gdeltproject.org/documentation/GDELT-Event_Codebook-V2.0.pdf</a></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">DIAS-GDELT microsite:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><p class="first last"><a class="reference external" href="http://dias-net.org/gdelt/">http://dias-net.org/gdelt/</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">DIAS-Documentation</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../pre.requisites.html">Pre-requisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dias.for.dummies.html">DIAS for Dummies</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../applications.html">Applications</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">GDELT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smart.agora.html">Smart Agora</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gui.html">GUIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dias-logging-system.html">DIAS Logging System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix.html">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aggregation.html">Aggregation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../applications.html">Applications</a><ul>
+      <li>Previous: <a href="../applications.html" title="previous chapter">Applications</a></li>
+      <li>Next: <a href="smart.agora.html" title="next chapter">Smart Agora</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Edward Gaere.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/sections/applications/gdelt.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

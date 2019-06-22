@@ -1,0 +1,258 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Protopeer &#8212; DIAS-Documentation  documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Command Flooder" href="command.flooder.html" />
+    <link rel="prev" title="Appendix" href="../appendix.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="protopeer">
+<span id="protopeer-chapter"></span><h1>Protopeer<a class="headerlink" href="#protopeer" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>In this section we which review the improvements that were made to the Protopeer Framework. The section is organised in two sub-sections, the first covering memory leaks and the second networking optimisations.</p>
+<p>The Protopeer Framework was designed in 2009 by two researches from the Swiss Institute of Technology in Lausanne (Galuba 2009) with the intention of providing a robust platform for carrying out small to medium scale peer-to-peer experiments. One important characteristic of the Protopeer Framework is the ability to carry out the experiments in either simulated mode or real-time mode, with minimal (if any) change to the code. In simulated mode, all the peers reside in a single process running inside a single Java Virtual Machine instance on a single machine. This mode facilitates development and debugging. In real-time mode, each peer is a separate process running inside its own Java Virtual Machine instance which can be located anywhere on the Internet.</p>
+<p>At the time of the initial release, the Protopeer Framework was the only platform with that capability.</p>
+<p>In 2016 we started working on the real-time implementation of DIAS. Back then, the Protopeer Framework still had many low-level technical issues with its real-time mode such as memory leaks, static port allocation, etc All of these issues have been solved to allow stable real-time DIAS simulations and real-time experiments.</p>
+<p>The issues belonged to two broad categories, which will be covered in subsections below.
+1. Memory Leaks
+2. Networking Optimisations</p>
+</div>
+</div>
+<div class="section" id="memory-leaks">
+<h1>Memory Leaks<a class="headerlink" href="#memory-leaks" title="Permalink to this headline">¶</a></h1>
+<p>Back in 2016, it was not possible to run experiments using the Protopeer Framework in real-time mode for longer than a day. This was due to extensive memory leaks in various parts of the Protopeer library.</p>
+<p>The exact cause and code location of the memory leaks was determined using Java’s hprof profiling tool. A sample of the code required to launch the profiler is provided below. Given that the classes in the Protopeer Framework can be derived from parent clases many layers deep, it was necessary to performing the profiling with up to 20 function calls (parameter tracedepth).</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span># ... this is your bash script to launch a Protopeer real-time experiment
+profileoutput=profile/dump.out
+tracedepth=20
+
+profilearg=&quot;-Xrunhprof:interval=60000,depth=$tracedepth ,heap=sites,format=a,file=$profileoutput&quot;
+
+java -Xmx$javamem $profilearg -cp &quot;$classpath&quot; ...
+</pre></div>
+</div>
+<p>Figure {x}. Launch commands for hprof profiling</p>
+<p>The result of the profiling showed three areas that required attention.</p>
+<div class="section" id="apache-mina">
+<h2>Apache Mina<a class="headerlink" href="#apache-mina" title="Permalink to this headline">¶</a></h2>
+<p>The first memory leak was detected Apache Mina, the networking library used for inter-peer TCP communication. Apache MINA is a network application framework which helps users develop high performance and high scalability network applications easily (src: <a class="reference external" href="https://mina.apache.org/">https://mina.apache.org/</a>). We favored the use of migrating to the ZeroMQ messaging framework, for the following reasons:
+1. ZeroMQ can be easily integrated into other programming languages and other devices, allowing for multi-peer networking with peers written in different programming languages to communicate seamlessly
+2. The ZeroMQ libraries are far simpler to use
+3. The size of the library is smaller
+4. Our development team had good prior experience with ZeroMQ</p>
+<p>We implemented JeroMQ, a native zeroMQ port for java (src: <a class="reference external" href="https://github.com/zeromq/jeromq">https://github.com/zeromq/jeromq</a>), and tested versions 2, 3 and 4.</p>
+<p>Starting a server in JeroMQ requires only a few lines of code.</p>
+<div class="code java highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">final</span> <span class="n">ZMQ</span><span class="o">.</span><span class="n">Context</span>   <span class="n">zmqContext</span> <span class="o">=</span> <span class="n">ZMQ</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="n">final</span> <span class="n">ZMQ</span><span class="o">.</span><span class="n">Socket</span>    <span class="n">zmqSocket</span><span class="o">=</span> <span class="n">zmqContext</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">ZMQ</span><span class="o">.</span><span class="n">REP</span><span class="p">);</span>
+
+<span class="n">final</span> <span class="nb">int</span> <span class="n">zmqListenPort</span> <span class="o">=</span> <span class="n">zmqSocket</span><span class="o">.</span><span class="n">bindToRandomPort</span><span class="p">(</span><span class="n">ConnectString</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Figure {x}. Starting a server with JeroMQ</p>
+</div>
+<div class="section" id="bytebuffer-allocate">
+<h2>ByteBuffer.allocate()<a class="headerlink" href="#bytebuffer-allocate" title="Permalink to this headline">¶</a></h2>
+<p>Another memory leak was in repeated calls to ByteBuffer.allocate() made throughout the codebase. In the Protopeer Framework, byte buffers are used when serialising objects, e.g messages to be sent over the network. The problem is that ByteBuffer.allocate() allocates an array of bytes that bypasses Java GC, leading to memory leaks if the allocation is done repeatedly during the programs lifetime. (More information can be found here: <a class="reference external" href="http://www.evanjones.ca/java-bytebuffer-leak.html">http://www.evanjones.ca/java-bytebuffer-leak.html</a>).</p>
+<p>We modified the Protopeer Framework so that a singleByteBuffer is only allocated once per class instance, at class construction.</p>
+<div class="code java highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">final</span> <span class="nb">int</span>         <span class="n">strlen</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">length</span><span class="p">();</span>
+
+<span class="n">ByteBuffer</span> <span class="n">bb</span> <span class="o">=</span> <span class="n">ByteBuffer</span><span class="o">.</span><span class="n">allocate</span><span class="p">(</span><span class="n">strlen</span><span class="p">)</span><span class="o">.</span><span class="n">order</span><span class="p">(</span><span class="n">ByteOrder</span><span class="o">.</span><span class="n">nativeOrder</span><span class="p">());</span>
+<span class="n">bb</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">getBytes</span><span class="p">(</span><span class="n">ZMQ</span><span class="o">.</span><span class="n">CHARSET</span><span class="p">));</span>
+<span class="n">bb</span><span class="o">.</span><span class="n">flip</span><span class="p">();</span>
+
+<span class="n">final</span> <span class="nb">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">ZMQSocket</span><span class="o">.</span><span class="n">sendByteBuffer</span><span class="p">(</span><span class="n">bb</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Figure {x}. Sample use of ByteBuffer.allocate() that will lead to a memory leak if called repeatedly during a programs lifetime</p>
+</div>
+<div class="section" id="measurementlog">
+<h2>MeasurementLog<a class="headerlink" href="#measurementlog" title="Permalink to this headline">¶</a></h2>
+<p>The Protopeer Framework provides support for recording an arbitrary number of values during an experiment, greatly facilitating post-experiment analyses. The measurement log also supports serialising the measurement log to a file, through a class callsed MeasurementFileDumper.  A memory leak existed because of ObjectOutputStream, a Java utility class that serialises Java objects to a stream (in our case, we are serialising to a file). ObjectOutputStream maintains a reference to each serialised object when writeObject is called, and these references are not released by default. This leads to object references that cannot be garbage-collected. As shown in the example below, it is required to call the function reset() to release the reference.</p>
+<div class="code java highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">public</span> <span class="k">class</span> <span class="nc">MeasurementFileDumper</span> <span class="n">implements</span> <span class="n">MeasurementLoggerListener</span>
+<span class="p">{</span>
+    <span class="n">private</span> <span class="n">ObjectOutputStream</span> <span class="n">measurementsOut</span><span class="p">;</span>
+
+        <span class="n">public</span> <span class="n">void</span> <span class="n">measurementEpochEnded</span><span class="p">(</span><span class="n">MeasurementLog</span> <span class="n">log</span><span class="p">,</span> <span class="nb">int</span> <span class="n">epochNumber</span><span class="p">)</span>
+        <span class="p">{</span>
+                <span class="o">...</span>
+                <span class="n">measurementsOut</span><span class="o">.</span><span class="n">writeObject</span><span class="p">(</span><span class="n">subLog</span><span class="p">);</span>
+
+                <span class="o">//</span> <span class="n">reset</span><span class="p">()</span> <span class="n">needs</span> <span class="n">to</span> <span class="n">be</span> <span class="n">added</span> <span class="n">to</span> <span class="n">release</span> <span class="n">the</span> <span class="nb">object</span> <span class="n">inside</span> <span class="n">the</span> <span class="n">serialisation</span><span class="p">,</span> <span class="k">else</span> <span class="n">it</span> <span class="n">will</span> <span class="n">cause</span> <span class="n">a</span> <span class="n">memory</span> <span class="n">leak</span>
+                <span class="n">measurementsOut</span><span class="o">.</span><span class="n">reset</span><span class="p">();</span>
+                <span class="n">measurementsOut</span><span class="o">.</span><span class="n">flush</span><span class="p">();</span>
+
+        <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Figure {x}. Memory leak fixed by calling reset() method of the ObjectOutputStream object</p>
+</div>
+</div>
+<div class="section" id="networking-optimisations">
+<h1>Networking Optimisations<a class="headerlink" href="#networking-optimisations" title="Permalink to this headline">¶</a></h1>
+<p><strong>1. Off-thread message sending</strong></p>
+<p>The Protopeer Framework is a multi-threaded library. Threads are used to handle incoming messages (also known as the passive state) as well as repeated events using timers, of which the active state is such an event. An issue that we identified is that multiple threads may need to send a network message to another peer(s) at the same time, leading to contention and inducing delays in the higher-level applcations of the peer such as DIAS or the Peer Sampling Service. This problem is acute for a real-time system because the worker threads cannot send a network message if another worker thread is doing the same, leading to idle waiting times in the worker threads.</p>
+<p>We alleviated this problem by handling the actual sending of messages in a background thread. In the new design, the worker threads only add messages to a FIFO queue (implemented as a circular buffer), and can then return to their work. In the background, a dedicated thread is continuously working to send all messages still in the queue. This design allows the worker threads to effectively delegate the lower level operations related to the sending of a message.</p>
+<p>It is important to note that the message to be sent is serialised by the worker thread before being added to the queue. Delegating the serialisation of the message to the background thread may appear more optimal - it is actually error prone since it leads to synchronization issue. For example, a LEAVE message contains a reference to a peer’s disseminator. The serialisation needs to occur immediately, not at a later stage when then the state of the disseminator may have changed due to subsequent interactions with other peers.</p>
+<div class="code java highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">zmqOutboundMsgQueueProcessor</span><span class="o">.</span><span class="n">add_message_to_queue</span><span class="p">(</span><span class="n">new</span> <span class="n">SerialisedMessage</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>Figure {x}. Serialisation of messages by the worker thread and adding to the outbound message queue (ZMQNetworkInterface:155)</p>
+<p><strong>2. Dynamic Port Allocation</strong></p>
+<p>Previously the port number of the socket through which the Peer interacted with other peers was determined by the startup script and passed as an argument to the java executable. This caused problems when scaling to hundreds of peers on a single host as this conflicted where other applications on the host that used network sockets. Thus the design was changed to allow dynamic allocation of ports using ZeroMQ::bind function, which automatically searches in the host’s dynamic port range for the next available port. The dynamic port range is 49152 to 65535. The Protopeer Framework fully supports dynamic port allocation since each peer communicates it’s own IP address to the DIAS Boostrap Server on startup, so the operation is not affected by ports being statically or dynamically defined.</p>
+<div class="code java highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">final</span> <span class="n">ZMQ</span><span class="o">.</span><span class="n">Context</span>   <span class="n">zmqContext</span> <span class="o">=</span> <span class="n">ZMQ</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="n">final</span>  <span class="n">ZMQ</span><span class="o">.</span><span class="n">Socket</span>    <span class="n">zmqSocket</span><span class="o">=</span> <span class="n">zmqContext</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">ZMQ</span><span class="o">.</span><span class="n">REP</span><span class="p">);</span>
+
+<span class="n">final</span> <span class="nb">int</span> <span class="n">zmqListenPort</span> <span class="o">=</span> <span class="n">zmqSocket</span><span class="o">.</span><span class="n">bindToRandomPort</span><span class="p">(</span><span class="n">ConnectString</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Figure {x}. Dynamic port assignment within ZeroMQ (ZeroMQReqRepListener:74)</p>
+<p><strong>3. Connection pool</strong></p>
+<p>In peer-to-peer networks such as DIAS, peers communicate with many other peers. The interactions can be brief to long running, depending on the size of the network and it’s topology. As a result a long-running peer may communicate with many other peers during operation.</p>
+<p>In the initial version of the Protopeer Framework, each time a peer sent a message to another peer, a new connection with the target peer was created, the message was sent, and the connection was immediately dropped. This is admittedly an inefficient process especially as there can be many messages exchange per second.</p>
+<p>We improved the framework by allowing a connection pool of 200 peers. That is, a FIFO hashmap of open connections is maintained, so that existing open connections with peers can be re-used where possible. Should a peer runs out of available connections, an older connection is closed and a new connection is created. This process is managed in the background and entirely transparent to the high-level peerlets such as DIAS and Peer Sampling Service.</p>
+<div class="code java highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">public</span> <span class="n">LinkedHashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="n">ZMQ</span><span class="o">.</span><span class="n">Socket</span><span class="o">&gt;</span>    <span class="n">pushSockets</span> <span class="o">=</span> <span class="n">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="n">ZMQ</span><span class="o">.</span><span class="n">Socket</span><span class="o">&gt;</span><span class="p">();</span>
+
+<span class="o">//</span> <span class="n">close</span> <span class="n">a</span> <span class="n">socket</span> <span class="k">if</span> <span class="n">too</span> <span class="n">many</span> <span class="nb">open</span>
+<span class="o">//</span> <span class="n">maxNumOpenSockets</span> <span class="n">presently</span> <span class="nb">set</span> <span class="n">to</span> <span class="mi">200</span>
+<span class="k">if</span><span class="p">(</span> <span class="n">numOpenSockets</span> <span class="o">&gt;=</span> <span class="n">maxNumOpenSockets</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="o">//</span> <span class="n">find</span> <span class="n">a</span> <span class="n">socket</span> <span class="n">to</span> <span class="n">close</span>
+    <span class="k">if</span><span class="p">(</span> <span class="n">this</span><span class="o">.</span><span class="n">debug_level2</span><span class="p">)</span> <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">printf</span><span class="p">(</span> <span class="s2">&quot;need to close a socket</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="p">);</span>
+
+    <span class="o">//</span> <span class="n">get</span> <span class="n">the</span> <span class="n">first</span> <span class="n">one</span> <span class="ow">in</span> <span class="n">the</span> <span class="nb">map</span>
+    <span class="o">//</span> <span class="n">TODO</span><span class="p">:</span> <span class="n">ideally</span> <span class="n">should</span> <span class="n">close</span> <span class="n">the</span> <span class="n">least</span> <span class="n">used</span> <span class="n">socket</span> <span class="p">(</span><span class="n">time</span> <span class="n">weighted</span><span class="p">)</span>
+    <span class="n">String</span> <span class="n">addressToCloseString</span> <span class="o">=</span> <span class="n">pushSockets</span><span class="o">.</span><span class="n">entrySet</span><span class="p">()</span><span class="o">.</span><span class="n">iterator</span><span class="p">()</span><span class="o">.</span><span class="n">next</span><span class="p">()</span><span class="o">.</span><span class="n">getKey</span><span class="p">();</span>
+
+    <span class="k">if</span><span class="p">(</span> <span class="n">this</span><span class="o">.</span><span class="n">debug_level2</span><span class="p">)</span> <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">printf</span><span class="p">(</span> <span class="s2">&quot;addressToCloseString : </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">addressToCloseString</span> <span class="p">);</span>
+
+    <span class="o">//</span> <span class="n">close</span> <span class="n">socket</span> <span class="ow">and</span> <span class="n">remove</span> <span class="kn">from</span> <span class="nn">hash</span> <span class="nb">map</span>
+    <span class="n">closeConnectionStr</span><span class="p">(</span><span class="n">addressToCloseString</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Figure {x}. Implementation of the connection pool in the Protopeer Framework. ZMQNetworkInterface:222</p>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p>Galuba W., Aberer K. (2009) ProtoPeer-A P2P Toolkit Bridging the Gap Between Simulation and Live Deployment</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">DIAS-Documentation</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../pre.requisites.html">Pre-requisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dias.for.dummies.html">DIAS for Dummies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gui.html">GUIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dias-logging-system.html">DIAS Logging System</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../appendix.html">Appendix</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Protopeer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#memory-leaks">Memory Leaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#networking-optimisations">Networking Optimisations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command.flooder.html">Command Flooder</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../aggregation.html">Aggregation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../appendix.html">Appendix</a><ul>
+      <li>Previous: <a href="../appendix.html" title="previous chapter">Appendix</a></li>
+      <li>Next: <a href="command.flooder.html" title="next chapter">Command Flooder</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Edward Gaere.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/sections/appendix/protopeer.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,390 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>DIAS - Dynamic Intelligent Aggregation Service &mdash; DIAS-Documentation 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Pre-requisites" href="sections/pre.requisites.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home"> DIAS-Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sections/pre.requisites.html">Pre-requisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/dias.for.dummies.html">DIAS for Dummies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/simulation.mode.html">Simulation Mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/architecture.html">Deployment Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/gui.html">GUIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/protopeer.html">Protopeer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/dias.in.detail.html">DIAS in Detail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/dias-logging-system.html">DIAS Logging System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/appendix.html">Appendix</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">DIAS-Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>DIAS - Dynamic Intelligent Aggregation Service</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dias-dynamic-intelligent-aggregation-service">
+<h1>DIAS - Dynamic Intelligent Aggregation Service<a class="headerlink" href="#dias-dynamic-intelligent-aggregation-service" title="Permalink to this headline">¶</a></h1>
+<p>Welcome to the DIAS documentation. DIAS stands for Dynamic Intelligent Aggregation Service.</p>
+<p>It’s purpose is to provide real-time data analytics, highly adaptive and truly decentralized.</p>
+<p>If you follow the instructions below, you will be up and running in matter of minutes.</p>
+<p><strong>Dynamic</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li>DIAS can operate in unreliable environments with rapidly changing input data</li>
+</ul>
+</div></blockquote>
+<p><strong>Intelligent</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li>Thanks to an intelligent memory system that guarantees accurate measurements</li>
+</ul>
+</div></blockquote>
+<p><strong>Aggregation</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li>Concerns the computation of several large-scale collective measurements</li>
+</ul>
+</div></blockquote>
+<p><strong>Service</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li>DIAS can be used by different techno-socio-economic applications</li>
+</ul>
+</div></blockquote>
+<p><strong>Documentation</strong></p>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sections/pre.requisites.html">Pre-requisites</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/pre.requisites/supported.platforms.html">Supported Platforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/pre.requisites/machine.requirements.html">Machine Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/pre.requisites/java.html">Java</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/pre.requisites/postgres.html">Postgres</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/quickstart.html">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/quickstart/download.html">Download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/quickstart/install.html">Installation + Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/quickstart/launch.html">Launching DIAS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/quickstart/monitoring.html">Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/quickstart/viewing.html">Viewing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/dias.for.dummies.html">DIAS for Dummies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/simulation.mode.html">Simulation Mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/applications.html">Applications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/applications/gdelt.html">GDELT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/applications/smart.agora.html">Smart Agora</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/architecture.html">Deployment Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/architecture/gateway.html">DIAS Gateway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/architecture/bootstrap.process.html">Bootstrap Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/architecture/mock.devices.html">Mock devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/architecture/multi.machine.setup.html">Multi-machine Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/architecture/dias.logging.html">DIAS Logging</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/gui.html">GUIs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/gui/redash.dashboards.html">Redash Dashboards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/gui/control.gui.html">Control GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/gui/network.gui.html">Network GUI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/protopeer.html">Protopeer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/protopeer/overview.html">Protopeer Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/protopeer/refactoring.html">Protopeer Refactoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/protopeer/command.flooder.html">Command Flooder</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/dias.in.detail.html">DIAS in Detail</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/dias.in.detail/conceptual.architecture.html">Conceptual Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/dias.in.detail/aggregation.mechanism.html">Aggregation Mechanism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/dias.in.detail/change.selected.states.html">Changing of selected states</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/dias.in.detail/change.possible.states.html">Changing of possible states</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/dias.in.detail/join.and.leave.html">Join and Leave</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/dias-logging-system.html">DIAS Logging System</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/dias-logging-system.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/dias-logging-system.html#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/dias-logging-system.html#components">Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/dias-logging-system.html#code-examples">Code examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/dias-logging-system.html#code-examples-rawlog">Code examples: RawLog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/dias-logging-system.html#code-examples-eventlog">Code examples: EventLog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/dias-logging-system.html#code-examples-memlog">Code examples: MemLog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/dias-logging-system.html#querying-the-data">Querying the data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/dias-logging-system.html#using-dias-logging-system-in-your-application">Using DIAS-Logging-System in your application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/dias-logging-system.html#database-installation">Database Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/dias-logging-system.html#launch">Launch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/dias-logging-system.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/appendix.html">Appendix</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/appendix/protopeer.html">Protopeer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/appendix/protopeer.html#memory-leaks">Memory Leaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/appendix/protopeer.html#networking-optimisations">Networking Optimisations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/appendix/command.flooder.html">Command Flooder</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>See sections/quickstart</p>
+</div>
+<div class="section" id="website">
+<h2>Website<a class="headerlink" href="#website" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://dias-net.org/">http://dias-net.org/</a></p>
+</div>
+<div class="section" id="support">
+<h2>Support<a class="headerlink" href="#support" title="Permalink to this headline">¶</a></h2>
+<p>For any question please contact us: <a class="reference external" href="mailto:mail&#37;&#52;&#48;dias-net&#46;org">mail<span>&#64;</span>dias-net<span>&#46;</span>org</a></p>
+</div>
+<div class="section" id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
+<p>The project is licensed under the GPL-2.0 license.</p>
+</div>
+<div class="section" id="publications">
+<h2>Publications<a class="headerlink" href="#publications" title="Permalink to this headline">¶</a></h2>
+<p>Evangelos Pournaras, Martijn Warnier and Frances M.T. Brazier, A Generic and Adaptive Aggregation Service for Large-scale Decentralized Networks, Complex Adaptive Systems Modeling, 1:19, 2013</p>
+<p>Evangelos Pournaras, Jovan Nikolic, Alex Omerzel, Dirk Helbing, Engineering Democratization in Internet of Things Data Analytics, in the proceedings of the 31st IEEE International Conference on Advanced Information Networking and Applications-AINA-2017, Taiwan, March 2017</p>
+<p>Evangelos Pournaras, Jovan Nikolic, Self-corrective Dynamic Networks via Decentralized Reverse Computations, in the Proceedings of the 14th International Conference on Autonomic Computing-ICAC-2017, Columbus, Ohio, July 2017</p>
+<p>Evangelos Pournaras and Jovan Nikolic, On-demand Self-adaptive Data Analytics in Large-scale Decentralized Networks, in the Proceedings of the 16th IEEE International Symposium on Network Computing and Applications-NCA-2017, Cambridge, USA, November 2017
+Theses</p>
+<p>Evangelos Pournaras Multi-level Reconfigurable Self-organization in Overlay Services, PhD Thesis, Delft University of Technology, March 2013 (Promotor: Frances M.T. Brazier, Compromotor: Martijn Warnier)</p>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sections/pre.requisites.html" class="btn btn-neutral float-right" title="Pre-requisites" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Edward Gaere
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+     .wy-nav-side {
+    
+        background: rgb(30,115,190);
+        color:#eee;
+        
+     }
+
+
+    .wy-side-nav-search {
+    
+        background: rgb(30,115,190);
+        
+    }
+
+    .wy-menu-vertical li.current{
+        background: #d6dfd3;
+    }
+
+    .wy-menu-vertical a:active{
+        background-color:rgb(30,115,190);
+    }
+
+    .fa-home::before, .icon-home::before {
+        content:"";
+    }
+
+    a.icon-home {
+        width: 50%;
+        margin-left: -6px;
+        font-size: 0%;
+        content:url("http://dias-net.org/wp-content/uploads/2016/08/silver-nodes-above-extended.png");
+    }
+
+    .wy-nav-content{
+        max-width: initial;
+    }
+  </style>
+
+
+</body>
+</html>
