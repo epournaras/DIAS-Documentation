@@ -93,11 +93,17 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../protopeer.html">Protopeer</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="overview.html">Protopeer Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="refactoring.html">Protopeer Refactoring</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Command Flooder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="refactoring.html#memory-leaks">Memory Leaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="refactoring.html#networking-optimisations">Networking Optimisations</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Command Flooder</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#launch-command">Launch Command</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../dias.in.detail.html">DIAS in Detail</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dias-logging-system.html">DIAS Logging System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../appendix.html">Appendix</a></li>
 </ul>
 
@@ -167,6 +173,19 @@
             
   <div class="section" id="command-flooder">
 <h1>Command Flooder<a class="headerlink" href="#command-flooder" title="Permalink to this headline">¶</a></h1>
+<p>The command flooder experiment is a minimalistic example of a Protopeer-based network.</p>
+<p>In this experiemtn, the network is comprised of a small number of peers, say 10. One of the peers is designated as the <em>captain</em>, typically peer 1.</p>
+<p>Every few seconds, the captain will send a message called a <em>hot potato</em> to each of the peers connected to the <em>captain</em>. In turn, each of the peers that receive the <em>hot potato</em> will send it to the peers it is itself connected to.</p>
+<p>And so on. The number of times the <em>hot potato</em> is pushed forward is defined by a parameter, set to 5 in the example below.</p>
+<div class="section" id="launch-command">
+<h2>Launch Command<a class="headerlink" href="#launch-command" title="Permalink to this headline">¶</a></h2>
+<p>The following command will launch 10 independent peers in live mode, allowing messages to propagate 5 types through the network, using 256M Ram per peer</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">command</span><span class="o">.</span><span class="n">flooder</span><span class="o">.</span><span class="n">zmq</span><span class="o">.</span><span class="n">sh</span> <span class="mi">10</span> <span class="mi">5</span> <span class="mi">256</span><span class="n">M</span>
+</pre></div>
+</div>
+<p><em>Figure {x}</em> Example for launch 10 peers in the command flooder experiment</p>
+<p>You should that the number of peers in your Command Flooder network is greater or equal to the number of peers required for the Boostrapping.</p>
+</div>
 </div>
 
 

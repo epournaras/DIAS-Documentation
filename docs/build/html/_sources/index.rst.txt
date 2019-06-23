@@ -12,6 +12,8 @@ It's purpose is to provide real-time data analytics, highly adaptive and truly d
 
 If you follow the instructions below, you will be up and running in matter of minutes.
 
+The original research paper can be found at http://evangelospournaras.com/wordpress/wp-content/uploads/2013/04/Multi-level-Reconfigurable-Self-organization-in-Overlay-Services1.pdf.
+
 **Dynamic**
 
  - DIAS can operate in unreliable environments with rapidly changing input data
@@ -45,6 +47,7 @@ If you follow the instructions below, you will be up and running in matter of mi
    sections/protopeer
    sections/dias.in.detail
    sections/dias-logging-system
+   sections/glossary
    sections/appendix
    
 
