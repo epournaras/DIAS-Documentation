@@ -100,7 +100,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../dias-logging-system.html">DIAS Logging System</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../appendix.html">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
 </ul>
 
             
@@ -169,6 +169,10 @@
             
   <div class="section" id="conceptual-architecture">
 <h1>Conceptual Architecture<a class="headerlink" href="#conceptual-architecture" title="Permalink to this headline">¶</a></h1>
+<p>The exact process by which DIAS performs aggregations is described below.</p>
+<p>This process is not simple, for a number of reasons, but it is primarily due to the use of Bloom Filters. Because Bloom filters can generate false positives by their very design, the use of Bloom Filters in a DIAS network creates an uncertainty since it is no longer possible to keep track of communication history with 100% certainty. In order to decrease the probability of incorrect decisions, additional checks are made to reduce noise and therefore increase the precision of the aggregation.</p>
+<p>The second reason is due to information latency in large networks. Uncertainty exists because information does not spread instantaneously throughout the network, which again generates a source of noise in the aggregation.</p>
+<p>The exact process by which a peer uses all available information that it has collected in order to update it’s aggregate estimates is described below.</p>
 </div>
 
 

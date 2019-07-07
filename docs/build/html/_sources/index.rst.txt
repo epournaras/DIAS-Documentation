@@ -48,7 +48,6 @@ The original research paper can be found at http://evangelospournaras.com/wordpr
    sections/dias.in.detail
    sections/dias-logging-system
    sections/glossary
-   sections/appendix
    
 
 Installation
