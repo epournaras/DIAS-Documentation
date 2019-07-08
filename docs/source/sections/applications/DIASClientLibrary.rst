@@ -23,7 +23,7 @@ Someone simply has to create an app using this library, in which the user gets a
 
 Installation
 ------------
-To use this library, one must simply add it tp its own android application in a new Package, that's all!
+To use this library, one must simply add it to its own android application in a new Package, that's all!
 
 **Note:** Don't forget to add the permission to use internet access in the android manifest.
 ::
