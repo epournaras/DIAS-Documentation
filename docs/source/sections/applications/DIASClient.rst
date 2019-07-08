@@ -1,5 +1,0 @@
-DIAS Client
-***********
-
-Introduction
-------------

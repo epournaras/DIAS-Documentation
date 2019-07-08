@@ -8,4 +8,3 @@ Applications
    applications/gdelt
    applications/smart.agora
    applications/DIASClientLibrary
-   applications/DIASClient
