@@ -6,13 +6,11 @@
 DIAS - Dynamic Intelligent Aggregation Service
 ==============================================
 
-Welcome to the DIAS documentation. DIAS stands for Dynamic Intelligent Aggregation Service.
-
-It's purpose is to provide real-time data analytics, highly adaptive and truly decentralized.
+Welcome to the DIAS documentation. DIAS provides real-time data analytics for the IoT, highly adaptive and truly decentralized.
 
 If you follow the instructions below, you will be up and running in matter of minutes.
 
-The original research paper can be found at http://evangelospournaras.com/wordpress/wp-content/uploads/2013/04/Multi-level-Reconfigurable-Self-organization-in-Overlay-Services1.pdf.
+DIAS stands for Dynamic Intelligent Aggregation Service.
 
 **Dynamic**
 
@@ -31,6 +29,9 @@ The original research paper can be found at http://evangelospournaras.com/wordpr
  - DIAS can be used by different techno-socio-economic applications
 
 
+The original research paper can be found at http://evangelospournaras.com/wordpress/wp-content/uploads/2013/04/Multi-level-Reconfigurable-Self-organization-in-Overlay-Services1.pdf.
+
+
 **Documentation**
 
 .. toctree::
@@ -39,8 +40,6 @@ The original research paper can be found at http://evangelospournaras.com/wordpr
 
    sections/pre.requisites
    sections/quickstart
-   sections/dias.for.dummies
-   sections/simulation.mode
    sections/applications
    sections/architecture
    sections/gui

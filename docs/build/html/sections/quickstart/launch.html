@@ -87,22 +87,17 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../quickstart.html">Quickstart</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="download.html">Download</a></li>
 <li class="toctree-l2"><a class="reference internal" href="install.html">Installation + Setup</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Launching DIAS</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#dias-with-logging">DIAS with Logging</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#dias-without-logging">DIAS without Logging</a></li>
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Launching DIAS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="monitoring.html">Monitoring</a></li>
 <li class="toctree-l2"><a class="reference internal" href="viewing.html">Viewing</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../dias.for.dummies.html">DIAS for Dummies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../simulation.mode.html">Simulation Mode</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Deployment Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../gui.html">GUIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../protopeer.html">Protopeer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../dias.in.detail.html">DIAS in Detail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dias.in.detail.html">How DIAS Works</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dias-logging-system.html">DIAS Logging System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
 </ul>
@@ -175,23 +170,43 @@
 <span id="label-launch"></span><h1>Launching DIAS<a class="headerlink" href="#launching-dias" title="Permalink to this headline">¶</a></h1>
 <p>Please check the <a class="reference internal" href="../pre.requisites.html#label-pre-requisites"><span class="std std-ref">Pre-requisites</span></a>, <a class="reference internal" href="download.html#label-quickstart-download"><span class="std std-ref">Download</span></a> and <a class="reference internal" href="install.html#label-installation"><span class="std std-ref">Installation + Setup</span></a> sections before continuing.</p>
 <p>We will assume a basic launch using default settings that are contained in the folder DIAS-Development/deployments/localhost.</p>
-<div class="section" id="dias-with-logging">
-<h2>DIAS with Logging<a class="headerlink" href="#dias-with-logging" title="Permalink to this headline">¶</a></h2>
 <p>If you installed the <a class="reference internal" href="../dias-logging-system.html#label-dias-logging-system"><span class="std std-ref">DIAS Logging System</span></a>, follow these instructions.</p>
-<p>First, let’s launch the DIAS Logging System.</p>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">DIAS</span><span class="o">-</span><span class="n">Logging</span><span class="o">-</span><span class="n">System</span>
+<p>First, let’s launch the DIAS Logging System. We recommend launching each of the below in a separate shell window to facilitate monitoring.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># start persistence daemon, used to store aggregates and debugging information to Postgres</span>
+
+<span class="n">cd</span> <span class="n">DIAS</span><span class="o">-</span><span class="n">Logging</span><span class="o">-</span><span class="n">System</span>
 <span class="n">clear</span> <span class="o">&amp;&amp;</span> <span class="o">./</span><span class="n">start</span><span class="o">.</span><span class="n">daemon</span><span class="o">.</span><span class="n">sh</span> <span class="n">deployments</span><span class="o">/</span><span class="n">localhost</span>
 </pre></div>
 </div>
 <p>Next, we need to start the Protopeer Bootstrap server and the DIAS Gateway server. More information can be found here <a class="reference internal" href="../architecture/bootstrap.process.html#label-bootstrap-process"><span class="std std-ref">Bootstrap Process</span></a> and <a class="reference internal" href="../architecture/gateway.html#label-dias-gateway"><span class="std std-ref">DIAS Gateway</span></a>.</p>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">DIAS</span><span class="o">-</span><span class="n">Development</span>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># start Protopeer server and Gateway server</span>
+
+<span class="n">cd</span> <span class="n">DIAS</span><span class="o">-</span><span class="n">Development</span>
 <span class="o">./</span><span class="n">start</span><span class="o">.</span><span class="n">servers</span><span class="o">.</span><span class="n">sh</span> <span class="n">deployments</span><span class="o">/</span><span class="n">localhost</span>
 </pre></div>
 </div>
+<p>Now we can start some carrier peers. Carrier peers allows peers to leave the network for short or long periods of time by performing corrective operations so that the network maintains correct aggregates.
+You can launch as many carrier nodes as you wish, 2 is a good start on a small networks.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># launch 2 carrier peers</span>
+
+<span class="n">cd</span> <span class="n">DIAS</span><span class="o">-</span><span class="n">Development</span>
+<span class="o">./</span><span class="n">start</span><span class="o">.</span><span class="n">carrier</span><span class="o">.</span><span class="n">peers</span><span class="o">.</span><span class="n">sh</span> <span class="n">deployments</span><span class="o">/</span><span class="n">localhost</span> <span class="mi">2</span>
+</pre></div>
 </div>
-<div class="section" id="dias-without-logging">
-<h2>DIAS without Logging<a class="headerlink" href="#dias-without-logging" title="Permalink to this headline">¶</a></h2>
-<p>If you did not install the <a class="reference internal" href="../dias-logging-system.html#label-dias-logging-system"><span class="std std-ref">DIAS Logging System</span></a>, then follow these instructions.</p>
+<p>We can then launch the DIAS aggregation peers. These are the peers that are actually performing the aggregations. In the example below, we launch 10 peers. You can launch upto 40 at a time.</p>
+<p>We also specify the id of the first DIAS aggregation peer, in this case 3. This is because peer 0 is the Protopeer bootstrap server and peers 1 and 2 are the carrier nodes that were launched above.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># start 10 aggregation peers, starting at peer id 3</span>
+
+<span class="n">cd</span> <span class="n">DIAS</span><span class="o">-</span><span class="n">Development</span>
+<span class="o">./</span><span class="n">start</span><span class="o">.</span><span class="n">aggregation</span><span class="o">.</span><span class="n">peers</span><span class="o">.</span><span class="n">sh</span> <span class="n">deployments</span><span class="o">/</span><span class="n">localhost</span> <span class="mi">10</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<p>Finally, we launch the mock devices. Mock devices simulate real IoT devices such has hand-held mobile phones, sensors, etc</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># launch 10 mock devices, starting at mock device number 3</span>
+
+<span class="n">cd</span> <span class="n">DIAS</span><span class="o">-</span><span class="n">Development</span>
+<span class="o">./</span><span class="n">start</span><span class="o">.</span><span class="n">mock</span><span class="o">.</span><span class="n">devices</span><span class="o">.</span><span class="n">sh</span> <span class="n">deployments</span><span class="o">/</span><span class="n">localhost</span> <span class="mi">10</span> <span class="mi">3</span>
+</pre></div>
 </div>
 </div>
 

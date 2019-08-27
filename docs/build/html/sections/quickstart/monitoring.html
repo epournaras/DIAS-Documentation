@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Viewing" href="viewing.html" />
+    <link rel="next" title="Simulation Mode" href="../simulation.mode.html" />
     <link rel="prev" title="Launching DIAS" href="launch.html" /> 
 </head>
 
@@ -88,17 +88,20 @@
 <li class="toctree-l2"><a class="reference internal" href="download.html">Download</a></li>
 <li class="toctree-l2"><a class="reference internal" href="install.html">Installation + Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="launch.html">Launching DIAS</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Monitoring</a></li>
-<li class="toctree-l2"><a class="reference internal" href="viewing.html">Viewing</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Monitoring</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sql-queries">SQL queries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#r-studio-plots">R-Studio plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#redash-dashboards">Redash dashboards</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../dias.for.dummies.html">DIAS for Dummies</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../simulation.mode.html">Simulation Mode</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Deployment Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../gui.html">GUIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../protopeer.html">Protopeer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../dias.in.detail.html">DIAS in Detail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dias.in.detail.html">How DIAS Works</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dias-logging-system.html">DIAS Logging System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
 </ul>
@@ -169,6 +172,66 @@
             
   <div class="section" id="monitoring">
 <h1>Monitoring<a class="headerlink" href="#monitoring" title="Permalink to this headline">¶</a></h1>
+<p>There are several options available for monitoring a DIAS experiment in real-time :</p>
+<ul class="simple">
+<li>SQL queries</li>
+<li>R-Studio plots</li>
+<li>Redash dashboards</li>
+</ul>
+<div class="section" id="sql-queries">
+<h2>SQL queries<a class="headerlink" href="#sql-queries" title="Permalink to this headline">¶</a></h2>
+<p>For fast and detailed understanding of the aggregation outcomes, it is easiest to execute queries on the Postgres database.</p>
+<p><strong>Show the last aggregation state per peer</strong></p>
+<div class="code sql highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WITH</span> <span class="n">with_last_peer_seq_id</span> <span class="n">AS</span>
+<span class="p">(</span>
+    <span class="n">SELECT</span>
+        <span class="n">MAX</span><span class="p">(</span><span class="n">seq_id</span><span class="p">)</span> <span class="n">AS</span> <span class="n">last_peer_seq_id</span>
+        <span class="p">,</span><span class="n">peer</span>
+    <span class="n">FROM</span>
+        <span class="n">aggregation</span>
+    <span class="n">GROUP</span> <span class="n">BY</span>
+        <span class="n">peer</span>
+<span class="p">)</span>
+<span class="n">SELECT</span>
+    <span class="n">agg</span><span class="o">.*</span>
+<span class="n">FROM</span>
+
+    <span class="n">aggregation</span> <span class="n">agg</span>
+<span class="n">INNER</span> <span class="n">JOIN</span>
+    <span class="n">with_last_peer_seq_id</span> <span class="n">last_records</span>
+    <span class="n">ON</span>
+    <span class="n">last_records</span><span class="o">.</span><span class="n">last_peer_seq_id</span> <span class="o">=</span> <span class="n">agg</span><span class="o">.</span><span class="n">seq_id</span>
+<span class="n">ORDER</span> <span class="n">BY</span>
+    <span class="n">peer</span> <span class="n">ASC</span>
+<span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Show raw logs for a selected peer over a given epoch range</strong></p>
+<div class="code sql highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SELECT</span> <span class="o">*</span> <span class="n">FROM</span> <span class="n">rawlog</span> <span class="n">WHERE</span> <span class="n">peer</span> <span class="o">=</span> <span class="mi">13</span> <span class="n">AND</span> <span class="n">epoch</span> <span class="n">BETWEEN</span> <span class="p">(</span><span class="mi">1551766218</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="n">AND</span> <span class="p">(</span><span class="mi">1551766218</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span><span class="n">ORDER</span> <span class="n">BY</span> <span class="n">dt</span><span class="p">,</span> <span class="n">seq_id</span> <span class="n">ASC</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Using the event log we can observe the frequency of function calls</strong></p>
+<div class="code sql highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SELECT</span> <span class="n">classname</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="n">FROM</span> <span class="n">eventlog</span> <span class="n">GROUP</span> <span class="n">BY</span> <span class="n">classname</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">key</span> <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">classname</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">key</span> <span class="n">ASC</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Memory usage evolution for a selected peer</strong></p>
+<div class="code sql highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SELECT</span>
+    <span class="o">*</span>
+<span class="n">FROM</span>
+    <span class="n">memlog</span>
+<span class="n">WHERE</span>
+    <span class="n">peer</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">ORDER</span> <span class="n">BY</span> <span class="n">seq_id</span> <span class="n">ASC</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>There are many more examples here (<a class="reference internal" href="../dias-logging-system.html#label-dias-logging-system"><span class="std std-ref">DIAS Logging System</span></a>).</p>
+</div>
+<div class="section" id="r-studio-plots">
+<h2>R-Studio plots<a class="headerlink" href="#r-studio-plots" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="redash-dashboards">
+<h2>Redash dashboards<a class="headerlink" href="#redash-dashboards" title="Permalink to this headline">¶</a></h2>
+</div>
 </div>
 
 
@@ -179,7 +242,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="viewing.html" class="btn btn-neutral float-right" title="Viewing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../simulation.mode.html" class="btn btn-neutral float-right" title="Simulation Mode" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="launch.html" class="btn btn-neutral float-left" title="Launching DIAS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

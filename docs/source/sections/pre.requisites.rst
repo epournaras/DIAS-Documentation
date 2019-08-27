@@ -7,7 +7,7 @@ DIAS should run on any linux/unix computer with a decent CPU and 2Gb of Ram. Det
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: List of pre-requisites:
 
    pre.requisites/supported.platforms
    pre.requisites/machine.requirements

@@ -1,2 +1,0 @@
-DIAS for Dummies
-****************

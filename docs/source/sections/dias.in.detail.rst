@@ -1,4 +1,4 @@
-DIAS in Detail
+How DIAS Works
 **************
 
 

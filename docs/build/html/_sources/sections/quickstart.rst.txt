@@ -11,4 +11,3 @@ Quickstart
    quickstart/install
    quickstart/launch
    quickstart/monitoring
-   quickstart/viewing

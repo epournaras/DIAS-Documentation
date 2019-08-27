@@ -88,6 +88,7 @@
 <li class="toctree-l2"><a class="reference internal" href="download.html">Download</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Installation + Setup</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#deployments">Deployments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sql-setup">SQL Setup</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="launch.html">Launching DIAS</a></li>
@@ -95,13 +96,12 @@
 <li class="toctree-l2"><a class="reference internal" href="viewing.html">Viewing</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../dias.for.dummies.html">DIAS for Dummies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../simulation.mode.html">Simulation Mode</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Deployment Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../gui.html">GUIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../protopeer.html">Protopeer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../dias.in.detail.html">DIAS in Detail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dias.in.detail.html">How DIAS Works</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dias-logging-system.html">DIAS Logging System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
 </ul>
@@ -178,7 +178,36 @@
 <p>DIAS comes with pre-configured deployments. As there are a number of components required to operate a DIAS network (e.g <a class="reference internal" href="../protopeer/overview.html#label-protopeer-overview"><span class="std std-ref">Protopeer Overview</span></a>), there are various configuration files for each component. For convenience, these are all grouped into components.</p>
 <p>In the next section, when you launch DIAS (<a class="reference internal" href="launch.html#label-launch"><span class="std std-ref">Launching DIAS</span></a>), you will need to choose a deployment.</p>
 <p>To get started, you should choose deployments/localhost, but you may add or modify deployments.</p>
-<p>TODO: SQL Setup</p>
+</div>
+<div class="section" id="sql-setup">
+<h2>SQL Setup<a class="headerlink" href="#sql-setup" title="Permalink to this headline">¶</a></h2>
+<p>The following tables need to be created in the Postgres database.</p>
+<p>The first step is to create the DIAS database itself. Within psql (or any other Postgres editor):</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CREATE</span> <span class="n">DATABASE</span> <span class="n">dias</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Then you need to switch to the dias database; recall that when you login to psql, the default database is postgres.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>\<span class="n">c</span> <span class="n">dias</span>
+</pre></div>
+</div>
+<p>Now we can create the tables that store the aggregates and debugging information.</p>
+<p>The SQL code with the table definitions is located here. Copy + paste the code from each file, one at a time.</p>
+<ul class="simple">
+<li>DIAS-Logging-System/sql/definitions/eventlog.sql</li>
+<li>DIAS-Logging-System/sql/definitions/memlog.sql</li>
+<li>DIAS-Logging-System/sql/definitions/rawlog.sql</li>
+<li>DIAS-Logging-System/sql/definitions/pss.sql</li>
+<li>DIAS-Development/sql/definitions/aggregation.sql</li>
+<li>DIAS-Development/sql/definitions/aggregation_plot.sql</li>
+<li>DIAS-Development/sql/definitions/aggregation_event.sql</li>
+<li>DIAS-Development/sql/definitions/aggregation_event_rrd.sql</li>
+<li>DIAS-Development/sql/definitions/aggregation_event_rrd_7d.sql</li>
+<li>DIAS-Development/sql/definitions/aggregation.sql</li>
+<li>DIAS-Development/sql/definitions/msgs.sql</li>
+<li>DIAS-Development/sql/definitions/sessions.sql</li>
+<li>Protopeer/sql/definitions/msgqueue.sql</li>
+<li>Protopeer/sql/definitions/msgtypes.sql</li>
+</ul>
 </div>
 </div>
 
