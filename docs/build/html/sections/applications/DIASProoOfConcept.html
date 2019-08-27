@@ -1,0 +1,346 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>DIAS Proof Of Concept Application &mdash; DIAS-Documentation 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Deployment Architecture" href="../architecture.html" />
+    <link rel="prev" title="DIASClient Library" href="DIASClientLibrary.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> DIAS-Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../pre.requisites.html">Pre-requisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dias.for.dummies.html">DIAS for Dummies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../simulation.mode.html">Simulation Mode</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="gdelt.html">GDELT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smart.agora.html">Smart Agora</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DIASClientLibrary.html">DIASClient Library</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">DIAS Proof Of Concept Application</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-case">Use case</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#start-up">Start up</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#changing-of-values">Changing of values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#checking-for-correctness">Checking for correctness</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#changing-the-settings">Changing the settings</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#problems">Problems</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Deployment Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gui.html">GUIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protopeer.html">Protopeer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dias.in.detail.html">DIAS in Detail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dias-logging-system.html">DIAS Logging System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">DIAS-Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../applications.html">Applications</a> &raquo;</li>
+        
+      <li>DIAS Proof Of Concept Application</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/sections/applications/DIASProoOfConcept.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dias-proof-of-concept-application">
+<h1>DIAS Proof Of Concept Application<a class="headerlink" href="#dias-proof-of-concept-application" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This documentation explains everything you need to know about the DIASProofOfConcept application and how to use it.
+The DIASProofOfConcept application is a simple application, which visualises the functions of the DIAS server, to show it’s correctness.</p>
+</div>
+<div class="section" id="use-case">
+<h2>Use case<a class="headerlink" href="#use-case" title="Permalink to this headline">¶</a></h2>
+<p>The application is solely intended to show the correctness and stability of the connected DIAS server.</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>To use this application, one need only to import the project into android studio and then install the application on the desired android device.</p>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>This section explains everything you need to know to correctly use the application.</p>
+<div class="section" id="start-up">
+<h3>Start up<a class="headerlink" href="#start-up" title="Permalink to this headline">¶</a></h3>
+<p>To start the application and initialise the connections, one has to press the switch on the top right corner of the screen.
+On the left of the button, there is a text writing “Running:”.</p>
+<p>Once the connections are established, there should be multiple entries in the list. How many entries this list has, depends on how many threads are selected in the sittings. More to that later on.
+Each entry stands for one separate connection with a peer of the DIAS server. To distinguish them, there is an enumeration in the left entry of each row.</p>
+<img alt="../../_images/NotStarted.png" src="../../_images/NotStarted.png" />
+</div>
+<div class="section" id="changing-of-values">
+<h3>Changing of values<a class="headerlink" href="#changing-of-values" title="Permalink to this headline">¶</a></h3>
+<p>In the centre of each row, there are three buttons with different values. The values can be changed in the settings.
+To change a value of a specific peer, one simply clicks on the desired value.
+The chosen value (and thus the value, which the server sees) is always the one with a blue background.</p>
+<img alt="../../_images/Select.png" src="../../_images/Select.png" />
+</div>
+<div class="section" id="checking-for-correctness">
+<h3>Checking for correctness<a class="headerlink" href="#checking-for-correctness" title="Permalink to this headline">¶</a></h3>
+<p>On the right side of each row, there is the value received for the respective peer from the server.
+During the convergence process on the server, it can happen, that different peers see different values.</p>
+<p>On the bottom, the internally calculated aggregation is shown. Once the value of a peer is the same as the internally aggregated one, the color of the received value of the respective peers changes to green.
+The aggregation function can be changed in the settings.</p>
+<p><strong>Note:</strong> As the values get calculated in the phone internally, only the peers from the list above are taken into consideration.
+As an example: Let’s assume the aggregation function “SUM” is selected. If 5 peers are connected over the app, all having selected the value 3, and 3 external peers with values 3 also. The app would show the “actual value” of 15, even if the correct value on the server side would be 24.</p>
+<p><strong>Note:</strong> The server is not stable with no peers online at all. For this purpose, there are always 10 mock-peers online, which do not change states. They are however taken into consideration when checking for correct aggregates (e.g. if aggregation function “AVG” is selected).
+If those 10 mock-peers on the server would be removed, one needs also to change the correction in the app:
+The line</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">mockPeers</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+</pre></div>
+</div>
+<p>needs to be changed to</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">mockPeers</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/WrongAgg.png"><img alt="../../_images/WrongAgg.png" src="../../_images/WrongAgg.png" style="width: 30%;" /></a>
+<a class="reference internal image-reference" href="../../_images/WrongAndRightAgg.png"><img alt="../../_images/WrongAndRightAgg.png" src="../../_images/WrongAndRightAgg.png" style="width: 30%;" /></a>
+<a class="reference internal image-reference" href="../../_images/RightAgg.png"><img alt="../../_images/RightAgg.png" src="../../_images/RightAgg.png" style="width: 30%;" /></a>
+<p>On the left, all estimates are incorrect. In the middle, some of the entries have correct estimates. On the right, all entries have correct estimates.</p>
+</div>
+<div class="section" id="changing-the-settings">
+<h3>Changing the settings<a class="headerlink" href="#changing-the-settings" title="Permalink to this headline">¶</a></h3>
+<p>To access the settings menu, one needs to quickly tap the DIAS logo in the top left corner five times.
+It is hidden, such that upon demonstration, the user does not change settings by accidentally accessing the settings window. The only one having access should be the demonstrator.</p>
+<p>In the settings, one can change the number of peers connected (“No. of Threads”, between 1 and 10), the value of the left button (“V1”), of the middle button (“V2”), of the right Button (“V3”), and the aggregation function (“aggregation type”).</p>
+<a class="reference internal image-reference" href="../../_images/Settings.png"><img alt="../../_images/Settings.png" src="../../_images/Settings.png" style="width: 30%;" /></a>
+</div>
+</div>
+<div class="section" id="problems">
+<h2>Problems<a class="headerlink" href="#problems" title="Permalink to this headline">¶</a></h2>
+<p>If any of the entries show “–” in the “Estimate” section, it means that this peer could not receive a value from the server.
+This could be because the corresponding peer crashed, the server is not running at all, or the connection itself could not be established.
+The latter one could be because the server or the phone itself has no connection to the internet.</p>
+<img alt="../../_images/Null.png" src="../../_images/Null.png" />
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../architecture.html" class="btn btn-neutral float-right" title="Deployment Architecture" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="DIASClientLibrary.html" class="btn btn-neutral float-left" title="DIASClient Library" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Edward Gaere
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+     .wy-nav-side {
+    
+        background: rgb(30,115,190);
+        color:#eee;
+        
+     }
+
+
+    .wy-side-nav-search {
+    
+        background: rgb(30,115,190);
+        
+    }
+
+    .wy-menu-vertical li.current{
+        background: #d6dfd3;
+    }
+
+    .wy-menu-vertical a:active{
+        background-color:rgb(30,115,190);
+    }
+
+    .fa-home::before, .icon-home::before {
+        content:"";
+    }
+
+    a.icon-home {
+        width: 50%;
+        margin-left: -6px;
+        font-size: 0%;
+        content:url("http://dias-net.org/wp-content/uploads/2016/08/silver-nodes-above-extended.png");
+    }
+
+    .wy-nav-content{
+        max-width: initial;
+    }
+  </style>
+
+
+</body>
+</html>
