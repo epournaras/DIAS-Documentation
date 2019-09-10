@@ -269,7 +269,7 @@ Please click on the Add Question after providing the required information. Quest
 
     **Upload Data Collection Asset Manually**
 
-Chapter 3 - Smart Agora Android application
+Chapter 2 - Smart Agora Android application
 *******************************************
 
 Smart Agora Android Application fosters for data scientists a more informed data collection approach at relevant public spaces. By encouraging physical presence in an augmented and gamified way, experiment participants visit public spaces more evidently and can collect highly relevant data about their environment. The experiment participant moves in the urban environment via different transport means or on foot. Physical presence provides to experiment, participants, the opportunity to witness points of interest in which data collection is required. The physical space turns to an augmented and gamified landscape for data collection.

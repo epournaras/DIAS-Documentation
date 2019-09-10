@@ -7,5 +7,6 @@ Applications
 
    applications/gdelt
    applications/smart.agora
+   applications/SmartAgoraDescription
    applications/DIASClientLibrary
    applications/DIASProoOfConcept
