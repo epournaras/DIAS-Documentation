@@ -37,12 +37,12 @@ Initialisation
 ##############
 The usage is rather easy, one just has to initialise an instance of the class.
 ::
-	MappingWrapperService server = new MappingWrapperService();
+	DIASClient server = new DIASClient();
 Once this is done, the communication with the server can begin.
 
-**Note:** Currently, the the MappingWrapper and MappingWrapperService are not guaranteed to be thread safe. Because of that, please try to only use one thread with one instance of the class.
+**Note:** Currently, the the MappingWrapper, MappingWrapperService and the DIASCLient classes are not guaranteed to be thread safe. Because of that, please try to only use one thread with one instance of the class.
 
-**Note:** You can also use the MappingWrapper class, but then you need to close the class before nulling it! The MappingWrapperService handles that for you.
+**Note:** You can also use the MappingWrapper class, but then you need to close the class before nulling it! The DIASCLient handles that for you.
 
 The usage of sensorIDs
 ######################
@@ -59,7 +59,7 @@ Sending data to the server
 ##########################
 There are two types of data messages, which can be sent: possible states and selected state messages.
 
-When sending a (or a reading), the value internally gets matched tot he closest possible state. This is why it's important to always have a) existing possible states and b) possible states, which are somewhat reasonable for the possible data.
+When sending a possible state (or a reading), the value internally gets matched to the closest possible state. This is why it's important to always have a) existing possible states and b) possible states, which are somewhat reasonable for the possible data.
 
 For Example, it doesn't make sense to have possible states in the range [500, 600], if all values are between 1 and 10. The closer the possible states lie to the possible values, which are inserted, the more accurate are the aggregates.
 
@@ -81,13 +81,13 @@ To create suiting possible states, there are already 3 methods to create them au
 
 Sending evaluated values
 ************************
-To send a value, the server must have already received some possible states (see 4.3.4.3). To set a value, one has to call the following method:
+To send a value, the server must have already received some possible states (see :ref:`Sending data to the server`). To set a value, one has to call the following method:
 ::
 	server.sendReading(String sensorID, double... readings);
 
 If multiple values are given, the library calculates the average and matches it to the nearest possible state.
 
-**Note:** A new reading overwrites the old reading, int the library, as well as in the server side.
+**Note:** A new reading overwrites the old reading, in the library, as well as on the server.
 
 Receiving data from the server
 ##############################
@@ -110,12 +110,12 @@ The returned value is an instance of the AggregateResult class, which is explain
 
 The AggregateResult class
 #########################
-This class has some similarities with the Future class.
-It will return a value, once it’s received from the server, or return null ,if an internal communication error happened.
+This class has some similarities with Java's Future class.
+It will return a value, once it’s received from the server, or return null, if an internal communication error happened.
 
-The isCancelled method will tell, if there was an error and the isReceived method with tell if anything was received.
+The isCancelled() method will tell, if there was an error and the isReceived() method with tell if anything was received.
 
-The method isFinished merges those two together and tells if either a value was received, or the process was cancelled. The isStillRunning method is basically a negation of the isCanclled method.
+The method isFinished() merges those two together and tells if either a value was received, or the process was cancelled. The isStillRunning() method is basically a negation of the isFinished() method.
 
 Getting a result
 ****************
@@ -128,7 +128,7 @@ There are 3 ways to aces a value:
 The first one is to not specify any waiting period.
 In this case, the caller waits until a value is received, or the process gets cancelled. This could potentially be dangerous, if the server never answers (Deadlock).
 
-The second one takes a waiting period. The caller waits until the waiting period is  ver for a result. If until then  nothing is received, or the process gets cancelled, it returns null.
+The second one takes a waiting period. The caller waits until the waiting period is over for a result. If until then  nothing is received, or the process gets cancelled, it returns null.
 
 The third one is the shortest. The caller checks, if there is already a value received. If not, it immediately returns null.  Notet hat the communication to the server could take some time and is not immediate.
 
@@ -142,10 +142,10 @@ The library stores already established addresses to peers internally, in order t
 
 If for any reason the saved addresses need to be re-fetched, e.g.  when the server is restarted and the sockets have dynamic addresses, the internal database needs to be cleared.
 
-To do that, the method reset() (from either the MappingWrapperService or the MappingWrapper) needs to be called.
+To do that, the method reset() (from either the MappingWrapperService, the MappingWrapper or the DIASClient class) needs to be called.
 Please Note that this only clears the database and does not close any already established connections. This means that this method needs to be called before any communication with the server. This also includes unsuccessful connection attempts, which means basically any call of any method, which would send something to the server (i.e. setting of possible states, setting of selected states, getting of aggregates etc.).
 
-If  any  of  those  methods  were  already  called,  the  instance  of  the  controller  (MappingWrapperService,  MappingWrapperor DIASInterface) needs do be correctly closed and e new instance needs to be instanciated.
+If  any  of  those  methods  were  already  called,  the  instance  of  the  controller  (MappingWrapperService,  MappingWrapper or DIASClient) needs do be correctly closed and e new instance needs to be instanciated.
 
 Overview
 --------
@@ -153,7 +153,7 @@ Overview
 
 Above, you see an overview of the library and its parts.
 
-The topmost part is the MappingWrapperService, which is a wrapperclass of the Mappingwrapper. The Mappingwrapper itself is a wrapperclass of the DIASInterface class and accesses the DIASInterface, which is the controller, we will get a deeper view in  he  following sections.
+The topmost part is the DIASCLient, which is a wrappter of the MappingWrapperService, which itself is a wrapperclass of the Mappingwrapper. The Mappingwrapper itself is a wrapperclass of the DIASInterface class and accesses the DIASInterface, which is the controller, we will get a deeper view in  he  following sections.
 
 The DIASInterface controls the Network class, which is the heart of thew hole library.
 
@@ -509,3 +509,42 @@ This class contains all constants for easy access. The following values can be r
 * the connection timeout for replies
 * the timeout for the library to change the internal flag back to offline
 * the timeout for the server
+
+Glossary
+--------
+
++-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| Expression                  | Brief explanation                                                                                                            |
++=============================+==============================================================================================================================+
+| Aggregate                   | An aggregate is an aggregated value from the server.                                                                         |
++-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| Aggregation                 | Aggregation is the process of calculating the server-wide values like average, sum, min, max etc.                            |
++-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| Deadlock                    | A deadlock occurs, if one or multiple peer wait (possibly fo eatch other), without ever making progress again.               |
++-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| DIAS                        | DIAS stands for Dynamic Intelligent Aggregation Service, explained in :ref:`DIAS - Dynamic Intelligent Aggregation Service`. |
++-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| Future class (Java)         | Future is a class used in multithreading to store return values. Its get() method waits until the thread provides the value. |
++-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| Gateway                     | The gateway is a part of the DIAS server, which resolves connections from the libraries to peers. If a the library connects  |
+|                             | to the gateway, it asks for a new peer for a given peerID. The gateway then gives a already established connection, if used  |
+|                             | before, or a new one, if the sensorID is new.                                                                                |
++-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| Manifest                    | The manifest is a configuration file for an Android application. |manifest_link|                                             |
++-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| Peer                        | Peers are the individual server modules, whith which the library communicates. Each peer can hold inividual values and       |
+|                             | aggregate on all values of the system.                                                                                       |
++-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| Reading                     | A reading is a value given from the user to be sent to the server.                                                           |
++-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| sensorID                    | sensorIDs are used to distiguish, which peer should be addressed on the server. See: :ref:`The usage of sensorIDs`           |
++-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| States                      | There are two types of states: possible states and selected states. Possible states denote values, which the library could   |
+|                             | possibly send to the peer. Selected state is the actual selected value. The selected state must be a state of the possible   |
+|                             | states.                                                                                                                      |
++-----------------------------+------------------------------------------------------------------------------------------------------------------------------+
+
+
+.. |manifest_link| raw:: html
+
+   <a href="https://developer.android.com/studio" target="_blank">Find out more.</a>
