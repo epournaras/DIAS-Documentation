@@ -1,0 +1,667 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Smart Agora Tutorial &mdash; DIAS-Documentation 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="SmartAgora Documentation" href="SmartAgoraDescription.html" />
+    <link rel="prev" title="GDELT" href="gdelt.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> DIAS-Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../pre.requisites.html">Pre-requisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="gdelt.html">GDELT</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Smart Agora Tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#about-this-tutorial">About this Tutorial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#smart-agora">Smart Agora</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#chapter-1-crowd-sourcing-dashboard">Chapter 1 - Crowd-sourcing Dashboard</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#logging-on-to-dashboard">Logging on to Dashboard</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#home-page">Home Page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#asset-creation">Asset Creation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#chapter-2-smart-agora-android-application">Chapter 2 - Smart Agora Android application</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#specifications-for-app-installation">Specifications for app installation:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Smart Agora</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="SmartAgoraDescription.html">SmartAgora Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DIASClientLibrary.html">DIASClient Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DIASProoOfConcept.html">DIAS Proof Of Concept Application</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Deployment Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gui.html">GUIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protopeer.html">Protopeer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dias.in.detail.html">How DIAS Works</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dias-logging-system.html">DIAS Logging System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">DIAS-Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../applications.html">Applications</a> &raquo;</li>
+        
+      <li>Smart Agora Tutorial</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/sections/applications/smart.agora.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="smart-agora-tutorial">
+<h1>Smart Agora Tutorial<a class="headerlink" href="#smart-agora-tutorial" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="about-this-tutorial">
+<h3>About this Tutorial<a class="headerlink" href="#about-this-tutorial" title="Permalink to this headline">¶</a></h3>
+<p>This user guide introduces you to the functionalities of Smart Agora and guides you on how you can easily create your own projects, experiments, and data collection. It guides you by listing the step-by-step procedure of crowdsourcing tasks in an automated way by the application, combined with extensive use of application screenshots, cross-references, and supplementary notes. All this is meant to give you a good understanding of the Smart Agora application and the crowd-sourcing dashboard in order to make use of it right away.</p>
+</div>
+<div class="section" id="smart-agora">
+<h3>Smart Agora<a class="headerlink" href="#smart-agora" title="Permalink to this headline">¶</a></h3>
+<p><strong>Smart Agora</strong> provides a data-collection approach for data scientists by active participation in smart cities in which the experiment participants collect data by using simple yet ethically sensitive technology. Data scientists can autonomously initiate collective movements about data collection in an urban environment. These collective movements can be easily orchestrated by defining augmented points of interest in public urban space. The participants of an experiment can explore with their smartphones and in a gamified way these points while they anonymously share informed opinions and highly relevant contextual (sensors) data.
+Smart Agora platform consists of the following two core components:</p>
+<ul class="simple">
+<li>Crowd-sourcing Dashboard</li>
+<li>Smart Phone Application</li>
+</ul>
+</div>
+</div>
+<div class="section" id="chapter-1-crowd-sourcing-dashboard">
+<h2>Chapter 1 - Crowd-sourcing Dashboard<a class="headerlink" href="#chapter-1-crowd-sourcing-dashboard" title="Permalink to this headline">¶</a></h2>
+<p>Data scientists and experiment participants both can create user-centric interactions such as questionnaires or surveys using the crowd-sourcing participation dashboard. The participation dashboard requests data and opinions from experiment participants in the public space of interest by crowd-sourcing tasks. These tasks are deployed at different points of interest in the public space, transforming them into augmented reality and making a highly interactive experience. The data scientist can log on to the crowd-sourcing dashboard to perform their respective tasks.
+(A System Diagram will be added later)</p>
+<div class="section" id="logging-on-to-dashboard">
+<h3>Logging on to Dashboard<a class="headerlink" href="#logging-on-to-dashboard" title="Permalink to this headline">¶</a></h3>
+<p>On accessing the <strong>Crowd-sourcing</strong> dashboard by visiting the following link <a class="reference external" href="http://195.201.58.108:9000/">http://195.201.58.108:9000/</a>, the <strong>Login</strong> window appears, as shown in <a class="reference internal" href="#figure-1"><span class="std std-numref">Fig. 1</span></a>. The purpose of this window is to secure the application from unauthorized access. You need to provide your authorized application Email ID and password in order to log on to the system successfully.</p>
+<div class="figure" id="id2">
+<span id="figure-1"></span><img alt="../../_images/Login_Window.png" src="../../_images/Login_Window.png" />
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text"><strong>Login Window</strong></span></p>
+</div>
+<p>If you do not have credentials to access the system, click on “Create Account” and the following screen will appear for registration.</p>
+<div class="figure" id="id3">
+<img alt="../../_images/Login_2.png" src="../../_images/Login_2.png" />
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text"><strong>Create an Account</strong></span></p>
+</div>
+<ol class="loweralpha simple">
+<li>Enter your first name in the First Name field.</li>
+<li>Enter your last name in the Last Name field.</li>
+<li>Enter your username in Username field.</li>
+<li>Enter your email id in the Email field.</li>
+<li>Enter your password in the Password field.</li>
+<li>Enter your password again to Confirm Password.</li>
+<li>Enter your Student ID in the Student ID field.</li>
+</ol>
+<ol class="arabic simple">
+<li>Click on Submit to proceed with account creation.</li>
+</ol>
+<p>If you already have user credentials, please proceed with login.</p>
+<ol class="arabic simple">
+<li>Enter your Email ID or Username in the Email/Username field.</li>
+<li>Enter your password in the Password field.</li>
+<li>Click Log In.</li>
+</ol>
+</div>
+<div class="section" id="home-page">
+<h3>Home Page<a class="headerlink" href="#home-page" title="Permalink to this headline">¶</a></h3>
+<p>On successful login, the home page is displayed. This page appears as shown below</p>
+<div class="figure" id="id4">
+<img alt="../../_images/Home_Page.png" src="../../_images/Home_Page.png" />
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text"><strong>Dashboard Home Screen</strong></span></p>
+</div>
+<p>There is an option to update the profile or password by clicking the right menu (user icon) on the dashboard as shown in <a class="reference internal" href="#figure-4"><span class="std std-numref">Fig. 4</span></a>. It allows updating user’s information on the profile page (except the username and e-mail address that are considered unique for every registered user).</p>
+<div class="figure" id="id5">
+<span id="figure-4"></span><img alt="../../_images/Figure_4.png" src="../../_images/Figure_4.png" />
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text"><strong>Update Profile</strong></span></p>
+</div>
+<p>From the dashboard’s home screen, you can proceed to crowd-source task(s). You can create projects, tasks, and assignments using the dashboard’s main menu. It’s important to note the following description of projects, tasks, and assignments before creating crowdsourcing tasks.</p>
+<div class="line-block">
+<div class="line"><strong>Projects</strong>: A project is a single crowdsourcing job. Everything else you create goes under the scope of a project: data collection assets, assignments, tasks and experiment participants. A user (experiment participant) can be connected with the project using the Smart Agora App.</div>
+<div class="line"><strong>Tasks</strong>: A task is like data storage; it contains the data collected by the individual actions on a data collection asset. For example, data collected by the experiment participants will be stored in a task. A project can have one or more tasks. It’s required to create at least one task under a project for receiving data from experiment participants. These tasks allow the data scientist to store information in an organized manner on the server. For instance, if a data scientist wants to conduct an experiment at two different occasions e.g. evening or morning time, the data scientist can create two tasks for storing the data on different occasions.</div>
+</div>
+<p>The following diagram shows the relationship between assets, assignments, and tasks.</p>
+<div class="figure" id="id6">
+<img alt="../../_images/Figure_5.png" src="../../_images/Figure_5.png" />
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text"><strong>Relationship Diagram</strong></span></p>
+</div>
+<p>Please go to the <strong>Project Configuration</strong> from the left menu on the dashboard and create a new project as below.</p>
+<div class="figure" id="id7">
+<img alt="../../_images/Figure_6.png" src="../../_images/Figure_6.png" />
+<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text"><strong>Create a Project</strong></span></p>
+</div>
+<ol class="arabic simple">
+<li>Provide any regular string in the <strong>Project Name</strong> field.</li>
+<li>It’s optional, additional information about the project in the <strong>Project Description</strong> field.</li>
+<li>It’s optional, instructions about the assignment will be shown to experiment participants in Android App’s <strong>Help Text</strong> field.</li>
+<li>By default, Smart Agora dashboard allows data scientist(s) to create assignments manually for experiment participants who are connected with the Project from Android App, it allows data scientist to control the list of participants who can join the project. <strong>Auto Assignment Creation</strong> switch button provides the functionality for experiment participants to join/perform an experiment without waiting for approval from the data scientist. The data, collected from experiment participants, will be saved in the first task.</li>
+<li>Click on Create Project after providing the required information.</li>
+</ol>
+<p>Next step is to create a task in the newly created project by clicking the Task Creation collapsible panel as shown below.</p>
+<div class="figure" id="id8">
+<img alt="../../_images/Figure_7.png" src="../../_images/Figure_7.png" />
+<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text"><strong>Create a Task</strong></span></p>
+</div>
+<ol class="arabic simple">
+<li>Select a project from the <strong>Select Project</strong> dropdown list.</li>
+<li>Provide any regular string title for the task in the <strong>Task Name</strong> field without any spaces.</li>
+<li>Optional additional information about <strong>Task Description</strong>.</li>
+</ol>
+<p>You can view details of the newly created project: View Data-&gt; Projects as follows.</p>
+<div class="figure" id="id9">
+<img alt="../../_images/Figure_8.png" src="../../_images/Figure_8.png" />
+<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text"><strong>View Project</strong></span></p>
+</div>
+<p><strong>Project Statistics:</strong></p>
+<ul class="simple">
+<li>Asset Count: shows the number of assets created for a project.</li>
+<li>Task Count: shows the number of tasks created in a project.</li>
+<li>User Count: shows the number of users connected with a project.</li>
+<li>Assignment Finished: shows the number of completed assignments by the experiment participants.</li>
+</ul>
+<p>You can view newly created task by selecting a project and task from View Data -&gt; Tasks as shown below.</p>
+<div class="figure" id="id10">
+<img alt="../../_images/Figure_9.png" src="../../_images/Figure_9.png" />
+<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text"><strong>View Tast</strong></span></p>
+</div>
+<p>The data scientist can remove any project from the system manually by providing the ID of the project, the project ID can be viewed in the View Data-&gt; Projects-&gt; Show Project ID(s).</p>
+<div class="figure" id="id11">
+<img alt="../../_images/Figure_10.png" src="../../_images/Figure_10.png" />
+<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text"><strong>Removing a project</strong></span></p>
+</div>
+<div class="line-block">
+<div class="line"><strong>Asset:</strong> Assets are what gets assigned to users such as crowed sourcing tasks for experiment participants. A data scientist can create an asset using the dashboard. All assets are scoped to a project.</div>
+<div class="line"><strong>Assignments:</strong> Assignment is the process of connecting an existing asset with the experiment participants. In simple words, a data scientist will create an assignment for experiment participants through the dashboard.</div>
+</div>
+</div>
+<div class="section" id="asset-creation">
+<h3>Asset Creation<a class="headerlink" href="#asset-creation" title="Permalink to this headline">¶</a></h3>
+<div class="figure" id="id12">
+<img alt="../../_images/Figure_11.png" src="../../_images/Figure_11.png" />
+<p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text"><strong>Project and Mode</strong></span></p>
+</div>
+<div class="line-block">
+<div class="line"><strong>Project:</strong> It contains a dropdown list of projects that you already have created from Project Configuration. Select a project from the <strong>Select Project</strong> dropdown list in order to create an asset for the project.</div>
+<div class="line"><strong>Mode:</strong> It contains a dropdown list of assignment modes (Simple, Sequence, Decision or DIAS Simple) required to create an asset. It provides the functionality to complete data collection asset for experiment participant in following four different settings.</div>
+</div>
+<ol class="arabic simple">
+<li><strong>Sequence:</strong> You can create a data collection asset containing several survey questions. In sequence mode, these questions are created in ascending sequence order and experiment participants must have to follow the same sequence in order to answer all questions using the android app. For instance, if five questions are asked in a sequence, experiment participant will answer them in order (1st question, 2nd question, 3rd question and so on) before reaching the destination.</li>
+<li><strong>Simple:</strong> In this case, questions are created without any sequence. Experiment participants can randomly visit and answer survey questions using the android app by visiting checkpoints on the map while walking on a street or traveling through the city.</li>
+<li><strong>Decision:</strong> You can create a data collection asset with Decision mode for decision-based questions using crowd-sourcing dashboard. In this case, the next question will be asked to the experiment participant based on his answer to the previous question. For example, in a real-time scenario, if there is a question “Do you like Hbf?” for experiment participant and assume there two answers YES or NO, you may like to ask next question based on the previous answer e.g.” Take the train to airport.” or “Use bus to reach the airport”.</li>
+<li><strong>DIAS Simple:</strong> It allows to create multiple Likert scale questions (with the scale values (1-10)) at any location called “group point” and experiment participants can answer questions using the android app by randomly visiting group points on the map. Android app will compute the average, of Likert scale answer(s) at each group point, and send it to Dynamic Intelligent Aggregation Service (DIAS), which returns the aggregated response of all users at the same location. For example, an experiment participant provides information of noise level at any location by answering some Likert scale questions, android app will show the aggregated response of other users on the screen who have visited the same group point. It will also show the average value of the current experiment participant on-screen for instant real-time comparison.</li>
+</ol>
+<div class="line-block">
+<div class="line">Click the Next button after providing the required information.</div>
+<div class="line"><strong>Default Credits</strong>: You can set default credit points for all questions as an incentive to motivate the involvement of experiment participants.</div>
+<div class="line"><strong>Start Address</strong>: You can provide a start location, from where experiment participants need to begin the experiment.</div>
+<div class="line"><strong>Destination Address</strong>: Similarly, provide a destination location where the experiment is supposed to be finished.</div>
+</div>
+<p>Alternatively, you can also select start and destination locations by placing the cursor in the input field and click at the desired location on the map.</p>
+<div class="figure" id="id13">
+<img alt="../../_images/Figure_12.png" src="../../_images/Figure_12.png" />
+<p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text"><strong>Start and Destination (Decision or Sequence mode)</strong></span></p>
+</div>
+<p>Note: There is an option to provide start and destination location in case of Sequence or Decision modes as shown in <a class="reference internal" href="#figure-13"><span class="std std-numref">Fig. 13</span></a>.</p>
+<div class="figure" id="id14">
+<span id="figure-13"></span><img alt="../../_images/Figure_13.png" src="../../_images/Figure_13.png" />
+<p class="caption"><span class="caption-number">Fig. 13 </span><span class="caption-text"><strong>Start and Destination (Simple or DIAS Simple mode)</strong></span></p>
+</div>
+<p>Click the Next button after providing the required information, you will see the main screen for asset creation as shown in <a class="reference internal" href="#figure-14"><span class="std std-numref">Fig. 14</span></a>:</p>
+<div class="figure" id="id15">
+<span id="figure-14"></span><img alt="../../_images/Figure_14.png" src="../../_images/Figure_14.png" />
+<p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text"><strong>Asset Creation</strong></span></p>
+</div>
+<p><strong>Asset Creation</strong> page consists of following sub-sections with collapsible panels.</p>
+<blockquote>
+<div><ul class="simple">
+<li>Question(s)</li>
+<li>Options</li>
+<li>Advanced Options</li>
+<li>Added Questions</li>
+</ul>
+</div></blockquote>
+<p><strong>Question(s)</strong>:
+This section contains information to define questions for experiment participants. You can define questions at any location, and experiment participant will answer them by visiting checkpoints on the map using the android application.</p>
+<div class="figure" id="id16">
+<span id="figure-15"></span><img alt="../../_images/Figure_15.png" src="../../_images/Figure_15.png" />
+<p class="caption"><span class="caption-number">Fig. 15 </span><span class="caption-text"><strong>Question (Sequence, Decision or Simple Mode)</strong></span></p>
+</div>
+<div class="line-block">
+<div class="line">Provide information in question(s) section as following:</div>
+<div class="line"><strong>Question</strong>: write a question that you want to ask from experiment participant(s).</div>
+<div class="line"><strong>Question Address</strong>: provide the desired location for question in ‘Question Address’ input field and visualize marker on the map. It also allows selecting locations by placing the cursor in the ‘Question Address’ input field and clicking at the desired location on the map as shown in Figure 15.</div>
+<div class="line"><strong>Question Type</strong>: there are four types of questions (i.e. radio button, checkbox, Likert scale, and text box). You can select any type for creating questions according to the requirement.</div>
+<div class="line"><strong>Visibility</strong>: this switch button is checked by default, to show question markers on the map for experiment participants. You can also make it unchecked, experiment participants will not be able to see checkpoints or markers of questions on the map.</div>
+<div class="line"><strong>Mandatory</strong>: this option is unchecked by default; it allows experiment participants to cancel the question if they do not want to answer it. You can mark it checked as mandatory so that user may not ignore it, in this case, ‘cancel’ button will not be enabled on question popup screen in android app.</div>
+<div class="line"><strong>Show Credit</strong>: You can show the credit points to experiment participants for every option of the question by checking this option. It’s unchecked by default.</div>
+</div>
+<p>Note: DIAS Simple mode supports only Likert Scale question type.</p>
+<p><strong>Option(s)</strong>: You can add possible answers to every question along with a choice to define credit points for each option in case if selected question type is Radio or Checkbox.</p>
+<p><strong>Advanced Option(s)</strong>: In advanced option(s) section you can set following advanced option(s) for while creating a question.</p>
+<ol class="loweralpha simple">
+<li><strong>Time (s)</strong>: time in seconds to record sensors’ information where the question will be asked on the map. By default, the value of time is 3 seconds.</li>
+<li><strong>Frequency</strong>: frequency can be set to high, low or medium to record sensors’ information. By default, the selected value of frequency is ’Medium’.</li>
+<li><strong>Sensors</strong>: You can select more than one sensor from the dropdown list to get the contextual information at the location of question. There are six types of sensors (Light, Gyroscope, Proximity, Accelerometer, Location, Noise) available to collect data from experiment participants at specific locations. By default, the selected value of the sensor is ‘Location’.</li>
+<li><strong>Vicinity</strong>: It is the range of the user to access checkpoints on the map (the distance from the user’s current position to the boundary of the ellipse while using the android app).</li>
+</ol>
+<p>Click ‘Add Question’ button after providing the necessary details of the question, it will be added into the grid as shown in <a class="reference internal" href="#figure-21"><span class="std std-numref">Fig. 21</span></a>.</p>
+<div class="figure" id="id17">
+<span id="figure-16"></span><img alt="../../_images/Figure_16.png" src="../../_images/Figure_16.png" />
+<p class="caption"><span class="caption-number">Fig. 16 </span><span class="caption-text"><strong>Questions Grid</strong></span></p>
+</div>
+<div class="line-block">
+<div class="line"><strong>Associate Questions (Decision Mode):</strong></div>
+<div class="line">If Decision Mode is selected from the assignment Mode dropdown list, ‘Associate Question’ button will appear on added questions’ panel as shown below:</div>
+</div>
+<div class="figure" id="id18">
+<span id="figure-17"></span><img alt="../../_images/Figure_17.png" src="../../_images/Figure_17.png" />
+<p class="caption"><span class="caption-number">Fig. 17 </span><span class="caption-text"><strong>Decision Mode Associate Question Button</strong></span></p>
+</div>
+<p>It’s required to add at least two questions in the data collection asset for creating an association between questions. If you click on the Associate Question, a pop-up window will appear to create an association among the added questions as shown below:</p>
+<div class="figure" id="id19">
+<span id="figure-18"></span><img alt="../../_images/Figure_18.png" src="../../_images/Figure_18.png" />
+<p class="caption"><span class="caption-number">Fig. 18 </span><span class="caption-text"><strong>Decision-Mode with Radio Button (Associate Question)</strong></span></p>
+</div>
+<p>‘Question’ dropdown list will show all the questions that you have added in questions grid. You can select a question from the dropdown list to create an association with any other question. By selecting the question, it will show all possible answers i.e. options of question. You can configure the next question for every available option or combination in the selected question. Click the save button every time you associate a question on popup window as shown in <a class="reference internal" href="#figure-18"><span class="std std-numref">Fig. 18</span></a>. If you have associated all questions, click the close button and submit data collection asset to server.</p>
+<ul class="simple">
+<li>If Decision Mode is selected and type of question is Checkbox, there might be more than one options to answer a question e.g.</li>
+</ul>
+<blockquote>
+<div><dl class="docutils">
+<dt>What caused you difficulty at these buildings?</dt>
+<dd><ul class="first last simple">
+<li>Parking problems</li>
+<li>Reception area</li>
+<li>Difficulty with transport</li>
+</ul>
+</dd>
+</dl>
+<p>which means participants can select more than one options, so the next question can be asked based on one or the combination of more than one checkbox options. If you define more than one options for checkbox question, all possible combinations will be generated on the screen as shown in <a class="reference internal" href="#figure-19"><span class="std std-numref">Fig. 19</span></a>. It’s allowed to create only seven options for a question if the type of question is a checkbox.</p>
+</div></blockquote>
+<div class="figure" id="id20">
+<span id="figure-19"></span><img alt="../../_images/Figure_19.png" src="../../_images/Figure_19.png" />
+<p class="caption"><span class="caption-number">Fig. 19 </span><span class="caption-text"><strong>Decision Mode checkbox combinations</strong></span></p>
+</div>
+<p>You can simply associate question for each possible combination, as shown in <a class="reference internal" href="#figure-20"><span class="std std-numref">Fig. 20</span></a>. Similarly, save all associations and close the popup window.</p>
+<div class="figure" id="id21">
+<span id="figure-20"></span><img alt="../../_images/Figure_20.png" src="../../_images/Figure_20.png" />
+<p class="caption"><span class="caption-number">Fig. 20 </span><span class="caption-text"><strong>Decision-Mode with Checkbox(Associate Question)</strong></span></p>
+</div>
+<p>Please click on the Add Question after providing the required information. Question will be added in the data grid, allowing users to update or delete it from the grid as shown in <a class="reference internal" href="#figure-21"><span class="std std-numref">Fig. 21</span></a>.</p>
+<div class="figure" id="id22">
+<span id="figure-21"></span><img alt="../../_images/Figure_21.png" src="../../_images/Figure_21.png" />
+<p class="caption"><span class="caption-number">Fig. 21 </span><span class="caption-text"><strong>Question Grid</strong></span></p>
+</div>
+<div class="line-block">
+<div class="line">Similarly, you can add more questions one by one repeating the above steps.</div>
+<div class="line">Once you have defined all questions with required configurations, you can finally submit the created asset to the server by clicking on <strong>Submit</strong>. You will see a ‘success’ notification if an asset has successfully been submitted to the server.</div>
+<div class="line">In order to verify the submitted asset on the server, you will see an increment in ‘Asset Count’ column from View Data -&gt; Projects as shown in Figure 8. Similarly, you can view the submitted assets from View Data -&gt; Assets.</div>
+<div class="line"><strong>Uploading File</strong></div>
+<div class="line">There is an additional option in the left menu to upload the data collection asset manually from the dashboard as shown in Figure 18. It’s mandatory to follow the schema of the asset file for uploading an asset file manually.  You can also create a sample JSON file from asset creation screen by adding questions into data grid, then download the file to visualize the schema.</div>
+</div>
+<div class="figure" id="id23">
+<span id="figure-22"></span><img alt="../../_images/Figure_22.png" src="../../_images/Figure_22.png" />
+<p class="caption"><span class="caption-number">Fig. 22 </span><span class="caption-text"><strong>Upload Data Collection Asset Manually</strong></span></p>
+</div>
+</div>
+</div>
+<div class="section" id="chapter-2-smart-agora-android-application">
+<h2>Chapter 2 - Smart Agora Android application<a class="headerlink" href="#chapter-2-smart-agora-android-application" title="Permalink to this headline">¶</a></h2>
+<p>Smart Agora Android Application fosters for data scientists a more informed data collection approach at relevant public spaces. By encouraging physical presence in an augmented and gamified way, experiment participants visit public spaces more evidently and can collect highly relevant data about their environment. The experiment participant moves in the urban environment via different transport means or on foot. Physical presence provides to experiment, participants, the opportunity to witness points of interest in which data collection is required. The physical space turns to an augmented and gamified landscape for data collection.</p>
+<div class="section" id="specifications-for-app-installation">
+<h3>Specifications for app installation:<a class="headerlink" href="#specifications-for-app-installation" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><strong>API level (Platform version)</strong>: There have been many major changes between API versions in android. Smart Agora supports minimum API level 15 (Android version= 4.0.3) and highest API level 24 (android version=7.0) for device compatibility.</div>
+<div class="line"><strong>Device capabilities</strong>: Your android device should have the following capabilities: GPS, Gyroscope, Accelerometer, Light Sensor.</div>
+<div class="line"><strong>Device Permissions</strong>: Smart Agora requires following permissions before installation: Internet, location, Nervousnet HUB API (for sensors), Storage.</div>
+<div class="line"><strong>Installation</strong>:</div>
+<div class="line">Please install “<strong>Smart Agora</strong>” android application from a shared location. By default, Android devices cannot install apps from sources other than the Google Play Store. To install apps manually, you’ll need to allow your device to install apps from other sources. You may need the following steps to enable manual installation of android APK.</div>
+</div>
+<ul class="simple">
+<li>Please open the <strong>Settings</strong> on your android device.</li>
+<li>Tap “<strong>Security</strong>”. it will open the Security menu.</li>
+<li>Scroll down and check the “Unknown sources” box. Tap “OK” to confirm that you want to enable this.</li>
+<li>Download Smart Agora APK directly to your device from a shared location. Navigate to the location of the downloaded APK file installation.</li>
+<li>Tap the APK. This will immediately open the installer for the app. You can review the permissions before the app is installed, you will see a list of the services that it will have access to.</li>
+<li>Tap “Install” to install the app. The app will automatically install, and an icon for it will be added to your Home screen. You can tap the “Open” button in the installer to open it immediately.</li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h3>Smart Agora<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Start the application by clicking the app icon on your android device. A splash screen will appear for a few seconds meanwhile application loads its resources.</li>
+</ol>
+<blockquote>
+<div><div class="figure" id="id24">
+<span id="figure-23"></span><img alt="../../_images/Figure_23.png" src="../../_images/Figure_23.png" />
+<p class="caption"><span class="caption-number">Fig. 23 </span><span class="caption-text"><strong>Smart Agora - Splash Screen</strong></span></p>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>The application will ask the user to turn the GPS on if it is disabled on the android device as shown in Figure 25. It will show the current location of the user after activating the GPS.</li>
+</ol>
+<blockquote>
+<div><div class="figure" id="id25">
+<span id="figure-24"></span><img alt="../../_images/Figure_24.png" src="../../_images/Figure_24.png" />
+<p class="caption"><span class="caption-number">Fig. 24 </span><span class="caption-text"><strong>Smart Agora - Enable GPS</strong></span></p>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li>You will land on the home screen after turning on the GPS location. Home screen consists of the following functionalities:</li>
+</ol>
+<blockquote>
+<div><div class="figure" id="id26">
+<span id="figure-25"></span><img alt="../../_images/Figure_25.png" src="../../_images/Figure_25.png" />
+<p class="caption"><span class="caption-number">Fig. 25 </span><span class="caption-text"><strong>Smart Agora - Right Menu</strong></span></p>
+</div>
+</div></blockquote>
+<p>There is a right menu option in smart agora app, available on the right side of header, mainly to select projects and get new assignments as shown <a class="reference internal" href="#figure-25"><span class="std std-numref">Fig. 25</span></a>.</p>
+<p>Experiment participant can select a project by providing data scientist code, sync assignments (to get new assignments), load an assignment to perform an experiment and mark an assignment as ‘complete’ by clicking on Submit Assignment from right menu option. If an experiment participant has already completed an assignment or submitted it manually from right menu, it will not be shown after sync. assignments.</p>
+<p>If a data scientist is registered at the crowed-sourcing dashboard with an email e.g. <a class="reference external" href="mailto:datascientist&#37;&#52;&#48;gmail&#46;com">datascientist<span>&#64;</span>gmail<span>&#46;</span>com</a>, the user name (i.e. datascientist) will be considered as code of data scientist to access their projects.</p>
+<div class="figure" id="id27">
+<span id="figure-26"></span><img alt="../../_images/Figure_26.png" src="../../_images/Figure_26.png" />
+<p class="caption"><span class="caption-number">Fig. 26 </span><span class="caption-text"><strong>Available Projects</strong></span></p>
+</div>
+<div class="line-block">
+<div class="line">In order to get an assignment, each android user needs to connect with a project at first. Please click on the Select Project from the right menu. All available projects will be shown to you as appeared in <a class="reference internal" href="#figure-26"><span class="std std-numref">Fig. 26</span></a> after providing data scientist code. You may connect with one project at a time, and can access assignment from that project.</div>
+<div class="line">Experiment participants cannot see other data scientists’ projects.</div>
+</div>
+<p>If an experiment participant is connected with a project, data scientists can visit the crowd-sourcing dashboard and create an assignment for the experiment participant from dashboard following Projects Configuration -&gt; Create Assignment as shown in <a class="reference internal" href="#figure-27"><span class="std std-numref">Fig. 27</span></a>.</p>
+<div class="figure" id="id28">
+<span id="figure-27"></span><img alt="../../_images/Figure_27.png" src="../../_images/Figure_27.png" />
+<p class="caption"><span class="caption-number">Fig. 27 </span><span class="caption-text"><strong>Dashboard - Create Assignment</strong></span></p>
+</div>
+<div class="line-block">
+<div class="line">Data scientists can also see all users connected with a project from View Data-&gt;Users.</div>
+<div class="line">Experiment participant can click on Sync Assignments from the bottom menu in the Android app to synchronize with the server and get assignments that are assigned by the data scientist.  Experiment participant can click on Sync. Assignment from the bottom menu to select an assignment from the assigned tasks.</div>
+</div>
+<div class="figure" id="id29">
+<span id="figure-28"></span><img alt="../../_images/Figure_28.png" src="../../_images/Figure_28.png" />
+<p class="caption"><span class="caption-number">Fig. 28 </span><span class="caption-text"><strong>Available Assignments</strong></span></p>
+</div>
+<p>Tap on the assignment (e.g. Sequence_16122017_23303) to load into the map as show in <a class="reference internal" href="#figure-28"><span class="std std-numref">Fig. 28</span></a>. In addition, there is a cross icon with every file to delete it from application. If data participant has deleted an assignment by mistake, it can be reloaded from server by clicking Sync. Assignment from right menu options of smart agora. If an assignment has already been marked as completed, it cannot be opened or submitted again.</p>
+<div class="figure" id="id30">
+<span id="figure-29"></span><img alt="../../_images/Figure_29.png" src="../../_images/Figure_29.png" />
+<p class="caption"><span class="caption-number">Fig. 29 </span><span class="caption-text"><strong>Assignment loaded on the map</strong></span></p>
+</div>
+<p>Experiment participant’s current position will be shown with an ellipse around his current location after loading the assignment as show in <a class="reference internal" href="#figure-29"><span class="std std-numref">Fig. 29</span></a>.</p>
+<div class="line-block">
+<div class="line">When an experiment participant loads an assignment in the Smart Agora app and starts to perform the experiment by moving into the public space, the application will draw an ellipse around the current location of the participant’s application as shown in Figure 30. Smart Agora app will check if a checkpoint/ question marker enters into the vicinity of the ellipse, and then a popup window will appear to ask a question from the participant and sensors’ information will be recorded.</div>
+<div class="line">It’s required to select an appropriate transport meanwhile performing an experiment. For example, if a participant is walking, the application will check after every 7 seconds to see if a question marker enters into the vicinity of the experiment participant.</div>
+</div>
+<ul class="simple">
+<li>Car: 1 second</li>
+<li>Train: 0.5 second</li>
+<li>Walk: 7 seconds</li>
+<li>Bicycle: 6 seconds</li>
+</ul>
+<div class="figure" id="id31">
+<span id="figure-30"></span><img alt="../../_images/Figure_30.png" src="../../_images/Figure_30.png" />
+<p class="caption"><span class="caption-number">Fig. 30 </span><span class="caption-text"><strong>Smart Agora - Transport Means</strong></span></p>
+</div>
+<p>There is a transport menu available on left side in application to change transport means by selecting an icon for walking, car, bus or tram once the assignment has been loaded in the application. By default, the selected transport mean is walking as shown in <a class="reference internal" href="#figure-30"><span class="std std-numref">Fig. 30</span></a>.</p>
+<p>If an experiment participant does not follow the route on the map and is not within the specified tolerance, then a message “Please follow the route.” will be shown to the user. The tolerance is set to 50 meters and application will add GPS accuracy value in this tolerance. This rule (i.e. “Please follow the route”) isn’t applicable for Simple and DIAS Simple mode, because the questions are distributed on the map at different locations without start &amp; destination locations and the participant don’t need to follow a route] By default, the tolerance is set to 50m.</p>
+<p>You can also see a state progress bar on the home screen, it shows the progress while completing an assignment. If an assignment is completed successfully, all states of the progress bar are marked.</p>
+<div class="figure" id="id32">
+<span id="figure-31"></span><img alt="../../_images/Figure_31.png" src="../../_images/Figure_31.png" />
+<p class="caption"><span class="caption-number">Fig. 31 </span><span class="caption-text"><strong>Smart Agora - Question pop up</strong></span></p>
+</div>
+<p>If a question comes into the vicinity  of a user, a pop up will appear to ask a survey question to the user as shown in <a class="reference internal" href="#figure-31"><span class="std std-numref">Fig. 31</span></a>.</p>
+<div class="figure" id="id33">
+<span id="figure-32"></span><img alt="../../_images/Figure_32.png" src="../../_images/Figure_32.png" />
+<p class="caption"><span class="caption-number">Fig. 32 </span><span class="caption-text"><strong>DIAS Simple Mode</strong></span></p>
+</div>
+<p>In DIAS Simple mode you can see your average response and aggregated response of other participants at the same location as shown in <a class="reference internal" href="#figure-32"><span class="std std-numref">Fig. 32</span></a>.</p>
+<div class="figure" id="id34">
+<span id="figure-33"></span><img alt="../../_images/Figure_33.png" src="../../_images/Figure_33.png" />
+<p class="caption"><span class="caption-number">Fig. 33 </span><span class="caption-text"><strong>Smart Agora - Left Menu</strong></span></p>
+</div>
+<ol class="lowerroman simple">
+<li>Transport Mean:  It shows a selected transport mean from home screen.</li>
+<li>Survey Questions: It shows total number of questions to be asked in case of simple and sequence mode.</li>
+<li>Location: It shows coordinates of starting and destination location.</li>
+<li>Check Points: It shows total number of checkpoints on the map.</li>
+<li>Visited Points: It shows the number of visited checkpoints.</li>
+</ol>
+<div class="figure" id="id35">
+<span id="figure-34"></span><img alt="../../_images/Figure_34.png" src="../../_images/Figure_34.png" />
+<p class="caption"><span class="caption-number">Fig. 34 </span><span class="caption-text"><strong>Smart Agora - Destination Reached</strong></span></p>
+</div>
+<p>When the user is reached at destination, a pop-up will appear “Destination Reached” as shown below. Application asks the user to click OK button and the completed assignment is submitted to the server and user returns to home screen after clicking OK. Similarly, multiple assignments can be completed repeating the same steps.</p>
+<p>If an experiment participant has completed an assignment by visiting all questions on the map, it will be submitted to the server. Data scientists can visit the dashboard again to see an increment into Assignment Finished counter from Projects Configuration-&gt; All Projects.</p>
+<p>Data scientists can access data of all completed assignments and sensors’ data in JSON format from the dashboard in order to perform analysis on the data.
+View Data -&gt; Tasks. It also allows downloading JSON file from Result icon as shown below.</p>
+<div class="figure" id="id36">
+<span id="figure-35"></span><img alt="../../_images/Figure_35.png" src="../../_images/Figure_35.png" />
+<p class="caption"><span class="caption-number">Fig. 35 </span><span class="caption-text"><strong>View Task</strong></span></p>
+</div>
+<p>There is an additional option to access data files (i.e. completed assignments &amp; sensors’ data) from the device’s internal storage (Mydevice/Android/data/nervousnet.ethz.ch/files/Assignments) in case of any problem in network connection to the server.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="SmartAgoraDescription.html" class="btn btn-neutral float-right" title="SmartAgora Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="gdelt.html" class="btn btn-neutral float-left" title="GDELT" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Edward Gaere
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+     .wy-nav-side {
+    
+        background: rgb(30,115,190);
+        color:#eee;
+        
+     }
+
+
+    .wy-side-nav-search {
+    
+        background: rgb(30,115,190);
+        
+    }
+
+    .wy-menu-vertical li.current{
+        background: #d6dfd3;
+    }
+
+    .wy-menu-vertical a:active{
+        background-color:rgb(30,115,190);
+    }
+
+    .fa-home::before, .icon-home::before {
+        content:"";
+    }
+
+    a.icon-home {
+        width: 50%;
+        margin-left: -6px;
+        font-size: 0%;
+        content:url("http://dias-net.org/wp-content/uploads/2016/08/silver-nodes-above-extended.png");
+    }
+
+    .wy-nav-content{
+        max-width: initial;
+    }
+  </style>
+
+
+</body>
+</html>
