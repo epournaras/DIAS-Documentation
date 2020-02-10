@@ -284,26 +284,102 @@
 
   <style>
     /* Sidebar header (and topbar for mobile) */
+
+
+
+
+
+      :root{
+        --grey: rgb(231, 232, 233);
+        --altblue: rgb(30,115,190);
+        --blue: rgb(37, 117, 187);
+      }
+
+      /*link visited and unvisited color*/
+
+      a {
+        color: var(--grey);
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      a:visited {
+        color: var(--grey);
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      /*footer colors*/
+
+      footer{
+        color:var(--grey)
+      }
+
+      a:hover {
+        color: var(--grey);
+        text-decoration: underline;
+        cursor: pointer;
+        text-decoration-color: var(--blue);
+      }
+
      .wy-nav-side {
-    
-        background: rgb(30,115,190);
-        color:#eee;
-        
+
+        /*background: rgb(30,115,190);*/
+        background: var(--grey);
+        color:/**#eee;*/var(--blue);
+
+
      }
 
+     .wy-menu-vertical li.toctree-l1.current>a {
+        color: var(--blue);
+     }
+
+     .wy-menu-vertical li.toctree-l2 a{
+       color: var(--blue);
+     }
+
+     .wy-menu-vertical li.toctree-l2 a:hover{
+       color: var(--grey);
+       background:var(--blue);
+     }
+
+     .wy-menu-vertical li.toctree-l2.current li.toctree-l3>a:hover{
+         color: var(--grey);
+         background:var(--blue);
+     }
+
+     .wy-menu-vertical li.toctree-l3.current li.toctree-l4>a:hover{
+           color: var(--grey);
+           background:var(--blue);
+     }
 
     .wy-side-nav-search {
-    
-        background: rgb(30,115,190);
-        
+
+        background:var(--grey); /*rgb(30,115,190);*/
+
+    }
+
+    .wy-menu-vertical a{
+      color:var(--blue);
+      text-decoration: none;
     }
 
     .wy-menu-vertical li.current{
-        background: #d6dfd3;
+        color:var(--blue);
     }
 
-    .wy-menu-vertical a:active{
-        background-color:rgb(30,115,190);
+    .wy-menu-vertical li{
+        color:var(--blue);
+    }
+
+    .wy-menu-vertival a:current {
+      color:var(--grey);
+    }
+
+    .wy-menu-vertical a:hover{
+        background-color:var(--blue);
+        color:var(--grey);
     }
 
     .fa-home::before, .icon-home::before {
@@ -319,7 +395,71 @@
 
     .wy-nav-content{
         max-width: initial;
+        background:var(--blue);
+        color:var(--grey);
     }
+
+    /*nav top current directory, delete link underline*/
+    .wy-breadcrumbs li a:first-child{
+      text-decoration: none;
+    }
+
+
+    /*buton colors*/
+    .btn-neutral {
+        color: var(--blue) !important;
+        background-color: var(--grey) !important;
+    }
+    .btn-neutral:visited {
+        color: var(--blue) !important;
+        background-color: var(--grey) !important;
+    }
+
+    /*codeblock color*/
+    .rst-content div[class^='highlight'] pre{
+      color:black;
+      border-radius:3px; /*rounded corners*/
+    }
+
+    /*make sure tables do no have white backgrounds*/
+    .rst-content table.docutils:not(.field-list) tr:nth-child(2n-1) td {
+      background-color:var(--blue)
+    }
+
+    /*color of table header*/
+    .rst-content table.docutils thead{
+      color:var(--grey) !important;
+    }
+
+    /*table title thick border*/
+    .rst-content table.docutils thead th{
+      border-bottom: solid 2px;
+      border-top: solid 2px;
+      border-left: solid 2px;
+      border-right: solid 2px;
+    }
+
+    /*code block line numbers*/
+    div.linenodiv pre{
+      color:var(--grey) !important;
+      border-radius:0 !important;
+    }
+
+    /*codeblock grey background*/
+    div.highlight pre{
+      background-color:var(--grey);
+    }
+
+    /*rounded corners on images*/
+    .rst-content .section>img{
+      border-radius:3px;
+    }
+
+    /*rounded corners on codeblocks*/
+    .rst-content div[class^='highlight']{
+        border-radius:3px;
+    }
+
   </style>
 
 
