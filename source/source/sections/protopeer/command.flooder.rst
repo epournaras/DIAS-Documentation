@@ -20,7 +20,7 @@ The following command will launch 10 independent peers in live mode, allowing me
 
     ./command.flooder.zmq.sh 10 5 256M
 
-*Figure {x}* Example for launch 10 peers in the command flooder experiment
+*Code snippet: Example for launch 10 peers in the command flooder experiment*
 
 
 You should that the number of peers in your Command Flooder network is greater or equal to the number of peers required for the Boostrapping.

@@ -90,7 +90,7 @@ With these objectives in mind, DIAS-Logging-System was designed using the follow
 
 .. image:: dias-logging-system/dias-logging-system-overview.png
 
-** Figure {} ** Design of the DIAS-Logging-System
+*Figure:* Design of the DIAS-Logging-System
 
 Code examples
 -------------
@@ -126,7 +126,7 @@ Code examples: RawLog
     RawLog.print(1,"DIASLight::SendBootstrapHello");
 
 
-** Figure {} ** Java code to add a free-form logging message to the DIAS-Logging-System. The number '1' indicates level info
+*Code snippet:* Java code to add a free-form logging message to the DIAS-Logging-System. The number '1' indicates level info
 
 Code examples: EventLog
 -----------------------
@@ -144,7 +144,7 @@ Code examples: EventLog
     - The name of the calling function, e.g. start
 
     - A key, e.g. "alreadyStarted"
-    
+
     - A value (text), e.g. "True"
 
 - The EventLog automatically records the id of the calling thread allowing insights into potential issues regarding thread synchronisation
@@ -166,7 +166,7 @@ Code examples: MemLog
 
 - Objects where memory monitoring is required need to be added with a call to add_object, that takes 3 arguments
 
-    - Arguments one and two are simple tags that will allow you 
+    - Arguments one and two are simple tags that will allow you
 
         - In the example below, we are using the class in which the object belongs and the name of the instantiated object
 
@@ -179,7 +179,7 @@ Code examples: MemLog
     // memory logging
     MemLog.add_object("DIASlight", "dumper", this.dumper);
 
-**Figure {}.** Java code to add an object the MemLog. In this example, the instance of a protopeer.MeasurementFileDumper inside the DIASlight peerlet. 
+*Code snippet:* Java code to add an object the MemLog. In this example, the instance of a protopeer.MeasurementFileDumper inside the DIASlight peerlet.
 
 Querying the data
 -----------------
@@ -199,7 +199,7 @@ Since the data is stored in a PostgreSQL database with fully compliant SQL suppo
 
 .. image:: dias-logging-system/dias-logging-system-1.png
 
-**Figure {}.** Latest 100 RawLog messages, across all peers
+*Figure:* Latest 100 RawLog messages, across all peers
 
 
 **RawLog: Only messages of a given peer, that contain certain text**
@@ -211,7 +211,7 @@ Since the data is stored in a PostgreSQL database with fully compliant SQL suppo
 
 .. image:: dias-logging-system/dias-logging-system-2.png
 
-**Figure {}.** Searching for messages within a given peer that contain specific text 
+*Figure:* Searching for messages within a given peer that contain specific text
 
 
 **RawLog: Warning and error messages**
@@ -224,7 +224,7 @@ The rawlog table is partitionned by error_level for fast lookup
 
 .. image:: dias-logging-system/dias-logging-system-3.png
 
-*Figure* Warning and error messages
+*Figure:* Warning and error messages
 
 **EventLog: Summary of events logged**
 
@@ -234,7 +234,7 @@ The rawlog table is partitionned by error_level for fast lookup
 
 .. image:: dias-logging-system/dias-logging-system-4.png
 
-*Figure* Summary of the types of events stored in the event log
+*Figure:* Summary of the types of events stored in the event log
 
 **EventLog: Most recent events**
 
@@ -248,7 +248,7 @@ The rawlog table is partitionned by error_level for fast lookup
 
 .. image:: dias-logging-system/dias-logging-system-5.png
 
-*Figure* Most recent events in the event log
+*Figure:* Most recent events in the event log
 
 
 **EventLog: Tracking certain events**
@@ -261,9 +261,9 @@ The rawlog table is partitionned by error_level for fast lookup
 
     SELECT * FROM eventlog WHERE key = 'finger' ORDER BY epoch ASC LIMIT 200;
 
-.. image:: dias-logging-system/dias-logging-system-6.png    
+.. image:: dias-logging-system/dias-logging-system-6.png
 
-*Figure* Filtering on the event type (column 'key')
+*Figure:* Filtering on the event type (column 'key')
 
 **MemLog: Show the latest memory footprint for recorded objects for each peer**
 
@@ -278,7 +278,7 @@ The rawlog table is partitionned by error_level for fast lookup
             ,object_name
         FROM
             memlog
-        GROUP BY    
+        GROUP BY
             peer
             ,object_group_name
             ,object_name
@@ -289,7 +289,7 @@ The rawlog table is partitionned by error_level for fast lookup
     FROM
 
         memlog mem
-    INNER JOIN 
+    INNER JOIN
         with_last_peer_seq_id last_records
         ON
         last_records.last_peer_seq_id = mem.seq_id
@@ -334,7 +334,7 @@ Before the DIAS-Logging-System can be used, it needs to be initalised inside eac
     persistenceClient = new PersistenceClient( zmqContext, daemonConnectString, persistenceClientOutputQueueSize );
     System.out.println( "persistenceClient created" );
 
-*Figure* Java code to initialise the PersistenceClient instance
+*Code Snippet:* Java code to initialise the PersistenceClient instance
 
 **RawLog**
 
@@ -362,10 +362,10 @@ Before the DIAS-Logging-System can be used, it needs to be initalised inside eac
     RawLog.setErrorLevelThreshold(rawLogLevel);        // log all (1); only log warnings (2); errors (3)
     RawLog.setPeer(newPeer);
     RawLog.setDIASNetworkId(diasNetworkId);
-               
+
     System.out.printf( "RawLog setup with rawLogLevel %d\n", rawLogLevel );
 
-*Figure* Java code to initialise the RawLog class
+*Code Snippet:* Java code to initialise the RawLog class
 
 **EventLog**
 
@@ -383,7 +383,7 @@ The EventLog class is initialised similarly to the RawLog with a:
     EventLog.setPeer(newPeer);
     EventLog.setDIASNetworkId(diasNetworkId);
 
-*Figure* Java code to initialise the EventLog class
+*Code Snippet:* Java code to initialise the EventLog class
 
 
 **MemLog**
@@ -403,7 +403,7 @@ The EventLog class is initialised similarly to the RawLog with a:
 
     // initialise MemLog
     final MemoryMeter     instrument = new MemoryMeter();
-                
+
     if( !MemoryMeter.hasInstrumentation() )
         System.out.printf( "MemLog: No instrumentation\n" );
     else
@@ -413,13 +413,13 @@ The EventLog class is initialised similarly to the RawLog with a:
         MemLog.setPeer(newPeer);
         MemLog.setDIASNetworkId(diasNetworkId);
         MemLog.startTimer(60);
-                    
+
         System.out.printf( "MemLog setup\n" );
-                    
+
         MemLog.add_object("Peer", "Peer", newPeer);
     }
 
-*Figure* Java code to initialise the MemLog class
+*Code Snippet:* Java code to initialise the MemLog class
 
 
 Database Installation
@@ -440,7 +440,7 @@ Note that this will also start the database service
     sudo apt-get update
     sudo apt-get install postgresql
 
-*Figure* Ubuntu commands to install the latest version of PostgreSQL server
+*Code Snippet:* Ubuntu commands to install the latest version of PostgreSQL server
 
 
 *Create a database*
@@ -455,7 +455,7 @@ Note that this will also start the database service
 
     CREATE DATABASE dias;
 
-*Figure* SQL commands to create the persistence database 
+*Code Snippet:* SQL commands to create the persistence database
 
 *Create tables*
 
@@ -484,7 +484,7 @@ There are three tables to create:
     CREATE TABLE memlog ...
     CREATE TABLE rawlog ...
 
-*Figure* SQL commands to create the persistence tables
+*Code Snippet:* SQL commands to create the persistence tables
 
 Launch
 ------
@@ -496,14 +496,14 @@ Once the DIAS-Logging-System is installed, launch the persistence daemon (that l
     cd DIAS-Logging-System
     ./start.daemon.sh deployments/localhost
 
-*Figure* Commands to launch of the persistence daemon
+*Code Snippet:* Commands to launch of the persistence daemon
 
 This will launch a UNIX screen session, inside of which the persistence daemon will run. In the screenshot below zou can see here that the daemon is listening on localhost:5433 for logging messages to be persisted
 
-.. image:: dias-logging-system/dias-logging-system-7.png    
+.. image:: dias-logging-system/dias-logging-system-7.png
 
 
-*Figure* Screenshot of the running DIAS-Logging-System persistence daemon
+*Figure:* Screenshot of the running DIAS-Logging-System persistence daemon
 
 
 References

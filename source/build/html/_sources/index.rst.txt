@@ -15,15 +15,15 @@ DIAS stands for Dynamic Intelligent Aggregation Service.
 **Dynamic**
 
  - DIAS can operate in unreliable environments with rapidly changing input data
- 
+
 **Intelligent**
 
  - Thanks to an intelligent memory system that guarantees accurate measurements
- 
+
 **Aggregation**
 
  - Concerns the computation of several large-scale collective measurements
- 
+
 **Service**
 
  - DIAS can be used by different techno-socio-economic applications
@@ -40,19 +40,19 @@ The original research paper can be found at http://evangelospournaras.com/wordpr
 
    sections/pre.requisites
    sections/quickstart
-   sections/applications
+   sections/dias.in.detail
    sections/architecture
    sections/gui
    sections/protopeer
-   sections/dias.in.detail
    sections/dias-logging-system
+   sections/applications
    sections/glossary
-   
+
 
 Installation
 ------------
 
-See sections/quickstart 
+See sections/quickstart
 
 Website
 -------

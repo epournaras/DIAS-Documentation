@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Glossary" href="glossary.html" />
-    <link rel="prev" title="Join and Leave" href="dias.in.detail/join.and.leave.html" /> 
+    <link rel="next" title="Applications" href="applications.html" />
+    <link rel="prev" title="Command Flooder" href="protopeer/command.flooder.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -86,11 +86,10 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="pre.requisites.html">Pre-requisites</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dias.in.detail.html">How DIAS Works</a></li>
 <li class="toctree-l1"><a class="reference internal" href="architecture.html">Deployment Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gui.html">GUIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="protopeer.html">Protopeer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dias.in.detail.html">How DIAS Works</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">DIAS Logging System</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#architecture">Architecture</a></li>
@@ -106,6 +105,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="applications.html">Applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 </ul>
 
@@ -292,7 +292,7 @@
 </li>
 </ul>
 <img alt="../_images/dias-logging-system-overview.png" src="../_images/dias-logging-system-overview.png" />
-<p>** Figure {} ** Design of the DIAS-Logging-System</p>
+<p><em>Figure:</em> Design of the DIAS-Logging-System</p>
 </div>
 <div class="section" id="code-examples">
 <h2>Code examples<a class="headerlink" href="#code-examples" title="Permalink to this headline">¶</a></h2>
@@ -335,7 +335,7 @@
 <span class="n">RawLog</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;DIASLight::SendBootstrapHello&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>** Figure {} ** Java code to add a free-form logging message to the DIAS-Logging-System. The number ‘1’ indicates level info</p>
+<p><em>Code snippet:</em> Java code to add a free-form logging message to the DIAS-Logging-System. The number ‘1’ indicates level info</p>
 </div>
 <div class="section" id="code-examples-eventlog">
 <h2>Code examples: EventLog<a class="headerlink" href="#code-examples-eventlog" title="Permalink to this headline">¶</a></h2>
@@ -394,7 +394,7 @@
 <span class="n">MemLog</span><span class="o">.</span><span class="n">add_object</span><span class="p">(</span><span class="s2">&quot;DIASlight&quot;</span><span class="p">,</span> <span class="s2">&quot;dumper&quot;</span><span class="p">,</span> <span class="n">this</span><span class="o">.</span><span class="n">dumper</span><span class="p">);</span>
 </pre></div>
 </div>
-<p><strong>Figure {}.</strong> Java code to add an object the MemLog. In this example, the instance of a protopeer.MeasurementFileDumper inside the DIASlight peerlet.</p>
+<p><em>Code snippet:</em> Java code to add an object the MemLog. In this example, the instance of a protopeer.MeasurementFileDumper inside the DIASlight peerlet.</p>
 </div>
 <div class="section" id="querying-the-data">
 <h2>Querying the data<a class="headerlink" href="#querying-the-data" title="Permalink to this headline">¶</a></h2>
@@ -408,26 +408,26 @@
 </pre></div>
 </div>
 <img alt="../_images/dias-logging-system-1.png" src="../_images/dias-logging-system-1.png" />
-<p><strong>Figure {}.</strong> Latest 100 RawLog messages, across all peers</p>
+<p><em>Figure:</em> Latest 100 RawLog messages, across all peers</p>
 <p><strong>RawLog: Only messages of a given peer, that contain certain text</strong></p>
 <div class="code sql highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SELECT</span> <span class="o">*</span> <span class="n">FROM</span> <span class="n">rawlog</span> <span class="n">WHERE</span> <span class="n">peer</span> <span class="o">=</span> <span class="mi">13</span> <span class="n">AND</span> <span class="n">txt</span> <span class="n">LIKE</span> <span class="s1">&#39;LEAVE REQUEST IS TRUE!&#39;</span> <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">seq_id</span> <span class="n">DESC</span> <span class="p">;</span>
 </pre></div>
 </div>
 <img alt="../_images/dias-logging-system-2.png" src="../_images/dias-logging-system-2.png" />
-<p><strong>Figure {}.</strong> Searching for messages within a given peer that contain specific text</p>
+<p><em>Figure:</em> Searching for messages within a given peer that contain specific text</p>
 <p><strong>RawLog: Warning and error messages</strong></p>
 <p>The rawlog table is partitionned by error_level for fast lookup</p>
 <div class="code sql highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SELECT</span> <span class="o">*</span> <span class="n">FROM</span> <span class="n">rawlog</span> <span class="n">WHERE</span> <span class="n">error_level</span> <span class="o">&gt;=</span> <span class="mi">2</span>  <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">seq_id</span> <span class="n">DESC</span> <span class="n">LIMIT</span> <span class="mi">100</span><span class="p">;</span>
 </pre></div>
 </div>
 <img alt="../_images/dias-logging-system-3.png" src="../_images/dias-logging-system-3.png" />
-<p><em>Figure</em> Warning and error messages</p>
+<p><em>Figure:</em> Warning and error messages</p>
 <p><strong>EventLog: Summary of events logged</strong></p>
 <div class="code sql highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SELECT</span> <span class="n">classname</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="n">FROM</span> <span class="n">eventlog</span> <span class="n">GROUP</span> <span class="n">BY</span> <span class="n">classname</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">key</span> <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">classname</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">key</span> <span class="n">ASC</span><span class="p">;</span>
 </pre></div>
 </div>
 <img alt="../_images/dias-logging-system-4.png" src="../_images/dias-logging-system-4.png" />
-<p><em>Figure</em> Summary of the types of events stored in the event log</p>
+<p><em>Figure:</em> Summary of the types of events stored in the event log</p>
 <p><strong>EventLog: Most recent events</strong></p>
 <ul class="simple">
 <li>The events in the eventlog table are persisted with milli-second resolution timestamp, which should provide enough resolution for most debugging applications</li>
@@ -437,7 +437,7 @@
 </pre></div>
 </div>
 <img alt="../_images/dias-logging-system-5.png" src="../_images/dias-logging-system-5.png" />
-<p><em>Figure</em> Most recent events in the event log</p>
+<p><em>Figure:</em> Most recent events in the event log</p>
 <p><strong>EventLog: Tracking certain events</strong></p>
 <ul class="simple">
 <li>In the below example, we observe the finger event. When each peer is started, it writes it’s IP address and port to the EventLog</li>
@@ -447,7 +447,7 @@
 </pre></div>
 </div>
 <img alt="../_images/dias-logging-system-6.png" src="../_images/dias-logging-system-6.png" />
-<p><em>Figure</em> Filtering on the event type (column ‘key’)</p>
+<p><em>Figure:</em> Filtering on the event type (column ‘key’)</p>
 <p><strong>MemLog: Show the latest memory footprint for recorded objects for each peer</strong></p>
 <div class="code sql highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WITH</span> <span class="n">with_last_peer_seq_id</span> <span class="n">AS</span>
 <span class="p">(</span>
@@ -507,7 +507,7 @@
 <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span> <span class="s2">&quot;persistenceClient created&quot;</span> <span class="p">);</span>
 </pre></div>
 </div>
-<p><em>Figure</em> Java code to initialise the PersistenceClient instance</p>
+<p><em>Code Snippet:</em> Java code to initialise the PersistenceClient instance</p>
 <p><strong>RawLog</strong></p>
 <ul>
 <li><p class="first">The RawLog class is initialised with the persistence client that actually sends the messages to the Persistence Daemon</p>
@@ -545,7 +545,7 @@
 <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">printf</span><span class="p">(</span> <span class="s2">&quot;RawLog setup with rawLogLevel </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">rawLogLevel</span> <span class="p">);</span>
 </pre></div>
 </div>
-<p><em>Figure</em> Java code to initialise the RawLog class</p>
+<p><em>Code Snippet:</em> Java code to initialise the RawLog class</p>
 <p><strong>EventLog</strong></p>
 <p>The EventLog class is initialised similarly to the RawLog with a:</p>
 <blockquote>
@@ -560,7 +560,7 @@
 <span class="n">EventLog</span><span class="o">.</span><span class="n">setDIASNetworkId</span><span class="p">(</span><span class="n">diasNetworkId</span><span class="p">);</span>
 </pre></div>
 </div>
-<p><em>Figure</em> Java code to initialise the EventLog class</p>
+<p><em>Code Snippet:</em> Java code to initialise the EventLog class</p>
 <p><strong>MemLog</strong></p>
 <ul>
 <li><p class="first">The MemLog class is initialised similarly to the RawLog and EventLog classes above, with some notable differences</p>
@@ -603,7 +603,7 @@ else
 }
 </pre></div>
 </div>
-<p><em>Figure</em> Java code to initialise the MemLog class</p>
+<p><em>Code Snippet:</em> Java code to initialise the MemLog class</p>
 </div>
 <div class="section" id="database-installation">
 <h2>Database Installation<a class="headerlink" href="#database-installation" title="Permalink to this headline">¶</a></h2>
@@ -616,7 +616,7 @@ else
 <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">postgresql</span>
 </pre></div>
 </div>
-<p><em>Figure</em> Ubuntu commands to install the latest version of PostgreSQL server</p>
+<p><em>Code Snippet:</em> Ubuntu commands to install the latest version of PostgreSQL server</p>
 <p><em>Create a database</em></p>
 <ul>
 <li><p class="first">Login into PostgreSQL, using your favorite SQL editor or psql</p>
@@ -632,7 +632,7 @@ else
 <div class="code sql highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CREATE</span> <span class="n">DATABASE</span> <span class="n">dias</span><span class="p">;</span>
 </pre></div>
 </div>
-<p><em>Figure</em> SQL commands to create the persistence database</p>
+<p><em>Code Snippet:</em> SQL commands to create the persistence database</p>
 <p><em>Create tables</em></p>
 <p>Finally, create the tables that will store the logging information</p>
 <p>There are three tables to create:</p>
@@ -661,7 +661,7 @@ else
 <span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">rawlog</span> <span class="o">...</span>
 </pre></div>
 </div>
-<p><em>Figure</em> SQL commands to create the persistence tables</p>
+<p><em>Code Snippet:</em> SQL commands to create the persistence tables</p>
 </div>
 <div class="section" id="launch">
 <h2>Launch<a class="headerlink" href="#launch" title="Permalink to this headline">¶</a></h2>
@@ -670,10 +670,10 @@ else
 <span class="o">./</span><span class="n">start</span><span class="o">.</span><span class="n">daemon</span><span class="o">.</span><span class="n">sh</span> <span class="n">deployments</span><span class="o">/</span><span class="n">localhost</span>
 </pre></div>
 </div>
-<p><em>Figure</em> Commands to launch of the persistence daemon</p>
+<p><em>Code Snippet:</em> Commands to launch of the persistence daemon</p>
 <p>This will launch a UNIX screen session, inside of which the persistence daemon will run. In the screenshot below zou can see here that the daemon is listening on localhost:5433 for logging messages to be persisted</p>
 <img alt="../_images/dias-logging-system-7.png" src="../_images/dias-logging-system-7.png" />
-<p><em>Figure</em> Screenshot of the running DIAS-Logging-System persistence daemon</p>
+<p><em>Figure:</em> Screenshot of the running DIAS-Logging-System persistence daemon</p>
 </div>
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
@@ -692,10 +692,10 @@ else
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="glossary.html" class="btn btn-neutral float-right" title="Glossary" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="applications.html" class="btn btn-neutral float-right" title="Applications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="dias.in.detail/join.and.leave.html" class="btn btn-neutral float-left" title="Join and Leave" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="protopeer/command.flooder.html" class="btn btn-neutral float-left" title="Command Flooder" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

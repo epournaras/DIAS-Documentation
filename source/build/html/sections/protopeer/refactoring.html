@@ -86,7 +86,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../pre.requisites.html">Pre-requisites</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dias.in.detail.html">How DIAS Works</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Deployment Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../gui.html">GUIs</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../protopeer.html">Protopeer</a><ul class="current">
@@ -108,8 +108,8 @@
 <li class="toctree-l2"><a class="reference internal" href="command.flooder.html">Command Flooder</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../dias.in.detail.html">How DIAS Works</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dias-logging-system.html">DIAS Logging System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
 </ul>
 
@@ -202,7 +202,7 @@ profilearg=&quot;-Xrunhprof:interval=60000,depth=$tracedepth ,heap=sites,format=
 java -Xmx$javamem $profilearg -cp &quot;$classpath&quot; ...
 </pre></div>
 </div>
-<p><em>Figure {x}</em> Launch commands for hprof profiling</p>
+<p><em>Code snippet: Launch commands for hprof profiling</em></p>
 <p>The result of the profiling showed three areas that required attention.</p>
 <div class="section" id="apache-mina">
 <h2>Apache Mina<a class="headerlink" href="#apache-mina" title="Permalink to this headline">¶</a></h2>
@@ -222,7 +222,7 @@ java -Xmx$javamem $profilearg -cp &quot;$classpath&quot; ...
 <span class="n">final</span> <span class="nb">int</span> <span class="n">zmqListenPort</span> <span class="o">=</span> <span class="n">zmqSocket</span><span class="o">.</span><span class="n">bindToRandomPort</span><span class="p">(</span><span class="n">ConnectString</span><span class="p">);</span>
 </pre></div>
 </div>
-<p><em>Figure {x}</em> Starting a server with JeroMQ</p>
+<p><em>Code snippet: Starting a server with JeroMQ</em></p>
 </div>
 <div class="section" id="bytebuffer-allocate">
 <h2>ByteBuffer.allocate()<a class="headerlink" href="#bytebuffer-allocate" title="Permalink to this headline">¶</a></h2>
@@ -237,7 +237,7 @@ java -Xmx$javamem $profilearg -cp &quot;$classpath&quot; ...
 <span class="n">final</span> <span class="nb">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">ZMQSocket</span><span class="o">.</span><span class="n">sendByteBuffer</span><span class="p">(</span><span class="n">bb</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </pre></div>
 </div>
-<p><em>Figure {x}</em> Sample use of ByteBuffer.allocate() that will lead to a memory leak if called repeatedly during a programs lifetime</p>
+<p><em>Code snippet: Sample use of ByteBuffer.allocate() that will lead to a memory leak if called repeatedly during a programs lifetime</em></p>
 </div>
 <div class="section" id="measurementlog">
 <h2>MeasurementLog<a class="headerlink" href="#measurementlog" title="Permalink to this headline">¶</a></h2>
@@ -259,7 +259,7 @@ java -Xmx$javamem $profilearg -cp &quot;$classpath&quot; ...
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><em>Figure {x}</em> Memory leak fixed by calling reset() method of the ObjectOutputStream object</p>
+<p><em>Code snippet: Memory leak fixed by calling reset() method of the ObjectOutputStream object</em></p>
 </div>
 </div>
 <div class="section" id="networking-optimisations">
@@ -272,7 +272,7 @@ java -Xmx$javamem $profilearg -cp &quot;$classpath&quot; ...
 <div class="code java highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">zmqOutboundMsgQueueProcessor</span><span class="o">.</span><span class="n">add_message_to_queue</span><span class="p">(</span><span class="n">new</span> <span class="n">SerialisedMessage</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="p">);</span>
 </pre></div>
 </div>
-<p><em>Figure {x}</em> Serialisation of messages by the worker thread and adding to the outbound message queue (ZMQNetworkInterface:155)</p>
+<p><em>Code snippet: Serialisation of messages by the worker thread and adding to the outbound message queue (ZMQNetworkInterface:155)</em></p>
 </div>
 <div class="section" id="dynamic-port-allocation">
 <h2>Dynamic Port Allocation<a class="headerlink" href="#dynamic-port-allocation" title="Permalink to this headline">¶</a></h2>
@@ -284,7 +284,7 @@ java -Xmx$javamem $profilearg -cp &quot;$classpath&quot; ...
 <span class="n">final</span> <span class="nb">int</span> <span class="n">zmqListenPort</span> <span class="o">=</span> <span class="n">zmqSocket</span><span class="o">.</span><span class="n">bindToRandomPort</span><span class="p">(</span><span class="n">ConnectString</span><span class="p">);</span>
 </pre></div>
 </div>
-<p><em>Figure {x}</em> Dynamic port assignment within ZeroMQ (ZeroMQReqRepListener:74)</p>
+<p><em>Code snippet: Dynamic port assignment within ZeroMQ (ZeroMQReqRepListener:74)</em></p>
 </div>
 <div class="section" id="connection-pool">
 <h2>Connection pool<a class="headerlink" href="#connection-pool" title="Permalink to this headline">¶</a></h2>
@@ -311,7 +311,7 @@ java -Xmx$javamem $profilearg -cp &quot;$classpath&quot; ...
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><em>Figure {x}</em> Implementation of the connection pool in the Protopeer Framework. ZMQNetworkInterface:222</p>
+<p><a href="#id1"><span class="problematic" id="id2">*</span></a>Code snippet: Implementation of the connection pool in the Protopeer Framework. ZMQNetworkInterface:222”</p>
 </div>
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>

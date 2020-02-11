@@ -32,8 +32,7 @@ The exact cause and code location of the memory leaks was determined using Java'
     profilearg="-Xrunhprof:interval=60000,depth=$tracedepth ,heap=sites,format=a,file=$profileoutput"
 
     java -Xmx$javamem $profilearg -cp "$classpath" ...
-
-*Figure {x}* Launch commands for hprof profiling
+*Code snippet: Launch commands for hprof profiling*
 
 The result of the profiling showed three areas that required attention.
 
@@ -61,7 +60,7 @@ Starting a server in JeroMQ requires only a few lines of code.
 
     final int zmqListenPort = zmqSocket.bindToRandomPort(ConnectString);
 
-*Figure {x}* Starting a server with JeroMQ
+*Code snippet: Starting a server with JeroMQ*
 
 ByteBuffer.allocate()
 ---------------------
@@ -73,14 +72,14 @@ We modified the Protopeer Framework so that a singleByteBuffer is only allocated
 .. code:: java
 
     final int         strlen = msg.length();
-       
+
     ByteBuffer bb = ByteBuffer.allocate(strlen).order(ByteOrder.nativeOrder());
     bb.put(msg.getBytes(ZMQ.CHARSET));
     bb.flip();
-       
+
     final int ret = ZMQSocket.sendByteBuffer(bb, 0);
 
-*Figure {x}* Sample use of ByteBuffer.allocate() that will lead to a memory leak if called repeatedly during a programs lifetime
+*Code snippet: Sample use of ByteBuffer.allocate() that will lead to a memory leak if called repeatedly during a programs lifetime*
 
 MeasurementLog
 --------------
@@ -89,23 +88,23 @@ The Protopeer Framework provides support for recording an arbitrary number of va
 
 .. code:: java
 
-    public class MeasurementFileDumper implements MeasurementLoggerListener 
+    public class MeasurementFileDumper implements MeasurementLoggerListener
     {
         private ObjectOutputStream measurementsOut;
 
-        public void measurementEpochEnded(MeasurementLog log, int epochNumber) 
+        public void measurementEpochEnded(MeasurementLog log, int epochNumber)
         {
             ...
             measurementsOut.writeObject(subLog);
 
             // reset() needs to be added to release the object inside the serialisation, else it will cause a memory leak
-            measurementsOut.reset();        
+            measurementsOut.reset();
             measurementsOut.flush();
         }
 
     }
 
-*Figure {x}* Memory leak fixed by calling reset() method of the ObjectOutputStream object
+*Code snippet: Memory leak fixed by calling reset() method of the ObjectOutputStream object*
 
 
 Networking Optimisations
@@ -125,7 +124,7 @@ It is important to note that the message to be sent is serialised by the worker 
 
     zmqOutboundMsgQueueProcessor.add_message_to_queue(new SerialisedMessage(message) );
 
-*Figure {x}* Serialisation of messages by the worker thread and adding to the outbound message queue (ZMQNetworkInterface:155)
+*Code snippet: Serialisation of messages by the worker thread and adding to the outbound message queue (ZMQNetworkInterface:155)*
 
 Dynamic Port Allocation
 -----------------------
@@ -140,7 +139,7 @@ Previously the port number of the socket through which the Peer interacted with 
 
     final int zmqListenPort = zmqSocket.bindToRandomPort(ConnectString);
 
-*Figure {x}* Dynamic port assignment within ZeroMQ (ZeroMQReqRepListener:74)
+*Code snippet: Dynamic port assignment within ZeroMQ (ZeroMQReqRepListener:74)*
 
 Connection pool
 ---------------
@@ -161,21 +160,20 @@ We improved the framework by allowing a connection pool of 200 peers. That is, a
     {
         // find a socket to close
         if( this.debug_level2) System.out.printf( "need to close a socket\n" );
-                        
-        // get the first one in the map 
+
+        // get the first one in the map
         // TODO: ideally should close the least used socket (time weighted)
         String addressToCloseString = pushSockets.entrySet().iterator().next().getKey();
-                    
+
         if( this.debug_level2) System.out.printf( "addressToCloseString : %s\n", addressToCloseString );
-                    
+
         // close socket and remove from hash map
         closeConnectionStr(addressToCloseString);
     }
 
-*Figure {x}* Implementation of the connection pool in the Protopeer Framework. ZMQNetworkInterface:222
+*Code snippet: Implementation of the connection pool in the Protopeer Framework. ZMQNetworkInterface:222"
 
 References
 ----------
 
 - Galuba W., Aberer K. (2009) ProtoPeer-A P2P Toolkit Bridging the Gap Between Simulation and Live Deployment
-

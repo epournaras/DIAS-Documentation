@@ -33,14 +33,11 @@ A peerlet looks like this:
         public void messageSent(Message message);
         public void networkExceptionHappened(NetworkAddress remoteAddress, Message message, Throwable cause);
 
-*Figure {x}* Interface for Peerlet class
-
-
-*Lifecycle*
+**Lifecycle**
 
 Just like applets, servlets or the peer, the peerlets have the init-start-stop- start-stop... lifecycle. When the Peer is inited, started or stopped it calls the init, start or stop on all of the peerlets that it contains. The peer argument in the init method lets the peerlet know which peer it's going to be associated with. Peerlet implementations implement these three methods with the peerlet-specific lifecycle handling code.
 
-*Networking*
+**Networking**
 
 Whenever the peer receives a message it calls handleIncomingMessage on all of its peerlets. This method is where most of the message handling logic usually sits. The handleOutgoingMessage is called whenever someone calls sendMessage on the Peer, this notifies all the peerlets that some message is about to be sent. The messageSent methods is called when the network interface is done sending the message. Note, that this does not mean that the message was delivered at the destination. The peerlets are also notified about all the network exceptions via the networkExceptionHappened call. Peerlet implementations implement these networking methods with the peerlet-specific code.
 
@@ -48,5 +45,3 @@ BasePeerlet
 -----------
 
 To implement a peerlet you need to implement all of the methods in the Peerlet interface. Most of the time you don't put any code into all of these methods. For convenience, there is a BasePeerlet class that has blank implementations of all of these methods. In addition, there is the useful getPeer() methods that returns the peer in which the peerlet is contained.
-
-

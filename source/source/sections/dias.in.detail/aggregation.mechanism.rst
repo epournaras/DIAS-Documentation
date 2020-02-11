@@ -26,10 +26,10 @@ Conditions:
       HashSet<State> posAMS = (HashSet) disseminatorReport.get(DisseminatorReport.POSITIVE_AMS);
       Iterator<State> it = posAMS.iterator();
       logEvent( "receiveDisseminatorReport", "case", "1" );
-      this.log(1,"1. CURRENT STATE { "	+
-                  " positiveAMD = "		+	positiveAMD		+	" | positiveDMA = "	+ positiveDMA	+
-                " | shouldRemove = "	+ 	shouldRemove	+	" | posAMS.size() =  " 	+ posAMS.size() +
-                " | purpose = " 		+ 	predictedOutcome+ 	" }");
+      this.log(1,"1. CURRENT STATE { " +
+            " positiveAMD = "    + positiveAMD       + " | positiveDMA =    " + positiveDMA   +
+            " | shouldRemove = " + shouldRemove      + " | posAMS.size() =  " + posAMS.size() +
+            " | purpose = "      + predictedOutcome  + " }");
 
       while(it.hasNext()){
         State state = it.next();
@@ -45,11 +45,11 @@ Conditions:
 +------------------+---------------------------------------------------------------------------+
 | Line number      | Description                                                               |
 +==================+===========================================================================+
-| line 1           | 1. Peers have communicated before (start time = Big Bang)                 |
+| line 1           | | 1. Peers have communicated before (start time = Big Bang)               |
 +------------------+---------------------------------------------------------------------------+
 | line 12          | Iterate on all the states that the "sending peer" thinks that I'm using   |
 +------------------+---------------------------------------------------------------------------+
-| line 14          | 2. Disagree! I am not using this state in my aggregate                    |
+| line 14          | | 2. Disagree! I am not using this state in my aggregate                  |
 +------------------+---------------------------------------------------------------------------+
 | line 19          | | This will set th AMSRemoval field in the PULL message returned to the   |
 |                  | | "sending peer" in order to update his own AMSs so that the sending peer |
@@ -90,9 +90,9 @@ Case 2
             while(iterator.hasNext()) {
               State state = iterator.next();
               if(this.removeSMAMembership(state)) {
-              	this.removeAggregationState(state);
-              	AMSRemoval = state;
-              	outcome = AggregationOutcome.REMOVAL;
+                this.removeAggregationState(state);
+                AMSRemoval = state;
+                outcome = AggregationOutcome.REMOVAL;
                 ack = true;
                 a = true;
                 this.log(1,"#####################");
@@ -103,36 +103,34 @@ Case 2
             {
               logEvent( "receiveDisseminatorReport", "case", "2" );
               this.log(1, "2. CURRENT STATE { " +
-                    " positiveAMD = " 		+ positiveAMD 		+ 	" | positiveDMA = "		+ 	positiveDMA +
-                    " | shouldRemove = " 		+ shouldRemove 		+ 	" | posAMS.size() = " 	+ 	" 1 " 		+
-                    " | purpose = " 			+ predictedOutcome 	+ 	" | removed = " 		+ 	removed 	+
-                    " | possibles == null ? "	+ (possibles==null)	+ 	" | NOTHING REMOVED }");
+                    " positiveAMD = "         + positiveAMD       + " | positiveDMA = "   + positiveDMA +
+                    " | shouldRemove = "      + shouldRemove      + " | posAMS.size() = " + " 1 "       +
+                    " | purpose = "           + predictedOutcome  + " | removed = "       + removed     +
+                    " | possibles == null ? " + (possibles==null) + " | NOTHING REMOVED }");
             }
 
 
-+------------------+----------------------------------------------------------------------------------------+
-| Line number      | Description                                                                            |
-+==================+========================================================================================+
-| line 1           | 1. Peers have communicated before (start time = Big Bang)                              |
-+------------------+----------------------------------------------------------------------------------------+
-| line 3           | 2. Only a single state in the list of all states that the sending peers                |
-|                  |    think that we have                                                                  |
-+------------------+----------------------------------------------------------------------------------------+
-| line 6           | 3. Other peer thinks we should remove it (recall that there is only 1)                 |
-|                  |    strategy = REMOVAL                                                                  |
-+------------------+----------------------------------------------------------------------------------------+
-| line 9           | Try to remove it                                                                       |
-+------------------+----------------------------------------------------------------------------------------+
-| line 10          | Didn't find the state to be removed in my SMAs                                         |
-+------------------+----------------------------------------------------------------------------------------+
-| line 14          | Iterate throug all possible states of the sending peer                                 |
-+------------------+----------------------------------------------------------------------------------------+
-| line 17          | Remove it from the SMA                                                                 |
-+------------------+----------------------------------------------------------------------------------------+
-| line 19          | | This will set th AMSRemoval field in the PULL message returned to the "sending peer" |
-|                  | | in order to update his own AMSs so that the sending peer can remove this state for   |
-|                  | | for this peer Dissemeniot:receiveAggregatorReport                                    |
-+------------------+----------------------------------------------------------------------------------------+
++------------------+----------------------------------------------------------------------------------------------+
+| Line number      | Description                                                                                  |
++==================+==============================================================================================+
+| line 1           | | 1. Peers have communicated before (start time = Big Bang)                                  |
++------------------+----------------------------------------------------------------------------------------------+
+| line 3           | | 2. Only a single state in the list of all states that the sending peers think that we have |
++------------------+----------------------------------------------------------------------------------------------+
+| line 6           | | 3. Other peer thinks we should remove it (recall that there is only 1) strategy = REMOVAL  |
++------------------+----------------------------------------------------------------------------------------------+
+| line 9           | Try to remove it                                                                             |
++------------------+----------------------------------------------------------------------------------------------+
+| line 10          | Didn't find the state to be removed in my SMAs                                               |
++------------------+----------------------------------------------------------------------------------------------+
+| line 14          | Iterate throug all possible states of the sending peer                                       |
++------------------+----------------------------------------------------------------------------------------------+
+| line 17          | Remove it from the SMA                                                                       |
++------------------+----------------------------------------------------------------------------------------------+
+| line 19          | | This will set th AMSRemoval field in the PULL message returned to the "sending peer"       |
+|                  | | in order to update his own AMSs so that the sending peer can remove this state for         |
+|                  | | for this peer Dissemeniot:receiveAggregatorReport                                          |
++------------------+----------------------------------------------------------------------------------------------+
 
 **Encoding:**
 
@@ -179,30 +177,27 @@ Case 3
             {
               logEvent( "receiveDisseminatorReport", "case", "3" );
               this.log(1, "3. CURRENT STATE { " +
-                    " positiveAMD = " 		+ positiveAMD 		+ 	" | positiveDMA = " 	+ 	positiveDMA +
-                    " | shouldRemove = " 		+ shouldRemove 		+ 	" | posAMS.size() = " 	+ 	" 1 " 		+
-                    " | purpose = " 			+ predictedOutcome 	+ 	" | removed = " 		+ 	removed 	+
-                    " | possibles == null ? " 	+ (possibles==null) + 	" | NOTHING REMOVED }");
+                    " positiveAMD = "         + positiveAMD       + " | positiveDMA = "   + positiveDMA +
+                    " | shouldRemove = "      + shouldRemove      + " | posAMS.size() = " + " 1 "       +
+                    " | purpose = "           + predictedOutcome  + " | removed = "       + removed     +
+                    " | possibles == null ? " + (possibles==null) + " | NOTHING REMOVED }");
             }
 
-+------------------+-------------------------------------------------------------------------+
-| Line number      | Description                                                             |
-+==================+=========================================================================+
-| line 1           | 1. Peers have communicated before (start time = Big Bang)               |
-+------------------+-------------------------------------------------------------------------+
-| line 3           | 2. Only a single state in the list of all states that the sending peers |
-|                  |    think that we have                                                   |
-+------------------+-------------------------------------------------------------------------+
-| line 6           | 3. Other peer thinks we should remove it (recall that there is only 1)  |
-|                  |    strategy = REMOVAL                                                   |
-+------------------+-------------------------------------------------------------------------+
-| line 9           | Try to remove it                                                        |
-+------------------+-------------------------------------------------------------------------+
-| line 10          | Oups! Didn't find the state to be removed in my SMAs!                   |
-+------------------+-------------------------------------------------------------------------+
-| line 11          | Sending peer has no possible states                                     |
-|                  | (Just to avoid null pointer exceptions)                                 |
-+------------------+-------------------------------------------------------------------------+
++------------------+----------------------------------------------------------------------------------------------+
+| Line number      | Description                                                                                  |
++==================+==============================================================================================+
+| line 1           | | 1. Peers have communicated before (start time = Big Bang)                                  |
++------------------+----------------------------------------------------------------------------------------------+
+| line 3           | | 2. Only a single state in the list of all states that the sending peers think that we have |
++------------------+----------------------------------------------------------------------------------------------+
+| line 6           | | 3. Other peer thinks we should remove it (recall that there is only 1) strategy = REMOVAL  |
++------------------+----------------------------------------------------------------------------------------------+
+| line 9           | Try to remove it                                                                             |
++------------------+----------------------------------------------------------------------------------------------+
+| line 10          | Oups! Didn't find the state to be removed in my SMAs!                                        |
++------------------+----------------------------------------------------------------------------------------------+
+| line 11          | Sending peer has no possible states (Just to avoid null pointer exceptions)                  |
++------------------+----------------------------------------------------------------------------------------------+
 
 **Encoding:**
 
@@ -240,8 +235,8 @@ Case 4
     {
       State oldState = posAMS.iterator().next();
       if(shouldRemove) {
-      	AMSRemoval = oldState;
-      	AMSAddition = null;
+        AMSRemoval = oldState;
+        AMSAddition = null;
         boolean removed = this.removeSMAMembership(oldState);
         if(!removed) {
           // Not executed in case 4, omitted
@@ -251,30 +246,28 @@ Case 4
 
           logEvent( "receiveDisseminatorReport", "case", "4" );
           this.log(1,"4. CURRENT STATE { " +
-                " positiveAMD = " 		+ positiveAMD 		+ 	" | positiveDMA = " 	+ 	positiveDMA +
-                " | shouldRemove = " 		+ shouldRemove 		+ 	" | posAMS.size() = " 	+ 	" 1 " 		+
-                " | purpose = " 			+ predictedOutcome 	+ 	" | removed = " 		+ 	removed 	+
-                " | possibles == null ? " 	+ (possibles==null) + 	" | OUTCOME = REMOVAL }");
+                " positiveAMD = "         + positiveAMD       + " | positiveDMA = "   + positiveDMA +
+                " | shouldRemove = "      + shouldRemove      + " | posAMS.size() = " + " 1 "       +
+                " | purpose = "           + predictedOutcome  + " | removed = "       + removed     +
+                " | possibles == null ? " + (possibles==null) + " | OUTCOME = REMOVAL }");
           outcome=AggregationOutcome.REMOVAL;
           ack=true;
         }
       }
 
-+------------------+-------------------------------------------------------------------------+
-| Line number      | Description                                                             |
-+==================+=========================================================================+
-| line 1           | 1. Peers have communicated before (start time = Big Bang)               |
-+------------------+-------------------------------------------------------------------------+
-| line 3           | 2. Only a single state in the list of all states that the sending peers |
-|                  |    think that we have                                                   |
-+------------------+-------------------------------------------------------------------------+
-| line 6           | 3. Other peer thinks we should remove it (recall that there is only 1)  |
-|                  |    strategy = REMOVAL                                                   |
-+------------------+-------------------------------------------------------------------------+
-| line 9           | Try to remove it                                                        |
-+------------------+-------------------------------------------------------------------------+
-| line 12          | Successfully removed it                                                 |
-+------------------+-------------------------------------------------------------------------+
++------------------+----------------------------------------------------------------------------------------------+
+| Line number      | Description                                                                                  |
++==================+==============================================================================================+
+| line 1           | | 1. Peers have communicated before (start time = Big Bang)                                  |
++------------------+----------------------------------------------------------------------------------------------+
+| line 3           | | 2. Only a single state in the list of all states that the sending peers think that we have |
++------------------+----------------------------------------------------------------------------------------------+
+| line 6           | | 3. Other peer thinks we should remove it (recall that there is only 1) strategy = REMOVAL  |
++------------------+----------------------------------------------------------------------------------------------+
+| line 9           | Try to remove it                                                                             |
++------------------+----------------------------------------------------------------------------------------------+
+| line 12          | Successfully removed it                                                                      |
++------------------+----------------------------------------------------------------------------------------------+
 
 **Encoding:**
 
@@ -328,33 +321,31 @@ Case 5
 
           logEvent( "receiveDisseminatorReport", "case", "5" );
           this.log(1,"5. CURRENT STATE { " +
-                " positiveAMD = " 			+ positiveAMD 		+ " | positiveDMA = " 					+ 	positiveDMA 				+
-                " | shouldRemove = " 			+ shouldRemove 		+ " | posAMS.size() = " 				+ 	" 1 " 						+
-                " | purpose = " 				+ predictedOutcome 	+ " | old.State.equals(newState) = "	+ 	oldState.equals(newState) 	+
-                " | removeOldSMAMembership = " 	+ s1 				+ " | addNewSMAMembership = " 			+ 	s2 							+
-                " | count0 = "					+ count0			+ " | count1 = "						+ 	count1						+
-                " | count2 = "					+ count2			+
+                " positiveAMD = "              + positiveAMD      + " | positiveDMA = "                + positiveDMA               +
+                " | shouldRemove = "           + shouldRemove     + " | posAMS.size() = "              + " 1 "                     +
+                " | purpose = "                + predictedOutcome + " | old.State.equals(newState) = " + oldState.equals(newState) +
+                " | removeOldSMAMembership = " + s1               + " | addNewSMAMembership = "        + s2                        +
+                " | count0 = "                 + count0           + " | count1 = "                     + count1                    +
+                " | count2 = "                 + count2           +
                 " | OUTCOME = UPDATE }");
           outcome = AggregationOutcome.REPLACE;
           ack = true;
 
-+------------------+-------------------------------------------------------------------------+
-| Line number      | Description                                                             |
-+==================+=========================================================================+
-| line 1           | 1. Peers have communicated before (start time = Big Bang)               |
-+------------------+-------------------------------------------------------------------------+
-| line 3           | 2. Only a single state in the list of all states that the sending peers |
-|                  |    think that we have                                                   |
-+------------------+-------------------------------------------------------------------------+
-| line 9           | 3. Other peer thinks we should EXPLOIT it                               |
-|                  |    (recall that there is only 1 state in posAMS)                        |
-+------------------+-------------------------------------------------------------------------+
-| line 11          | posAMS[0] != new selected state                                         |
-+------------------+-------------------------------------------------------------------------+
-| line 16 - 20     | Replace the old selected state with the new one                         |
-+------------------+-------------------------------------------------------------------------+
-| line 32          | Successfully replaced it                                                |
-+------------------+-------------------------------------------------------------------------+
++------------------+----------------------------------------------------------------------------------------------+
+| Line number      | Description                                                                                  |
++==================+==============================================================================================+
+| line 1           | | 1. Peers have communicated before (start time = Big Bang)                                  |
++------------------+----------------------------------------------------------------------------------------------+
+| line 3           | | 2. Only a single state in the list of all states that the sending peers think that we have |
++------------------+----------------------------------------------------------------------------------------------+
+| line 9           | | 3. Other peer thinks we should EXPLOIT it (recall that there is only 1 state in posAMS)    |
++------------------+----------------------------------------------------------------------------------------------+
+| line 11          | posAMS[0] != new selected state                                                              |
++------------------+----------------------------------------------------------------------------------------------+
+| line 16 - 20     | Replace the old selected state with the new one                                              |
++------------------+----------------------------------------------------------------------------------------------+
+| line 32          | Successfully replaced it                                                                     |
++------------------+----------------------------------------------------------------------------------------------+
 
 **Encoding:**
 
@@ -407,32 +398,30 @@ Case 6
 
           logEvent( "receiveDisseminatorReport", "case", "6" );
           this.log(1,"6. CURRENT STATE { " +
-                " positiveAMD = " 	+ positiveAMD 		+ 	" | positiveDMA = " 				+ 	positiveDMA 				+
-                " | shouldRemove = " 	+ shouldRemove 		+ 	" | posAMS.size() = " 				+ 	" 1 " 						+
-                " | purpose = " 		+ predictedOutcome 	+ 	" | old.State.equals(newState) = " 	+ 	oldState.equals(newState) 	+
+                " positiveAMD = "    + positiveAMD      + " | positiveDMA = "                + positiveDMA               +
+                " | shouldRemove = " + shouldRemove     + " | posAMS.size() = "              + " 1 "                     +
+                " | purpose = "      + predictedOutcome + " | old.State.equals(newState) = " + oldState.equals(newState) +
                 " | OUTCOME = DOUBLE }");
           outcome=AggregationOutcome.DOUBLE;
           ack=true;
         }
 
-+------------------+-------------------------------------------------------------------------+
-| Line number      | Description                                                             |
-+==================+=========================================================================+
-| line 1           | 1. Peers have communicated before (start time = Big Bang)               |
-+------------------+-------------------------------------------------------------------------+
-| line 3           | 2. Only a single state in the list of all states that the sending peers |
-|                  |    think that we have                                                   |
-+------------------+-------------------------------------------------------------------------+
-| line 9           | 3. Other peer thinks we should EXPLOIT it                               |
-|                  |    (recall that there is only 1 state in posAMS)                        |
-+------------------+-------------------------------------------------------------------------+
-| line 11          | posAMS[0] != new selected state                                         |
-|                  | (in case 6, this is not true -> old = new)                              |
-+------------------+-------------------------------------------------------------------------+
-| line 14 - 32     | Do nothing                                                              |
-+------------------+-------------------------------------------------------------------------+
-| line 29          | Successfully replaced (since we had nothing to do)                      |
-+------------------+-------------------------------------------------------------------------+
++------------------+----------------------------------------------------------------------------------------------+
+| Line number      | Description                                                                                  |
++==================+==============================================================================================+
+| line 1           | | 1. Peers have communicated before (start time = Big Bang)                                  |
++------------------+----------------------------------------------------------------------------------------------+
+| line 3           | | 2. Only a single state in the list of all states that the sending peers think that we have |
++------------------+----------------------------------------------------------------------------------------------+
+| line 9           | | 3. Other peer thinks we should EXPLOIT it (recall that there is only 1 state in posAMS)    |
++------------------+----------------------------------------------------------------------------------------------+
+| line 11          | posAMS[0] != new selected state                                                              |
+|                  | (in case 6, this is not true -> old = new)                                                   |
++------------------+----------------------------------------------------------------------------------------------+
+| line 14 - 32     | Do nothing                                                                                   |
++------------------+----------------------------------------------------------------------------------------------+
+| line 29          | Successfully replaced (since we had nothing to do)                                           |
++------------------+----------------------------------------------------------------------------------------------+
 
 **Encoding:**
 
@@ -480,10 +469,10 @@ Case 7
 
           logEvent( "receiveDisseminatorReport", "case", "7" );
           this.log(1,"7. CURRENT STATE { " +
-                " positiveAMD = " 		+ 	positiveAMD 		+ 	" | positiveDMA = " 			+ 	positiveDMA +
-                " | shouldRemove = " 		+ 	shouldRemove 		+ 	" | posAMS.size() = " 			+ 	" 0 " 		+
-                " | purpose = " 			+ 	predictedOutcome 	+ 	" | SMA.contains(newState) = " 	+ 	bool 		+
-                " | count0 = " 				+ 	count0 				+
+                " positiveAMD = "    + positiveAMD      + " | positiveDMA = "            + positiveDMA +
+                " | shouldRemove = " + shouldRemove     + " | posAMS.size() = "          + " 0 "       +
+                " | purpose = "      + predictedOutcome + " | SMA.contains(newState) = " + bool        +
+                " | count0 = "       + count0           +
                 " | OUTCOME = DUPLICATE }");
 
           AMSAddition = newState;
@@ -493,20 +482,19 @@ Case 7
           }
           ack = true;
 
-+------------------+-------------------------------------------------------------------------+
-| Line number      | Description                                                             |
-+==================+=========================================================================+
-| line 1           | 1. Peers have communicated before (start time = Big Bang)               |
-+------------------+-------------------------------------------------------------------------+
-| line 9           | 2. No entries in the list of states that the sending peer think that we |
-|                  |    have                                                                 |
-+------------------+-------------------------------------------------------------------------+
-| line 9           | 3. Sending peer sends an EXPLOITATION                                   |
-+------------------+-------------------------------------------------------------------------+
-| line 14          | New selected state is already in our aggregation                        |
-+------------------+-------------------------------------------------------------------------+
-| line 29 - 31     | Jovan and Edward are still unclear why this code is here                |
-+------------------+-------------------------------------------------------------------------+
++------------------+--------------------------------------------------------------------------------+
+| Line number      | Description                                                                    |
++==================+================================================================================+
+| line 1           | | 1. Peers have communicated before (start time = Big Bang)                    |
++------------------+--------------------------------------------------------------------------------+
+| line 9           | | 2. No entries in the list of states that the sending peer think that we have |
++------------------+--------------------------------------------------------------------------------+
+| line 9           | | 3. Sending peer sends an EXPLOITATION                                        |
++------------------+--------------------------------------------------------------------------------+
+| line 14          | New selected state is already in our aggregation                               |
++------------------+--------------------------------------------------------------------------------+
+| line 29 - 31     | Jovan and Edward are still unclear why this code is here                       |
++------------------+--------------------------------------------------------------------------------+
 
 **Encoding:**
 
@@ -556,10 +544,10 @@ Case 8
 
           logEvent( "receiveDisseminatorReport", "case", "8" );
           this.log(1,"8. CURRENT STATE { " +
-                " positiveAMD = " 	+ positiveAMD 		+ 	" | positiveDMA = " 			+ 	positiveDMA 	+
-                " | shouldRemove = " 	+ shouldRemove 		+ 	" | posAMS.size() = " 			+ 	"0 " 			+
-                " | purpose = " 		+ predictedOutcome 	+	" | SMA.contains(newState) = "	+	bool 			+
-                " | count0 = " 				+ 	count0 				+
+                " positiveAMD = "    + positiveAMD      + " | positiveDMA = "            + positiveDMA +
+                " | shouldRemove = " + shouldRemove     + " | posAMS.size() = "          + "0 "        +
+                " | purpose = "      + predictedOutcome + " | SMA.contains(newState) = " + bool        +
+                " | count0 = "       + count0           +
                 " | NOT INCONSISTENCY ANYMORE }");
           if(possibles != null) {
             Iterator<State> iterator = possibles.iterator();
@@ -574,24 +562,22 @@ Case 8
             }
             double count1 = (Double)this.aggregates.getAggregate(AggregationFunction.COUNT);
 
-+------------------+-------------------------------------------------------------------------+
-| Line number      | Description                                                             |
-+==================+=========================================================================+
-| line 1           | 1. Peers have communicated before (start time = Big Bang)               |
-+------------------+-------------------------------------------------------------------------+
-| line 9           | 2. No entries in the list of states that the sending peer think that we |
-|                  |    have                                                                 |
-+------------------+-------------------------------------------------------------------------+
-| line 9           | 3. Sending peer did not send a REMOVAL                                  |
-|                  |    (this is the correct way of interpreting this flag)                  |
-+------------------+-------------------------------------------------------------------------+
-| line 18          | 4. New selected state is NOT in our aggregation                         |
-+------------------+-------------------------------------------------------------------------+
-| line 29          | 5. Sending peer sent it's possible states                               |
-+------------------+-------------------------------------------------------------------------+
-| line 33 - 39     | **To be safe**, remove all possible states of the sending peer from our |
-|                  | Aggregator                                                              |
-+------------------+-------------------------------------------------------------------------+
++------------------+----------------------------------------------------------------------------------------------+
+| Line number      | Description                                                                                  |
++==================+==============================================================================================+
+| line 1           | | 1. Peers have communicated before (start time = Big Bang)                                  |
++------------------+----------------------------------------------------------------------------------------------+
+| line 9           | | 2. No entries in the list of states that the sending peer think that we have               |
++------------------+----------------------------------------------------------------------------------------------+
+| line 9           | | 3. Sending peer did not send a REMOVAL (this is the correct way of interpreting this flag) |
++------------------+----------------------------------------------------------------------------------------------+
+| line 18          | | 4. New selected state is NOT in our aggregation                                            |
++------------------+----------------------------------------------------------------------------------------------+
+| line 29          | | 5. Sending peer sent it's possible states                                                  |
++------------------+----------------------------------------------------------------------------------------------+
+| line 33 - 39     | **To be safe**, remove all possible states of the sending peer from our                      |
+|                  | Aggregator                                                                                   |
++------------------+----------------------------------------------------------------------------------------------+
 
 **Encoding:**
 
@@ -642,10 +628,10 @@ Case 8.1
 
           logEvent( "receiveDisseminatorReport", "case", "8" );
           this.log(1,"8. CURRENT STATE { " +
-                " positiveAMD = " 	+ positiveAMD 		+ 	" | positiveDMA = " 			+ 	positiveDMA 	+
-                " | shouldRemove = " 	+ shouldRemove 		+ 	" | posAMS.size() = " 			+ 	"0 " 			+
-                " | purpose = " 		+ predictedOutcome 	+	" | SMA.contains(newState) = "	+	bool 			+
-                " | count0 = " 				+ 	count0 				+
+                " positiveAMD = "    + positiveAMD      + " | positiveDMA = "            + positiveDMA +
+                " | shouldRemove = " + shouldRemove     + " | posAMS.size() = "          + "0 "        +
+                " | purpose = "      + predictedOutcome + " | SMA.contains(newState) = " +  bool       +
+                " | count0 = "       + count0           +
                 " | NOT INCONSISTENCY ANYMORE }");
           if(possibles != null) {
 
@@ -659,31 +645,30 @@ Case 8.1
             {
               logEvent( "receiveDisseminatorReport", "case", "8.1" );
               this.log(1,"8.1. CURRENT STATE { " +
-                    " positiveAMD = " 		+ positiveAMD 		+ 	" | positiveDMA = "		+ 	positiveDMA +
-                    " | shouldRemove = " 		+ shouldRemove 		+ 	" | posAMS.size() = " 	+ 	" 0 " 		+
-                    " | purpose = " 			+ predictedOutcome 	+
-                    " | count1 = " 				+ 	count1 				+
-                    " | possibles == null ? "	+ (possibles==null)	+ 	" | NOTHING REMOVED }");
+                    " positiveAMD = "         + positiveAMD       + " | positiveDMA = "   + positiveDMA +
+                    " | shouldRemove = "      + shouldRemove      + " | posAMS.size() = " + " 0 "       +
+                    " | purpose = "           + predictedOutcome  +
+                    " | count1 = "            + count1            +
+                    " | possibles == null ? " + (possibles==null) + " | NOTHING REMOVED }");
             }
 
-+------------------+-------------------------------------------------------------------------+
-| Line number      | Description                                                             |
-+==================+=========================================================================+
-| line 1           | 1. Peers have communicated before (start time = Big Bang)               |
-+------------------+-------------------------------------------------------------------------+
-| line 9           | 2. No entries in the list of states that the sending peer think that we |
-|                  |    have                                                                 |
-+------------------+-------------------------------------------------------------------------+
-| line 9           | 3. Sending peer sends an EXPLOITATION                                   |
-+------------------+-------------------------------------------------------------------------+
-| line 18          | 4. New selected state is NOT in our aggregation                         |
-+------------------+-------------------------------------------------------------------------+
-| line 29          | 5. Sending peer sent it's possible states                               |
-+------------------+-------------------------------------------------------------------------+
-| line 33          | Remove all possible states of the sending peer from our aggregator      |
-+------------------+-------------------------------------------------------------------------+
-| line 37          | None of the possible states were found in our aggregator                |
-+------------------+-------------------------------------------------------------------------+
++------------------+--------------------------------------------------------------------------------+
+| Line number      | Description                                                                    |
++==================+================================================================================+
+| line 1           | | 1. Peers have communicated before (start time = Big Bang)                    |
++------------------+--------------------------------------------------------------------------------+
+| line 9           | | 2. No entries in the list of states that the sending peer think that we have |
++------------------+--------------------------------------------------------------------------------+
+| line 9           | | 3. Sending peer sends an EXPLOITATION                                        |
++------------------+--------------------------------------------------------------------------------+
+| line 18          | | 4. New selected state is NOT in our aggregation                              |
++------------------+--------------------------------------------------------------------------------+
+| line 29          | | 5. Sending peer sent it's possible states                                    |
++------------------+--------------------------------------------------------------------------------+
+| line 33          | Remove all possible states of the sending peer from our aggregator             |
++------------------+--------------------------------------------------------------------------------+
+| line 37          | None of the possible states were found in our aggregator                       |
++------------------+--------------------------------------------------------------------------------+
 
 **Encoding:**
 
@@ -733,10 +718,10 @@ Case 8.2
 
           logEvent( "receiveDisseminatorReport", "case", "8" );
           this.log(1,"8. CURRENT STATE { " +
-                " positiveAMD = " 	+ positiveAMD 		+ 	" | positiveDMA = " 			+ 	positiveDMA 	+
-                " | shouldRemove = " 	+ shouldRemove 		+ 	" | posAMS.size() = " 			+ 	"0 " 			+
-                " | purpose = " 		+ predictedOutcome 	+	" | SMA.contains(newState) = "	+	bool 			+
-                " | count0 = " 				+ 	count0 				+
+                " positiveAMD = "    + positiveAMD        + " | positiveDMA = "            + positiveDMA +
+                " | shouldRemove = " + shouldRemove       + " | posAMS.size() = "          + "0 "        +
+                " | purpose = "      + predictedOutcome   + " | SMA.contains(newState) = " +  bool       +
+                " | count0 = "       + count0             +
                 " | NOT INCONSISTENCY ANYMORE }");
           if(possibles != null) {
 
@@ -754,31 +739,30 @@ Case 8.2
             {
               logEvent( "receiveDisseminatorReport", "case", "8.2" );
               this.log(1,"8.2. CURRENT STATE { " +
-                    " positiveAMD = " 		+ positiveAMD 		+ 	" | positiveDMA = "		+ 	positiveDMA +
-                    " | shouldRemove = " 		+ shouldRemove 		+ 	" | posAMS.size() = " 	+ 	" 0 " 		+
-                    " | purpose = " 			+ predictedOutcome 	+
-                    " | count1 = " 				+ 	count1 				+
-                    " | possibles == null ? "	+ (possibles==null)	+ 	" | STATES REMOVED FROM SMA }");
+                    " positiveAMD = "          + positiveAMD       + " | positiveDMA = "   + positiveDMA +
+                    " | shouldRemove = "       + shouldRemove      + " | posAMS.size() = " + " 0 "       +
+                    " | purpose = "            + predictedOutcome  +
+                    " | count1 = "             + count1            +
+                    " | possibles == null ? "  + (possibles==null) + " | STATES REMOVED FROM SMA }");
             }
 
-+------------------+-------------------------------------------------------------------------+
-| Line number      | Description                                                             |
-+==================+=========================================================================+
-| line 1           | 1. Peers have communicated before (start time = Big Bang)               |
-+------------------+-------------------------------------------------------------------------+
-| line 9           | 2. No entries in the list of states that the sending peer think that we |
-|                  |    have                                                                 |
-+------------------+-------------------------------------------------------------------------+
-| line 9           | 3. Sending peer sends an EXPLOITATION                                   |
-+------------------+-------------------------------------------------------------------------+
-| line 18          | 4. New selected state is NOT in our aggregation                         |
-+------------------+-------------------------------------------------------------------------+
-| line 29          | 5. Sending peer sent it's possible states                               |
-+------------------+-------------------------------------------------------------------------+
-| line 33          | Remove all possible states of the sending peer from our aggregator      |
-+------------------+-------------------------------------------------------------------------+
-| line 41          | At least one of the possible states was found in the Aggregator         |
-+------------------+-------------------------------------------------------------------------+
++------------------+--------------------------------------------------------------------------------+
+| Line number      | Description                                                                    |
++==================+================================================================================+
+| line 1           | | 1. Peers have communicated before (start time = Big Bang)                    |
++------------------+--------------------------------------------------------------------------------+
+| line 9           | | 2. No entries in the list of states that the sending peer think that we have |
++------------------+--------------------------------------------------------------------------------+
+| line 9           | | 3. Sending peer sends an EXPLOITATION                                        |
++------------------+--------------------------------------------------------------------------------+
+| line 18          | | 4. New selected state is NOT in our aggregation                              |
++------------------+--------------------------------------------------------------------------------+
+| line 29          | | 5. Sending peer sent it's possible states                                    |
++------------------+--------------------------------------------------------------------------------+
+| line 33          | Remove all possible states of the sending peer from our aggregator             |
++------------------+--------------------------------------------------------------------------------+
+| line 41          | At least one of the possible states was found in the Aggregator                |
++------------------+--------------------------------------------------------------------------------+
 
 **Encoding:**
 
@@ -829,10 +813,10 @@ Case 8.3
 
           logEvent( "receiveDisseminatorReport", "case", "8" );
           this.log(1,"8. CURRENT STATE { " +
-                " positiveAMD = " 	+ positiveAMD 		+ 	" | positiveDMA = " 			+ 	positiveDMA 	+
-                " | shouldRemove = " 	+ shouldRemove 		+ 	" | posAMS.size() = " 			+ 	"0 " 			+
-                " | purpose = " 		+ predictedOutcome 	+	" | SMA.contains(newState) = "	+	bool 			+
-                " | count0 = " 				+ 	count0 				+
+                " positiveAMD = "    + positiveAMD      + " | positiveDMA = "            + positiveDMA   +
+                " | shouldRemove = " + shouldRemove     + " | posAMS.size() = "          + "0 "          +
+                " | purpose = "      + predictedOutcome + " | SMA.contains(newState) = " + bool          +
+                " | count0 = "       + count0           +
                 " | NOT INCONSISTENCY ANYMORE }");
           if(possibles != null) {
 
@@ -853,31 +837,30 @@ Case 8.3
 
               double count2 = (Double)this.aggregates.getAggregate(AggregationFunction.COUNT);
               this.log(1,"8.3. CURRENT STATE { " +
-                    " positiveAMD = " 		+ positiveAMD 		+ 	" | positiveDMA = "		+ 	positiveDMA +
-                    " | shouldRemove = " 		+ shouldRemove 		+ 	" | posAMS.size() = " 	+ 	" 0 " 		+
-                    " | purpose = " 			+ predictedOutcome 	+ 	" | addSMAMembership(newState) = "	+ SMAbool	+
-                    " | count2 = " 				+ 	count2 				+
-                    " | possibles == null ? "	+ (possibles==null)	+ 	" | OUTCOME = EXPLOITATION }");
+                    " positiveAMD = "         + positiveAMD       +   " | positiveDMA = "                 + positiveDMA +
+                    " | shouldRemove = "      + shouldRemove      +   " | posAMS.size() = "               + " 0 " +
+                    " | purpose = "           + predictedOutcome  +   " | addSMAMembership(newState) = "  + SMAbool  +
+                    " | count2 = "            + count2            +
+                    " | possibles == null ? " + (possibles==null) +   " | OUTCOME = EXPLOITATION }");
             }
 
-+------------------+-------------------------------------------------------------------------+
-| Line number      | Description                                                             |
-+==================+=========================================================================+
-| line 1           | 1. Peers have communicated before (start time = Big Bang)               |
-+------------------+-------------------------------------------------------------------------+
-| line 9           | 2. No entries in the list of states that the sending peer think that we |
-|                  |    have                                                                 |
-+------------------+-------------------------------------------------------------------------+
-| line 9           | 3. Sending peer sends an EXPLOITATION                                   |
-+------------------+-------------------------------------------------------------------------+
-| line 18          | 4. New selected state is NOT in our aggregation                         |
-+------------------+-------------------------------------------------------------------------+
-| line 29          | 5. Sending peer sent it's possible states                               |
-+------------------+-------------------------------------------------------------------------+
-| line 33          | Remove all possible states of the sending peer from our aggregator      |
-+------------------+-------------------------------------------------------------------------+
-| line 39          | 6. True means the new selected state was not yet in our SMA             |
-+------------------+-------------------------------------------------------------------------+
++------------------+--------------------------------------------------------------------------------+
+| Line number      | Description                                                                    |
++==================+================================================================================+
+| line 1           | | 1. Peers have communicated before (start time = Big Bang)                    |
++------------------+--------------------------------------------------------------------------------+
+| line 9           | | 2. No entries in the list of states that the sending peer think that we have |
++------------------+--------------------------------------------------------------------------------+
+| line 9           | | 3. Sending peer sends an EXPLOITATION                                        |
++------------------+--------------------------------------------------------------------------------+
+| line 18          | | 4. New selected state is NOT in our aggregation                              |
++------------------+--------------------------------------------------------------------------------+
+| line 29          | | 5. Sending peer sent it's possible states                                    |
++------------------+--------------------------------------------------------------------------------+
+| line 33          | Remove all possible states of the sending peer from our aggregator             |
++------------------+--------------------------------------------------------------------------------+
+| line 39          | | 6. True means the new selected state was not yet in our SMA                  |
++------------------+--------------------------------------------------------------------------------+
 
 **Encoding:**
 
@@ -928,10 +911,10 @@ Case 8.4
 
           logEvent( "receiveDisseminatorReport", "case", "8" );
           this.log(1,"8. CURRENT STATE { " +
-                " positiveAMD = " 	+ positiveAMD 		+ 	" | positiveDMA = " 			+ 	positiveDMA 	+
-                " | shouldRemove = " 	+ shouldRemove 		+ 	" | posAMS.size() = " 			+ 	"0 " 			+
-                " | purpose = " 		+ predictedOutcome 	+	" | SMA.contains(newState) = "	+	bool 			+
-                " | count0 = " 				+ 	count0 				+
+                " positiveAMD = "    + positiveAMD      + " | positiveDMA = "             + positiveDMA +
+                " | shouldRemove = " + shouldRemove     + " | posAMS.size() = "           + "0 "        +
+                " | purpose = "      + predictedOutcome + " | SMA.contains(newState) = "  + bool        +
+                " | count0 = "       + count0           +
                 " | NOT INCONSISTENCY ANYMORE }");
           if(possibles != null) {
 
@@ -951,32 +934,31 @@ Case 8.4
             {
               logEvent( "receiveDisseminatorReport", "case", "8.4" );
               this.log(1,"8.4. CURRENT STATE { " +
-                    " positiveAMD = " 		+ positiveAMD 		+ 	" | positiveDMA = "		+ 	positiveDMA +
-                    " | shouldRemove = " 		+ shouldRemove 		+ 	" | posAMS.size() = " 	+ 	" 0 " 		+
-                    " | purpose = " 			+ predictedOutcome 	+ 	" | addSMAMembership(newState) = "	+	SMAbool	+
-                    " | possibles == null ? "	+ (possibles==null)	+ 	" | OUTCOME = INCONSISTENCY }");
+                    " positiveAMD = "         + positiveAMD       + " | positiveDMA = "                + positiveDMA +
+                    " | shouldRemove = "      + shouldRemove      + " | posAMS.size() = "              + " 0 "       +
+                    " | purpose = "           + predictedOutcome  + " | addSMAMembership(newState) = " + SMAbool     +
+                    " | possibles == null ? " + (possibles==null) + " | OUTCOME = INCONSISTENCY }");
               outcome = AggregationOutcome.UNSUCCESSFUL;
               ack = false;
             }
 
-+------------------+-------------------------------------------------------------------------+
-| Line number      | Description                                                             |
-+==================+=========================================================================+
-| line 1           | 1. Peers have communicated before (start time = Big Bang)               |
-+------------------+-------------------------------------------------------------------------+
-| line 9           | 2. No entries in the list of states that the sending peer think that we |
-|                  |    have                                                                 |
-+------------------+-------------------------------------------------------------------------+
-| line 9           | 3. Sending peer sends an EXPLOITATION                                   |
-+------------------+-------------------------------------------------------------------------+
-| line 18          | 4. New selected state is NOT in our aggregation                         |
-+------------------+-------------------------------------------------------------------------+
-| line 29          | 5. Sending peer sent it's possible states                               |
-+------------------+-------------------------------------------------------------------------+
-| line 33          | Remove all possible states of the sending peer from our aggregator      |
-+------------------+-------------------------------------------------------------------------+
-| line 43          | 6. New selected state was already in our SMA                            |
-+------------------+-------------------------------------------------------------------------+
++------------------+--------------------------------------------------------------------------------+
+| Line number      | Description                                                                    |
++==================+================================================================================+
+| line 1           | | 1. Peers have communicated before (start time = Big Bang)                    |
++------------------+--------------------------------------------------------------------------------+
+| line 9           | | 2. No entries in the list of states that the sending peer think that we have |
++------------------+--------------------------------------------------------------------------------+
+| line 9           | | 3. Sending peer sends an EXPLOITATION                                        |
++------------------+--------------------------------------------------------------------------------+
+| line 18          | | 4. New selected state is NOT in our aggregation                              |
++------------------+--------------------------------------------------------------------------------+
+| line 29          | | 5. Sending peer sent it's possible states                                    |
++------------------+--------------------------------------------------------------------------------+
+| line 33          | Remove all possible states of the sending peer from our aggregator             |
++------------------+--------------------------------------------------------------------------------+
+| line 43          | | 6. New selected state was already in our SMA                                 |
++------------------+--------------------------------------------------------------------------------+
 
 **Encoding:**
 
@@ -1026,40 +1008,39 @@ Case 8.5
 
           logEvent( "receiveDisseminatorReport", "case", "8" );
           this.log(1,"8. CURRENT STATE { " +
-                " positiveAMD = " 	+ positiveAMD 		+ 	" | positiveDMA = " 			+ 	positiveDMA 	+
-                " | shouldRemove = " 	+ shouldRemove 		+ 	" | posAMS.size() = " 			+ 	"0 " 			+
-                " | purpose = " 		+ predictedOutcome 	+	" | SMA.contains(newState) = "	+	bool 			+
-                " | count0 = " 				+ 	count0 				+
+                " positiveAMD = "    + positiveAMD      + " | positiveDMA = "            + positiveDMA +
+                " | shouldRemove = " + shouldRemove     + " | posAMS.size() = "          + "0 "        +
+                " | purpose = "      + predictedOutcome + " | SMA.contains(newState) = " + bool        +
+                " | count0 = "       + count0           +
                 " | NOT INCONSISTENCY ANYMORE }");
           if(possibles != null) {
-            Not executed in case 8.5, omitted here
+            // Not executed in case 8.5, omitted here
           }
           else
           {
             logEvent( "receiveDisseminatorReport", "case", "8.5" );
             this.log(1,"8.5. CURRENT STATE { " +
-                  " positiveAMD = " 		+ positiveAMD 		+ 	" | positiveDMA = "		+ 	positiveDMA +
-                  " | shouldRemove = " 		+ shouldRemove 		+ 	" | posAMS.size() = " 	+ 	" 0 " 		+
-                  " | purpose = " 			+ predictedOutcome 	+
-                  " | possibles == null ? "	+ (possibles==null)	+ 	" | NOTHING REMOVED FROM SMA }");
+                  " positiveAMD = "         + positiveAMD       + " | positiveDMA = "   + positiveDMA +
+                  " | shouldRemove = "      + shouldRemove      + " | posAMS.size() = " + " 0 "       +
+                  " | purpose = "           + predictedOutcome  +
+                  " | possibles == null ? " + (possibles==null) + " | NOTHING REMOVED FROM SMA }");
             outcome = AggregationOutcome.UNSUCCESSFUL;
             ack = false;
           }
 
-+------------------+-------------------------------------------------------------------------+
-| Line number      | Description                                                             |
-+==================+=========================================================================+
-| line 1           | 1. Peers have communicated before (start time = Big Bang)               |
-+------------------+-------------------------------------------------------------------------+
-| line 9           | 2. No entries in the list of states that the sending peer think that we |
-|                  |    have                                                                 |
-+------------------+-------------------------------------------------------------------------+
-| line 9           | 3. Sending peer sends an EXPLOITATION                                   |
-+------------------+-------------------------------------------------------------------------+
-| line 18          | 4. New selected state is NOT in our aggregation                         |
-+------------------+-------------------------------------------------------------------------+
-| line 32          | 5. Sending peer did NOT send it's possible states                       |
-+------------------+-------------------------------------------------------------------------+
++------------------+--------------------------------------------------------------------------------+
+| Line number      | Description                                                                    |
++==================+================================================================================+
+| line 1           | | 1. Peers have communicated before (start time = Big Bang)                    |
++------------------+--------------------------------------------------------------------------------+
+| line 9           | | 2. No entries in the list of states that the sending peer think that we have |
++------------------+--------------------------------------------------------------------------------+
+| line 9           | | 3. Sending peer sends an EXPLOITATION                                        |
++------------------+--------------------------------------------------------------------------------+
+| line 18          | | 4. New selected state is NOT in our aggregation                              |
++------------------+--------------------------------------------------------------------------------+
+| line 32          | | 5. Sending peer did NOT send it's possible states                            |
++------------------+--------------------------------------------------------------------------------+
 
 **Encoding:**
 
@@ -1122,9 +1103,9 @@ Case 9
             {
               logEvent( "receiveDisseminatorReport", "case", "9" );
               this.log(1,"9. CURRENT STATE { " +
-                    " positiveAMD = " 	+ positiveAMD 		+ 	" | positiveDMA = " 			+ 	positiveDMA 	+
-                    " | shouldRemove = " 	+ shouldRemove 		+ 	" | posAMS.size() = " 			+ 	" 0 " 			+
-                    " | purpose = " 		+ predictedOutcome 	+	" | possibles == null ? "	+	(possibles==null)	+
+                    " positiveAMD = "    + positiveAMD      + " | positiveDMA = "       + positiveDMA       +
+                    " | shouldRemove = " + shouldRemove     + " | posAMS.size() = "     + " 0 "             +
+                    " | purpose = "      + predictedOutcome + " | possibles == null ? " + (possibles==null) +
                     " | NOTHING WAS REMOVED }");
               }
             }
@@ -1132,16 +1113,15 @@ Case 9
 +------------------+-------------------------------------------------------------------------------------+
 | Line number      | Description                                                                         |
 +==================+=====================================================================================+
-| line 1           | 1. Peers have communicated before (start time = Big Bang)                           |
+| line 1           | | 1. Peers have communicated before (start time = Big Bang)                         |
 +------------------+-------------------------------------------------------------------------------------+
 | line 9           | shouldRemove (REMOVAL) are only sent by migrated disseminators                      |
 +------------------+-------------------------------------------------------------------------------------+
-| line 15          | 2. No entries in the list of states that the sending peer think that we             |
-|                  |    have                                                                             |
+| line 15          | | 2. No entries in the list of states that the sending peer think that we have      |
 +------------------+-------------------------------------------------------------------------------------+
-| line 15          | 3. Migrated peer (inside a carrier node) sends a REMOVAL                            |
+| line 15          | | 3. Migrated peer (inside a carrier node) sends a REMOVAL                          |
 +------------------+-------------------------------------------------------------------------------------+
-| line 18          | 4. Sending peer sent it's possible states                                           |
+| line 18          | | 4. Sending peer sent it's possible states                                         |
 +------------------+-------------------------------------------------------------------------------------+
 | line 24          | **To be safe**, remove all possible states of the sending peer from our             |
 |                  | Aggregator                                                                          |
@@ -1149,7 +1129,7 @@ Case 9
 | line 26          | | **To be safe**, inform the sending peer that the aggregator removed something,    |
 |                  | | even if the sending peer has no entries for our Aggregator (i.e. posAMS is empty) |
 +------------------+-------------------------------------------------------------------------------------+
-| line 33          | 5. Nothing was removed on our side                                                  |
+| line 33          | | 5. Nothing was removed on our side                                                |
 +------------------+-------------------------------------------------------------------------------------+
 
 **Encoding:**
@@ -1203,28 +1183,27 @@ Case 10
           {
             logEvent( "receiveDisseminatorReport", "case", "10" );
             this.log(1,"10. CURRENT STATE { " +
-                  " positiveAMD = " 	+ positiveAMD 		+ 	" | positiveDMA = " 			+ 	positiveDMA 	+
-                  " | shouldRemove = " 	+ shouldRemove 		+ 	" | posAMS.size() = " 			+ 	" 0 " 			+
-                  " | purpose = " 		+ predictedOutcome 	+	" | possibles == null ? "	+	(possibles==null)	+
+                  " positiveAMD = "    + positiveAMD      + " | positiveDMA = "       + positiveDMA      +
+                  " | shouldRemove = " + shouldRemove     + " | posAMS.size() = "     + " 0 "            +
+                  " | purpose = "      + predictedOutcome + " | possibles == null ? " +(possibles==null) +
                   " | NOTHING WAS REMOVED }");
           }
 
-+------------------+-------------------------------------------------------------------------+
-| Line number      | Description                                                             |
-+==================+=========================================================================+
-| line 1           | 1. Peers have communicated before (start time = Big Bang)               |
-+------------------+-------------------------------------------------------------------------+
-| line 9           | shouldRemove (REMOVAL) are only sent by migrated disseminators          |
-+------------------+-------------------------------------------------------------------------+
-| line 15          | 2. No entries in the list of states that the sending peer think that we |
-|                  |    have                                                                 |
-+------------------+-------------------------------------------------------------------------+
-| line 15          | 3. Migrated peer (inside a carrier node) sends a REMOVAL                |
-+------------------+-------------------------------------------------------------------------+
-| line 22          | 4. Sending peer did not send it's possible states                       |
-+------------------+-------------------------------------------------------------------------+
-| line 22          | Nothing was removed on our side                                         |
-+------------------+-------------------------------------------------------------------------+
++------------------+--------------------------------------------------------------------------------+
+| Line number      | Description                                                                    |
++==================+================================================================================+
+| line 1           | | 1. Peers have communicated before (start time = Big Bang)                    |
++------------------+--------------------------------------------------------------------------------+
+| line 9           | shouldRemove (REMOVAL) are only sent by migrated disseminators                 |
++------------------+--------------------------------------------------------------------------------+
+| line 15          | | 2. No entries in the list of states that the sending peer think that we have |
++------------------+--------------------------------------------------------------------------------+
+| line 15          | | 3. Migrated peer (inside a carrier node) sends a REMOVAL                     |
++------------------+--------------------------------------------------------------------------------+
+| line 22          | | 4. Sending peer did not send it's possible states                            |
++------------------+--------------------------------------------------------------------------------+
+| line 22          | Nothing was removed on our side                                                |
++------------------+--------------------------------------------------------------------------------+
 
 **Encoding:**
 
@@ -1274,30 +1253,29 @@ Case 11
         {
           logEvent( "receiveDisseminatorReport", "case", "11" );
           this.log(1,"11. CURRENT STATE { " +
-                " positiveAMD = " 	+ positiveAMD 		+ 	" | positiveDMA = " 			+ 	positiveDMA 	+
-                " | shouldRemove = " 	+ shouldRemove 		+ 	" | posAMS.size() = " 			+ 	posAMS.size()	+
-                " | purpose = " 		+ predictedOutcome 	+
+                " positiveAMD = "    + positiveAMD      + " | positiveDMA = "   +   positiveDMA   +
+                " | shouldRemove = " + shouldRemove     + " | posAMS.size() = " +   posAMS.size() +
+                " | purpose = "      + predictedOutcome +
                 " | OUTCOME = INCONSISTENCY_2 }");
           outcome = AggregationOutcome.UNSUCCESSFUL;
           ack = false;
         }
 
-+------------------+-------------------------------------------------------------------------+
-| Line number      | Description                                                             |
-+==================+=========================================================================+
-| line 1           | 1. Peers have communicated before (start time = Big Bang)               |
-+------------------+-------------------------------------------------------------------------+
-| line 9           | shouldRemove (REMOVAL) are only sent by migrated disseminators          |
-+------------------+-------------------------------------------------------------------------+
-| line 15          | 2. No entries in the list of states that the sending peer think that we |
-|                  |    have                                                                 |
-+------------------+-------------------------------------------------------------------------+
-| line 15          | 3. Migrated peer (inside a carrier node) sends a REMOVAL                |
-+------------------+-------------------------------------------------------------------------+
-| line 19          | 4. posAMS.size > 1                                                      |
-+------------------+-------------------------------------------------------------------------+
-| line 27          | Normally this should not happen, because posAMS should never be >= 1    |
-+------------------+-------------------------------------------------------------------------+
++------------------+--------------------------------------------------------------------------------+
+| Line number      | Description                                                                    |
++==================+================================================================================+
+| line 1           | | 1. Peers have communicated before (start time = Big Bang)                    |
++------------------+--------------------------------------------------------------------------------+
+| line 9           | shouldRemove (REMOVAL) are only sent by migrated disseminators                 |
++------------------+--------------------------------------------------------------------------------+
+| line 15          | | 2. No entries in the list of states that the sending peer think that we have |
++------------------+--------------------------------------------------------------------------------+
+| line 15          | | 3. Migrated peer (inside a carrier node) sends a REMOVAL                     |
++------------------+--------------------------------------------------------------------------------+
+| line 19          | | 4. posAMS.size > 1                                                           |
++------------------+--------------------------------------------------------------------------------+
+| line 27          | Normally this should not happen, because posAMS should never be >= 1           |
++------------------+--------------------------------------------------------------------------------+
 
 **Encoding:**
 
@@ -1346,9 +1324,9 @@ Case 12
           {
             logEvent( "receiveDisseminatorReport", "case", "12" );
             this.log(1,"12. CURRENT STATE { " +
-                  " positiveAMD = " 	+ positiveAMD 		+ 	" | positiveDMA = " 			+ 	positiveDMA 	+
-                  " | shouldRemove = " 	+ shouldRemove 		+ 	" | posAMS.size() = " 			+ 	"NO POS AMS"	+
-                  " | purpose = " 		+ predictedOutcome 	+	" | possibles == null ? "	+	(possibles==null)	+
+                  " positiveAMD = "    + positiveAMD      + " | positiveDMA = "       + positiveDMA       +
+                  " | shouldRemove = " + shouldRemove     + " | posAMS.size() = "     + "NO POS AMS"      +
+                  " | purpose = "      + predictedOutcome + " | possibles == null ? " + (possibles==null) +
                   " | NOTHING WAS REMOVED }");
           }
 
@@ -1360,11 +1338,11 @@ Case 12
 +------------------+-------------------------------------------------------------------------+
 | line 7           | shouldRemove (REMOVAL) are only sent by migrated disseminators          |
 +------------------+-------------------------------------------------------------------------+
-| line 18          | 2. Remove all possible states of the sending peer in the aggregator     |
+| line 18          | | 2. Remove all possible states of the sending peer in the aggregator   |
 +------------------+-------------------------------------------------------------------------+
-| line 20          | 3. Migrated peer (inside a carrier node) sends a REMOVAL                |
+| line 20          | | 3. Migrated peer (inside a carrier node) sends a REMOVAL              |
 +------------------+-------------------------------------------------------------------------+
-| line 27          | 4. Nothing got removed                                                  |
+| line 27          | | 4. Nothing got removed                                                |
 +------------------+-------------------------------------------------------------------------+
 
 **Encoding:**
@@ -1403,9 +1381,9 @@ Case 13
         {
           logEvent( "receiveDisseminatorReport", "case", "13" );
           this.log(1,"13. CURRENT STATE { " +
-                " positiveAMD = " 	+ positiveAMD 		+ 	" | positiveDMA = " 			+ 	positiveDMA 	+
-                " | shouldRemove = " 	+ shouldRemove 		+ 	" | posAMS.size() = " 			+ 	"NO POS AMS"	+
-                " | purpose = " 		+ predictedOutcome 	+	" | possibles == null ? "	+	(possibles==null)	+
+                " positiveAMD = "    + positiveAMD      + " | positiveDMA = "       + positiveDMA       +
+                " | shouldRemove = " + shouldRemove     + " | posAMS.size() = "     + "NO POS AMS"      +
+                " | purpose = "      + predictedOutcome + " | possibles == null ? " + (possibles==null) +
                 " | NOTHING WAS REMOVED }");
         }
 
@@ -1417,7 +1395,7 @@ Case 13
 +------------------+-------------------------------------------------------------------------+
 | line 7           | shouldRemove (REMOVAL) are only sent by migrated disseminators          |
 +------------------+-------------------------------------------------------------------------+
-| line 15          | 2. Nothing gets removed                                                 |
+| line 15          | | 2. Nothing gets removed                                               |
 +------------------+-------------------------------------------------------------------------+
 
 **Encoding:**
@@ -1459,9 +1437,9 @@ Case 14
 
             logEvent( "receiveDisseminatorReport", "case", "14" );
             this.log(1,"14. CURRENT STATE { " +
-                  " positiveAMD = " 	+ positiveAMD 		+ 	" | positiveDMA = " 	+ 	positiveDMA 	+
-                  " | shouldRemove = " 	+ shouldRemove 		+ 	" | posAMS.size() = " 	+ 	"NO POS AMS"	+
-                  " | purpose = " 		+ predictedOutcome 	+	" | ack = " 			+ 	ack				+
+                  " positiveAMD = "    + positiveAMD      + " | positiveDMA = "   + positiveDMA  +
+                  " | shouldRemove = " + shouldRemove     + " | posAMS.size() = " + "NO POS AMS" +
+                  " | purpose = "      + predictedOutcome + " | ack = "           + ack          +
                   " | OUTCOME = DUPLICATE }");
           }
 
@@ -1521,9 +1499,9 @@ Case 15
 
             logEvent( "receiveDisseminatorReport", "case", "15" );
             this.log(1,"15. CURRENT STATE { " +
-                  " positiveAMD = " 	+ positiveAMD 		+ 	" | positiveDMA = " 	+ 	positiveDMA 	+
-                  " | shouldRemove = " 	+ shouldRemove 		+ 	" | posAMS.size() = " 	+ 	"NO POS AMS"	+
-                  " | purpose = " 		+ predictedOutcome 	+	" | ack = " 			+ 	ack				+
+                  " positiveAMD = "    + positiveAMD      + " | positiveDMA = "   + positiveDMA  +
+                  " | shouldRemove = " + shouldRemove     + " | posAMS.size() = " + "NO POS AMS" +
+                  " | purpose = "      + predictedOutcome + " | ack = "           + ack          +
                   " | OUTCOME = DUPLICATE }");
           }
 
@@ -1532,13 +1510,10 @@ Case 15
 +==================+=========================================================================+
 | line 7           | shouldRemove (REMOVAL) are only sent by migrated disseminators          |
 +------------------+-------------------------------------------------------------------------+
-| line 15          | 1. Conditions:                                                          |
-|                  |                                                                         |
-|                  |    AMD = 1, DMA = 0                                                     |
-|                  |                                                                         |
-|                  |    AMD = 0, DMA = 0                                                     |
-|                  |                                                                         |
-|                  |    This can be compressed to just DMA = 0                               |
+| line 15          | | 1. Conditions:                                                        |
+|                  | |   AMD = 1, DMA = 0                                                    |
+|                  | |   AMD = 0, DMA = 0                                                    |
+|                  | |   This can be compressed to just DMA = 0                              |
 +------------------+-------------------------------------------------------------------------+
 | line 19          | Duplicate, nothing gets changed                                         |
 +------------------+-------------------------------------------------------------------------+
@@ -1580,9 +1555,9 @@ Case 16
         {
           logEvent( "receiveDisseminatorReport", "case", "16" );
           this.log(1,"16. CURRENT STATE { " +
-                " positiveAMD = " 	+ positiveAMD 		+ 	" | positiveDMA = " 	+ 	positiveDMA 	+
-                " | shouldRemove = " 	+ shouldRemove 		+ 	" | posAMS.size() = " 	+ 	"NO POS AMS"	+
-                " | purpose = " 		+ predictedOutcome 	+	" | ack = " 			+ 	ack				+
+                " positiveAMD = "    + positiveAMD      + " | positiveDMA = "   + positiveDMA  +
+                " | shouldRemove = " + shouldRemove     + " | posAMS.size() = " + "NO POS AMS" +
+                " | purpose = "      + predictedOutcome + " | ack = "           + ack          +
                 " | ... }");
         }
 
@@ -1591,13 +1566,10 @@ Case 16
 +==================+=========================================================================+
 | line 7           | shouldRemove (REMOVAL) are only sent by migrated disseminators          |
 +------------------+-------------------------------------------------------------------------+
-| line 13          | 1. Conditions:                                                          |
-|                  |                                                                         |
-|                  |    AMD = 1, DMA = 0                                                     |
-|                  |                                                                         |
-|                  |    AMD = 0, DMA = 0                                                     |
-|                  |                                                                         |
-|                  |    This can be compressed to just DMA = 0                               |
+| line 13          | | 1. Conditions:                                                        |
+|                  | |   AMD = 1, DMA = 0                                                    |
+|                  | |   AMD = 0, DMA = 0                                                    |
+|                  | |   This can be compressed to just DMA = 0                              |
 +------------------+-------------------------------------------------------------------------+
 | line 17 - 25     | Do nothing                                                              |
 +------------------+-------------------------------------------------------------------------+
@@ -1619,13 +1591,13 @@ Case 17
 
   if(positiveAMD && positive DMA)
   {
-    // Not executed in case 16, omitted here
+    // Not executed in case 17, omitted here
   }
   else
   {
       if(!positiveAMD && positiveDMA && shouldRemove)
       {
-        // Not executed in case 16, omitted here
+        // Not executed in case 17, omitted here
       }
       else
       {
@@ -1643,19 +1615,19 @@ Case 17
 
             logEvent( "receiveDisseminatorReport", "case", "17" );
             this.log(1,"17. CURRENT STATE { " +
-                  " positiveAMD = " 	+ positiveAMD 		+ 	" | positiveDMA = " 	+ 	positiveDMA 	+
-                  " | shouldRemove = " 	+ shouldRemove 		+ 	" | posAMS.size() = " 	+ 	"NO POS AMS"	+
-                  " | purpose = " 		+ predictedOutcome 	+	" | addDMAMembership(newNode) = " + DMAbool +
-                  " | addSMAMembership(newState) = " + SMAbool+	" | ack = " 			+ 	ack				+
+                  " positiveAMD = "    + positiveAMD           + " | positiveDMA = "               + positiveDMA  +
+                  " | shouldRemove = " + shouldRemove          + " | posAMS.size() = "             + "NO POS AMS" +
+                  " | purpose = "      + predictedOutcome      + " | addDMAMembership(newNode) = " + DMAbool      +
+                  " | addSMAMembership(newState) = " + SMAbool + " | ack = "                       + ack          +
                   " | OUTCOME = EXPLOITATION }");
           }
 
 +------------------+-------------------------------------------------------------------------+
 | Line number      | Description                                                             |
 +==================+=========================================================================+
-| line 13          | 1. Peers have never communicated before                                 |
+| line 13          | | 1. Peers have never communicated before                               |
 +------------------+-------------------------------------------------------------------------+
-| line 21          | 2. Peer and new state successfully added to the BloomFilters            |
+| line 21          | | 2. Peer and new state successfully added to the BloomFilters          |
 +------------------+-------------------------------------------------------------------------+
 | line 22 - 32     | Do nothing                                                              |
 +------------------+-------------------------------------------------------------------------+
@@ -1665,6 +1637,116 @@ Case 17
   | Topic Matched = 1
   | positiveDMA:0
   | positiveAMD:0
+  | DMAbool:1
+  | SMAbool:1
+
+Case 18
+-------
+
+.. code-block:: java
+  :linenos:
+
+  if(positiveAMD && positive DMA)
+  {
+    // Not executed in case 18, omitted here
+  }
+  else
+  {
+      if(!positiveAMD && positiveDMA && shouldRemove)
+      {
+        // Not executed in case 18, omitted here
+      }
+      else
+      {
+        if(!positiveAMD && !positiveDMA)
+        {
+          AMSAddition = newState;
+          boolean DMAbool = this.addDMAMembership(node);
+          boolean SMAbool = this.addSMAMembership(newState);
+
+          if(DMAbool && SMAbool)
+          {
+            // Not executed in case 18, omitted here
+          }
+          else
+          {
+            logEvent( "receiveDisseminatorReport", "case", "18" );
+            this.log(1,"18. CURRENT STATE { " +
+                  " positiveAMD = "                  + positiveAMD      + " | positiveDMA = "               + positiveDMA  +
+                  " | shouldRemove = "               + shouldRemove     + " | posAMS.size() = "             + "NO POS AMS" +
+                  " | purpose = "                    + predictedOutcome + " | addDMAMembership(newNode) = " + DMAbool      +
+                  " | addSMAMembership(newState) = " + SMAbool          + " | ack = "                       + ack          +
+                  " | OUTCOME = INCONSISTENCY }");
+            outcome=AggregationOutcome.UNSUCCESSFUL;
+            ack=false;
+          }
+
++------------------+-------------------------------------------------------------------------+
+| Line number      | Description                                                             |
++==================+=========================================================================+
+| line 13          | | 1. Peers have never communicated before                               |
++------------------+-------------------------------------------------------------------------+
+| line 32          | | 2. tryign to add Peer and new state to the BloomFilters failed        |
++------------------+-------------------------------------------------------------------------+
+| line 33          | Do nothing                                                              |
++------------------+-------------------------------------------------------------------------+
+
+**Encoding:**
+
+  | Topic Matched = 1
+  | positiveDMA:0
+  | positiveAMD:0
+  | DMAbool:0 AND/OR SMAbool:0
+
+Case 19
+-------
+
+.. code-block:: java
+  :linenos:
+
+  if(positiveAMD && positive DMA)
+  {
+    // Not executed in case 19, omitted here
+  }
+  else
+  {
+      if(!positiveAMD && positiveDMA && shouldRemove)
+      {
+        // Not executed in case 19, omitted here
+      }
+      else
+      {
+        if(!positiveAMD && !positiveDMA)
+        {
+          // Not executed in case 19, omitted here
+        }
+        if(positiveAMD && !positiveDMA)
+        {
+          logEvent( "receiveDisseminatorReport", "case", "19" );
+          this.log(1,"19. CURRENT STATE { " +
+                " positiveAMD = "    + positiveAMD      + " | positiveDMA = "   + positiveDMA  +
+                " | shouldRemove = " + shouldRemove     + " | posAMS.size() = " + "NO POS AMS" +
+                " | purpose = "      + predictedOutcome + " | ack = "           + ack          +
+                " | OUTCOME = INCONSISTENCY }");
+          outcome=AggregationOutcome.UNSUCCESSFUL;
+          ack=false;
+        }
+
++------------------+-------------------------------------------------------------------------+
+| Line number      | Description                                                             |
++==================+=========================================================================+
+| line 17          | | 1. Inconsistent information about previous communicatio               |
++------------------+-------------------------------------------------------------------------+
+| line 25          | | 2. tryign to add Peer and new state to the BloomFilters failed        |
++------------------+-------------------------------------------------------------------------+
+| line 26          | Do nothing                                                              |
++------------------+-------------------------------------------------------------------------+
+
+**Encoding:**
+
+  | Topic Matched = 1
+  | positiveDMA:0
+  | positiveAMD:1
 
 Case 20
 -------
@@ -1686,9 +1768,9 @@ Case 20
 
     logEvent( "receiveDisseminatorReport", "case", "20" );
     this.log(1,"20. CURRENT STATE { " +
-          " positiveAMD = " 	+ positiveAMD 		+ 	" | positiveDMA = " 	+ 	positiveDMA 	+
-          " | shouldRemove = " 	+ shouldRemove 		+ 	" | posAMS.size() = " 	+ 	"NO POS AMS"	+
-          " | purpose = " 		+ predictedOutcome 	+	" | ack = " 			+ 	ack				+
+          " positiveAMD = "    + positiveAMD      + " | positiveDMA = "   + positiveDMA  +
+          " | shouldRemove = " + shouldRemove     + " | posAMS.size() = " + "NO POS AMS" +
+          " | purpose = "      + predictedOutcome + " | ack = "           + ack          +
           " | OUTCOME = INCOCNSISTENCY DUE TO TOPIC MISMATCH }");
     outcome = AggregationOutcome.UNSUCCESSFUL;
     AMSAddition = null;
@@ -1704,7 +1786,7 @@ Case 20
 +------------------+-------------------------------------------------------------------------+
 | Line number      | Description                                                             |
 +==================+=========================================================================+
-| line 5           | 1. Topic mismatch                                                       |
+| line 5           | | 1. Topic mismatch                                                     |
 +------------------+-------------------------------------------------------------------------+
 | line 5 - 24      | Do nothing                                                              |
 +------------------+-------------------------------------------------------------------------+
