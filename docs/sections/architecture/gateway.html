@@ -168,6 +168,13 @@
             
   <div class="section" id="dias-gateway">
 <span id="label-dias-gateway"></span><h1>DIAS Gateway<a class="headerlink" href="#dias-gateway" title="Permalink to this headline">¶</a></h1>
+<div class="figure" id="id1">
+<a class="reference internal image-reference" href="../../_images/GateWayMessageSequence.png"><img alt="../../_images/GateWayMessageSequence.png" src="../../_images/GateWayMessageSequence.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">The message sequence between the gateway and a newly connecting peer</span></p>
+</div>
+<p>The gateway establishes initial connections between external devices and DIAS peers.
+The device is expected to keep the received connection, but the gateway is able to return the peer address again, in case the device lost it for some reason.</p>
+<p>The connection mapping is a mapping between (deviceID, sensorID) and peerAddress.</p>
 </div>
 
 
