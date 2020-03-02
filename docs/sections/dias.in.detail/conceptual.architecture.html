@@ -92,7 +92,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#aggregator">Aggregator</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#disseminator">Disseminator</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bloom-filters">Bloom Filters</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#bootstrapgatewayclient">BootstrapGatewayClient</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#zeromqreqreplistener">ZeroMQReqRepListener</a></li>
 </ul>
 </li>
@@ -185,7 +184,6 @@ The submodules are called peerlets, the most important peerlets are:</p>
 <ul class="simple">
 <li>Aggregator</li>
 <li>Disseminator</li>
-<li>BootstrapGatewayClient</li>
 <li>RealTimeDiasApp</li>
 </ul>
 <div class="section" id="aggregator">
@@ -247,14 +245,6 @@ Read more about <a href="https://en.wikipedia.org/wiki/Counting_Bloom_filter" ta
 </li>
 </ul>
 <p>AMD and AMS are present in the Disseminator, DMA and SMA are present in the Aggregator of a peer.</p>
-</div>
-<div class="section" id="bootstrapgatewayclient">
-<h3>BootstrapGatewayClient<a class="headerlink" href="#bootstrapgatewayclient" title="Permalink to this headline">¶</a></h3>
-<p>In the DIAS network, there is one peer with a the bootstrap peerlet.</p>
-<p>This peerlet is responsible for interconnecting the first peers in the system.
-It gets triggered once there are 10 peers in the system.
-When triggered, it gives the 10 peers a view of some of the other peers in the network, such that they can start communicating in the network.</p>
-<p>Read more about the <a class="reference internal" href="../architecture/bootstrap.process.html#bootstrap-process"><span class="std std-ref">Bootstrap Process</span></a></p>
 </div>
 <div class="section" id="zeromqreqreplistener">
 <h3>ZeroMQReqRepListener<a class="headerlink" href="#zeromqreqreplistener" title="Permalink to this headline">¶</a></h3>

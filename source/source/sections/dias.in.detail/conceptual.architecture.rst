@@ -12,7 +12,6 @@ The submodules are called peerlets, the most important peerlets are:
 
 * Aggregator
 * Disseminator
-* BootstrapGatewayClient
 * RealTimeDiasApp
 
 Aggregator
@@ -65,17 +64,6 @@ There are 4 different bloom filters used in DIAS for storing different membershi
   |   This means this membership is present, if the aggregator used the selected state in question in its own aggregation.
 
 AMD and AMS are present in the Disseminator, DMA and SMA are present in the Aggregator of a peer.
-
-BootstrapGatewayClient
-**********************
-
-In the DIAS network, there is one peer with a the bootstrap peerlet.
-
-This peerlet is responsible for interconnecting the first peers in the system.
-It gets triggered once there are 10 peers in the system.
-When triggered, it gives the 10 peers a view of some of the other peers in the network, such that they can start communicating in the network.
-
-Read more about the :ref:`Bootstrap Process`
 
 ZeroMQReqRepListener
 ********************
