@@ -97,14 +97,12 @@
 <li class="toctree-l4"><a class="reference internal" href="#notes">Notes</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#redash-dashboards">Redash dashboards</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../dias.in.detail.html">How DIAS Works</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Deployment Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gui.html">GUIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../protopeer.html">Protopeer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dias-logging-system.html">DIAS Logging System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
@@ -1188,9 +1186,6 @@ legend<span class="p">(</span><span class="s">&quot;bottomleft&quot;</span><span
 <p>Everywhere, where there is the following annotation: &lt;something&gt;, the whole statement must be replaced by some dynamic value explained by the statements inside the brackets.</p>
 </div>
 </div>
-<div class="section" id="redash-dashboards">
-<h2>Redash dashboards<a class="headerlink" href="#redash-dashboards" title="Permalink to this headline">¶</a></h2>
-</div>
 </div>
 
 
@@ -1242,9 +1237,19 @@ legend<span class="p">(</span><span class="s">&quot;bottomleft&quot;</span><span
     
 
   <style>
+    /*To underline text*/
+    .underline {
+      text-decoration: underline;
+    }
+
+
+      /*To underline bold text*/
+      .underlinebold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
     /* Sidebar header (and topbar for mobile) */
-
-
 
 
 
@@ -1288,6 +1293,10 @@ legend<span class="p">(</span><span class="s">&quot;bottomleft&quot;</span><span
         color:/**#eee;*/var(--blue);
 
 
+     }
+
+     .wy-nav-content-wrap{
+       background: var(--grey);
      }
 
      .wy-menu-vertical li.toctree-l1.current>a {

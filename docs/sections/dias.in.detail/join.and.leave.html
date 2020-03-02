@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Deployment Architecture" href="../architecture.html" />
-    <link rel="prev" title="Changing of possible states" href="change.possible.states.html" /> 
+    <link rel="next" title="Carrier Peer" href="Carrier.peer.html" />
+    <link rel="prev" title="Changing of states" href="change.states.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -89,13 +89,21 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../dias.in.detail.html">How DIAS Works</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="conceptual.architecture.html">Conceptual Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="aggregation.mechanism.html">Aggregation Mechanism</a></li>
-<li class="toctree-l2"><a class="reference internal" href="change.selected.states.html">Changing of selected states</a></li>
-<li class="toctree-l2"><a class="reference internal" href="change.possible.states.html">Changing of possible states</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Join and Leave</a></li>
+<li class="toctree-l2"><a class="reference internal" href="change.states.html">Changing of states</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Join and Leave</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#leave">Leave</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#graceful-leave">Graceful Leave</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#timout-leave">Timout Leave</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#leaving-process">Leaving Process</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#join">Join</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Carrier.peer.html">Carrier Peer</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Deployment Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gui.html">GUIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../protopeer.html">Protopeer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dias-logging-system.html">DIAS Logging System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
@@ -168,6 +176,30 @@
             
   <div class="section" id="join-and-leave">
 <h1>Join and Leave<a class="headerlink" href="#join-and-leave" title="Permalink to this headline">¶</a></h1>
+<p>A peer is able to join and leave the running network.</p>
+<div class="section" id="leave">
+<h2>Leave<a class="headerlink" href="#leave" title="Permalink to this headline">¶</a></h2>
+<p>There is a graceful leave and a timeout leave.</p>
+<div class="section" id="graceful-leave">
+<h3>Graceful Leave<a class="headerlink" href="#graceful-leave" title="Permalink to this headline">¶</a></h3>
+<p>On a graceful leave, the device notifies the peer that it is leaving, the communication between the device and the peer is stopped until further notice.</p>
+</div>
+<div class="section" id="timout-leave">
+<h3>Timout Leave<a class="headerlink" href="#timout-leave" title="Permalink to this headline">¶</a></h3>
+<p>On a timeout leave, the peer leaves the network due to no received messages from the device over a predefined period of time.</p>
+</div>
+<div class="section" id="leaving-process">
+<h3>Leaving Process<a class="headerlink" href="#leaving-process" title="Permalink to this headline">¶</a></h3>
+<p>When a node leaves the network, it stops aggregating and starts sleeping.
+In order for the peer to still have information about the network and its neighbors, the node sends its Disseminator to a <a class="reference internal" href="Carrier.peer.html#carrier-peer"><span class="std std-ref">Carrier Peer</span></a> before stopping its service.</p>
+</div>
+</div>
+<div class="section" id="join">
+<h2>Join<a class="headerlink" href="#join" title="Permalink to this headline">¶</a></h2>
+<p>When a peer receives any message from a device, it reactivates itself, joining the network again in the process.
+In order to rejoin, it notifies all carrier peers that it needs its disseminator back.
+Upon receiving it’s disseminator, it runs regularly again.</p>
+</div>
 </div>
 
 
@@ -178,10 +210,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../architecture.html" class="btn btn-neutral float-right" title="Deployment Architecture" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Carrier.peer.html" class="btn btn-neutral float-right" title="Carrier Peer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="change.possible.states.html" class="btn btn-neutral float-left" title="Changing of possible states" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="change.states.html" class="btn btn-neutral float-left" title="Changing of states" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -219,9 +251,19 @@
     
 
   <style>
+    /*To underline text*/
+    .underline {
+      text-decoration: underline;
+    }
+
+
+      /*To underline bold text*/
+      .underlinebold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
     /* Sidebar header (and topbar for mobile) */
-
-
 
 
 
@@ -265,6 +307,10 @@
         color:/**#eee;*/var(--blue);
 
 
+     }
+
+     .wy-nav-content-wrap{
+       background: var(--grey);
      }
 
      .wy-menu-vertical li.toctree-l1.current>a {

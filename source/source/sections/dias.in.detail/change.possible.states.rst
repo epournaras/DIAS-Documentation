@@ -1,2 +1,0 @@
-Changing of possible states
-***************************

@@ -94,7 +94,6 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="dias.in.detail.html">How DIAS Works</a></li>
 <li class="toctree-l1"><a class="reference internal" href="architecture.html">Deployment Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gui.html">GUIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="protopeer.html">Protopeer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dias-logging-system.html">DIAS Logging System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="applications.html">Applications</a></li>
@@ -178,7 +177,6 @@
 <li class="toctree-l1"><a class="reference internal" href="quickstart/monitoring.html">Monitoring</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="quickstart/monitoring.html#sql-queries">SQL queries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart/monitoring.html#r-studio-plots">R-Studio plots</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart/monitoring.html#redash-dashboards">Redash dashboards</a></li>
 </ul>
 </li>
 </ul>
@@ -234,9 +232,19 @@
     
 
   <style>
+    /*To underline text*/
+    .underline {
+      text-decoration: underline;
+    }
+
+
+      /*To underline bold text*/
+      .underlinebold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
     /* Sidebar header (and topbar for mobile) */
-
-
 
 
 
@@ -280,6 +288,10 @@
         color:/**#eee;*/var(--blue);
 
 
+     }
+
+     .wy-nav-content-wrap{
+       background: var(--grey);
      }
 
      .wy-menu-vertical li.toctree-l1.current>a {

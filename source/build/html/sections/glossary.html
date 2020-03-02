@@ -87,7 +87,6 @@
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dias.in.detail.html">How DIAS Works</a></li>
 <li class="toctree-l1"><a class="reference internal" href="architecture.html">Deployment Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gui.html">GUIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="protopeer.html">Protopeer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dias-logging-system.html">DIAS Logging System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="applications.html">Applications</a></li>
@@ -158,59 +157,64 @@
             
   <div class="section" id="glossary">
 <h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h1>
-<ul>
-<li><p class="first">DIAS</p>
-</li>
-<li><p class="first">DIAS node</p>
-</li>
-<li><p class="first">GDELT</p>
-<blockquote>
-<div><ul class="simple">
-<li>data.gdeltproject.org</li>
-</ul>
-</div></blockquote>
-</li>
-<li><p class="first">GDELT Subscription</p>
-</li>
-<li><p class="first">Mock Device</p>
-</li>
-<li><p class="first">Protopeer Framework</p>
-<blockquote>
-<div><ul class="simple">
-<li>A platform written in Java for carrying out small to medium scale peer-to-peer experiments</li>
-</ul>
-</div></blockquote>
-</li>
-<li><p class="first">DIAS Boostrap Server</p>
-</li>
-<li><p class="first">DIAS Gateway Server</p>
-</li>
-<li><p class="first">DIAS-Logging-System</p>
-<blockquote>
-<div><ul class="simple">
-<li>EventLog</li>
-<li>RawLog</li>
-<li>MemLog</li>
-<li>Persistence Client</li>
-<li>Persistence Daemon</li>
-</ul>
-</div></blockquote>
-</li>
-<li><p class="first">DIAS Network Id</p>
-</li>
-<li><p class="first">Selected state</p>
-</li>
-<li><p class="first">Possible states</p>
-</li>
-<li><p class="first">Peer Sampling Service</p>
-</li>
-<li><p class="first">Active State</p>
-</li>
-<li><p class="first">Passive State</p>
-</li>
-<li><p class="first">UNIX screen</p>
-</li>
-</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Expression</th>
+<th class="head">Brief explanation</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>DIAS</td>
+<td>The name of the hereby described project, see <a class="reference internal" href="../index.html#dias-dynamic-intelligent-aggregation-service"><span class="std std-ref">DIAS - Dynamic Intelligent Aggregation Service</span></a></td>
+</tr>
+<tr class="row-odd"><td>DIAS node</td>
+<td>One aggregating node inside the DIAS network</td>
+</tr>
+<tr class="row-even"><td>GDELT</td>
+<td>GDELT is the largest publicly available collection of near real-time news feed in the World, see <a class="reference internal" href="applications/gdelt.html#gdelt"><span class="std std-ref">GDELT</span></a></td>
+</tr>
+<tr class="row-odd"><td>Mock Device</td>
+<td>A program simulating the input of real-world users for different experiments, see <a class="reference internal" href="architecture/mock.devices.html#mock-devices"><span class="std std-ref">Mock devices</span></a></td>
+</tr>
+<tr class="row-even"><td>Protopeer Framework</td>
+<td>A platform written in Java for carrying out small to medium scale peer-to-peer experiments, see <a class="reference internal" href="protopeer.html#protopeer"><span class="std std-ref">Protopeer</span></a></td>
+</tr>
+<tr class="row-odd"><td>DIAS Bootstrap server</td>
+<td>The server, which initially interconnects the first peers in the DIAS network, see <a class="reference internal" href="architecture/bootstrap.process.html#bootstrap-process"><span class="std std-ref">Bootstrap Process</span></a></td>
+</tr>
+<tr class="row-even"><td>DIAS Gateway Server</td>
+<td>The server connecting newly created peer to the already running network, see <a class="reference internal" href="architecture/gateway.html#dias-gateway"><span class="std std-ref">DIAS Gateway</span></a></td>
+</tr>
+<tr class="row-odd"><td>DIAS-Logging-System</td>
+<td>The system, which allows the distributed system to log averything to a single database with relatively little contention, see <a class="reference internal" href="architecture/dias.logging.html#dias-logging"><span class="std std-ref">DIAS Logging</span></a></td>
+</tr>
+<tr class="row-even"><td>DIAS Network Id</td>
+<td>The Network Id (oe sensor ID) is used to distinguish between different peers to be able to address a specific peer, see more here: <a class="reference internal" href="applications/DIASClientLibrary.html#the-usage-of-sensorids"><span class="std std-ref">The usage of sensorIDs</span></a>,</td>
+</tr>
+<tr class="row-odd"><td>Possible states</td>
+<td>The user needs to send a node different options, from which he later chooses a single one as a selected state. see <a class="reference internal" href="dias.in.detail/change.states.html#changing-of-possible-states"><span class="std std-ref">Changing of possible states</span></a></td>
+</tr>
+<tr class="row-even"><td>Selected state</td>
+<td>The selected state is a selected element out of the possible states, it is considered as the current active value sent from a device. see <a class="reference internal" href="dias.in.detail/change.states.html#changing-of-selected-states"><span class="std std-ref">Changing of selected states</span></a></td>
+</tr>
+<tr class="row-odd"><td>Peer Sampling Service</td>
+<td>TODO</td>
+</tr>
+<tr class="row-even"><td>Active state</td>
+<td>Every DIAS node has an active state, it is basically an acttive thread running on a timer, repeatedly doing specific tasks.</td>
+</tr>
+<tr class="row-odd"><td>Passive state</td>
+<td>Every DIAS node has a passive state, it gets triggered upon receiving a message, handling it corresponding to the defined actions.</td>
+</tr>
+<tr class="row-even"><td>UNIX Screen</td>
+<td>A UNIX command line tool, read <a href="https://kb.iu.edu/d/acuy" target="_blank">more</a></td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
@@ -260,9 +264,19 @@
     
 
   <style>
+    /*To underline text*/
+    .underline {
+      text-decoration: underline;
+    }
+
+
+      /*To underline bold text*/
+      .underlinebold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
     /* Sidebar header (and topbar for mobile) */
-
-
 
 
 
@@ -306,6 +320,10 @@
         color:/**#eee;*/var(--blue);
 
 
+     }
+
+     .wy-nav-content-wrap{
+       background: var(--grey);
      }
 
      .wy-menu-vertical li.toctree-l1.current>a {

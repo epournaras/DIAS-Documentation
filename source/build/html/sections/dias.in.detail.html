@@ -89,13 +89,12 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">How DIAS Works</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="dias.in.detail/conceptual.architecture.html">Conceptual Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dias.in.detail/aggregation.mechanism.html">Aggregation Mechanism</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dias.in.detail/change.selected.states.html">Changing of selected states</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dias.in.detail/change.possible.states.html">Changing of possible states</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dias.in.detail/change.states.html">Changing of states</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dias.in.detail/join.and.leave.html">Join and Leave</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dias.in.detail/Carrier.peer.html">Carrier Peer</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="architecture.html">Deployment Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gui.html">GUIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="protopeer.html">Protopeer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dias-logging-system.html">DIAS Logging System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="applications.html">Applications</a></li>
@@ -169,7 +168,10 @@
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="dias.in.detail/conceptual.architecture.html">Conceptual Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dias.in.detail/conceptual.architecture.html">Conceptual Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dias.in.detail/conceptual.architecture.html#peerlets">Peerlets</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="dias.in.detail/aggregation.mechanism.html">Aggregation Mechanism</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="dias.in.detail/aggregation.mechanism.html#case-1">Case 1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dias.in.detail/aggregation.mechanism.html#case-2">Case 2</a></li>
@@ -198,9 +200,17 @@
 <li class="toctree-l2"><a class="reference internal" href="dias.in.detail/aggregation.mechanism.html#case-20">Case 20</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="dias.in.detail/change.selected.states.html">Changing of selected states</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dias.in.detail/change.possible.states.html">Changing of possible states</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dias.in.detail/join.and.leave.html">Join and Leave</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dias.in.detail/change.states.html">Changing of states</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dias.in.detail/change.states.html#changing-of-possible-states">Changing of possible states</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dias.in.detail/change.states.html#changing-of-selected-states">Changing of selected states</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dias.in.detail/join.and.leave.html">Join and Leave</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dias.in.detail/join.and.leave.html#leave">Leave</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dias.in.detail/join.and.leave.html#join">Join</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dias.in.detail/Carrier.peer.html">Carrier Peer</a></li>
 </ul>
 </div>
 </div>
@@ -254,9 +264,19 @@
     
 
   <style>
+    /*To underline text*/
+    .underline {
+      text-decoration: underline;
+    }
+
+
+      /*To underline bold text*/
+      .underlinebold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
     /* Sidebar header (and topbar for mobile) */
-
-
 
 
 
@@ -300,6 +320,10 @@
         color:/**#eee;*/var(--blue);
 
 
+     }
+
+     .wy-nav-content-wrap{
+       background: var(--grey);
      }
 
      .wy-menu-vertical li.toctree-l1.current>a {

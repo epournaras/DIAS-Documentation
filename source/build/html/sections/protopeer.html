@@ -38,7 +38,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Protopeer Overview" href="protopeer/overview.html" />
-    <link rel="prev" title="Network GUI" href="gui/network.gui.html" /> 
+    <link rel="prev" title="DIAS Logging" href="architecture/dias.logging.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,7 +88,6 @@
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dias.in.detail.html">How DIAS Works</a></li>
 <li class="toctree-l1"><a class="reference internal" href="architecture.html">Deployment Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gui.html">GUIs</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Protopeer</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="protopeer/overview.html">Protopeer Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="protopeer/refactoring.html">Protopeer Refactoring</a></li>
@@ -207,7 +206,7 @@
         <a href="protopeer/overview.html" class="btn btn-neutral float-right" title="Protopeer Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="gui/network.gui.html" class="btn btn-neutral float-left" title="Network GUI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="architecture/dias.logging.html" class="btn btn-neutral float-left" title="DIAS Logging" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -245,9 +244,19 @@
     
 
   <style>
+    /*To underline text*/
+    .underline {
+      text-decoration: underline;
+    }
+
+
+      /*To underline bold text*/
+      .underlinebold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
     /* Sidebar header (and topbar for mobile) */
-
-
 
 
 
@@ -291,6 +300,10 @@
         color:/**#eee;*/var(--blue);
 
 
+     }
+
+     .wy-nav-content-wrap{
+       background: var(--grey);
      }
 
      .wy-menu-vertical li.toctree-l1.current>a {

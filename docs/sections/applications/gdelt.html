@@ -88,7 +88,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dias.in.detail.html">How DIAS Works</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Deployment Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gui.html">GUIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../protopeer.html">Protopeer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dias-logging-system.html">DIAS Logging System</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../applications.html">Applications</a><ul class="current">
@@ -344,16 +343,12 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">GitHub repo:</th><td class="field-body"><p class="first"><a class="reference external" href="https://github.com/epournaras/DIAS-GDELT.git">https://github.com/epournaras/DIAS-GDELT.git</a></p>
-</td>
+<tr class="field-odd field"><th class="field-name">GitHub repo:</th><td class="field-body"><a class="reference external" href="https://github.com/epournaras/DIAS-GDELT.git">https://github.com/epournaras/DIAS-GDELT.git</a></td>
 </tr>
-<tr class="field-even field"><th class="field-name">GDELT:</th><td class="field-body"><p class="first"><a class="reference external" href="http://data.gdeltproject.org/">http://data.gdeltproject.org/</a></p>
-<p><a class="reference external" href="http://data.gdeltproject.org/documentation/GDELT-Event_Codebook-V2.0.pdf">http://data.gdeltproject.org/documentation/GDELT-Event_Codebook-V2.0.pdf</a></p>
-</td>
+<tr class="field-even field"><th class="field-name">GDELT:</th><td class="field-body"><a class="reference external" href="http://data.gdeltproject.org/documentation/GDELT-Event_Codebook-V2.0.pdf">http://data.gdeltproject.org/documentation/GDELT-Event_Codebook-V2.0.pdf</a></td>
 </tr>
 <tr class="field-odd field"><th class="field-name" colspan="2">DIAS-GDELT microsite:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body"><p class="first last"><a class="reference external" href="http://dias-net.org/gdelt/">http://dias-net.org/gdelt/</a></p>
-</td>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><a class="reference external" href="http://dias-net.org/dias-gdelt-live/">http://dias-net.org/dias-gdelt-live/</a></td>
 </tr>
 </tbody>
 </table>
@@ -409,9 +404,19 @@
     
 
   <style>
+    /*To underline text*/
+    .underline {
+      text-decoration: underline;
+    }
+
+
+      /*To underline bold text*/
+      .underlinebold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
     /* Sidebar header (and topbar for mobile) */
-
-
 
 
 
@@ -455,6 +460,10 @@
         color:/**#eee;*/var(--blue);
 
 
+     }
+
+     .wy-nav-content-wrap{
+       background: var(--grey);
      }
 
      .wy-menu-vertical li.toctree-l1.current>a {

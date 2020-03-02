@@ -87,7 +87,6 @@
 <li class="toctree-l1"><a class="reference internal" href="sections/quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sections/dias.in.detail.html">How DIAS Works</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sections/architecture.html">Deployment Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sections/gui.html">GUIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sections/protopeer.html">Protopeer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sections/dias-logging-system.html">DIAS Logging System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sections/applications.html">Applications</a></li>
@@ -186,7 +185,6 @@
 </ul>
 </div></blockquote>
 <p>The original research paper can be found at <a class="reference external" href="http://evangelospournaras.com/wordpress/wp-content/uploads/2013/04/Multi-level-Reconfigurable-Self-organization-in-Overlay-Services1.pdf">http://evangelospournaras.com/wordpress/wp-content/uploads/2013/04/Multi-level-Reconfigurable-Self-organization-in-Overlay-Services1.pdf</a>.</p>
-<p><strong>Documentation</strong></p>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Contents</span></p>
 <ul>
@@ -207,9 +205,9 @@
 <li class="toctree-l1"><a class="reference internal" href="sections/dias.in.detail.html">How DIAS Works</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="sections/dias.in.detail/conceptual.architecture.html">Conceptual Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sections/dias.in.detail/aggregation.mechanism.html">Aggregation Mechanism</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sections/dias.in.detail/change.selected.states.html">Changing of selected states</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sections/dias.in.detail/change.possible.states.html">Changing of possible states</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/dias.in.detail/change.states.html">Changing of states</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sections/dias.in.detail/join.and.leave.html">Join and Leave</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/dias.in.detail/Carrier.peer.html">Carrier Peer</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="sections/architecture.html">Deployment Architecture</a><ul>
@@ -218,12 +216,6 @@
 <li class="toctree-l2"><a class="reference internal" href="sections/architecture/mock.devices.html">Mock devices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sections/architecture/multi.machine.setup.html">Multi-machine Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sections/architecture/dias.logging.html">DIAS Logging</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="sections/gui.html">GUIs</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="sections/gui/redash.dashboards.html">Redash Dashboards</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sections/gui/control.gui.html">Control GUI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sections/gui/network.gui.html">Network GUI</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="sections/protopeer.html">Protopeer</a><ul>
@@ -340,9 +332,19 @@ Theses</p>
     
 
   <style>
+    /*To underline text*/
+    .underline {
+      text-decoration: underline;
+    }
+
+
+      /*To underline bold text*/
+      .underlinebold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
     /* Sidebar header (and topbar for mobile) */
-
-
 
 
 
@@ -386,6 +388,10 @@ Theses</p>
         color:/**#eee;*/var(--blue);
 
 
+     }
+
+     .wy-nav-content-wrap{
+       background: var(--grey);
      }
 
      .wy-menu-vertical li.toctree-l1.current>a {

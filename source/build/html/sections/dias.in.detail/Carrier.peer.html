@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Changing of possible states &mdash; DIAS-Documentation 1.0 documentation</title>
+  <title>Carrier Peer &mdash; DIAS-Documentation 1.0 documentation</title>
   
 
   
@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Join and Leave" href="join.and.leave.html" />
-    <link rel="prev" title="Changing of selected states" href="change.selected.states.html" /> 
+    <link rel="next" title="Deployment Architecture" href="../architecture.html" />
+    <link rel="prev" title="Join and Leave" href="join.and.leave.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -89,13 +89,12 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../dias.in.detail.html">How DIAS Works</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="conceptual.architecture.html">Conceptual Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="aggregation.mechanism.html">Aggregation Mechanism</a></li>
-<li class="toctree-l2"><a class="reference internal" href="change.selected.states.html">Changing of selected states</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Changing of possible states</a></li>
+<li class="toctree-l2"><a class="reference internal" href="change.states.html">Changing of states</a></li>
 <li class="toctree-l2"><a class="reference internal" href="join.and.leave.html">Join and Leave</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Carrier Peer</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Deployment Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gui.html">GUIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../protopeer.html">Protopeer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dias-logging-system.html">DIAS Logging System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
@@ -147,13 +146,13 @@
         
           <li><a href="../dias.in.detail.html">How DIAS Works</a> &raquo;</li>
         
-      <li>Changing of possible states</li>
+      <li>Carrier Peer</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../_sources/sections/dias.in.detail/change.possible.states.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/sections/dias.in.detail/Carrier.peer.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -166,8 +165,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="changing-of-possible-states">
-<h1>Changing of possible states<a class="headerlink" href="#changing-of-possible-states" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="carrier-peer">
+<h1>Carrier Peer<a class="headerlink" href="#carrier-peer" title="Permalink to this headline">¶</a></h1>
+<p>The carrier peer takes care of all disseminator of peers, which left the network.
+It simulates normal operation by calling the active state of the disseminator, just as the peer itself did.
+This way, the disseminator is still in contact with its neighbors, ensuring an up to date view of the network graph.</p>
+<p>Once a peer rejoins the network, the carrier peer gets notified and returns the disseminator to the correct peer, deleting it from its own collection in the process.</p>
 </div>
 
 
@@ -178,10 +181,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="join.and.leave.html" class="btn btn-neutral float-right" title="Join and Leave" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../architecture.html" class="btn btn-neutral float-right" title="Deployment Architecture" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="change.selected.states.html" class="btn btn-neutral float-left" title="Changing of selected states" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="join.and.leave.html" class="btn btn-neutral float-left" title="Join and Leave" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -219,9 +222,19 @@
     
 
   <style>
+    /*To underline text*/
+    .underline {
+      text-decoration: underline;
+    }
+
+
+      /*To underline bold text*/
+      .underlinebold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
     /* Sidebar header (and topbar for mobile) */
-
-
 
 
 
@@ -265,6 +278,10 @@
         color:/**#eee;*/var(--blue);
 
 
+     }
+
+     .wy-nav-content-wrap{
+       background: var(--grey);
      }
 
      .wy-menu-vertical li.toctree-l1.current>a {

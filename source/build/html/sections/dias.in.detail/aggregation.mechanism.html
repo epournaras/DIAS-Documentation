@@ -37,7 +37,7 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Changing of selected states" href="change.selected.states.html" />
+    <link rel="next" title="Changing of states" href="change.states.html" />
     <link rel="prev" title="Conceptual Architecture" href="conceptual.architecture.html" /> 
 </head>
 
@@ -116,13 +116,12 @@
 <li class="toctree-l3"><a class="reference internal" href="#case-20">Case 20</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="change.selected.states.html">Changing of selected states</a></li>
-<li class="toctree-l2"><a class="reference internal" href="change.possible.states.html">Changing of possible states</a></li>
+<li class="toctree-l2"><a class="reference internal" href="change.states.html">Changing of states</a></li>
 <li class="toctree-l2"><a class="reference internal" href="join.and.leave.html">Join and Leave</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Carrier.peer.html">Carrier Peer</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Deployment Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gui.html">GUIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../protopeer.html">Protopeer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dias-logging-system.html">DIAS Logging System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
@@ -3190,7 +3189,7 @@ Aggregator</td>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="change.selected.states.html" class="btn btn-neutral float-right" title="Changing of selected states" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="change.states.html" class="btn btn-neutral float-right" title="Changing of states" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="conceptual.architecture.html" class="btn btn-neutral float-left" title="Conceptual Architecture" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -3231,9 +3230,19 @@ Aggregator</td>
     
 
   <style>
+    /*To underline text*/
+    .underline {
+      text-decoration: underline;
+    }
+
+
+      /*To underline bold text*/
+      .underlinebold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
     /* Sidebar header (and topbar for mobile) */
-
-
 
 
 
@@ -3277,6 +3286,10 @@ Aggregator</td>
         color:/**#eee;*/var(--blue);
 
 
+     }
+
+     .wy-nav-content-wrap{
+       background: var(--grey);
      }
 
      .wy-menu-vertical li.toctree-l1.current>a {

@@ -1,2 +1,8 @@
 Changing of selected states
 ***************************
+
+The selected state is a selected element of the elements in the possible states.
+
+Upon receiving a new selected state through a SelectedStateMessage, the internal selected state gets changed.
+
+**Note:** The selected state only gets changed, if the newly received one is a valid element of the internally stored possible states.

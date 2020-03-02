@@ -1059,5 +1059,5 @@ Note that if the sql database is on a remote server, postgres needs to whitelist
 
 Everywhere, where there is the following annotation: <something>, the whole statement must be replaced by some dynamic value explained by the statements inside the brackets.
 
-Redash dashboards
-*****************
+.. Redash dashboards
+.. *****************

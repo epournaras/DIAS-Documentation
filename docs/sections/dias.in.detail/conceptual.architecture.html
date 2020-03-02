@@ -87,15 +87,24 @@
 <li class="toctree-l1"><a class="reference internal" href="../pre.requisites.html">Pre-requisites</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../dias.in.detail.html">How DIAS Works</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Conceptual Architecture</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Conceptual Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#peerlets">Peerlets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#aggregator">Aggregator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#disseminator">Disseminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bloom-filters">Bloom Filters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bootstrapgatewayclient">BootstrapGatewayClient</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#zeromqreqreplistener">ZeroMQReqRepListener</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="aggregation.mechanism.html">Aggregation Mechanism</a></li>
-<li class="toctree-l2"><a class="reference internal" href="change.selected.states.html">Changing of selected states</a></li>
-<li class="toctree-l2"><a class="reference internal" href="change.possible.states.html">Changing of possible states</a></li>
+<li class="toctree-l2"><a class="reference internal" href="change.states.html">Changing of states</a></li>
 <li class="toctree-l2"><a class="reference internal" href="join.and.leave.html">Join and Leave</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Carrier.peer.html">Carrier Peer</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Deployment Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gui.html">GUIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../protopeer.html">Protopeer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dias-logging-system.html">DIAS Logging System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
@@ -168,10 +177,148 @@
             
   <div class="section" id="conceptual-architecture">
 <h1>Conceptual Architecture<a class="headerlink" href="#conceptual-architecture" title="Permalink to this headline">¶</a></h1>
-<p>The exact process by which DIAS performs aggregations is described below.</p>
-<p>This process is not simple, for a number of reasons, but it is primarily due to the use of Bloom Filters. Because Bloom filters can generate false positives by their very design, the use of Bloom Filters in a DIAS network creates an uncertainty since it is no longer possible to keep track of communication history with 100% certainty. In order to decrease the probability of incorrect decisions, additional checks are made to reduce noise and therefore increase the precision of the aggregation.</p>
-<p>The second reason is due to information latency in large networks. Uncertainty exists because information does not spread instantaneously throughout the network, which again generates a source of noise in the aggregation.</p>
-<p>The exact process by which a peer uses all available information that it has collected in order to update it’s aggregate estimates is described below.</p>
+<div class="section" id="peerlets">
+<h2>Peerlets<a class="headerlink" href="#peerlets" title="Permalink to this headline">¶</a></h2>
+<p>DIAS is an intricate system with many parts, the most important are briefly explained in this section.</p>
+<p>DIAS builds on <a class="reference internal" href="../protopeer.html#protopeer"><span class="std std-ref">Protopeer</span></a>, which is modular and allows easy creation of submodules for a protopeer peer.
+The submodules are called peerlets, the most important peerlets are:</p>
+<ul class="simple">
+<li>Aggregator</li>
+<li>Disseminator</li>
+<li>BootstrapGatewayClient</li>
+<li>RealTimeDiasApp</li>
+</ul>
+<div class="section" id="aggregator">
+<h3>Aggregator<a class="headerlink" href="#aggregator" title="Permalink to this headline">¶</a></h3>
+<p>The aggregator is responsible for the aggregation of the data distributed in the DIAS network, it is present in all aggregating DIAS peers.
+There are multiple aggregates supported:</p>
+<ul class="simple">
+<li>average (=avg)</li>
+<li>sum</li>
+<li>maximum value (=max)</li>
+<li>minimum value (=min)</li>
+<li>the number uf currently aggregating (joined) peers (=count)</li>
+</ul>
+<p>The aggregated data takes the selected state of all joined peers into consideration.
+If a peer does not yet have a selected state, or it currently left the network, it will not affect the aggregates.</p>
+<p>The aggregation process is thoroughly described in the section “<a class="reference internal" href="aggregation.mechanism.html#aggregation-mechanism"><span class="std std-ref">Aggregation Mechanism</span></a>”</p>
+</div>
+<div class="section" id="disseminator">
+<h3>Disseminator<a class="headerlink" href="#disseminator" title="Permalink to this headline">¶</a></h3>
+<p>The disseminator is responsible for the communication between different peers, it is present in all DIAS peers in the network.</p>
+<p>To keep track of which peers were already notified about the own state, the Disseminator keeps track of those information in a counting bloom filter, allowing additions and removals, to keep the information up to date.
+Read more about <a href="https://en.wikipedia.org/wiki/Counting_Bloom_filter" target="_blank">Counting Bloom Filter</a>, <a class="reference internal" href="aggregation.mechanism.html#aggregation-mechanism"><span class="std std-ref">Aggregation Mechanism</span></a></p>
+</div>
+<div class="section" id="bloom-filters">
+<h3>Bloom Filters<a class="headerlink" href="#bloom-filters" title="Permalink to this headline">¶</a></h3>
+<p>There are 4 different bloom filters used in DIAS for storing different memberships.</p>
+<ul>
+<li><div class="first line-block">
+<div class="line">Aggregator j membership in disseminator i, called <strong>AMD</strong></div>
+<div class="line-block">
+<div class="line">Disseminator of peer i stores the identifier of the aggregator of peer j to which it has disseminated its own selected state at least once.</div>
+<div class="line">This means this membership is present in a disseminator, if the aggregator in question has received the own selected state.</div>
+</div>
+</div>
+</li>
+<li><div class="first line-block">
+<div class="line">Aggregator j membership in a Possible state s of peer i, called <strong>AMS</strong></div>
+<div class="line-block">
+<div class="line">Disseminator of peer i stores the identifier of the aggregator of peer j for each possible state s aggregated by Aggregator j.</div>
+<div class="line">This means this membership is present, if the selected state in question comes from the aggregator in question.</div>
+</div>
+</div>
+</li>
+<li><div class="first line-block">
+<div class="line">Disseminator i membership in Aggregator j, called <strong>DMA</strong></div>
+<div class="line-block">
+<div class="line">The aggregator of peer j stores the identifier of the Disseminator of peer i from which it has aggregated its selected state at least once.</div>
+<div class="line">This means this membership is present, if the aggregator received the selected state of the disseminator in question and used it in its own aggregation.</div>
+</div>
+</div>
+</li>
+<li><div class="first line-block">
+<div class="line">Selected state s membership in aggregate j, called <strong>SMA</strong></div>
+<div class="line-block">
+<div class="line">The aggregator of peer j stores the identifier of a selected state s aggregated from a disseminator of a peer.</div>
+<div class="line">This means this membership is present, if the aggregator used the selected state in question in its own aggregation.</div>
+</div>
+</div>
+</li>
+</ul>
+<p>AMD and AMS are present in the Disseminator, DMA and SMA are present in the Aggregator of a peer.</p>
+</div>
+<div class="section" id="bootstrapgatewayclient">
+<h3>BootstrapGatewayClient<a class="headerlink" href="#bootstrapgatewayclient" title="Permalink to this headline">¶</a></h3>
+<p>In the DIAS network, there is one peer with a the bootstrap peerlet.</p>
+<p>This peerlet is responsible for interconnecting the first peers in the system.
+It gets triggered once there are 10 peers in the system.
+When triggered, it gives the 10 peers a view of some of the other peers in the network, such that they can start communicating in the network.</p>
+<p>Read more about the <a class="reference internal" href="../architecture/bootstrap.process.html#bootstrap-process"><span class="std std-ref">Bootstrap Process</span></a></p>
+</div>
+<div class="section" id="zeromqreqreplistener">
+<h3>ZeroMQReqRepListener<a class="headerlink" href="#zeromqreqreplistener" title="Permalink to this headline">¶</a></h3>
+<p>This peerlet is in all aggregating peers, it keeps the connection between the peer and the connected device, it demultiplexes all incoming messages and notifies the correspndong correct peerlets.</p>
+<dl class="docutils">
+<dt><strong>Note:</strong></dt>
+<dd><div class="first last line-block">
+<div class="line">The messages are only checked, if the sender is the initially paired sender.</div>
+<div class="line">The first time the peerlet receives a message from a device, the pairing is saved.</div>
+</div>
+</dd>
+</dl>
+<p>The following messages can be interpreted by this peerlet:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Message</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>LeaveMessage</td>
+<td>Tells the peer to leave the network</td>
+</tr>
+<tr class="row-odd"><td>PingMessage</td>
+<td>Asks the peer to send a PongMessage</td>
+</tr>
+<tr class="row-even"><td>HearbeatMessage</td>
+<td>Sends a hearbeat, this message itself does not trigger anything, but it ensures that the peer does not time out.</td>
+</tr>
+<tr class="row-odd"><td>SensorCommandMessage</td>
+<td>This message is at the moment only used to set the timeout threshold of the peer to a desired value.</td>
+</tr>
+<tr class="row-even"><td>AggregateRequestMessage</td>
+<td><p class="first">This message requests the current aggregate from the peer, the peer answers with the requested value, or with a nok message, if the aggregate is not available.
+The following aggregates are available (see <a class="reference internal" href="#aggregator"><span class="std std-ref">Aggregator</span></a>):</p>
+<ul class="last simple">
+<li>avg</li>
+<li>sum</li>
+<li>max</li>
+<li>min</li>
+<li>count</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>StartAggregationMessage</td>
+<td>This message triggers the initial start for aggregation, before this message is received, the peer is offline and is not aggregating.</td>
+</tr>
+<tr class="row-even"><td>StopAggregationMessage</td>
+<td>This message stops the aggregation and leaves the network</td>
+</tr>
+<tr class="row-odd"><td>PossibleStatesMessage</td>
+<td>This message sets the possible states to the given values, see <a class="reference internal" href="change.states.html#changing-of-possible-states"><span class="std std-ref">Changing of possible states</span></a></td>
+</tr>
+<tr class="row-even"><td>SelectedStateMessage</td>
+<td>This message sets the selected state to the given values under some constraints, see <a class="reference internal" href="change.states.html#changing-of-selected-states"><span class="std std-ref">Changing of selected states</span></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 
 
@@ -223,9 +370,19 @@
     
 
   <style>
+    /*To underline text*/
+    .underline {
+      text-decoration: underline;
+    }
+
+
+      /*To underline bold text*/
+      .underlinebold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
     /* Sidebar header (and topbar for mobile) */
-
-
 
 
 
@@ -269,6 +426,10 @@
         color:/**#eee;*/var(--blue);
 
 
+     }
+
+     .wy-nav-content-wrap{
+       background: var(--grey);
      }
 
      .wy-menu-vertical li.toctree-l1.current>a {
