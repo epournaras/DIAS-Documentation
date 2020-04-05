@@ -91,7 +91,6 @@
 <li class="toctree-l2"><a class="reference internal" href="gateway.html">DIAS Gateway</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Bootstrap Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mock.devices.html">Mock devices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="multi.machine.setup.html">Multi-machine Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dias.logging.html">DIAS Logging</a></li>
 </ul>
 </li>
@@ -167,6 +166,16 @@
             
   <div class="section" id="bootstrap-process">
 <span id="label-bootstrap-process"></span><h1>Bootstrap Process<a class="headerlink" href="#bootstrap-process" title="Permalink to this headline">¶</a></h1>
+<p>The bootstrap process initialises the connection between the initial peers in the network.
+In DIAS, the bootstrap process starts as soon as 10 peers are online in the network.</p>
+<p>During the process, the bootstrap peer sends an initial set of neighbors to all peers.
+The elements in those set can be arbitrary, but the network must not be separated.
+in DIAS, the network graph admits a star shape with two peers in the center.</p>
+<p>Once the initial setup is done, the bootstrap node gives each additionally joining peer a subset of the view of the
+already created network.</p>
+<p>The initial view of the peers will however not remain the only neigbors, as the peers interchange their view with their neighbors.</p>
+<p>The bootstrap process is needed, as initially joining peers have no idea of the network and need a starting view,
+it ensures that the network initially is not separated.</p>
 </div>
 
 
