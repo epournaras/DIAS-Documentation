@@ -168,20 +168,20 @@
 </tr>
 </thead>
 <tbody valign="top">
+<tr class="row-even"><td>Active state</td>
+<td>Every DIAS node has an active state, it is basically an acttive thread running on a timer, repeatedly doing specific tasks.</td>
+</tr>
+<tr class="row-odd"><td>Aggregator</td>
+<td>A peerlet in a peer, the aggregator is responsible for making its local aggregations on the values of the whole network.</td>
+</tr>
+<tr class="row-even"><td>Applet</td>
+<td>Little programs, which execute a specific tast.</td>
+</tr>
+<tr class="row-odd"><td>Bloom Filter</td>
+<td>A bloom filter is a way to store much information in little room, with the tradeoff for false positives. <a href="https://de.wikipedia.org/wiki/Bloomfilter" target="_blank">Read more</a></td>
+</tr>
 <tr class="row-even"><td>DIAS</td>
 <td>The name of the hereby described project, see <a class="reference internal" href="../index.html#dias-dynamic-intelligent-aggregation-service"><span class="std std-ref">DIAS - Dynamic Intelligent Aggregation Service</span></a></td>
-</tr>
-<tr class="row-odd"><td>DIAS node</td>
-<td>One aggregating node inside the DIAS network</td>
-</tr>
-<tr class="row-even"><td>GDELT</td>
-<td>GDELT is the largest publicly available collection of near real-time news feed in the World, see <a class="reference internal" href="applications/gdelt.html#gdelt"><span class="std std-ref">GDELT</span></a></td>
-</tr>
-<tr class="row-odd"><td>Mock Device</td>
-<td>A program simulating the input of real-world users for different experiments, see <a class="reference internal" href="architecture/mock.devices.html#mock-devices"><span class="std std-ref">Mock devices</span></a></td>
-</tr>
-<tr class="row-even"><td>Protopeer Framework</td>
-<td>A platform written in Java for carrying out small to medium scale peer-to-peer experiments, see <a class="reference internal" href="protopeer.html#protopeer"><span class="std std-ref">Protopeer</span></a></td>
 </tr>
 <tr class="row-odd"><td>DIAS Bootstrap server</td>
 <td>The server, which initially interconnects the first peers in the DIAS network, see <a class="reference internal" href="architecture/bootstrap.process.html#bootstrap-process"><span class="std std-ref">Bootstrap Process</span></a></td>
@@ -195,23 +195,65 @@
 <tr class="row-even"><td>DIAS Network Id</td>
 <td>The Network Id (oe sensor ID) is used to distinguish between different peers to be able to address a specific peer, see more here: <a class="reference internal" href="applications/DIASClientLibrary.html#the-usage-of-sensorids"><span class="std std-ref">The usage of sensorIDs</span></a>,</td>
 </tr>
-<tr class="row-odd"><td>Possible states</td>
-<td>The user needs to send a node different options, from which he later chooses a single one as a selected state. see <a class="reference internal" href="dias.in.detail/change.states.html#changing-of-possible-states"><span class="std std-ref">Changing of possible states</span></a></td>
+<tr class="row-odd"><td>DIAS Node</td>
+<td>One aggregating node inside the DIAS network</td>
 </tr>
-<tr class="row-even"><td>Selected state</td>
-<td>The selected state is a selected element out of the possible states, it is considered as the current active value sent from a device. see <a class="reference internal" href="dias.in.detail/change.states.html#changing-of-selected-states"><span class="std std-ref">Changing of selected states</span></a></td>
+<tr class="row-even"><td>DIAS Peer</td>
+<td>One participant in the DIAS network</td>
+</tr>
+<tr class="row-odd"><td>Disseminator</td>
+<td>A peerlet in a peer, it is responsible mor the communication between the different peers, as well as keeping track what information was disseminated to what peer and which information is still valid.</td>
+</tr>
+<tr class="row-even"><td>EventLog</td>
+<td>This logger logs the data more ordered, giving the option to track which object and method invoked the logging, as well as being able to provide a specific key to filter out specific logs.</td>
+</tr>
+<tr class="row-odd"><td>GDELT</td>
+<td>GDELT is the largest publicly available collection of near real-time news feed in the World, see <a class="reference internal" href="applications/gdelt.html#gdelt"><span class="std std-ref">GDELT</span></a></td>
+</tr>
+<tr class="row-even"><td>JVM</td>
+<td>The Java Virtual Machine is a vm, in which the java program is running, it encapsulates the program and contains all data to run it.</td>
+</tr>
+<tr class="row-odd"><td>MemLog</td>
+<td>This log is automated and tracks the memory usage of the given objects.</td>
+</tr>
+<tr class="row-even"><td>Memory Leak</td>
+<td>Incorrectly managed memory leads to allocated memory, which after not needing it anymore does not get freed again and remains in the program for the rest of its lifecycle. This results in trash laying in memory, filling up the memory usage.</td>
+</tr>
+<tr class="row-odd"><td>Mock Device</td>
+<td>A program simulating the input of real-world users for different experiments, see <a class="reference internal" href="architecture/mock.devices.html#mock-devices"><span class="std std-ref">Mock devices</span></a></td>
+</tr>
+<tr class="row-even"><td>Passive state</td>
+<td>Every DIAS node has a passive state, it gets triggered upon receiving a message, handling it corresponding to the defined actions.</td>
 </tr>
 <tr class="row-odd"><td>Peer Sampling Service</td>
 <td>TODO</td>
 </tr>
-<tr class="row-even"><td>Active state</td>
-<td>Every DIAS node has an active state, it is basically an acttive thread running on a timer, repeatedly doing specific tasks.</td>
+<tr class="row-even"><td>Peerlet</td>
+<td>A submodule in a Protopeer peer</td>
 </tr>
-<tr class="row-odd"><td>Passive state</td>
-<td>Every DIAS node has a passive state, it gets triggered upon receiving a message, handling it corresponding to the defined actions.</td>
+<tr class="row-odd"><td>Possible states</td>
+<td>The user needs to send a node different options, from which he later chooses a single one as a selected state. see <a class="reference internal" href="dias.in.detail/change.states.html#changing-of-possible-states"><span class="std std-ref">Changing of possible states</span></a></td>
 </tr>
-<tr class="row-even"><td>UNIX Screen</td>
+<tr class="row-even"><td>Postgres</td>
+<td>A popular implementation of the SQL database</td>
+</tr>
+<tr class="row-odd"><td>Protopeer Framework</td>
+<td>A platform written in Java for carrying out small to medium scale peer-to-peer experiments, see <a class="reference internal" href="protopeer.html#protopeer"><span class="std std-ref">Protopeer</span></a></td>
+</tr>
+<tr class="row-even"><td>Servlet</td>
+<td>Java classes, which run on a server, serving user requests.</td>
+</tr>
+<tr class="row-odd"><td>RawLog</td>
+<td>A single String message is logged.</td>
+</tr>
+<tr class="row-even"><td>Selected state</td>
+<td>The selected state is a selected element out of the possible states, it is considered as the current active value sent from a device. see <a class="reference internal" href="dias.in.detail/change.states.html#changing-of-selected-states"><span class="std std-ref">Changing of selected states</span></a></td>
+</tr>
+<tr class="row-odd"><td>UNIX Screen</td>
 <td>A UNIX command line tool, read <a href="https://kb.iu.edu/d/acuy" target="_blank">more</a></td>
+</tr>
+<tr class="row-even"><td>ZeroMQ</td>
+<td>ZeroMQ is a low level, high efficiency communication library, based on TCP. It is available for many platforms.</td>
 </tr>
 </tbody>
 </table>

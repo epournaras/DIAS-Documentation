@@ -21,7 +21,6 @@ You can obtain the latest version of DIAS from GitHub. Be careful to swtich to t
 
     git clone https://github.com/epournaras/DIAS-Development.git
 
-    git checkout pilot.2019.a 
 
 **DIAS Gateway**
 
@@ -45,7 +44,3 @@ The DIAS Logging System can be found at https://github.com/epournaras/DIAS-Loggi
     cd {my_dias_workspace}
 
     git clone https://github.com/epournaras/DIAS-Logging-System.git
-
-    
-
-
