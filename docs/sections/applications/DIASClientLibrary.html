@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -210,7 +210,7 @@ It also contains a description of all core classes, if someone would like to add
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>To use this library, one must simply add it to its own android application in a new Package, that’s all!</p>
 <p><strong>Note:</strong> Don’t forget to add the permission to use internet access in the android manifest.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="n">android</span><span class="o">:</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;android.permission.INTERNET&quot;</span> <span class="o">/&gt;</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="n">android</span><span class="p">:</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;android.permission.INTERNET&quot;</span> <span class="o">/&gt;</span>
 </pre></div>
 </div>
 </div>
@@ -220,7 +220,7 @@ It also contains a description of all core classes, if someone would like to add
 <div class="section" id="initialisation">
 <h3>Initialisation<a class="headerlink" href="#initialisation" title="Permalink to this headline">¶</a></h3>
 <p>The usage is rather easy, one just has to initialise an instance of the class.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">DIASClient</span> <span class="n">server</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DIASClient</span><span class="o">();</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">DIASClient</span> <span class="n">server</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DIASClient</span><span class="p">();</span>
 </pre></div>
 </div>
 <p>Once this is done, the communication with the server can begin.</p>
@@ -245,23 +245,23 @@ Alice also has two peers, 19 and 20. The two peers with ID 20 are not the same, 
 <h4>Sending possible states<a class="headerlink" href="#sending-possible-states" title="Permalink to this headline">¶</a></h4>
 <p>To create suiting possible states, there are already 3 methods to create them automatically. Additionally, one can pass a custom array of possible states.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//create possible states with step size 1 from 0 up to n (included)</span>
-<span class="n">server</span><span class="o">.</span><span class="na">setPossibleStatesRange</span><span class="o">(</span><span class="n">String</span> <span class="n">sensorID</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">);</span>
+<span class="n">server</span><span class="p">.</span><span class="na">setPossibleStatesRange</span><span class="p">(</span><span class="n">String</span> <span class="n">sensorID</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">);</span>
 
 <span class="c1">//create possible states with step size 1 from lower up to upper (both included)</span>
-<span class="n">server</span><span class="o">.</span><span class="na">setPossibleStatesRange</span><span class="o">(</span><span class="n">String</span> <span class="n">sensorID</span><span class="o">,</span> <span class="kt">int</span> <span class="n">lower</span><span class="o">,</span> <span class="kt">int</span> <span class="n">upper</span><span class="o">);</span>
+<span class="n">server</span><span class="p">.</span><span class="na">setPossibleStatesRange</span><span class="p">(</span><span class="n">String</span> <span class="n">sensorID</span><span class="p">,</span> <span class="kt">int</span> <span class="n">lower</span><span class="p">,</span> <span class="kt">int</span> <span class="n">upper</span><span class="p">);</span>
 
 <span class="c1">//create possible states with given step size from lower up to upper (both included)</span>
-<span class="n">server</span><span class="o">.</span><span class="na">setPossibleStatesRange</span><span class="o">(</span><span class="n">String</span> <span class="n">sensorID</span><span class="o">,</span> <span class="kt">double</span> <span class="n">lower</span><span class="o">,</span> <span class="kt">double</span> <span class="n">upper</span><span class="o">,</span> <span class="kt">double</span> <span class="n">steps</span><span class="o">);</span>
+<span class="n">server</span><span class="p">.</span><span class="na">setPossibleStatesRange</span><span class="p">(</span><span class="n">String</span> <span class="n">sensorID</span><span class="p">,</span> <span class="kt">double</span> <span class="n">lower</span><span class="p">,</span> <span class="kt">double</span> <span class="n">upper</span><span class="p">,</span> <span class="kt">double</span> <span class="n">steps</span><span class="p">);</span>
 
 <span class="c1">//insert custom possible states</span>
-<span class="n">server</span><span class="o">.</span><span class="na">setPossibleStates</span><span class="o">(</span><span class="n">String</span> <span class="n">sensorID</span><span class="o">,</span> <span class="kt">double</span><span class="o">[]</span> <span class="n">states</span><span class="o">);</span>
+<span class="n">server</span><span class="p">.</span><span class="na">setPossibleStates</span><span class="p">(</span><span class="n">String</span> <span class="n">sensorID</span><span class="p">,</span> <span class="kt">double</span><span class="o">[]</span> <span class="n">states</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="sending-evaluated-values">
 <h4>Sending evaluated values<a class="headerlink" href="#sending-evaluated-values" title="Permalink to this headline">¶</a></h4>
 <p>To send a value, the server must have already received some possible states (see <a class="reference internal" href="#sending-data-to-the-server"><span class="std std-ref">Sending data to the server</span></a>). To set a value, one has to call the following method:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">server</span><span class="o">.</span><span class="na">sendReading</span><span class="o">(</span><span class="n">String</span> <span class="n">sensorID</span><span class="o">,</span> <span class="kt">double</span><span class="o">...</span> <span class="n">readings</span><span class="o">);</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">server</span><span class="p">.</span><span class="na">sendReading</span><span class="p">(</span><span class="n">String</span> <span class="n">sensorID</span><span class="p">,</span> <span class="kt">double</span><span class="p">...</span> <span class="n">readings</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>If multiple values are given, the library calculates the average and matches it to the nearest possible state.</p>
@@ -273,16 +273,16 @@ Alice also has two peers, 19 and 20. The two peers with ID 20 are not the same, 
 <p>In order to receive any aggregates from the server, the addressed peer needs to start it’s aggregation protocol.
 This is done after successfully sending possible and selected states. The following aggregates can be retrieved:</p>
 <ul class="simple">
-<li>average (avg)</li>
-<li>summation (sum)</li>
-<li>standard deviation (stdev)</li>
-<li>maximum value (max)</li>
-<li>minimum value (min)</li>
-<li>count of all peers (count)</li>
+<li><p>average (avg)</p></li>
+<li><p>summation (sum)</p></li>
+<li><p>standard deviation (stdev)</p></li>
+<li><p>maximum value (max)</p></li>
+<li><p>minimum value (min)</p></li>
+<li><p>count of all peers (count)</p></li>
 </ul>
 <p>To request a specific aggregate, one must call the following method:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// The aggregation type is an enum</span>
-<span class="n">server</span><span class="o">.</span><span class="na">getAggregate</span><span class="o">(</span><span class="n">String</span> <span class="n">sensorID</span><span class="o">,</span> <span class="n">AggregationType</span> <span class="n">aggregationType</span><span class="o">);</span>
+<span class="n">server</span><span class="p">.</span><span class="na">getAggregate</span><span class="p">(</span><span class="n">String</span> <span class="n">sensorID</span><span class="p">,</span> <span class="n">AggregationType</span> <span class="n">aggregationType</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>The returned value is an instance of the AggregateResult class, which is explained shortly.</p>
@@ -296,9 +296,9 @@ It will return a value, once it’s received from the server, or return null, if
 <div class="section" id="getting-a-result">
 <h4>Getting a result<a class="headerlink" href="#getting-a-result" title="Permalink to this headline">¶</a></h4>
 <p>There are 3 ways to aces a value:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">aggregateResult</span><span class="o">.</span><span class="na">get</span><span class="o">();</span> <span class="c1">//1</span>
-<span class="n">aggregateResult</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="kt">long</span> <span class="n">waitingPeriod</span><span class="o">);</span> <span class="c1">//2</span>
-<span class="n">aggregateResult</span><span class="o">.</span><span class="na">getImmediately</span><span class="o">();</span> <span class="c1">//3</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">aggregateResult</span><span class="p">.</span><span class="na">get</span><span class="p">();</span> <span class="c1">//1</span>
+<span class="n">aggregateResult</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="kt">long</span> <span class="n">waitingPeriod</span><span class="p">);</span> <span class="c1">//2</span>
+<span class="n">aggregateResult</span><span class="p">.</span><span class="na">getImmediately</span><span class="p">();</span> <span class="c1">//3</span>
 </pre></div>
 </div>
 <p>The first one is to not specify any waiting period.
@@ -654,80 +654,80 @@ If the queue reaches the specified limit, the oldest message gets dropped. The l
 <p>The MessageCreator converts the given data to a message, which is understood by the server.
 At the moment, it is possible to create the following messages:</p>
 <ul class="simple">
-<li>one dimensional possible states message</li>
-<li>one dimensional selected states message</li>
-<li>leave message</li>
-<li>aggregate request message</li>
-<li>address request message</li>
-<li>timeout message</li>
-<li>start aggregation message</li>
-<li>heartbeat message</li>
+<li><p>one dimensional possible states message</p></li>
+<li><p>one dimensional selected states message</p></li>
+<li><p>leave message</p></li>
+<li><p>aggregate request message</p></li>
+<li><p>address request message</p></li>
+<li><p>timeout message</p></li>
+<li><p>start aggregation message</p></li>
+<li><p>heartbeat message</p></li>
 </ul>
 </div>
 <div class="section" id="networkconstants">
 <h3>NetworkConstants<a class="headerlink" href="#networkconstants" title="Permalink to this headline">¶</a></h3>
 <p>This class contains all constants for easy access. The following values can be read and changed:</p>
 <ul class="simple">
-<li>buffer size of socket</li>
-<li>the prefix for the sensors (naming convention of server)</li>
-<li>the internal ID for the gateway</li>
-<li>the used protocol, currently TCP</li>
-<li>the UUID port</li>
-<li>the connection timeout for replies</li>
-<li>the timeout for the library to change the internal flag back to offline</li>
-<li>the timeout for the server</li>
+<li><p>buffer size of socket</p></li>
+<li><p>the prefix for the sensors (naming convention of server)</p></li>
+<li><p>the internal ID for the gateway</p></li>
+<li><p>the used protocol, currently TCP</p></li>
+<li><p>the UUID port</p></li>
+<li><p>the connection timeout for replies</p></li>
+<li><p>the timeout for the library to change the internal flag back to offline</p></li>
+<li><p>the timeout for the server</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="glossary">
 <h2>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h2>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="19%" />
-<col width="81%" />
+<col style="width: 19%" />
+<col style="width: 81%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Expression</th>
-<th class="head">Brief explanation</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Expression</p></th>
+<th class="head"><p>Brief explanation</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>Aggregate</td>
-<td><div class="first last line-block">
+<tbody>
+<tr class="row-even"><td><p>Aggregate</p></td>
+<td><div class="line-block">
 <div class="line">An aggregate is an aggregated value from the server.</div>
 </div>
 </td>
 </tr>
-<tr class="row-odd"><td>Aggregation</td>
-<td><div class="first last line-block">
+<tr class="row-odd"><td><p>Aggregation</p></td>
+<td><div class="line-block">
 <div class="line">Aggregation is the process of calculating the server-wide values like average,</div>
 <div class="line">sum, min, max etc.</div>
 </div>
 </td>
 </tr>
-<tr class="row-even"><td>Deadlock</td>
-<td><div class="first last line-block">
+<tr class="row-even"><td><p>Deadlock</p></td>
+<td><div class="line-block">
 <div class="line">A deadlock occurs, if one or multiple peer wait (possibly fo eatch other),</div>
 <div class="line">without ever making progress again.</div>
 </div>
 </td>
 </tr>
-<tr class="row-odd"><td>DIAS</td>
-<td><div class="first last line-block">
+<tr class="row-odd"><td><p>DIAS</p></td>
+<td><div class="line-block">
 <div class="line">DIAS stands for Dynamic Intelligent Aggregation Service, explained in</div>
 <div class="line"><a class="reference internal" href="../../index.html#dias-dynamic-intelligent-aggregation-service"><span class="std std-ref">DIAS - Dynamic Intelligent Aggregation Service</span></a>.</div>
 </div>
 </td>
 </tr>
-<tr class="row-even"><td>Future class (Java)</td>
-<td><div class="first last line-block">
+<tr class="row-even"><td><p>Future class (Java)</p></td>
+<td><div class="line-block">
 <div class="line">Future is a class used in multithreading to store return values. Its get()</div>
 <div class="line">method waits until the thread provides the value.</div>
 </div>
 </td>
 </tr>
-<tr class="row-odd"><td>Gateway</td>
-<td><div class="first last line-block">
+<tr class="row-odd"><td><p>Gateway</p></td>
+<td><div class="line-block">
 <div class="line">The gateway is a part of the DIAS server, which resolves connections from</div>
 <div class="line">the libraries to peers. If a the library connects to the gateway, it asks</div>
 <div class="line">for a new peer for a given peerID. The gateway then gives a already established</div>
@@ -735,8 +735,8 @@ At the moment, it is possible to create the following messages:</p>
 </div>
 </td>
 </tr>
-<tr class="row-even"><td>Heartbeat</td>
-<td><div class="first last line-block">
+<tr class="row-even"><td><p>Heartbeat</p></td>
+<td><div class="line-block">
 <div class="line">A heartbeat (most commonly in form of a hearbeat message) is a way of maintaining</div>
 <div class="line">a connection between two services over the  internet. As long there are some</div>
 <div class="line">messages going through from time to time, the connection is not torn down.</div>
@@ -745,8 +745,8 @@ At the moment, it is possible to create the following messages:</p>
 </div>
 </td>
 </tr>
-<tr class="row-odd"><td>Json</td>
-<td><div class="first last line-block">
+<tr class="row-odd"><td><p>Json</p></td>
+<td><div class="line-block">
 <div class="line">A Json is a encoding format for information to be sent over the internet,</div>
 <div class="line">as it is usually represented as a string. Since messages sent over the internet</div>
 <div class="line">should be in a byte array format, which can easily be made out of a string,</div>
@@ -755,34 +755,34 @@ At the moment, it is possible to create the following messages:</p>
 </div>
 </td>
 </tr>
-<tr class="row-even"><td>Manifest</td>
-<td><div class="first last line-block">
+<tr class="row-even"><td><p>Manifest</p></td>
+<td><div class="line-block">
 <div class="line">The manifest is a configuration file for an Android application. <a href="https://developer.android.com/studio" target="_blank">Find out more.</a></div>
 </div>
 </td>
 </tr>
-<tr class="row-odd"><td>Peer</td>
-<td><div class="first last line-block">
+<tr class="row-odd"><td><p>Peer</p></td>
+<td><div class="line-block">
 <div class="line">Peers are the individual server modules, whith which the library communicates.</div>
 <div class="line">Each peer can hold inividual values and aggregate on all values of the system.</div>
 </div>
 </td>
 </tr>
-<tr class="row-even"><td>Reading</td>
-<td><div class="first last line-block">
+<tr class="row-even"><td><p>Reading</p></td>
+<td><div class="line-block">
 <div class="line">A reading is a value given from the user to be sent to the server.</div>
 </div>
 </td>
 </tr>
-<tr class="row-odd"><td>sensorID</td>
-<td><div class="first last line-block">
+<tr class="row-odd"><td><p>sensorID</p></td>
+<td><div class="line-block">
 <div class="line">sensorIDs are used to distiguish, which peer should be addressed on the server.</div>
 <div class="line">See: <a class="reference internal" href="#the-usage-of-sensorids"><span class="std std-ref">The usage of sensorIDs</span></a></div>
 </div>
 </td>
 </tr>
-<tr class="row-even"><td>States</td>
-<td><div class="first last line-block">
+<tr class="row-even"><td><p>States</p></td>
+<td><div class="line-block">
 <div class="line">There are two types of states: possible states and selected states. Possible</div>
 <div class="line">states denote values, which the library could possibly send to the peer.</div>
 <div class="line">Selected state is the actual selected value. The selected state must be a</div>
@@ -790,28 +790,28 @@ At the moment, it is possible to create the following messages:</p>
 </div>
 </td>
 </tr>
-<tr class="row-odd"><td>Socket</td>
-<td><div class="first last line-block">
+<tr class="row-odd"><td><p>Socket</p></td>
+<td><div class="line-block">
 <div class="line">A socket is a network interface to communicate to the internet, there are</div>
 <div class="line">two types of sockets: TCP and UDP. <a href="https://en.wikipedia.org/wiki/Network_socket" target="_blank">Read more.</a></div>
 </div>
 </td>
 </tr>
-<tr class="row-even"><td>TCP</td>
-<td><div class="first last line-block">
+<tr class="row-even"><td><p>TCP</p></td>
+<td><div class="line-block">
 <div class="line">A message protocol used in the internet. <a href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol" target="_blank">Read more.</a></div>
 </div>
 </td>
 </tr>
-<tr class="row-odd"><td>UUID</td>
-<td><div class="first last line-block">
+<tr class="row-odd"><td><p>UUID</p></td>
+<td><div class="line-block">
 <div class="line">A UUID, or unique user id, is an id, which is different for all users.</div>
 <div class="line">As the name suggests, every UUID is unique.</div>
 </div>
 </td>
 </tr>
-<tr class="row-even"><td>ZMQ</td>
-<td><div class="first last line-block">
+<tr class="row-even"><td><p>ZMQ</p></td>
+<td><div class="line-block">
 <div class="line">ZMQ is a library, which takes care of all socket and message handling,</div>
 <div class="line">making it simple to communicate over the internet. <a href="https://zeromq.org" target="_blank">Read more.</a></div>
 </div>

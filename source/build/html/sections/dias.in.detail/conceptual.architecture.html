@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -182,20 +182,20 @@
 <p>DIAS builds on <a class="reference internal" href="../protopeer.html#protopeer"><span class="std std-ref">Protopeer</span></a>, which is modular and allows easy creation of submodules for a protopeer peer.
 The submodules are called peerlets, the most important peerlets are:</p>
 <ul class="simple">
-<li>Aggregator</li>
-<li>Disseminator</li>
-<li>RealTimeDiasApp</li>
+<li><p>Aggregator</p></li>
+<li><p>Disseminator</p></li>
+<li><p>RealTimeDiasApp</p></li>
 </ul>
 <div class="section" id="aggregator">
 <h3>Aggregator<a class="headerlink" href="#aggregator" title="Permalink to this headline">¶</a></h3>
 <p>The aggregator is responsible for the aggregation of the data distributed in the DIAS network, it is present in all aggregating DIAS peers.
 There are multiple aggregates supported:</p>
 <ul class="simple">
-<li>average (=avg)</li>
-<li>sum</li>
-<li>maximum value (=max)</li>
-<li>minimum value (=min)</li>
-<li>the number uf currently aggregating (joined) peers (=count)</li>
+<li><p>average (=avg)</p></li>
+<li><p>sum</p></li>
+<li><p>maximum value (=max)</p></li>
+<li><p>minimum value (=min)</p></li>
+<li><p>the number uf currently aggregating (joined) peers (=count)</p></li>
 </ul>
 <p>The aggregated data takes the selected state of all joined peers into consideration.
 If a peer does not yet have a selected state, or it currently left the network, it will not affect the aggregates.</p>
@@ -211,7 +211,7 @@ Read more about <a href="https://en.wikipedia.org/wiki/Counting_Bloom_filter" ta
 <h3>Bloom Filters<a class="headerlink" href="#bloom-filters" title="Permalink to this headline">¶</a></h3>
 <p>There are 4 different bloom filters used in DIAS for storing different memberships.</p>
 <ul>
-<li><div class="first line-block">
+<li><div class="line-block">
 <div class="line">Aggregator j membership in disseminator i, called <strong>AMD</strong></div>
 <div class="line-block">
 <div class="line">Disseminator of peer i stores the identifier of the aggregator of peer j to which it has disseminated its own selected state at least once.</div>
@@ -219,7 +219,7 @@ Read more about <a href="https://en.wikipedia.org/wiki/Counting_Bloom_filter" ta
 </div>
 </div>
 </li>
-<li><div class="first line-block">
+<li><div class="line-block">
 <div class="line">Aggregator j membership in a Possible state s of peer i, called <strong>AMS</strong></div>
 <div class="line-block">
 <div class="line">Disseminator of peer i stores the identifier of the aggregator of peer j for each possible state s aggregated by Aggregator j.</div>
@@ -227,7 +227,7 @@ Read more about <a href="https://en.wikipedia.org/wiki/Counting_Bloom_filter" ta
 </div>
 </div>
 </li>
-<li><div class="first line-block">
+<li><div class="line-block">
 <div class="line">Disseminator i membership in Aggregator j, called <strong>DMA</strong></div>
 <div class="line-block">
 <div class="line">The aggregator of peer j stores the identifier of the Disseminator of peer i from which it has aggregated its selected state at least once.</div>
@@ -235,7 +235,7 @@ Read more about <a href="https://en.wikipedia.org/wiki/Counting_Bloom_filter" ta
 </div>
 </div>
 </li>
-<li><div class="first line-block">
+<li><div class="line-block">
 <div class="line">Selected state s membership in aggregate j, called <strong>SMA</strong></div>
 <div class="line-block">
 <div class="line">The aggregator of peer j stores the identifier of a selected state s aggregated from a disseminator of a peer.</div>
@@ -249,61 +249,60 @@ Read more about <a href="https://en.wikipedia.org/wiki/Counting_Bloom_filter" ta
 <div class="section" id="zeromqreqreplistener">
 <h3>ZeroMQReqRepListener<a class="headerlink" href="#zeromqreqreplistener" title="Permalink to this headline">¶</a></h3>
 <p>This peerlet is in all aggregating peers, it keeps the connection between the peer and the connected device, it demultiplexes all incoming messages and notifies the correspndong correct peerlets.</p>
-<dl class="docutils">
-<dt><strong>Note:</strong></dt>
-<dd><div class="first last line-block">
+<dl>
+<dt><strong>Note:</strong></dt><dd><div class="line-block">
 <div class="line">The messages are only checked, if the sender is the initially paired sender.</div>
 <div class="line">The first time the peerlet receives a message from a device, the pairing is saved.</div>
 </div>
 </dd>
 </dl>
 <p>The following messages can be interpreted by this peerlet:</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="50%" />
-<col width="50%" />
+<col style="width: 50%" />
+<col style="width: 50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Message</th>
-<th class="head">Action</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Message</p></th>
+<th class="head"><p>Action</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>LeaveMessage</td>
-<td>Tells the peer to leave the network</td>
+<tbody>
+<tr class="row-even"><td><p>LeaveMessage</p></td>
+<td><p>Tells the peer to leave the network</p></td>
 </tr>
-<tr class="row-odd"><td>PingMessage</td>
-<td>Asks the peer to send a PongMessage</td>
+<tr class="row-odd"><td><p>PingMessage</p></td>
+<td><p>Asks the peer to send a PongMessage</p></td>
 </tr>
-<tr class="row-even"><td>HearbeatMessage</td>
-<td>Sends a hearbeat, this message itself does not trigger anything, but it ensures that the peer does not time out.</td>
+<tr class="row-even"><td><p>HearbeatMessage</p></td>
+<td><p>Sends a hearbeat, this message itself does not trigger anything, but it ensures that the peer does not time out.</p></td>
 </tr>
-<tr class="row-odd"><td>SensorCommandMessage</td>
-<td>This message is at the moment only used to set the timeout threshold of the peer to a desired value.</td>
+<tr class="row-odd"><td><p>SensorCommandMessage</p></td>
+<td><p>This message is at the moment only used to set the timeout threshold of the peer to a desired value.</p></td>
 </tr>
-<tr class="row-even"><td>AggregateRequestMessage</td>
-<td><p class="first">This message requests the current aggregate from the peer, the peer answers with the requested value, or with a nok message, if the aggregate is not available.
+<tr class="row-even"><td><p>AggregateRequestMessage</p></td>
+<td><p>This message requests the current aggregate from the peer, the peer answers with the requested value, or with a nok message, if the aggregate is not available.
 The following aggregates are available (see <a class="reference internal" href="#aggregator"><span class="std std-ref">Aggregator</span></a>):</p>
-<ul class="last simple">
-<li>avg</li>
-<li>sum</li>
-<li>max</li>
-<li>min</li>
-<li>count</li>
+<ul class="simple">
+<li><p>avg</p></li>
+<li><p>sum</p></li>
+<li><p>max</p></li>
+<li><p>min</p></li>
+<li><p>count</p></li>
 </ul>
 </td>
 </tr>
-<tr class="row-odd"><td>StartAggregationMessage</td>
-<td>This message triggers the initial start for aggregation, before this message is received, the peer is offline and is not aggregating.</td>
+<tr class="row-odd"><td><p>StartAggregationMessage</p></td>
+<td><p>This message triggers the initial start for aggregation, before this message is received, the peer is offline and is not aggregating.</p></td>
 </tr>
-<tr class="row-even"><td>StopAggregationMessage</td>
-<td>This message stops the aggregation and leaves the network</td>
+<tr class="row-even"><td><p>StopAggregationMessage</p></td>
+<td><p>This message stops the aggregation and leaves the network</p></td>
 </tr>
-<tr class="row-odd"><td>PossibleStatesMessage</td>
-<td>This message sets the possible states to the given values, see <a class="reference internal" href="change.states.html#changing-of-possible-states"><span class="std std-ref">Changing of possible states</span></a></td>
+<tr class="row-odd"><td><p>PossibleStatesMessage</p></td>
+<td><p>This message sets the possible states to the given values, see <a class="reference internal" href="change.states.html#changing-of-possible-states"><span class="std std-ref">Changing of possible states</span></a></p></td>
 </tr>
-<tr class="row-even"><td>SelectedStateMessage</td>
-<td>This message sets the selected state to the given values under some constraints, see <a class="reference internal" href="change.states.html#changing-of-selected-states"><span class="std std-ref">Changing of selected states</span></a></td>
+<tr class="row-even"><td><p>SelectedStateMessage</p></td>
+<td><p>This message sets the selected state to the given values under some constraints, see <a class="reference internal" href="change.states.html#changing-of-selected-states"><span class="std std-ref">Changing of selected states</span></a></p></td>
 </tr>
 </tbody>
 </table>

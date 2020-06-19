@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -179,17 +179,17 @@
 <h2>Peerlets<a class="headerlink" href="#peerlets" title="Permalink to this headline">¶</a></h2>
 <p>The name for the peerlets is inspired by the applets and servlets. The peerlets encapsulate a well-defined piece of application functionality. Most of the application code lives inside the peerlets. Each peerlet instance has an associated peer instance in which it is contained. Several peerlets can be added together to a peer to achieve the desired functionality. The peer serves as an “execution context” for the peerlets. The peerlets can send messages using the peer’s network interface and get notified about the networking events. Peerlets have access to the peer’s clock, which they can use to schedule timers. The peerlets can also discover one another via the peer. For more see the peer documentation.</p>
 <p>A peerlet looks like this:</p>
-<div class="code java highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">public</span> <span class="n">interface</span> <span class="n">Peerlet</span> <span class="p">{</span>
-    <span class="o">/*</span> <span class="n">lifecycle</span> <span class="o">*/</span>
-    <span class="n">public</span> <span class="n">void</span> <span class="n">init</span><span class="p">(</span><span class="n">Peer</span> <span class="n">peer</span><span class="p">);</span>
-    <span class="n">public</span> <span class="n">void</span> <span class="n">start</span><span class="p">();</span>
-    <span class="n">public</span> <span class="n">void</span> <span class="n">stop</span><span class="p">();</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Peerlet</span> <span class="p">{</span>
+    <span class="cm">/* lifecycle */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="p">(</span><span class="n">Peer</span> <span class="n">peer</span><span class="p">);</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">start</span><span class="p">();</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">stop</span><span class="p">();</span>
 
-    <span class="o">/*</span> <span class="n">networking</span> <span class="o">*/</span>
-    <span class="n">public</span> <span class="n">void</span> <span class="n">handleIncomingMessage</span><span class="p">(</span><span class="n">Message</span> <span class="n">message</span><span class="p">);</span>
-    <span class="n">public</span> <span class="n">void</span> <span class="n">handleOutgoingMessage</span><span class="p">(</span><span class="n">Message</span> <span class="n">message</span><span class="p">);</span>
-    <span class="n">public</span> <span class="n">void</span> <span class="n">messageSent</span><span class="p">(</span><span class="n">Message</span> <span class="n">message</span><span class="p">);</span>
-    <span class="n">public</span> <span class="n">void</span> <span class="n">networkExceptionHappened</span><span class="p">(</span><span class="n">NetworkAddress</span> <span class="n">remoteAddress</span><span class="p">,</span> <span class="n">Message</span> <span class="n">message</span><span class="p">,</span> <span class="n">Throwable</span> <span class="n">cause</span><span class="p">);</span>
+    <span class="cm">/* networking */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">handleIncomingMessage</span><span class="p">(</span><span class="n">Message</span> <span class="n">message</span><span class="p">);</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">handleOutgoingMessage</span><span class="p">(</span><span class="n">Message</span> <span class="n">message</span><span class="p">);</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">messageSent</span><span class="p">(</span><span class="n">Message</span> <span class="n">message</span><span class="p">);</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">networkExceptionHappened</span><span class="p">(</span><span class="n">NetworkAddress</span> <span class="n">remoteAddress</span><span class="p">,</span> <span class="n">Message</span> <span class="n">message</span><span class="p">,</span> <span class="n">Throwable</span> <span class="n">cause</span><span class="p">);</span>
 </pre></div>
 </div>
 <p><strong>Lifecycle</strong></p>

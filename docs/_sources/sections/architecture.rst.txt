@@ -9,4 +9,4 @@ Deployment Architecture
    architecture/bootstrap.process
    architecture/mock.devices
    architecture/dias.logging
-.. architecture/multi.machine.setup
+   architecture/multi.machine.setup

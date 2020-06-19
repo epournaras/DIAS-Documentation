@@ -23,10 +23,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -170,19 +170,19 @@
 <p>At time of writing, Postgres is the only mechanism to record data generated within the DIAS network, through the <a class="reference internal" href="../dias-logging-system.html#label-dias-logging-system"><span class="std std-ref">DIAS Logging System</span></a>.</p>
 <p>A variety of data is persisted to the database, such as:</p>
 <ul class="simple">
-<li>DIAS aggregates (sum, average, min, max, …)</li>
-<li>Aggregation logs</li>
-<li>General free-text logging</li>
-<li>Structured logging</li>
-<li>Message exchange</li>
+<li><p>DIAS aggregates (sum, average, min, max, …)</p></li>
+<li><p>Aggregation logs</p></li>
+<li><p>General free-text logging</p></li>
+<li><p>Structured logging</p></li>
+<li><p>Message exchange</p></li>
 </ul>
 <p>Supported version of Postgres:</p>
 <ul class="simple">
-<li>9.x</li>
-<li>10.x</li>
+<li><p>9.x</p></li>
+<li><p>10.x</p></li>
 </ul>
 <p>On Ubuntu, Postgres can be installed as follows:</p>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">postgresql</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get install postgresql
 </pre></div>
 </div>
 <p>On OSX, follow the instructions here <a class="reference external" href="https://www.postgresql.org/download/macosx/">https://www.postgresql.org/download/macosx/</a></p>
