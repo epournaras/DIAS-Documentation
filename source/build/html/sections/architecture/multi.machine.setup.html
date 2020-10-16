@@ -3,8 +3,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -14,31 +13,33 @@
   
 
   
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="DIAS Logging" href="dias.logging.html" />
-    <link rel="prev" title="Mock devices" href="mock.devices.html" /> 
+    <link rel="next" title="Protopeer" href="../protopeer.html" />
+    <link rel="prev" title="DIAS Logging" href="dias.logging.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -52,7 +53,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> DIAS-Documentation
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> DIAS-Documentation
           
 
           
@@ -75,6 +76,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -91,11 +93,10 @@
 <li class="toctree-l2"><a class="reference internal" href="gateway.html">DIAS Gateway</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bootstrap.process.html">Bootstrap Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mock.devices.html">Mock devices</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Multi-machine Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dias.logging.html">DIAS Logging</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Multi-machine Setup</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../gui.html">GUIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../protopeer.html">Protopeer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dias-logging-system.html">DIAS Logging System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
@@ -105,6 +106,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -143,7 +145,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../architecture.html">Deployment Architecture</a> &raquo;</li>
         
@@ -168,6 +170,25 @@
             
   <div class="section" id="multi-machine-setup">
 <h1>Multi-machine Setup<a class="headerlink" href="#multi-machine-setup" title="Permalink to this headline">¶</a></h1>
+<p>DIAS is able to run the different components on different machines for splitting the computation power.
+This is possible, as all communation between different processes is done via ZMQ, which uses TCP.</p>
+<p>The parts being able to run separately are:</p>
+<ol class="arabic simple">
+<li><p>The different DIAS peers, including the carrier peers.</p></li>
+<li><p>The persistence daemon, running the database</p></li>
+<li><p>The device gateway</p></li>
+<li><p>The bootstrap manager</p></li>
+</ol>
+<p>The way this is done, is by changing the configuration files ‘dias.conf’ and ‘protopeer.conf’.
+Those files can be found under ‘DIAS-Devlopment/deployments/&lt;deployment-name&gt;/conf/’.</p>
+<p>The IP for the peers can be changed in ‘dias.conf’, at ‘peerIP=’.
+The IP for the carriers is defined right below at ‘peerZeroIP=’</p>
+<p>The other configurations are in the ‘protopeer.conf’ file, under the names ‘persistenceDaemonIP’, ‘deviceGatewayPort’, ‘bootstrapIP’.</p>
+<p>The config files must be consistent across all machines running any part of the setup.</p>
+<p><strong>Note</strong> If some of the machines do not receive anything, you may have to open the respective ports on the system, as well as on the router.</p>
+<p>All of the ports are stated right below the correspoinding IP declaration in the config files.
+One exception to this are the IP’s for the DIAS peers. They dynamically allocate free ports, so the system needs to be able to dynamically allocate ports.
+This setting may need to be done in the router settings of your router.</p>
 </div>
 
 
@@ -178,10 +199,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="dias.logging.html" class="btn btn-neutral float-right" title="DIAS Logging" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../protopeer.html" class="btn btn-neutral float-right" title="Protopeer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="mock.devices.html" class="btn btn-neutral float-left" title="Mock devices" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="dias.logging.html" class="btn btn-neutral float-left" title="DIAS Logging" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -190,11 +211,19 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2019, Edward Gaere
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -205,7 +234,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
@@ -219,9 +247,19 @@
     
 
   <style>
+    /*To underline text*/
+    .underline {
+      text-decoration: underline;
+    }
+
+
+      /*To underline bold text*/
+      .underlinebold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
     /* Sidebar header (and topbar for mobile) */
-
-
 
 
 
@@ -265,6 +303,10 @@
         color:/**#eee;*/var(--blue);
 
 
+     }
+
+     .wy-nav-content-wrap{
+       background: var(--grey);
      }
 
      .wy-menu-vertical li.toctree-l1.current>a {

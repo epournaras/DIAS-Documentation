@@ -1,2 +1,0 @@
-Changing of selected states
-***************************

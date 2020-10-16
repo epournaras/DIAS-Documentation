@@ -3,8 +3,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -14,27 +13,29 @@
   
 
   
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Launching DIAS" href="launch.html" />
@@ -52,7 +53,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> DIAS-Documentation
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> DIAS-Documentation
           
 
           
@@ -75,6 +76,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -98,7 +100,6 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../dias.in.detail.html">How DIAS Works</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Deployment Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gui.html">GUIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../protopeer.html">Protopeer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dias-logging-system.html">DIAS Logging System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
@@ -108,6 +109,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -146,7 +148,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../quickstart.html">Quickstart</a> &raquo;</li>
         
@@ -182,30 +184,29 @@
 <h2>SQL Setup<a class="headerlink" href="#sql-setup" title="Permalink to this headline">¶</a></h2>
 <p>The following tables need to be created in the Postgres database.</p>
 <p>The first step is to create the DIAS database itself. Within psql (or any other Postgres editor):</p>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CREATE</span> <span class="n">DATABASE</span> <span class="n">dias</span><span class="p">;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>CREATE DATABASE dias<span class="p">;</span>
 </pre></div>
 </div>
 <p>Then you need to switch to the dias database; recall that when you login to psql, the default database is postgres.</p>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>\<span class="n">c</span> <span class="n">dias</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="se">\c</span> dias
 </pre></div>
 </div>
 <p>Now we can create the tables that store the aggregates and debugging information.</p>
 <p>The SQL code with the table definitions is located here. Copy + paste the code from each file, one at a time.</p>
 <ul class="simple">
-<li>DIAS-Logging-System/sql/definitions/eventlog.sql</li>
-<li>DIAS-Logging-System/sql/definitions/memlog.sql</li>
-<li>DIAS-Logging-System/sql/definitions/rawlog.sql</li>
-<li>DIAS-Logging-System/sql/definitions/pss.sql</li>
-<li>DIAS-Development/sql/definitions/aggregation.sql</li>
-<li>DIAS-Development/sql/definitions/aggregation_plot.sql</li>
-<li>DIAS-Development/sql/definitions/aggregation_event.sql</li>
-<li>DIAS-Development/sql/definitions/aggregation_event_rrd.sql</li>
-<li>DIAS-Development/sql/definitions/aggregation_event_rrd_7d.sql</li>
-<li>DIAS-Development/sql/definitions/aggregation.sql</li>
-<li>DIAS-Development/sql/definitions/msgs.sql</li>
-<li>DIAS-Development/sql/definitions/sessions.sql</li>
-<li>Protopeer/sql/definitions/msgqueue.sql</li>
-<li>Protopeer/sql/definitions/msgtypes.sql</li>
+<li><p>DIAS-Development/sql/definitions/Logging-System/eventlog.sql</p></li>
+<li><p>DIAS-Development/sql/definitions/Logging-System/memlog.sql</p></li>
+<li><p>DIAS-Development/sql/definitions/Logging-System/rawlog.sql</p></li>
+<li><p>DIAS-Development/sql/definitions/Logging-System/pss.sql</p></li>
+<li><p>DIAS-Development/sql/definitions/DIAS/aggregation.sql</p></li>
+<li><p>DIAS-Development/sql/definitions/DIAS/aggregation_plot.sql</p></li>
+<li><p>DIAS-Development/sql/definitions/DIAS/aggregation_event.sql</p></li>
+<li><p>DIAS-Development/sql/definitions/DIAS/aggregation_event_rrd.sql</p></li>
+<li><p>DIAS-Development/sql/definitions/DIAS/aggregation_event_rrd_7d.sql</p></li>
+<li><p>DIAS-Development/sql/definitions/DIAS/msgs.sql</p></li>
+<li><p>DIAS-Development/sql/definitions/DIAS/sessions.sql</p></li>
+<li><p>DIAS-Development/sql/definitions/Protopeer/msgqueue.sql</p></li>
+<li><p>DIAS-Development/sql/definitions/Protopeer/msgtypes.sql</p></li>
 </ul>
 </div>
 </div>
@@ -230,11 +231,19 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2019, Edward Gaere
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -245,7 +254,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
@@ -259,9 +267,19 @@
     
 
   <style>
+    /*To underline text*/
+    .underline {
+      text-decoration: underline;
+    }
+
+
+      /*To underline bold text*/
+      .underlinebold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
     /* Sidebar header (and topbar for mobile) */
-
-
 
 
 
@@ -305,6 +323,10 @@
         color:/**#eee;*/var(--blue);
 
 
+     }
+
+     .wy-nav-content-wrap{
+       background: var(--grey);
      }
 
      .wy-menu-vertical li.toctree-l1.current>a {

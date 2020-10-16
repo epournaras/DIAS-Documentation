@@ -37,20 +37,18 @@ Now we can create the tables that store the aggregates and debugging information
 
 The SQL code with the table definitions is located here. Copy + paste the code from each file, one at a time.
 
-- DIAS-Logging-System/sql/definitions/eventlog.sql
-- DIAS-Logging-System/sql/definitions/memlog.sql
-- DIAS-Logging-System/sql/definitions/rawlog.sql
-- DIAS-Logging-System/sql/definitions/pss.sql
+- DIAS-Development/sql/definitions/Logging-System/eventlog.sql
+- DIAS-Development/sql/definitions/Logging-System/memlog.sql
+- DIAS-Development/sql/definitions/Logging-System/rawlog.sql
+- DIAS-Development/sql/definitions/Logging-System/pss.sql
 
-- DIAS-Development/sql/definitions/aggregation.sql
-- DIAS-Development/sql/definitions/aggregation_plot.sql
-- DIAS-Development/sql/definitions/aggregation_event.sql
-- DIAS-Development/sql/definitions/aggregation_event_rrd.sql
-- DIAS-Development/sql/definitions/aggregation_event_rrd_7d.sql
-- DIAS-Development/sql/definitions/aggregation.sql
+- DIAS-Development/sql/definitions/DIAS/aggregation.sql
+- DIAS-Development/sql/definitions/DIAS/aggregation_plot.sql
+- DIAS-Development/sql/definitions/DIAS/aggregation_event.sql
+- DIAS-Development/sql/definitions/DIAS/aggregation_event_rrd.sql
+- DIAS-Development/sql/definitions/DIAS/aggregation_event_rrd_7d.sql
+- DIAS-Development/sql/definitions/DIAS/msgs.sql
+- DIAS-Development/sql/definitions/DIAS/sessions.sql
 
-- DIAS-Development/sql/definitions/msgs.sql
-- DIAS-Development/sql/definitions/sessions.sql
-
-- Protopeer/sql/definitions/msgqueue.sql
-- Protopeer/sql/definitions/msgtypes.sql
+- DIAS-Development/sql/definitions/Protopeer/msgqueue.sql
+- DIAS-Development/sql/definitions/Protopeer/msgtypes.sql

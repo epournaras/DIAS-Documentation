@@ -3,8 +3,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -14,31 +13,33 @@
   
 
   
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="GUIs" href="../gui.html" />
-    <link rel="prev" title="Multi-machine Setup" href="multi.machine.setup.html" /> 
+    <link rel="next" title="Multi-machine Setup" href="multi.machine.setup.html" />
+    <link rel="prev" title="Mock devices" href="mock.devices.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -52,7 +53,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> DIAS-Documentation
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> DIAS-Documentation
           
 
           
@@ -75,6 +76,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -91,11 +93,30 @@
 <li class="toctree-l2"><a class="reference internal" href="gateway.html">DIAS Gateway</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bootstrap.process.html">Bootstrap Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mock.devices.html">Mock devices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="multi.machine.setup.html">Multi-machine Setup</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">DIAS Logging</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">DIAS Logging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rawlog">RawLog</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#initialisation">Initialisation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sql-table">SQL Table</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../gui.html">GUIs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#eventlog">EventLog</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Initialisation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">SQL Table</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#memlog">MemLog</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">Initialisation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">SQL Table</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="multi.machine.setup.html">Multi-machine Setup</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../protopeer.html">Protopeer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dias-logging-system.html">DIAS Logging System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
@@ -105,6 +126,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -143,7 +165,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../architecture.html">Deployment Architecture</a> &raquo;</li>
         
@@ -168,6 +190,278 @@
             
   <div class="section" id="dias-logging">
 <h1>DIAS Logging<a class="headerlink" href="#dias-logging" title="Permalink to this headline">¶</a></h1>
+<p>The logging system used here can be found on <a href="https://github.com/epournaras/Livelog" target="_blank">Github</a>.</p>
+<p>The instructions on how to start the logging daemon can be found in the <a class="reference internal" href="../quickstart/launch.html#launching-dias"><span class="std std-ref">Launching DIAS</span></a> section.</p>
+<p>There are 3 different Loggers, that can be used:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#rawlog"><span class="std std-ref">RawLog</span></a></p></li>
+<li><p><a class="reference internal" href="#eventlog"><span class="std std-ref">EventLog</span></a></p></li>
+<li><p><a class="reference internal" href="#memlog"><span class="std std-ref">MemLog</span></a></p></li>
+</ul>
+<p>Before any of those loggers can be used, the persistence client needs to be set up:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pgpersist.PersistenceClient</span><span class="p">;</span>
+<span class="cm">/*...*/</span>
+<span class="n">persistenceClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PersistenceClient</span><span class="p">(</span><span class="n">zmqContext</span><span class="p">,</span> <span class="n">daemonConnectString</span><span class="p">,</span> <span class="n">persistenceClientOutputQueueSize</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="section" id="rawlog">
+<h2>RawLog<a class="headerlink" href="#rawlog" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>RawLog is designed as a drop-copy replacement for System.out.printf</p></li>
+<li><p>The function takes 2 arguments</p>
+<ul>
+<li><p>The log level, a number between 1 and 3 representing respectively an information, a warning or an error message</p></li>
+<li><p>Any string to be persisted</p></li>
+</ul>
+</li>
+<li><p>The RawLog automatically records the id of the calling thread allowing insights into potential issues regarding thread synchronisation</p></li>
+</ul>
+<div class="section" id="initialisation">
+<h3>Initialisation<a class="headerlink" href="#initialisation" title="Permalink to this headline">¶</a></h3>
+<p>To create the RawLog, the persistenceClient needs to be set, as well as the logging level threshold, the peerID, and the networkID:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">RawLog</span><span class="p">.</span><span class="na">setPeristenceClient</span><span class="p">(</span><span class="n">persistenceClient</span><span class="p">);</span>
+<span class="n">RawLog</span><span class="p">.</span><span class="na">setErrorLevelThreshold</span><span class="p">(</span><span class="n">rawLogLevel</span><span class="p">);</span> <span class="c1">// log all (1); only log warnings (2); errors (3)</span>
+<span class="n">RawLog</span><span class="p">.</span><span class="na">setPeer</span><span class="p">(</span><span class="n">newPeer</span><span class="p">);</span>
+<span class="n">RawLog</span><span class="p">.</span><span class="na">setDIASNetworkId</span><span class="p">(</span><span class="n">diasNetworkId</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
+<p>To log something, one just has to insert the following line:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">RawLog</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;Text to be logged&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The ‘1’ specifies the error level, there is an internal level threshold, which can be set to a specific level.
+<strong>Every level smaller to the threshold will not get logged.</strong></p>
+</div>
+<div class="section" id="sql-table">
+<h3>SQL Table<a class="headerlink" href="#sql-table" title="Permalink to this headline">¶</a></h3>
+<p>The underlying sql table looks like this:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>SQL field definition</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>seq_id SERIAL NOT NULL</p></td>
+<td><p>The entry sequence id, created automatically</p></td>
+</tr>
+<tr class="row-odd"><td><p>dt TIMESTAMP NOT NULL</p></td>
+<td><p>Timestampt of logged entry, measured automatically by the RawLog class</p></td>
+</tr>
+<tr class="row-even"><td><p>network INTEGER NOT NULL DEFAULT 0</p></td>
+<td><p>The network id for the logged entry, 0 if not defined</p></td>
+</tr>
+<tr class="row-odd"><td><p>peer INTEGER NOT NULL</p></td>
+<td><p>The peer number</p></td>
+</tr>
+<tr class="row-even"><td><p>epoch BIGINT NOT NULL</p></td>
+<td><p>The epoch is System.currentTimeMillis()/1000</p></td>
+</tr>
+<tr class="row-odd"><td><p>thread_id INTEGER NOT NULL</p></td>
+<td><p>The id of the thread triggering the log, measured automatically</p></td>
+</tr>
+<tr class="row-even"><td><p>error_level INTEGER NOT NULL</p></td>
+<td><p>The error level of the logged event, 1 is normal, 2 is warning and 3 is error</p></td>
+</tr>
+<tr class="row-odd"><td><p>txt TEXT</p></td>
+<td><p>The logged text</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="eventlog">
+<h2>EventLog<a class="headerlink" href="#eventlog" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>EventLog is designed to understand code execution sequence within a peer and across multiple peers</p></li>
+<li><p>It is different than RawLog in that it is structured, allowing for side-by-side comparison of events within and across peers</p></li>
+<li><p>Furthermore, the EventLog automatically records the id of the calling thread allowing insights into potential issues regarding thread synchronisation</p></li>
+</ul>
+<div class="section" id="id1">
+<h3>Initialisation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>The initialisation is similar to the <a class="reference internal" href="#rawlog"><span class="std std-ref">RawLog</span></a>:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">EventLog</span><span class="p">.</span><span class="na">setPeristenceClient</span><span class="p">(</span><span class="n">persistenceClient</span><span class="p">);</span>
+<span class="n">EventLog</span><span class="p">.</span><span class="na">setPeer</span><span class="p">(</span><span class="n">newPeer</span><span class="p">);</span>
+<span class="n">EventLog</span><span class="p">.</span><span class="na">setDIASNetworkId</span><span class="p">(</span><span class="n">diasNetworkId</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Usage<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>The logging function takes 4 arguments:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The name of the calling class, e.g. DIAS</p></li>
+<li><p>The name of the calling function, e.g. start</p></li>
+<li><p>A key, e.g. “alreadyStarted”</p></li>
+<li><p>A value (text), e.g. “True”</p></li>
+</ul>
+</div></blockquote>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">EventLog</span><span class="p">.</span><span class="na">logEvent</span><span class="p">(</span><span class="s">&quot;DIAS&quot;</span><span class="p">,</span> <span class="s">&quot;start&quot;</span><span class="p">,</span> <span class="s">&quot;alreadyStarted&quot;</span><span class="p">,</span> <span class="n">Boolean</span><span class="p">.</span><span class="na">toString</span><span class="p">(</span><span class="n">alreadyStarted</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>SQL Table<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>SQL field definition</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>seq_id SERIAL NOT NULL</p></td>
+<td><p>The entry sequence id, created automatically</p></td>
+</tr>
+<tr class="row-odd"><td><p>dt TIMESTAMP NOT NULL</p></td>
+<td><p>Timestampt of logged entry, measured automatically by the RawLog class</p></td>
+</tr>
+<tr class="row-even"><td><p>current_time_millis BIGINT NOT NULL</p></td>
+<td><p>The current time in milliseconds</p></td>
+</tr>
+<tr class="row-odd"><td><p>network INTEGER NOT NULL DEFAULT 0</p></td>
+<td><p>The network id for the logged entry, 0 if not defined</p></td>
+</tr>
+<tr class="row-even"><td><p>peer INTEGER NOT NULL</p></td>
+<td><p>The peer number</p></td>
+</tr>
+<tr class="row-odd"><td><p>epoch BIGINT NOT NULL</p></td>
+<td><p>The epoch is System.currentTimeMillis()/1000</p></td>
+</tr>
+<tr class="row-even"><td><p>peer_event_counter BIGINT NOT NULL</p></td>
+<td><p>An internal counter of the events inside the peer</p></td>
+</tr>
+<tr class="row-odd"><td><p>thread_id INTEGER NOT NULL</p></td>
+<td><p>The id of the thread triggering the log, measured automatically</p></td>
+</tr>
+<tr class="row-even"><td><p>classname TEXT NOT NULL</p></td>
+<td><p>The name of the caller class</p></td>
+</tr>
+<tr class="row-odd"><td><p>func TEXT NOT NULL</p></td>
+<td><p>The name of the caller function</p></td>
+</tr>
+<tr class="row-even"><td><p>key TEXT</p></td>
+<td><p>A key string for categorinsing the log</p></td>
+</tr>
+<tr class="row-odd"><td><p>value TEXT</p></td>
+<td><p>The message to be logged</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="memlog">
+<h2>MemLog<a class="headerlink" href="#memlog" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>MemLog is designed to periodically measure total memory footprint of any Java object in memory</p></li>
+<li><p>It’s great for detecting memory leaks that appear over time, e.g over several weeks of operation</p></li>
+<li><p>As explained below, MemLog uses the JAMM instrumentation agent, that traverses all elements and member variables of complex Java objects such as classes and containers</p></li>
+</ul>
+<div class="section" id="id4">
+<h3>Initialisation<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>The MemLog class is initialised similarly to the RawLog and EventLog classes above, with some notable differences</p></li>
+<li><p>First, a Java instrumentation class, that will take the actual memory measurements, is required for the MemLog and must be passed as an argument to Memlog. More information about Java instrumentation can be found at TODO</p>
+<ul>
+<li><p>The particular instrumentation class used is JAMM (see references below). JAMM is a powerful Java instrumentation class that mesures the size of objects in memory. For containers, JAMM actually traverses the containers and measures the size of each element, further traversing each element if it is a container. This recursive approach allows proper estimation of the memory footprint of an object.</p></li>
+</ul>
+</li>
+<li><p>Second, the period for taking snapshots</p>
+<ul>
+<li><p>Memlog will periodically compute the memory footprint of each object that was added with add_object(), at the period specificed in startTimer()</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="c1">// initialise MemLog</span>
+<span class="kd">final</span> <span class="n">MemoryMeter</span> <span class="n">instrument</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MemoryMeter</span><span class="p">();</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">MemoryMeter</span><span class="p">.</span><span class="na">hasInstrumentation</span><span class="p">())</span>
+  <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span> <span class="s">&quot;MemLog: No instrumentation\n&quot;</span><span class="p">);</span>
+<span class="k">else</span> <span class="p">{</span>
+  <span class="n">MemLog</span><span class="p">.</span><span class="na">setPersistenceClient</span><span class="p">(</span><span class="n">persistenceClient</span><span class="p">);</span>
+  <span class="n">MemLog</span><span class="p">.</span><span class="na">setMeasurementInstrument</span><span class="p">(</span><span class="n">instrument</span><span class="p">);</span>
+  <span class="n">MemLog</span><span class="p">.</span><span class="na">setPeer</span><span class="p">(</span><span class="n">newPeer</span><span class="p">);</span>
+  <span class="n">MemLog</span><span class="p">.</span><span class="na">setDIASNetworkId</span><span class="p">(</span><span class="n">diasNetworkId</span><span class="p">);</span>
+  <span class="n">MemLog</span><span class="p">.</span><span class="na">startTimer</span><span class="p">(</span><span class="mi">60</span><span class="p">);</span>
+
+  <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span> <span class="s">&quot;MemLog setup\n&quot;</span> <span class="p">);</span>
+  <span class="n">MemLog</span><span class="p">.</span><span class="na">add_object</span><span class="p">(</span><span class="s">&quot;Peer&quot;</span><span class="p">,</span> <span class="s">&quot;Peer&quot;</span><span class="p">,</span> <span class="n">newPeer</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Note:</strong> the timer period is specified in <em>seconds</em> and <strong>not</strong> in milliseconds.</p>
+</div>
+<div class="section" id="id5">
+<h3>Usage<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Objects where memory monitoring is required need to be added with a call to add_object, that takes 3 arguments</p>
+<ul>
+<li><p>Arguments one and two are simple tags that will allow you</p>
+<ul>
+<li><p>In the example below, we are using the class in which the object belongs and the name of the instantiated object</p></li>
+</ul>
+</li>
+<li><p>The third argument is a reference to the Java object to be monitored</p></li>
+</ul>
+</li>
+<li><p>Once an object has been added, as per the example below, a sample of the total memory footprint of the object will be taken every 60 seconds and persisted to the memlog table</p></li>
+</ul>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">MemLog</span><span class="p">.</span><span class="na">add_object</span><span class="p">(</span><span class="s">&quot;DIASlight&quot;</span><span class="p">,</span> <span class="s">&quot;dumper&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="na">dumper</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Note:</strong> dumper is just a random object to be measured.</p>
+</div>
+<div class="section" id="id6">
+<h3>SQL Table<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>SQL field definition</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>seq_id SERIAL NOT NULL</p></td>
+<td><p>The entry sequence id, created automatically</p></td>
+</tr>
+<tr class="row-odd"><td><p>dt TIMESTAMP NOT NULL</p></td>
+<td><p>Timestampt of logged entry, measured automatically by the RawLog class</p></td>
+</tr>
+<tr class="row-even"><td><p>network INTEGER NOT NULL DEFAULT 0</p></td>
+<td><p>The network id for the logged entry, 0 if not defined</p></td>
+</tr>
+<tr class="row-odd"><td><p>peer INTEGER NOT NULL</p></td>
+<td><p>The peer number</p></td>
+</tr>
+<tr class="row-even"><td><p>epoch BIGINT NOT NULL</p></td>
+<td><p>The epoch is System.currentTimeMillis()/1000</p></td>
+</tr>
+<tr class="row-odd"><td><p>object_group_name TEXT NOT NULL</p></td>
+<td><p>A groupt name to categorise the objects in groups</p></td>
+</tr>
+<tr class="row-even"><td><p>object_name TEXT NOT NULL</p></td>
+<td><p>The name of the object</p></td>
+</tr>
+<tr class="row-odd"><td><p>object_size_mb FLOAT</p></td>
+<td><p>Can be null if the object is null</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 
 
@@ -178,10 +472,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../gui.html" class="btn btn-neutral float-right" title="GUIs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="multi.machine.setup.html" class="btn btn-neutral float-right" title="Multi-machine Setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="multi.machine.setup.html" class="btn btn-neutral float-left" title="Multi-machine Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="mock.devices.html" class="btn btn-neutral float-left" title="Mock devices" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -190,11 +484,19 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2019, Edward Gaere
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -205,7 +507,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
@@ -219,9 +520,19 @@
     
 
   <style>
+    /*To underline text*/
+    .underline {
+      text-decoration: underline;
+    }
+
+
+      /*To underline bold text*/
+      .underlinebold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
     /* Sidebar header (and topbar for mobile) */
-
-
 
 
 
@@ -265,6 +576,10 @@
         color:/**#eee;*/var(--blue);
 
 
+     }
+
+     .wy-nav-content-wrap{
+       background: var(--grey);
      }
 
      .wy-menu-vertical li.toctree-l1.current>a {

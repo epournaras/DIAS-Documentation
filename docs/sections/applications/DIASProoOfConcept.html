@@ -3,8 +3,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -14,30 +13,32 @@
   
 
   
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Glossary" href="../glossary.html" />
+    <link rel="next" title="Telegram Plotter" href="TelegramPlotter.html" />
     <link rel="prev" title="DIASClient Library" href="DIASClientLibrary.html" /> 
 </head>
 
@@ -52,7 +53,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> DIAS-Documentation
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> DIAS-Documentation
           
 
           
@@ -75,6 +76,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -88,7 +90,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dias.in.detail.html">How DIAS Works</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Deployment Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gui.html">GUIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../protopeer.html">Protopeer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dias-logging-system.html">DIAS Logging System</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../applications.html">Applications</a><ul class="current">
@@ -108,6 +109,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#problems">Problems</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="TelegramPlotter.html">Telegram Plotter</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
@@ -116,6 +118,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -154,7 +157,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../applications.html">Applications</a> &raquo;</li>
         
@@ -221,11 +224,11 @@ As an example: Let’s assume the aggregation function “SUM” is selected. If
 <p><strong>Note:</strong> The server is not stable with no peers online at all. For this purpose, there are always 10 mock-peers online, which do not change states. They are however taken into consideration when checking for correct aggregates (e.g. if aggregation function “AVG” is selected).
 If those 10 mock-peers on the server would be removed, one needs also to change the correction in the app:
 The line</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">mockPeers</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">mockPeers</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>needs to be changed to</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">mockPeers</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">mockPeers</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="../../_images/WrongAgg.png"><img alt="../../_images/WrongAgg.png" src="../../_images/WrongAgg.png" style="width: 30%;" /></a>
@@ -258,7 +261,7 @@ The latter one could be because the server or the phone itself has no connection
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../glossary.html" class="btn btn-neutral float-right" title="Glossary" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="TelegramPlotter.html" class="btn btn-neutral float-right" title="Telegram Plotter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="DIASClientLibrary.html" class="btn btn-neutral float-left" title="DIASClient Library" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -270,11 +273,19 @@ The latter one could be because the server or the phone itself has no connection
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2019, Edward Gaere
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -285,7 +296,6 @@ The latter one could be because the server or the phone itself has no connection
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
@@ -299,9 +309,19 @@ The latter one could be because the server or the phone itself has no connection
     
 
   <style>
+    /*To underline text*/
+    .underline {
+      text-decoration: underline;
+    }
+
+
+      /*To underline bold text*/
+      .underlinebold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
     /* Sidebar header (and topbar for mobile) */
-
-
 
 
 
@@ -345,6 +365,10 @@ The latter one could be because the server or the phone itself has no connection
         color:/**#eee;*/var(--blue);
 
 
+     }
+
+     .wy-nav-content-wrap{
+       background: var(--grey);
      }
 
      .wy-menu-vertical li.toctree-l1.current>a {

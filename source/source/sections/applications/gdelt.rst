@@ -4,13 +4,13 @@ GDELT
 Introduction
 ------------
 
-Have you ever wondered how many news event are produced every day in Europe? 
+Have you ever wondered how many news event are produced every day in Europe?
 
 To demonstrate the real-world applicability and feasibility to perform real-time distributed data analytics, we connected DIAS into GDELT to measure the number of news events in Europe, updated every 15 minutes. Such news events are a good indicator of the overall activity level of the continent. Indeed, if more news items are being produced, then it is likely that more physical events are taking place. And vice-versa.
 
-The following application connects DIAS into GDELT. GDELT is the largest publicly available collection of near real-time news feed in the World, connecting to hundreds of newsfeeds and delivering updates every 15-minutes. 
+The following application connects DIAS into GDELT. GDELT is the largest publicly available collection of near real-time news feed in the World, connecting to hundreds of newsfeeds and delivering updates every 15-minutes.
 
-This DIAS application covers the 28 countries in Europe. Each country is represented by a DIAS node, so there are 28 DIAS nodes in the network that are cooperating to provide analytics about the network. Each DIAS node aggregates the number of news items produced by itself as well as the 27 other nodes in the network. 
+This DIAS application covers the 28 countries in Europe. Each country is represented by a DIAS node, so there are 28 DIAS nodes in the network that are cooperating to provide analytics about the network. Each DIAS node aggregates the number of news items produced by itself as well as the 27 other nodes in the network.
 
 
 Application Setup
@@ -26,7 +26,7 @@ At a high level, data for the 28 European countries are retrieved from GDELT eve
 Screenshots
 -----------
 
-Here is a screenshot of DIAS-GDELT in action. You can observe the fluctuations in the numbers of news events generated per 15-minute window. 
+Here is a screenshot of DIAS-GDELT in action. You can observe the fluctuations in the numbers of news events generated per 15-minute window.
 
 For example, the number 200 (on the y-axis) indicates that 200 news events were generated concerning European countries over the relevant 15-minute window.
 
@@ -35,11 +35,11 @@ For example, the number 200 (on the y-axis) indicates that 200 news events were 
 
 **Figure 4.2** DIAS-GDELT aggregation process. Each blue dot represents the estimated sum from each DIAS node. The green line shows the true sum of news events from GDELT. The blue line shows the true sum of selected states, whilst the red line shows the sum of the DIAS aggregates.
 
-You can also view the same aggregation process on the DIAS website, http://dias-net.org/gdelt/
+You can also view the same aggregation process on the DIAS website, http://dias-net.org/dias-gdelt-live/
 
 .. image:: gdelt/fig4.3.png
 
-**Figure 4.3** DIAS-GDELT aggregation process as viewed in the webpage http://dias-net.org/gdelt/
+**Figure 4.3** DIAS-GDELT aggregation process as viewed in the webpage http://dias-net.org/dias-gdelt-live/
 
 Getting Started
 ---------------
@@ -204,7 +204,7 @@ Note that this field does not capture which countries are affected by events, bu
 Local Publication Service
 -------------------------
 
-There are 28 DIAS nodes in this application, each representing a European country.  
+There are 28 DIAS nodes in this application, each representing a European country.
 
 For sake of efficiency, list of news events (compressed text file) is only pulled once from the GDELT server every 15 minutes. After the decompressing and parsing, data is published using a ZeroMQ publish socket over a TCP port on the server. This allows the 28 mock devices to connect to this port and subscribe to the parsed GDELT events as ZeroMQ subscribers, whilst only retrieving the raw data once from GDELT.
 
@@ -236,13 +236,15 @@ References
 ----------
 
 :GitHub repo:
-    https://github.com/epournaras/DIAS-GDELT.git
+      https://github.com/epournaras/DIAS-GDELT.git
 
 :GDELT:
-    http://data.gdeltproject.org/
 
-    http://data.gdeltproject.org/documentation/GDELT-Event_Codebook-V2.0.pdf
+      http://data.gdeltproject.org/documentation/GDELT-Event_Codebook-V2.0.pdf
 
 :DIAS-GDELT microsite:
-    http://dias-net.org/gdelt/
+      http://dias-net.org/dias-gdelt-live/
 
+..  http://dias-net.org/gdelt/
+
+..  http://data.gdeltproject.org/

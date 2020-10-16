@@ -3,8 +3,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -14,27 +13,29 @@
   
 
   
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="DIAS Logging System" href="../dias-logging-system.html" />
@@ -52,7 +53,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> DIAS-Documentation
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> DIAS-Documentation
           
 
           
@@ -75,6 +76,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -88,7 +90,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dias.in.detail.html">How DIAS Works</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Deployment Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gui.html">GUIs</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../protopeer.html">Protopeer</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="overview.html">Protopeer Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="refactoring.html">Protopeer Refactoring</a></li>
@@ -108,6 +109,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -146,7 +148,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../protopeer.html">Protopeer</a> &raquo;</li>
         
@@ -178,7 +180,7 @@
 <div class="section" id="launch-command">
 <h2>Launch Command<a class="headerlink" href="#launch-command" title="Permalink to this headline">¶</a></h2>
 <p>The following command will launch 10 independent peers in live mode, allowing messages to propagate 5 types through the network, using 256M Ram per peer</p>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">command</span><span class="o">.</span><span class="n">flooder</span><span class="o">.</span><span class="n">zmq</span><span class="o">.</span><span class="n">sh</span> <span class="mi">10</span> <span class="mi">5</span> <span class="mi">256</span><span class="n">M</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./command.flooder.zmq.sh <span class="m">10</span> <span class="m">5</span> 256M
 </pre></div>
 </div>
 <p><em>Code snippet: Example for launch 10 peers in the command flooder experiment</em></p>
@@ -206,11 +208,19 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2019, Edward Gaere
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -221,7 +231,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
@@ -235,9 +244,19 @@
     
 
   <style>
+    /*To underline text*/
+    .underline {
+      text-decoration: underline;
+    }
+
+
+      /*To underline bold text*/
+      .underlinebold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
     /* Sidebar header (and topbar for mobile) */
-
-
 
 
 
@@ -281,6 +300,10 @@
         color:/**#eee;*/var(--blue);
 
 
+     }
+
+     .wy-nav-content-wrap{
+       background: var(--grey);
      }
 
      .wy-menu-vertical li.toctree-l1.current>a {

@@ -1,0 +1,448 @@
+
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Changing of states &mdash; DIAS-Documentation 1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Join and Leave" href="join.and.leave.html" />
+    <link rel="prev" title="Aggregation Mechanism" href="aggregation.mechanism.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> DIAS-Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../pre.requisites.html">Pre-requisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../dias.in.detail.html">How DIAS Works</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="conceptual.architecture.html">Conceptual Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aggregation.mechanism.html">Aggregation Mechanism</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Changing of states</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#changing-of-possible-states">Changing of possible states</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changing-of-selected-states">Changing of selected states</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="join.and.leave.html">Join and Leave</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Carrier.peer.html">Carrier Peer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Deployment Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protopeer.html">Protopeer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dias-logging-system.html">DIAS Logging System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">DIAS-Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../dias.in.detail.html">How DIAS Works</a> &raquo;</li>
+        
+      <li>Changing of states</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/sections/dias.in.detail/change.states.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="changing-of-states">
+<h1>Changing of states<a class="headerlink" href="#changing-of-states" title="Permalink to this headline">¶</a></h1>
+<p>A peer has a couple of possible states, which are values, which the connected device can possibly select as a current value.
+The current value is then the selected state of the peer.
+Both the possible state, as well as the selected states, can be changed over the runtime of the peer.</p>
+<div class="section" id="changing-of-possible-states">
+<h2>Changing of possible states<a class="headerlink" href="#changing-of-possible-states" title="Permalink to this headline">¶</a></h2>
+<p>Possible states are a list of all states possible for the device so select/send to this specific peer.
+When a selected state is chosen, it has to be a state of the possible states.
+In order to keep the selected stated rather close to the actual value, the possible can/need to be updated sometimes.</p>
+<p>In order to do that, the device sends the DIAS node a PossibleStatesMessage.</p>
+<p>The Node then sets the list of the newly received Possible states as its own.</p>
+<p><strong>Note:</strong> If the newly received possible states are the same as the old ones, nothing gets done.</p>
+</div>
+<div class="section" id="changing-of-selected-states">
+<h2>Changing of selected states<a class="headerlink" href="#changing-of-selected-states" title="Permalink to this headline">¶</a></h2>
+<p>The selected state is a selected element of the elements in the possible states.</p>
+<p>Upon receiving a new selected state through a SelectedStateMessage, the internal selected state gets changed.</p>
+<p><strong>Note:</strong> The selected state only gets changed, if the newly received one is a valid element of the internally stored possible states.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="join.and.leave.html" class="btn btn-neutral float-right" title="Join and Leave" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="aggregation.mechanism.html" class="btn btn-neutral float-left" title="Aggregation Mechanism" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, Edward Gaere
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    
+
+  <style>
+    /*To underline text*/
+    .underline {
+      text-decoration: underline;
+    }
+
+
+      /*To underline bold text*/
+      .underlinebold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
+    /* Sidebar header (and topbar for mobile) */
+
+
+
+      :root{
+        --grey: rgb(231, 232, 233);
+        --altblue: rgb(30,115,190);
+        --blue: rgb(37, 117, 187);
+      }
+
+      /*link visited and unvisited color*/
+
+      a {
+        color: var(--grey);
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      a:visited {
+        color: var(--grey);
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      /*footer colors*/
+
+      footer{
+        color:var(--grey)
+      }
+
+      a:hover {
+        color: var(--grey);
+        text-decoration: underline;
+        cursor: pointer;
+        text-decoration-color: var(--blue);
+      }
+
+     .wy-nav-side {
+
+        /*background: rgb(30,115,190);*/
+        background: var(--grey);
+        color:/**#eee;*/var(--blue);
+
+
+     }
+
+     .wy-nav-content-wrap{
+       background: var(--grey);
+     }
+
+     .wy-menu-vertical li.toctree-l1.current>a {
+        color: var(--blue);
+     }
+
+     .wy-menu-vertical li.toctree-l2 a{
+       color: var(--blue);
+     }
+
+     .wy-menu-vertical li.toctree-l2 a:hover{
+       color: var(--grey);
+       background:var(--blue);
+     }
+
+     .wy-menu-vertical li.toctree-l2.current li.toctree-l3>a:hover{
+         color: var(--grey);
+         background:var(--blue);
+     }
+
+     .wy-menu-vertical li.toctree-l3.current li.toctree-l4>a:hover{
+           color: var(--grey);
+           background:var(--blue);
+     }
+
+    .wy-side-nav-search {
+
+        background:var(--grey); /*rgb(30,115,190);*/
+
+    }
+
+    .wy-menu-vertical a{
+      color:var(--blue);
+      text-decoration: none;
+    }
+
+    .wy-menu-vertical li.current{
+        color:var(--blue);
+    }
+
+    .wy-menu-vertical li{
+        color:var(--blue);
+    }
+
+    .wy-menu-vertival a:current {
+      color:var(--grey);
+    }
+
+    .wy-menu-vertical a:hover{
+        background-color:var(--blue);
+        color:var(--grey);
+    }
+
+    .fa-home::before, .icon-home::before {
+        content:"";
+    }
+
+    a.icon-home {
+        width: 50%;
+        margin-left: -6px;
+        font-size: 0%;
+        content:url("http://dias-net.org/wp-content/uploads/2016/08/silver-nodes-above-extended.png");
+    }
+
+    .wy-nav-content{
+        max-width: initial;
+        background:var(--blue);
+        color:var(--grey);
+    }
+
+    /*nav top current directory, delete link underline*/
+    .wy-breadcrumbs li a:first-child{
+      text-decoration: none;
+    }
+
+
+    /*buton colors*/
+    .btn-neutral {
+        color: var(--blue) !important;
+        background-color: var(--grey) !important;
+    }
+    .btn-neutral:visited {
+        color: var(--blue) !important;
+        background-color: var(--grey) !important;
+    }
+
+    /*codeblock color*/
+    .rst-content div[class^='highlight'] pre{
+      color:black;
+      border-radius:3px; /*rounded corners*/
+    }
+
+    /*make sure tables do no have white backgrounds*/
+    .rst-content table.docutils:not(.field-list) tr:nth-child(2n-1) td {
+      background-color:var(--blue)
+    }
+
+    /*color of table header*/
+    .rst-content table.docutils thead{
+      color:var(--grey) !important;
+    }
+
+    /*table title thick border*/
+    .rst-content table.docutils thead th{
+      border-bottom: solid 2px;
+      border-top: solid 2px;
+      border-left: solid 2px;
+      border-right: solid 2px;
+    }
+
+    /*code block line numbers*/
+    div.linenodiv pre{
+      color:var(--grey) !important;
+      border-radius:0 !important;
+    }
+
+    /*codeblock grey background*/
+    div.highlight pre{
+      background-color:var(--grey);
+    }
+
+    /*rounded corners on images*/
+    .rst-content .section>img{
+      border-radius:3px;
+    }
+
+    /*rounded corners on codeblocks*/
+    .rst-content div[class^='highlight']{
+        border-radius:3px;
+    }
+
+  </style>
+
+
+</body>
+</html>

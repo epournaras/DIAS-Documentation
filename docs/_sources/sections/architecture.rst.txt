@@ -8,5 +8,5 @@ Deployment Architecture
    architecture/gateway
    architecture/bootstrap.process
    architecture/mock.devices
-   architecture/multi.machine.setup
    architecture/dias.logging
+   architecture/multi.machine.setup

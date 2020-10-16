@@ -589,7 +589,7 @@ Glossary
 
 .. |json_link| raw:: html
 
-  <a href="https://www.json.orghttps://www.json.org" target="_blank">Read more.</a>
+  <a href="https://www.json.org" target="_blank">Read more.</a>
 
 .. |zeromq_link| raw:: html
 

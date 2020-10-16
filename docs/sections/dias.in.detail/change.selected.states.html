@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Changing of possible states" href="change.possible.states.html" />
-    <link rel="prev" title="Aggregation Mechanism" href="aggregation.mechanism.html" /> 
+    <link rel="next" title="Join and Leave" href="join.and.leave.html" />
+    <link rel="prev" title="Changing of possible states" href="change.possible.states.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -89,13 +89,13 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../dias.in.detail.html">How DIAS Works</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="conceptual.architecture.html">Conceptual Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="aggregation.mechanism.html">Aggregation Mechanism</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Changing of selected states</a></li>
 <li class="toctree-l2"><a class="reference internal" href="change.possible.states.html">Changing of possible states</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Changing of selected states</a></li>
 <li class="toctree-l2"><a class="reference internal" href="join.and.leave.html">Join and Leave</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Carrier.peer.html">Carrier Peer</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Deployment Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gui.html">GUIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../protopeer.html">Protopeer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dias-logging-system.html">DIAS Logging System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
@@ -168,6 +168,9 @@
             
   <div class="section" id="changing-of-selected-states">
 <h1>Changing of selected states<a class="headerlink" href="#changing-of-selected-states" title="Permalink to this headline">¶</a></h1>
+<p>The selected state is a selected element of the elements in the possible states.</p>
+<p>Upon receiving a new selected state through a SelectedStateMessage, the internal selected state gets changed.</p>
+<p><strong>Note:</strong> The selected state only gets changed, if the newly received one is a valid element of the internally stored possible states.</p>
 </div>
 
 
@@ -178,10 +181,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="change.possible.states.html" class="btn btn-neutral float-right" title="Changing of possible states" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="join.and.leave.html" class="btn btn-neutral float-right" title="Join and Leave" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="aggregation.mechanism.html" class="btn btn-neutral float-left" title="Aggregation Mechanism" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="change.possible.states.html" class="btn btn-neutral float-left" title="Changing of possible states" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -219,9 +222,19 @@
     
 
   <style>
+    /*To underline text*/
+    .underline {
+      text-decoration: underline;
+    }
+
+
+      /*To underline bold text*/
+      .underlinebold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
     /* Sidebar header (and topbar for mobile) */
-
-
 
 
 
@@ -265,6 +278,10 @@
         color:/**#eee;*/var(--blue);
 
 
+     }
+
+     .wy-nav-content-wrap{
+       background: var(--grey);
      }
 
      .wy-menu-vertical li.toctree-l1.current>a {

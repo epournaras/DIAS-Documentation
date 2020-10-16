@@ -32,8 +32,6 @@ DIAS stands for Dynamic Intelligent Aggregation Service.
 The original research paper can be found at http://evangelospournaras.com/wordpress/wp-content/uploads/2013/04/Multi-level-Reconfigurable-Self-organization-in-Overlay-Services1.pdf.
 
 
-**Documentation**
-
 .. toctree::
    :maxdepth: 2
    :caption: Contents
@@ -42,11 +40,12 @@ The original research paper can be found at http://evangelospournaras.com/wordpr
    sections/quickstart
    sections/dias.in.detail
    sections/architecture
-   sections/gui
    sections/protopeer
    sections/dias-logging-system
    sections/applications
    sections/glossary
+
+.. sections/gui
 
 
 Installation

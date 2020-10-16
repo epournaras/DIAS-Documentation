@@ -3,8 +3,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -14,27 +13,29 @@
   
 
   
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Aggregation Mechanism" href="aggregation.mechanism.html" />
@@ -52,7 +53,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> DIAS-Documentation
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> DIAS-Documentation
           
 
           
@@ -75,6 +76,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -87,15 +89,23 @@
 <li class="toctree-l1"><a class="reference internal" href="../pre.requisites.html">Pre-requisites</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../dias.in.detail.html">How DIAS Works</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Conceptual Architecture</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Conceptual Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#peerlets">Peerlets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#aggregator">Aggregator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#disseminator">Disseminator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bloom-filters">Bloom Filters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#zeromqreqreplistener">ZeroMQReqRepListener</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="aggregation.mechanism.html">Aggregation Mechanism</a></li>
-<li class="toctree-l2"><a class="reference internal" href="change.selected.states.html">Changing of selected states</a></li>
-<li class="toctree-l2"><a class="reference internal" href="change.possible.states.html">Changing of possible states</a></li>
+<li class="toctree-l2"><a class="reference internal" href="change.states.html">Changing of states</a></li>
 <li class="toctree-l2"><a class="reference internal" href="join.and.leave.html">Join and Leave</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Carrier.peer.html">Carrier Peer</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Deployment Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gui.html">GUIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../protopeer.html">Protopeer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dias-logging-system.html">DIAS Logging System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
@@ -105,6 +115,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -143,7 +154,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../dias.in.detail.html">How DIAS Works</a> &raquo;</li>
         
@@ -168,10 +179,138 @@
             
   <div class="section" id="conceptual-architecture">
 <h1>Conceptual Architecture<a class="headerlink" href="#conceptual-architecture" title="Permalink to this headline">¶</a></h1>
-<p>The exact process by which DIAS performs aggregations is described below.</p>
-<p>This process is not simple, for a number of reasons, but it is primarily due to the use of Bloom Filters. Because Bloom filters can generate false positives by their very design, the use of Bloom Filters in a DIAS network creates an uncertainty since it is no longer possible to keep track of communication history with 100% certainty. In order to decrease the probability of incorrect decisions, additional checks are made to reduce noise and therefore increase the precision of the aggregation.</p>
-<p>The second reason is due to information latency in large networks. Uncertainty exists because information does not spread instantaneously throughout the network, which again generates a source of noise in the aggregation.</p>
-<p>The exact process by which a peer uses all available information that it has collected in order to update it’s aggregate estimates is described below.</p>
+<div class="section" id="peerlets">
+<h2>Peerlets<a class="headerlink" href="#peerlets" title="Permalink to this headline">¶</a></h2>
+<p>DIAS is an intricate system with many parts, the most important are briefly explained in this section.</p>
+<p>DIAS builds on <a class="reference internal" href="../protopeer.html#protopeer"><span class="std std-ref">Protopeer</span></a>, which is modular and allows easy creation of submodules for a protopeer peer.
+The submodules are called peerlets, the most important peerlets are:</p>
+<ul class="simple">
+<li><p>Aggregator</p></li>
+<li><p>Disseminator</p></li>
+<li><p>RealTimeDiasApp</p></li>
+</ul>
+<div class="section" id="aggregator">
+<h3>Aggregator<a class="headerlink" href="#aggregator" title="Permalink to this headline">¶</a></h3>
+<p>The aggregator is responsible for the aggregation of the data distributed in the DIAS network, it is present in all aggregating DIAS peers.
+There are multiple aggregates supported:</p>
+<ul class="simple">
+<li><p>average (=avg)</p></li>
+<li><p>sum</p></li>
+<li><p>maximum value (=max)</p></li>
+<li><p>minimum value (=min)</p></li>
+<li><p>the number uf currently aggregating (joined) peers (=count)</p></li>
+</ul>
+<p>The aggregated data takes the selected state of all joined peers into consideration.
+If a peer does not yet have a selected state, or it currently left the network, it will not affect the aggregates.</p>
+<p>The aggregation process is thoroughly described in the section “<a class="reference internal" href="aggregation.mechanism.html#aggregation-mechanism"><span class="std std-ref">Aggregation Mechanism</span></a>”</p>
+</div>
+<div class="section" id="disseminator">
+<h3>Disseminator<a class="headerlink" href="#disseminator" title="Permalink to this headline">¶</a></h3>
+<p>The disseminator is responsible for the communication between different peers, it is present in all DIAS peers in the network.</p>
+<p>To keep track of which peers were already notified about the own state, the Disseminator keeps track of those information in a counting bloom filter, allowing additions and removals, to keep the information up to date.
+Read more about <a href="https://en.wikipedia.org/wiki/Counting_Bloom_filter" target="_blank">Counting Bloom Filter</a>, <a class="reference internal" href="aggregation.mechanism.html#aggregation-mechanism"><span class="std std-ref">Aggregation Mechanism</span></a></p>
+</div>
+<div class="section" id="bloom-filters">
+<h3>Bloom Filters<a class="headerlink" href="#bloom-filters" title="Permalink to this headline">¶</a></h3>
+<p>There are 4 different bloom filters used in DIAS for storing different memberships.</p>
+<ul>
+<li><div class="line-block">
+<div class="line">Aggregator j membership in disseminator i, called <strong>AMD</strong></div>
+<div class="line-block">
+<div class="line">Disseminator of peer i stores the identifier of the aggregator of peer j to which it has disseminated its own selected state at least once.</div>
+<div class="line">This means this membership is present in a disseminator, if the aggregator in question has received the own selected state.</div>
+</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">Aggregator j membership in a Possible state s of peer i, called <strong>AMS</strong></div>
+<div class="line-block">
+<div class="line">Disseminator of peer i stores the identifier of the aggregator of peer j for each possible state s aggregated by Aggregator j.</div>
+<div class="line">This means this membership is present, if the selected state in question comes from the aggregator in question.</div>
+</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">Disseminator i membership in Aggregator j, called <strong>DMA</strong></div>
+<div class="line-block">
+<div class="line">The aggregator of peer j stores the identifier of the Disseminator of peer i from which it has aggregated its selected state at least once.</div>
+<div class="line">This means this membership is present, if the aggregator received the selected state of the disseminator in question and used it in its own aggregation.</div>
+</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">Selected state s membership in aggregate j, called <strong>SMA</strong></div>
+<div class="line-block">
+<div class="line">The aggregator of peer j stores the identifier of a selected state s aggregated from a disseminator of a peer.</div>
+<div class="line">This means this membership is present, if the aggregator used the selected state in question in its own aggregation.</div>
+</div>
+</div>
+</li>
+</ul>
+<p>AMD and AMS are present in the Disseminator, DMA and SMA are present in the Aggregator of a peer.</p>
+</div>
+<div class="section" id="zeromqreqreplistener">
+<h3>ZeroMQReqRepListener<a class="headerlink" href="#zeromqreqreplistener" title="Permalink to this headline">¶</a></h3>
+<p>This peerlet is in all aggregating peers, it keeps the connection between the peer and the connected device, it demultiplexes all incoming messages and notifies the correspndong correct peerlets.</p>
+<dl>
+<dt><strong>Note:</strong></dt><dd><div class="line-block">
+<div class="line">The messages are only checked, if the sender is the initially paired sender.</div>
+<div class="line">The first time the peerlet receives a message from a device, the pairing is saved.</div>
+</div>
+</dd>
+</dl>
+<p>The following messages can be interpreted by this peerlet:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Message</p></th>
+<th class="head"><p>Action</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>LeaveMessage</p></td>
+<td><p>Tells the peer to leave the network</p></td>
+</tr>
+<tr class="row-odd"><td><p>PingMessage</p></td>
+<td><p>Asks the peer to send a PongMessage</p></td>
+</tr>
+<tr class="row-even"><td><p>HearbeatMessage</p></td>
+<td><p>Sends a hearbeat, this message itself does not trigger anything, but it ensures that the peer does not time out.</p></td>
+</tr>
+<tr class="row-odd"><td><p>SensorCommandMessage</p></td>
+<td><p>This message is at the moment only used to set the timeout threshold of the peer to a desired value.</p></td>
+</tr>
+<tr class="row-even"><td><p>AggregateRequestMessage</p></td>
+<td><p>This message requests the current aggregate from the peer, the peer answers with the requested value, or with a nok message, if the aggregate is not available.
+The following aggregates are available (see <a class="reference internal" href="#aggregator"><span class="std std-ref">Aggregator</span></a>):</p>
+<ul class="simple">
+<li><p>avg</p></li>
+<li><p>sum</p></li>
+<li><p>max</p></li>
+<li><p>min</p></li>
+<li><p>count</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>StartAggregationMessage</p></td>
+<td><p>This message triggers the initial start for aggregation, before this message is received, the peer is offline and is not aggregating.</p></td>
+</tr>
+<tr class="row-even"><td><p>StopAggregationMessage</p></td>
+<td><p>This message stops the aggregation and leaves the network</p></td>
+</tr>
+<tr class="row-odd"><td><p>PossibleStatesMessage</p></td>
+<td><p>This message sets the possible states to the given values, see <a class="reference internal" href="change.states.html#changing-of-possible-states"><span class="std std-ref">Changing of possible states</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>SelectedStateMessage</p></td>
+<td><p>This message sets the selected state to the given values under some constraints, see <a class="reference internal" href="change.states.html#changing-of-selected-states"><span class="std std-ref">Changing of selected states</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 
 
@@ -194,11 +333,19 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2019, Edward Gaere
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -209,7 +356,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
@@ -223,9 +369,19 @@
     
 
   <style>
+    /*To underline text*/
+    .underline {
+      text-decoration: underline;
+    }
+
+
+      /*To underline bold text*/
+      .underlinebold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
     /* Sidebar header (and topbar for mobile) */
-
-
 
 
 
@@ -269,6 +425,10 @@
         color:/**#eee;*/var(--blue);
 
 
+     }
+
+     .wy-nav-content-wrap{
+       background: var(--grey);
      }
 
      .wy-menu-vertical li.toctree-l1.current>a {

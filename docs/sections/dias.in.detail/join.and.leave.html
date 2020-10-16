@@ -3,8 +3,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -14,31 +13,33 @@
   
 
   
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Deployment Architecture" href="../architecture.html" />
-    <link rel="prev" title="Changing of possible states" href="change.possible.states.html" /> 
+    <link rel="next" title="Carrier Peer" href="Carrier.peer.html" />
+    <link rel="prev" title="Changing of states" href="change.states.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -52,7 +53,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> DIAS-Documentation
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> DIAS-Documentation
           
 
           
@@ -75,6 +76,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -89,13 +91,22 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../dias.in.detail.html">How DIAS Works</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="conceptual.architecture.html">Conceptual Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="aggregation.mechanism.html">Aggregation Mechanism</a></li>
-<li class="toctree-l2"><a class="reference internal" href="change.selected.states.html">Changing of selected states</a></li>
-<li class="toctree-l2"><a class="reference internal" href="change.possible.states.html">Changing of possible states</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Join and Leave</a></li>
+<li class="toctree-l2"><a class="reference internal" href="change.states.html">Changing of states</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Join and Leave</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#leave">Leave</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#graceful-leave">Graceful Leave</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tiemout-leave">Tiemout Leave</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#leaving-process">Leaving Process</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#join">Join</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#special-cases">Special Cases</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Carrier.peer.html">Carrier Peer</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Deployment Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gui.html">GUIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../protopeer.html">Protopeer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dias-logging-system.html">DIAS Logging System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
@@ -105,6 +116,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -143,7 +155,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../dias.in.detail.html">How DIAS Works</a> &raquo;</li>
         
@@ -168,6 +180,63 @@
             
   <div class="section" id="join-and-leave">
 <h1>Join and Leave<a class="headerlink" href="#join-and-leave" title="Permalink to this headline">¶</a></h1>
+<p>A peer is able to join and leave the running network.</p>
+<div class="section" id="leave">
+<h2>Leave<a class="headerlink" href="#leave" title="Permalink to this headline">¶</a></h2>
+<p>There is a graceful leave and a timeout leave.</p>
+<div class="section" id="graceful-leave">
+<h3>Graceful Leave<a class="headerlink" href="#graceful-leave" title="Permalink to this headline">¶</a></h3>
+<p>On a graceful leave, the device notifies the peer that it is leaving, the communication between the device and the peer is stopped until further notice.
+If the DIAS node is currently joined in the network, it sets a flag, such that it leaves in the next iteration.
+If the node is currently not joined, the device communication handler ignores the request and notifies the requester, that the node has already left the system.</p>
+</div>
+<div class="section" id="tiemout-leave">
+<h3>Tiemout Leave<a class="headerlink" href="#tiemout-leave" title="Permalink to this headline">¶</a></h3>
+<p>On a timeout leave, the peer leaves the network due to no received messages from the device over a predefined period of time.
+Every time the device communication handler receives a message from the connected device, it saves the timestamp in the DIAS node.
+In every iteration of the node, it checks, if the last received message exceeds a specified threshold.
+If this is the case, the node sets a flag to leave in the next iteration.</p>
+</div>
+<div class="section" id="leaving-process">
+<h3>Leaving Process<a class="headerlink" href="#leaving-process" title="Permalink to this headline">¶</a></h3>
+<p>When a node leaves the network, it stops aggregating and starts sleeping. This happens when the leave flag is set.
+In order for the peer to still have information about the network and its neighbors, the node sends its Disseminator to a <a class="reference internal" href="Carrier.peer.html#carrier-peer"><span class="std std-ref">Carrier Peer</span></a> before stopping its service.
+For this, it selects a random carrier peer of it’s list of available carriers.
+It then sends it’s disseminator to this selected carrier peer and stops all it’s actions.</p>
+<p>If the node leaving is a carrier, it distributes all it’s collected disseminators to other carrier peers before leaving.</p>
+</div>
+</div>
+<div class="section" id="join">
+<h2>Join<a class="headerlink" href="#join" title="Permalink to this headline">¶</a></h2>
+<p>When a peer receives any message from a device, it reactivates itself, joining the network again in the process.
+In order to rejoin, it notifies all carrier peers that it needs its disseminator back.
+Since the disseminator could have changed carrier since the node left the network, it cannot directly notify the carrier carrying the disseminator, as it does not know which carrier has it.
+Instead, it sets a flag with a UUID, which matches the one the disseminator carries.
+When the carriernotices this flag, it will then send back the matching disseminator to the DIAS node.
+Since most of the operations of a DIAS node need a working disseminator, the node cannot return to normal operation before successfully receiving said disseminator.
+Because of that, the node waits for the disseminator, before starting itself up.
+After that, the flag gets removed again, and the node returns to normal operation.</p>
+</div>
+<div class="section" id="special-cases">
+<h2>Special Cases<a class="headerlink" href="#special-cases" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><strong>The peer wants to leave the network and thus send it’s disseminator to a carrier peer, but it seems to have no disseminator</strong></p></li>
+</ul>
+<p>This case can only happen after rejoining the network, before the node received its disseminator back from a carrier.
+The node simply skips the whole leaving process, but leaves the leave flag set.
+This way, it will try to leave again in the next iteration, when the disseminator hopefully returned.</p>
+<ul class="simple">
+<li><p><strong>The peer wants to leave the network and thus send it’s disseminator to a carrier peer, but it can’t find any carrier peers</strong></p></li>
+</ul>
+<p>This case should only happen after rejoining the network, before it hase enough knowledge of its neighbors and the carrier peers within.
+When handling a leave request in the device communication manager, it waits for carrier peers do appear in the view of the DIAS node, before notifying it to leave.
+If the leave is triggered by a timeout, it should always have a carrier in its view and should thus not be a problem for the system.
+If this case would still happen, and the DIAS node is trying with no carriers in its view, it stops the peer, such that the last logging information is from the malicious state.</p>
+<ul class="simple">
+<li><p><strong>The peer waits for its disseminator, but then actually receives it twice</strong></p></li>
+</ul>
+<p>It simply ignores the second disseminator, as it already has received it before.</p>
+</div>
 </div>
 
 
@@ -178,10 +247,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../architecture.html" class="btn btn-neutral float-right" title="Deployment Architecture" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Carrier.peer.html" class="btn btn-neutral float-right" title="Carrier Peer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="change.possible.states.html" class="btn btn-neutral float-left" title="Changing of possible states" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="change.states.html" class="btn btn-neutral float-left" title="Changing of states" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -190,11 +259,19 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2019, Edward Gaere
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -205,7 +282,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
@@ -219,9 +295,19 @@
     
 
   <style>
+    /*To underline text*/
+    .underline {
+      text-decoration: underline;
+    }
+
+
+      /*To underline bold text*/
+      .underlinebold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
     /* Sidebar header (and topbar for mobile) */
-
-
 
 
 
@@ -265,6 +351,10 @@
         color:/**#eee;*/var(--blue);
 
 
+     }
+
+     .wy-nav-content-wrap{
+       background: var(--grey);
      }
 
      .wy-menu-vertical li.toctree-l1.current>a {

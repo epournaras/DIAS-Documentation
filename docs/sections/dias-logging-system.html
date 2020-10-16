@@ -3,8 +3,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -14,27 +13,29 @@
   
 
   
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Applications" href="applications.html" />
@@ -52,7 +53,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> DIAS-Documentation
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> DIAS-Documentation
           
 
           
@@ -75,6 +76,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -88,7 +90,6 @@
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dias.in.detail.html">How DIAS Works</a></li>
 <li class="toctree-l1"><a class="reference internal" href="architecture.html">Deployment Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gui.html">GUIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="protopeer.html">Protopeer</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">DIAS Logging System</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
@@ -112,6 +113,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -150,7 +152,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>DIAS Logging System</li>
     
@@ -180,24 +182,24 @@
 <p>For a quick start, jump directly to the section “Using DIAS-Logging-System in your application”, below.</p>
 <p>Initially, logging within DIAS was performed using log4j, a classic logging tool widely used by Java developers that works well on simple applications but has major shortcomings in peer-to-peer applications. Already with 30 peers in a network, basic text-based log4j logfiles become difficult to handle, for the following reasons:</p>
 <ul class="simple">
-<li><ol class="first arabic">
-<li>Multiplicity of log files. Since there is one logfile per peer, it is inconvenient to browse through N different logfiles</li>
+<li><ol class="arabic simple">
+<li><p>Multiplicity of log files. Since there is one logfile per peer, it is inconvenient to browse through N different logfiles</p></li>
 </ol>
 </li>
-<li><ol class="first arabic" start="2">
-<li>Requirement to write a multitude of Python and/or other scripts for post-processing logfiles</li>
+<li><ol class="arabic simple" start="2">
+<li><p>Requirement to write a multitude of Python and/or other scripts for post-processing logfiles</p></li>
 </ol>
 </li>
-<li><ol class="first arabic" start="3">
-<li>Difficulty to perform complex event processing to correlate data points generated within peers and amongst peers, throughout the network</li>
+<li><ol class="arabic simple" start="3">
+<li><p>Difficulty to perform complex event processing to correlate data points generated within peers and amongst peers, throughout the network</p></li>
 </ol>
 </li>
-<li><ol class="first arabic" start="4">
-<li>Query times get long, especially as the size grow large when simulations run over several weeks</li>
+<li><ol class="arabic simple" start="4">
+<li><p>Query times get long, especially as the size grow large when simulations run over several weeks</p></li>
 </ol>
 </li>
-<li><ol class="first arabic" start="5">
-<li>It is not guaranteed to have a decent network file system (such as NFS) that can support heavy writing. Such was the case on the ETH Euler supercomputer</li>
+<li><ol class="arabic simple" start="5">
+<li><p>It is not guaranteed to have a decent network file system (such as NFS) that can support heavy writing. Such was the case on the ETH Euler supercomputer</p></li>
 </ol>
 </li>
 </ul>
@@ -206,56 +208,53 @@
 <h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
 <p>Thus we designed the DIAS-Logging-System around a single PostgreSQL database with the following four objectives:</p>
 <ul>
-<li><ol class="first arabic simple">
-<li>Simplified analysis</li>
+<li><ol class="arabic simple">
+<li><p>Simplified analysis</p></li>
 </ol>
 <blockquote>
 <div><ul class="simple">
-<li>Leverage the powerful SQL language, rather than ad-hoc scripts such as Python and sql to post-process logfiles</li>
-<li>Using SQL, it becomes easy to understand interactions within components the components  (peerlets) of a peer as well as between peers, using built-in SQL JOIN operations. This also paves the way for complex event processing, where different types in different parts of the system can be easily brought together for correlation analysis</li>
-<li>Enable time-series analysis, e.g to observe the evolution of aggregates or memory usage over time</li>
+<li><p>Leverage the powerful SQL language, rather than ad-hoc scripts such as Python and sql to post-process logfiles</p></li>
+<li><p>Using SQL, it becomes easy to understand interactions within components the components  (peerlets) of a peer as well as between peers, using built-in SQL JOIN operations. This also paves the way for complex event processing, where different types in different parts of the system can be easily brought together for correlation analysis</p></li>
+<li><p>Enable time-series analysis, e.g to observe the evolution of aggregates or memory usage over time</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><ol class="first arabic simple" start="2">
-<li>Support for multiple peers on multiple hosts</li>
+<li><ol class="arabic simple" start="2">
+<li><p>Support for multiple peers on multiple hosts</p></li>
 </ol>
 <blockquote>
 <div><ul class="simple">
-<li>With peers located on different servers, possibly on different networks across the Internet, the logging data should be stored in a single database, accessible from all peers</li>
-<li>Even when peers are on the same private network with a common shared file stotrage, NFS may not provide the necessary throughput to sustain heavy logging from many peers</li>
+<li><p>With peers located on different servers, possibly on different networks across the Internet, the logging data should be stored in a single database, accessible from all peers</p></li>
+<li><p>Even when peers are on the same private network with a common shared file stotrage, NFS may not provide the necessary throughput to sustain heavy logging from many peers</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><ol class="first arabic simple" start="3">
-<li>Lightweight, simple to use and efficient</li>
+<li><ol class="arabic simple" start="3">
+<li><p>Lightweight, simple to use and efficient</p></li>
 </ol>
 <blockquote>
 <div><ul class="simple">
-<li>Minimise impact on real-time applications</li>
-<li>Global static function calls allow logging from anywhere within your code without need to pass references around the classes</li>
-<li>Simple drop-copy replacement for System.out.print statements to minimise refactoring time towards the DIAS-Logging-System</li>
+<li><p>Minimise impact on real-time applications</p></li>
+<li><p>Global static function calls allow logging from anywhere within your code without need to pass references around the classes</p></li>
+<li><p>Simple drop-copy replacement for System.out.print statements to minimise refactoring time towards the DIAS-Logging-System</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><ol class="first arabic simple" start="4">
-<li>Scaling and real-time</li>
+<li><ol class="arabic simple" start="4">
+<li><p>Scaling and real-time</p></li>
 </ol>
 <blockquote>
 <div><ul>
-<li><p class="first">The DIAS-Logging-System can scale to hundreds of peers running over periods of weeks and months</p>
+<li><p>The DIAS-Logging-System can scale to hundreds of peers running over periods of weeks and months</p>
 <blockquote>
 <div><ul class="simple">
-<li>The DIAS-GDELT experiment has been successfully running for 6 months on the DIAS-Logging-System without a single failure</li>
+<li><p>The DIAS-GDELT experiment has been successfully running for 6 months on the DIAS-Logging-System without a single failure</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first">Fast access to the logs, using database tuning techniques such as partitioning and indexing</p>
-</li>
-<li><p class="first">The ability to perform analysis on the logging in real-time, and to allow for dashboards (Tableau, Qlik, etc)</p>
-</li>
-<li><p class="first">Fast write speeds several K msgs /sec</p>
-</li>
+<li><p>Fast access to the logs, using database tuning techniques such as partitioning and indexing</p></li>
+<li><p>The ability to perform analysis on the logging in real-time, and to allow for dashboards (Tableau, Qlik, etc)</p></li>
+<li><p>Fast write speeds several K msgs /sec</p></li>
 </ul>
 </div></blockquote>
 </li>
@@ -265,28 +264,28 @@
 <h2>Components<a class="headerlink" href="#components" title="Permalink to this headline">¶</a></h2>
 <p>With these objectives in mind, DIAS-Logging-System was designed using the following code components.</p>
 <ul>
-<li><p class="first">A single PostgreSQL database, containing all the logging data from all peers</p>
+<li><p>A single PostgreSQL database, containing all the logging data from all peers</p>
 <blockquote>
 <div><ul class="simple">
-<li>Using database tuning techniques such as partitioning and indexing</li>
+<li><p>Using database tuning techniques such as partitioning and indexing</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first">A single persistence demaon, accessible by all peers in the network, that listens to ZeroMQ messages with logging information sent by the peers</p>
+<li><p>A single persistence demaon, accessible by all peers in the network, that listens to ZeroMQ messages with logging information sent by the peers</p>
 <blockquote>
 <div><ul class="simple">
-<li>simple Single location for the data -&gt; single connection to database, commit rate</li>
-<li>The daemon listens to logging information on a pull port, and persists all received messages to the PostgreSQL database</li>
-<li>Fast write speeds supporting several thousand msgs /sec sustained over time</li>
+<li><p>simple Single location for the data -&gt; single connection to database, commit rate</p></li>
+<li><p>The daemon listens to logging information on a pull port, and persists all received messages to the PostgreSQL database</p></li>
+<li><p>Fast write speeds supporting several thousand msgs /sec sustained over time</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first">The users only needs to implement simple logging functions, with the same behavior as basic printing functions such ZeroMQ messaging</p>
+<li><p>The users only needs to implement simple logging functions, with the same behavior as basic printing functions such ZeroMQ messaging</p>
 <blockquote>
 <div><ul class="simple">
-<li>RawLog</li>
-<li>EventLog</li>
-<li>MemLog</li>
+<li><p>RawLog</p></li>
+<li><p>EventLog</p></li>
+<li><p>MemLog</p></li>
 </ul>
 </div></blockquote>
 </li>
@@ -298,19 +297,18 @@
 <h2>Code examples<a class="headerlink" href="#code-examples" title="Permalink to this headline">¶</a></h2>
 <p>Currently there are three supported mechanisms for logging data:</p>
 <ul>
-<li><p class="first">Rawlog, free-form text logging, used as a replacement to System.out.print</p>
-</li>
-<li><p class="first">Memlog, used to sample memory footprint of Java objects at regular intervals</p>
+<li><p>Rawlog, free-form text logging, used as a replacement to System.out.print</p></li>
+<li><p>Memlog, used to sample memory footprint of Java objects at regular intervals</p>
 <blockquote>
 <div><ul class="simple">
-<li>Performs deep traversal of objects in order to obtain total memory size of collections as well as the contained objects, recursively</li>
+<li><p>Performs deep traversal of objects in order to obtain total memory size of collections as well as the contained objects, recursively</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first">Eventlog, used to understand event sequences within peers and/or amongst sets of peers</p>
+<li><p>Eventlog, used to understand event sequences within peers and/or amongst sets of peers</p>
 <blockquote>
 <div><ul class="simple">
-<li>This is basically a more structured form of logging, which works well with scripts such as SQL or Python for more complex analyses</li>
+<li><p>This is basically a more structured form of logging, which works well with scripts such as SQL or Python for more complex analyses</p></li>
 </ul>
 </div></blockquote>
 </li>
@@ -319,20 +317,19 @@
 <div class="section" id="code-examples-rawlog">
 <h2>Code examples: RawLog<a class="headerlink" href="#code-examples-rawlog" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first">RawLog is designed as a drop-copy replacement for System.out.printf</p>
-</li>
-<li><p class="first">The function takes 2 arguments</p>
+<li><p>RawLog is designed as a drop-copy replacement for System.out.printf</p></li>
+<li><p>The function takes 2 arguments</p>
 <blockquote>
 <div><ul class="simple">
-<li>The log level, a number between 1 and 3 representing respectively an information, a warning or an error message</li>
-<li>Any string to be persisted</li>
+<li><p>The log level, a number between 1 and 3 representing respectively an information, a warning or an error message</p></li>
+<li><p>Any string to be persisted</p></li>
 </ul>
 </div></blockquote>
 </li>
 </ul>
-<div class="code sql highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">printf</span><span class="p">(</span> <span class="s2">&quot;DIASlight created</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="p">);</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">System</span><span class="p">.</span><span class="k">out</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span> <span class="ss">&quot;DIASlight created\n&quot;</span> <span class="p">);</span>
 
-<span class="n">RawLog</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;DIASLight::SendBootstrapHello&quot;</span><span class="p">);</span>
+<span class="n">RawLog</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="ss">&quot;DIASLight::SendBootstrapHello&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p><em>Code snippet:</em> Java code to add a free-form logging message to the DIAS-Logging-System. The number ‘1’ indicates level info</p>
@@ -340,58 +337,49 @@
 <div class="section" id="code-examples-eventlog">
 <h2>Code examples: EventLog<a class="headerlink" href="#code-examples-eventlog" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first">EventLog is designed to understand code execution sequence within a peer and across multiple peers</p>
-</li>
-<li><p class="first">It is different than RawLog in that it is structured, allowing for side-by-side comparison of events within and across peers</p>
-</li>
-<li><p class="first">Furthermore, the EventLog automatically records the id of the calling thread allowing insights into potential issues regarding thread synchronisation</p>
-</li>
-<li><p class="first">The function takes 4 arguments</p>
+<li><p>EventLog is designed to understand code execution sequence within a peer and across multiple peers</p></li>
+<li><p>It is different than RawLog in that it is structured, allowing for side-by-side comparison of events within and across peers</p></li>
+<li><p>Furthermore, the EventLog automatically records the id of the calling thread allowing insights into potential issues regarding thread synchronisation</p></li>
+<li><p>The function takes 4 arguments</p>
 <blockquote>
 <div><ul class="simple">
-<li>The name of the calling class, e.g. DIAS</li>
-<li>The name of the calling function, e.g. start</li>
-<li>A key, e.g. “alreadyStarted”</li>
-<li>A value (text), e.g. “True”</li>
+<li><p>The name of the calling class, e.g. DIAS</p></li>
+<li><p>The name of the calling function, e.g. start</p></li>
+<li><p>A key, e.g. “alreadyStarted”</p></li>
+<li><p>A value (text), e.g. “True”</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first">The EventLog automatically records the id of the calling thread allowing insights into potential issues regarding thread synchronisation</p>
-</li>
+<li><p>The EventLog automatically records the id of the calling thread allowing insights into potential issues regarding thread synchronisation</p></li>
 </ul>
-<div class="code sql highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">EventLog</span><span class="o">.</span><span class="n">logEvent</span><span class="p">(</span><span class="s2">&quot;DIAS&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">,</span>  <span class="s2">&quot;alreadyStarted&quot;</span><span class="p">,</span> <span class="n">Boolean</span><span class="o">.</span><span class="n">toString</span><span class="p">(</span><span class="n">alreadyStarted</span><span class="p">)</span>  <span class="p">);</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">EventLog</span><span class="p">.</span><span class="n">logEvent</span><span class="p">(</span><span class="ss">&quot;DIAS&quot;</span><span class="p">,</span> <span class="ss">&quot;start&quot;</span><span class="p">,</span>  <span class="ss">&quot;alreadyStarted&quot;</span><span class="p">,</span> <span class="nb">Boolean</span><span class="p">.</span><span class="n">toString</span><span class="p">(</span><span class="n">alreadyStarted</span><span class="p">)</span>  <span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="code-examples-memlog">
 <h2>Code examples: MemLog<a class="headerlink" href="#code-examples-memlog" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first">MemLog is designed to periodically measure total memory footprint of any Java object in memory</p>
-</li>
-<li><p class="first">It’s great for detecting memory leaks that appear over time, e.g over several weeks of operation</p>
-</li>
-<li><p class="first">As explained below, MemLog uses the JAMM instrumentation agent, that traverses all elements and member variables of complex Java objects such as classes and containers</p>
-</li>
-<li><p class="first">Objects where memory monitoring is required need to be added with a call to add_object, that takes 3 arguments</p>
+<li><p>MemLog is designed to periodically measure total memory footprint of any Java object in memory</p></li>
+<li><p>It’s great for detecting memory leaks that appear over time, e.g over several weeks of operation</p></li>
+<li><p>As explained below, MemLog uses the JAMM instrumentation agent, that traverses all elements and member variables of complex Java objects such as classes and containers</p></li>
+<li><p>Objects where memory monitoring is required need to be added with a call to add_object, that takes 3 arguments</p>
 <blockquote>
 <div><ul>
-<li><p class="first">Arguments one and two are simple tags that will allow you</p>
+<li><p>Arguments one and two are simple tags that will allow you</p>
 <blockquote>
 <div><ul class="simple">
-<li>In the example below, we are using the class in which the object belongs and the name of the instantiated object</li>
+<li><p>In the example below, we are using the class in which the object belongs and the name of the instantiated object</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first">The third argument is a reference to the Java object to be monitored</p>
-</li>
+<li><p>The third argument is a reference to the Java object to be monitored</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first">One an object has been added, as per the example below, a sample of the total memory footprint of the object will be taken every 60 seconds and persisted to the memlog table</p>
-</li>
+<li><p>One an object has been added, as per the example below, a sample of the total memory footprint of the object will be taken every 60 seconds and persisted to the memlog table</p></li>
 </ul>
-<div class="code sql highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">memory</span> <span class="n">logging</span>
-<span class="n">MemLog</span><span class="o">.</span><span class="n">add_object</span><span class="p">(</span><span class="s2">&quot;DIASlight&quot;</span><span class="p">,</span> <span class="s2">&quot;dumper&quot;</span><span class="p">,</span> <span class="n">this</span><span class="o">.</span><span class="n">dumper</span><span class="p">);</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">memory</span> <span class="n">logging</span>
+<span class="n">MemLog</span><span class="p">.</span><span class="n">add_object</span><span class="p">(</span><span class="ss">&quot;DIASlight&quot;</span><span class="p">,</span> <span class="ss">&quot;dumper&quot;</span><span class="p">,</span> <span class="n">this</span><span class="p">.</span><span class="n">dumper</span><span class="p">);</span>
 </pre></div>
 </div>
 <p><em>Code snippet:</em> Java code to add an object the MemLog. In this example, the instance of a protopeer.MeasurementFileDumper inside the DIASlight peerlet.</p>
@@ -401,93 +389,93 @@
 <p>Since the data is stored in a PostgreSQL database with fully compliant SQL support, it is straightforward to examine the logs as well as perform complex search, join and analytics.</p>
 <p><strong>RawLog: Most recent messages</strong></p>
 <ul class="simple">
-<li>Shows the 100 most recent RawLog messages, across all peers</li>
-<li>A powerful feature of the DIAS-Logging-System is the ability to observe log events across peers within a same window, as can be seen in the example below.</li>
+<li><p>Shows the 100 most recent RawLog messages, across all peers</p></li>
+<li><p>A powerful feature of the DIAS-Logging-System is the ability to observe log events across peers within a same window, as can be seen in the example below.</p></li>
 </ul>
-<div class="code sql highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SELECT</span> <span class="o">*</span> <span class="n">FROM</span> <span class="n">rawlog</span> <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">seq_id</span> <span class="n">DESC</span> <span class="n">LIMIT</span> <span class="mi">100</span><span class="p">;</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">rawlog</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">seq_id</span> <span class="k">DESC</span> <span class="k">LIMIT</span> <span class="mi">100</span><span class="p">;</span>
 </pre></div>
 </div>
 <img alt="../_images/dias-logging-system-1.png" src="../_images/dias-logging-system-1.png" />
 <p><em>Figure:</em> Latest 100 RawLog messages, across all peers</p>
 <p><strong>RawLog: Only messages of a given peer, that contain certain text</strong></p>
-<div class="code sql highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SELECT</span> <span class="o">*</span> <span class="n">FROM</span> <span class="n">rawlog</span> <span class="n">WHERE</span> <span class="n">peer</span> <span class="o">=</span> <span class="mi">13</span> <span class="n">AND</span> <span class="n">txt</span> <span class="n">LIKE</span> <span class="s1">&#39;LEAVE REQUEST IS TRUE!&#39;</span> <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">seq_id</span> <span class="n">DESC</span> <span class="p">;</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">rawlog</span> <span class="k">WHERE</span> <span class="n">peer</span> <span class="o">=</span> <span class="mi">13</span> <span class="k">AND</span> <span class="n">txt</span> <span class="k">LIKE</span> <span class="s1">&#39;LEAVE REQUEST IS TRUE!&#39;</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">seq_id</span> <span class="k">DESC</span> <span class="p">;</span>
 </pre></div>
 </div>
 <img alt="../_images/dias-logging-system-2.png" src="../_images/dias-logging-system-2.png" />
 <p><em>Figure:</em> Searching for messages within a given peer that contain specific text</p>
 <p><strong>RawLog: Warning and error messages</strong></p>
 <p>The rawlog table is partitionned by error_level for fast lookup</p>
-<div class="code sql highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SELECT</span> <span class="o">*</span> <span class="n">FROM</span> <span class="n">rawlog</span> <span class="n">WHERE</span> <span class="n">error_level</span> <span class="o">&gt;=</span> <span class="mi">2</span>  <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">seq_id</span> <span class="n">DESC</span> <span class="n">LIMIT</span> <span class="mi">100</span><span class="p">;</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">rawlog</span> <span class="k">WHERE</span> <span class="n">error_level</span> <span class="o">&gt;=</span> <span class="mi">2</span>  <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">seq_id</span> <span class="k">DESC</span> <span class="k">LIMIT</span> <span class="mi">100</span><span class="p">;</span>
 </pre></div>
 </div>
 <img alt="../_images/dias-logging-system-3.png" src="../_images/dias-logging-system-3.png" />
 <p><em>Figure:</em> Warning and error messages</p>
 <p><strong>EventLog: Summary of events logged</strong></p>
-<div class="code sql highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SELECT</span> <span class="n">classname</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="n">FROM</span> <span class="n">eventlog</span> <span class="n">GROUP</span> <span class="n">BY</span> <span class="n">classname</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">key</span> <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">classname</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">key</span> <span class="n">ASC</span><span class="p">;</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">classname</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="k">key</span><span class="p">,</span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">eventlog</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">classname</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="k">key</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">classname</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="k">key</span> <span class="k">ASC</span><span class="p">;</span>
 </pre></div>
 </div>
 <img alt="../_images/dias-logging-system-4.png" src="../_images/dias-logging-system-4.png" />
 <p><em>Figure:</em> Summary of the types of events stored in the event log</p>
 <p><strong>EventLog: Most recent events</strong></p>
 <ul class="simple">
-<li>The events in the eventlog table are persisted with milli-second resolution timestamp, which should provide enough resolution for most debugging applications</li>
-<li>In the below example you can observe the DIAS aggregation process taking place amongst the different peers in the network</li>
+<li><p>The events in the eventlog table are persisted with milli-second resolution timestamp, which should provide enough resolution for most debugging applications</p></li>
+<li><p>In the below example you can observe the DIAS aggregation process taking place amongst the different peers in the network</p></li>
 </ul>
-<div class="code sql highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SELECT</span> <span class="o">*</span> <span class="n">FROM</span> <span class="n">eventlog</span> <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">current_time_millis</span> <span class="n">DESC</span> <span class="n">LIMIT</span> <span class="mi">200</span><span class="p">;</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">eventlog</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">current_time_millis</span> <span class="k">DESC</span> <span class="k">LIMIT</span> <span class="mi">200</span><span class="p">;</span>
 </pre></div>
 </div>
 <img alt="../_images/dias-logging-system-5.png" src="../_images/dias-logging-system-5.png" />
 <p><em>Figure:</em> Most recent events in the event log</p>
 <p><strong>EventLog: Tracking certain events</strong></p>
 <ul class="simple">
-<li>In the below example, we observe the finger event. When each peer is started, it writes it’s IP address and port to the EventLog</li>
-<li>This allows for simple retrieval of the fingers of each peer</li>
+<li><p>In the below example, we observe the finger event. When each peer is started, it writes it’s IP address and port to the EventLog</p></li>
+<li><p>This allows for simple retrieval of the fingers of each peer</p></li>
 </ul>
-<div class="code sql highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SELECT</span> <span class="o">*</span> <span class="n">FROM</span> <span class="n">eventlog</span> <span class="n">WHERE</span> <span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;finger&#39;</span> <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">epoch</span> <span class="n">ASC</span> <span class="n">LIMIT</span> <span class="mi">200</span><span class="p">;</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">eventlog</span> <span class="k">WHERE</span> <span class="k">key</span> <span class="o">=</span> <span class="s1">&#39;finger&#39;</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">epoch</span> <span class="k">ASC</span> <span class="k">LIMIT</span> <span class="mi">200</span><span class="p">;</span>
 </pre></div>
 </div>
 <img alt="../_images/dias-logging-system-6.png" src="../_images/dias-logging-system-6.png" />
 <p><em>Figure:</em> Filtering on the event type (column ‘key’)</p>
 <p><strong>MemLog: Show the latest memory footprint for recorded objects for each peer</strong></p>
-<div class="code sql highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WITH</span> <span class="n">with_last_peer_seq_id</span> <span class="n">AS</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">WITH</span> <span class="n">with_last_peer_seq_id</span> <span class="k">AS</span>
 <span class="p">(</span>
-    <span class="n">SELECT</span>
-        <span class="n">MAX</span><span class="p">(</span><span class="n">seq_id</span><span class="p">)</span> <span class="n">AS</span> <span class="n">last_peer_seq_id</span>
+    <span class="k">SELECT</span>
+        <span class="k">MAX</span><span class="p">(</span><span class="n">seq_id</span><span class="p">)</span> <span class="k">AS</span> <span class="n">last_peer_seq_id</span>
         <span class="p">,</span><span class="n">peer</span>
         <span class="p">,</span><span class="n">object_group_name</span>
         <span class="p">,</span><span class="n">object_name</span>
-    <span class="n">FROM</span>
+    <span class="k">FROM</span>
         <span class="n">memlog</span>
-    <span class="n">GROUP</span> <span class="n">BY</span>
+    <span class="k">GROUP</span> <span class="k">BY</span>
         <span class="n">peer</span>
         <span class="p">,</span><span class="n">object_group_name</span>
         <span class="p">,</span><span class="n">object_name</span>
 <span class="p">)</span>
-<span class="o">/*</span> <span class="n">SELECT</span> <span class="o">*</span> <span class="n">FROM</span> <span class="n">with_last_peer_seq_id</span> <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">peer</span> <span class="n">ASC</span><span class="p">;</span> <span class="o">*/</span>
-<span class="n">SELECT</span>
-    <span class="n">mem</span><span class="o">.*</span>
-<span class="n">FROM</span>
+<span class="cm">/* SELECT * FROM with_last_peer_seq_id ORDER BY peer ASC; */</span>
+<span class="k">SELECT</span>
+    <span class="n">mem</span><span class="p">.</span><span class="o">*</span>
+<span class="k">FROM</span>
 
     <span class="n">memlog</span> <span class="n">mem</span>
-<span class="n">INNER</span> <span class="n">JOIN</span>
+<span class="k">INNER</span> <span class="k">JOIN</span>
     <span class="n">with_last_peer_seq_id</span> <span class="n">last_records</span>
-    <span class="n">ON</span>
-    <span class="n">last_records</span><span class="o">.</span><span class="n">last_peer_seq_id</span> <span class="o">=</span> <span class="n">mem</span><span class="o">.</span><span class="n">seq_id</span>
-<span class="o">--</span><span class="n">WHERE</span>
-<span class="o">--</span>    <span class="n">mem</span><span class="o">.</span><span class="n">object_size_mb</span> <span class="o">&gt;</span> <span class="mf">0.1</span>
-<span class="n">ORDER</span> <span class="n">BY</span>
-    <span class="n">peer</span> <span class="n">ASC</span>
-    <span class="p">,</span><span class="n">object_size_mb</span> <span class="n">DESC</span> <span class="n">NULLS</span> <span class="n">LAST</span>
+    <span class="k">ON</span>
+    <span class="n">last_records</span><span class="p">.</span><span class="n">last_peer_seq_id</span> <span class="o">=</span> <span class="n">mem</span><span class="p">.</span><span class="n">seq_id</span>
+<span class="c1">--WHERE</span>
+<span class="c1">--    mem.object_size_mb &gt; 0.1</span>
+<span class="k">ORDER</span> <span class="k">BY</span>
+    <span class="n">peer</span> <span class="k">ASC</span>
+    <span class="p">,</span><span class="n">object_size_mb</span> <span class="k">DESC</span> <span class="n">NULLS</span> <span class="k">LAST</span>
 </pre></div>
 </div>
 <p><em>Show the memory footprint of all recorded objects for a single peer, as a timeseries</em></p>
-<div class="code sql highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SELECT</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span>
     <span class="o">*</span>
-<span class="n">FROM</span>
+<span class="k">FROM</span>
     <span class="n">memlog</span>
-<span class="n">WHERE</span>
+<span class="k">WHERE</span>
     <span class="n">peer</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">ORDER</span> <span class="n">BY</span> <span class="n">seq_id</span> <span class="n">ASC</span><span class="p">;</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">seq_id</span> <span class="k">ASC</span><span class="p">;</span>
 </pre></div>
 </div>
 </div>
@@ -496,53 +484,51 @@
 <p>Before the DIAS-Logging-System can be used, it needs to be initalised inside each Java program</p>
 <p><strong>Import Persistence Client</strong></p>
 <ul class="simple">
-<li>The Persistence Client is required by the RawLog, MemLog and EventLog classes to send messages to be persisted to the Persistence Daemon</li>
-<li>The advantage of this design is that the  Persistence Client and Persistence Daemon could be modified to store the data in other types of databases, without affecting the RawLog, MemLog or EventLog classes</li>
+<li><p>The Persistence Client is required by the RawLog, MemLog and EventLog classes to send messages to be persisted to the Persistence Daemon</p></li>
+<li><p>The advantage of this design is that the  Persistence Client and Persistence Daemon could be modified to store the data in other types of databases, without affecting the RawLog, MemLog or EventLog classes</p></li>
 </ul>
-<div class="code java highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pgpersist.PersistenceClient</span><span class="p">;</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pgpersist.PersistenceClient</span><span class="p">;</span>
 
-<span class="o">/*</span> <span class="o">...</span> <span class="o">*/</span>
+<span class="cm">/* ... */</span>
 
-<span class="n">persistenceClient</span> <span class="o">=</span> <span class="n">new</span> <span class="n">PersistenceClient</span><span class="p">(</span> <span class="n">zmqContext</span><span class="p">,</span> <span class="n">daemonConnectString</span><span class="p">,</span> <span class="n">persistenceClientOutputQueueSize</span> <span class="p">);</span>
-<span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span> <span class="s2">&quot;persistenceClient created&quot;</span> <span class="p">);</span>
+<span class="n">persistenceClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PersistenceClient</span><span class="p">(</span> <span class="n">zmqContext</span><span class="p">,</span> <span class="n">daemonConnectString</span><span class="p">,</span> <span class="n">persistenceClientOutputQueueSize</span> <span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span> <span class="s">&quot;persistenceClient created&quot;</span> <span class="p">);</span>
 </pre></div>
 </div>
 <p><em>Code Snippet:</em> Java code to initialise the PersistenceClient instance</p>
 <p><strong>RawLog</strong></p>
 <ul>
-<li><p class="first">The RawLog class is initialised with the persistence client that actually sends the messages to the Persistence Daemon</p>
-</li>
-<li><p class="first">Next, you can set the threshold level for logging. Default would be 2 and above, i.e only persist warnings and errors</p>
+<li><p>The RawLog class is initialised with the persistence client that actually sends the messages to the Persistence Daemon</p></li>
+<li><p>Next, you can set the threshold level for logging. Default would be 2 and above, i.e only persist warnings and errors</p>
 <blockquote>
 <div><ul class="simple">
-<li>Set this value to 1 to log all calls to RawLog</li>
+<li><p>Set this value to 1 to log all calls to RawLog</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first">Optionally, you specify the the peer in which your code is running</p>
+<li><p>Optionally, you specify the the peer in which your code is running</p>
 <blockquote>
 <div><ul>
-<li><p class="first">This allows RawLog to automatically add additional information to the logging, such as:</p>
+<li><p>This allows RawLog to automatically add additional information to the logging, such as:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Peer ID</li>
-<li>Epoch</li>
+<li><p>Peer ID</p></li>
+<li><p>Epoch</p></li>
 </ul>
 </div></blockquote>
 </li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first">Optionally, you specify the the DIAS Network Id, which appears as a column in the rawlog table and allows distinguishing between different DIAS networks running on the same infrastructure</p>
-</li>
+<li><p>Optionally, you specify the the DIAS Network Id, which appears as a column in the rawlog table and allows distinguishing between different DIAS networks running on the same infrastructure</p></li>
 </ul>
-<div class="code java highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">RawLog</span><span class="o">.</span><span class="n">setPeristenceClient</span><span class="p">(</span><span class="n">persistenceClient</span><span class="p">);</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">RawLog</span><span class="p">.</span><span class="na">setPeristenceClient</span><span class="p">(</span><span class="n">persistenceClient</span><span class="p">);</span>
 
-<span class="n">RawLog</span><span class="o">.</span><span class="n">setErrorLevelThreshold</span><span class="p">(</span><span class="n">rawLogLevel</span><span class="p">);</span>        <span class="o">//</span> <span class="n">log</span> <span class="nb">all</span> <span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="n">only</span> <span class="n">log</span> <span class="n">warnings</span> <span class="p">(</span><span class="mi">2</span><span class="p">);</span> <span class="n">errors</span> <span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">RawLog</span><span class="o">.</span><span class="n">setPeer</span><span class="p">(</span><span class="n">newPeer</span><span class="p">);</span>
-<span class="n">RawLog</span><span class="o">.</span><span class="n">setDIASNetworkId</span><span class="p">(</span><span class="n">diasNetworkId</span><span class="p">);</span>
+<span class="n">RawLog</span><span class="p">.</span><span class="na">setErrorLevelThreshold</span><span class="p">(</span><span class="n">rawLogLevel</span><span class="p">);</span>        <span class="c1">// log all (1); only log warnings (2); errors (3)</span>
+<span class="n">RawLog</span><span class="p">.</span><span class="na">setPeer</span><span class="p">(</span><span class="n">newPeer</span><span class="p">);</span>
+<span class="n">RawLog</span><span class="p">.</span><span class="na">setDIASNetworkId</span><span class="p">(</span><span class="n">diasNetworkId</span><span class="p">);</span>
 
-<span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">printf</span><span class="p">(</span> <span class="s2">&quot;RawLog setup with rawLogLevel </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">rawLogLevel</span> <span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span> <span class="s">&quot;RawLog setup with rawLogLevel %d\n&quot;</span><span class="p">,</span> <span class="n">rawLogLevel</span> <span class="p">);</span>
 </pre></div>
 </div>
 <p><em>Code Snippet:</em> Java code to initialise the RawLog class</p>
@@ -550,57 +536,56 @@
 <p>The EventLog class is initialised similarly to the RawLog with a:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Persistence client that actually sends the messages to the Persistence Daemon</li>
-<li>Optionally, you specify the the peer in which your code is running</li>
-<li>Optionally, you specify the the DIAS Network Id, which appears as a column in the eventlog table and allows distinguishing between different DIAS networks running on the same infrastructure</li>
+<li><p>Persistence client that actually sends the messages to the Persistence Daemon</p></li>
+<li><p>Optionally, you specify the the peer in which your code is running</p></li>
+<li><p>Optionally, you specify the the DIAS Network Id, which appears as a column in the eventlog table and allows distinguishing between different DIAS networks running on the same infrastructure</p></li>
 </ul>
 </div></blockquote>
-<div class="code java highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">EventLog</span><span class="o">.</span><span class="n">setPeristenceClient</span><span class="p">(</span><span class="n">persistenceClient</span><span class="p">);</span>
-<span class="n">EventLog</span><span class="o">.</span><span class="n">setPeer</span><span class="p">(</span><span class="n">newPeer</span><span class="p">);</span>
-<span class="n">EventLog</span><span class="o">.</span><span class="n">setDIASNetworkId</span><span class="p">(</span><span class="n">diasNetworkId</span><span class="p">);</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">EventLog</span><span class="p">.</span><span class="na">setPeristenceClient</span><span class="p">(</span><span class="n">persistenceClient</span><span class="p">);</span>
+<span class="n">EventLog</span><span class="p">.</span><span class="na">setPeer</span><span class="p">(</span><span class="n">newPeer</span><span class="p">);</span>
+<span class="n">EventLog</span><span class="p">.</span><span class="na">setDIASNetworkId</span><span class="p">(</span><span class="n">diasNetworkId</span><span class="p">);</span>
 </pre></div>
 </div>
 <p><em>Code Snippet:</em> Java code to initialise the EventLog class</p>
 <p><strong>MemLog</strong></p>
 <ul>
-<li><p class="first">The MemLog class is initialised similarly to the RawLog and EventLog classes above, with some notable differences</p>
-</li>
-<li><p class="first">First, a Java instrumentation class, that will take the actual memory measurements, is required for the MemLog and must be passed as an argument to Memlog. More information about Java instrumentation can be found at Oracle (see references below)</p>
+<li><p>The MemLog class is initialised similarly to the RawLog and EventLog classes above, with some notable differences</p></li>
+<li><p>First, a Java instrumentation class, that will take the actual memory measurements, is required for the MemLog and must be passed as an argument to Memlog. More information about Java instrumentation can be found at Oracle (see references below)</p>
 <blockquote>
 <div><ul class="simple">
-<li>The particular instrumentation class used is JAMM (see references below). JAMM is a powerful Java instrumentation class that mesures the size of objects in memory. For containers, JAMM actually traverses the containers and measures the size of each element, further traversing each element if it is a container. This recursive approach allows proper estimation of the memory footprint of an object.</li>
+<li><p>The particular instrumentation class used is JAMM (see references below). JAMM is a powerful Java instrumentation class that mesures the size of objects in memory. For containers, JAMM actually traverses the containers and measures the size of each element, further traversing each element if it is a container. This recursive approach allows proper estimation of the memory footprint of an object.</p></li>
 </ul>
 </div></blockquote>
 </li>
 </ul>
 <blockquote>
 <div><ul>
-<li><p class="first">Second, the period for taking snapshots</p>
+<li><p>Second, the period for taking snapshots</p>
 <blockquote>
 <div><ul class="simple">
-<li>Memlog will periodically compute the memory footprint of each object that was added with add_object(), at the period specificed in startTimer()</li>
+<li><p>Memlog will periodically compute the memory footprint of each object that was added with add_object(), at the period specificed in startTimer()</p></li>
 </ul>
 </div></blockquote>
 </li>
 </ul>
 </div></blockquote>
-<div class="code java highlight-default notranslate"><div class="highlight"><pre><span></span>// initialise MemLog
-final MemoryMeter     instrument = new MemoryMeter();
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// initialise MemLog</span>
+<span class="kd">final</span> <span class="n">MemoryMeter</span>     <span class="n">instrument</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MemoryMeter</span><span class="p">();</span>
 
-if( !MemoryMeter.hasInstrumentation() )
-    System.out.printf( &quot;MemLog: No instrumentation\n&quot; );
-else
-{
-    MemLog.setPersistenceClient(persistenceClient);
-    MemLog.setMeasurementInstrument(instrument);
-    MemLog.setPeer(newPeer);
-    MemLog.setDIASNetworkId(diasNetworkId);
-    MemLog.startTimer(60);
+<span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="n">MemoryMeter</span><span class="p">.</span><span class="na">hasInstrumentation</span><span class="p">()</span> <span class="p">)</span>
+    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span> <span class="s">&quot;MemLog: No instrumentation\n&quot;</span> <span class="p">);</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="n">MemLog</span><span class="p">.</span><span class="na">setPersistenceClient</span><span class="p">(</span><span class="n">persistenceClient</span><span class="p">);</span>
+    <span class="n">MemLog</span><span class="p">.</span><span class="na">setMeasurementInstrument</span><span class="p">(</span><span class="n">instrument</span><span class="p">);</span>
+    <span class="n">MemLog</span><span class="p">.</span><span class="na">setPeer</span><span class="p">(</span><span class="n">newPeer</span><span class="p">);</span>
+    <span class="n">MemLog</span><span class="p">.</span><span class="na">setDIASNetworkId</span><span class="p">(</span><span class="n">diasNetworkId</span><span class="p">);</span>
+    <span class="n">MemLog</span><span class="p">.</span><span class="na">startTimer</span><span class="p">(</span><span class="mi">60</span><span class="p">);</span>
 
-    System.out.printf( &quot;MemLog setup\n&quot; );
+    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span> <span class="s">&quot;MemLog setup\n&quot;</span> <span class="p">);</span>
 
-    MemLog.add_object(&quot;Peer&quot;, &quot;Peer&quot;, newPeer);
-}
+    <span class="n">MemLog</span><span class="p">.</span><span class="na">add_object</span><span class="p">(</span><span class="s">&quot;Peer&quot;</span><span class="p">,</span> <span class="s">&quot;Peer&quot;</span><span class="p">,</span> <span class="n">newPeer</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p><em>Code Snippet:</em> Java code to initialise the MemLog class</p>
@@ -611,25 +596,24 @@ else
 <p>Installation of the database, that contains the output of the logging, is simple and is done in three steps. The DIAS-Logging-System requries a running PostgreSQL database, that we will install in the first step just below.</p>
 <p><em>Install postgres database</em></p>
 <p>Note that this will also start the database service</p>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># on an Ubuntu system (Ubuntu 14 or higher)</span>
-<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
-<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">postgresql</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># on an Ubuntu system (Ubuntu 14 or higher)</span>
+sudo apt-get update
+sudo apt-get install postgresql
 </pre></div>
 </div>
 <p><em>Code Snippet:</em> Ubuntu commands to install the latest version of PostgreSQL server</p>
 <p><em>Create a database</em></p>
 <ul>
-<li><p class="first">Login into PostgreSQL, using your favorite SQL editor or psql</p>
-</li>
-<li><p class="first">Choose any name, in this case we choose the name dias</p>
+<li><p>Login into PostgreSQL, using your favorite SQL editor or psql</p></li>
+<li><p>Choose any name, in this case we choose the name dias</p>
 <blockquote>
 <div><ul class="simple">
-<li>If you change the database name, you will also need to update the file conf/daemon.conf accordingly</li>
+<li><p>If you change the database name, you will also need to update the file conf/daemon.conf accordingly</p></li>
 </ul>
 </div></blockquote>
 </li>
 </ul>
-<div class="code sql highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CREATE</span> <span class="n">DATABASE</span> <span class="n">dias</span><span class="p">;</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">dias</span><span class="p">;</span>
 </pre></div>
 </div>
 <p><em>Code Snippet:</em> SQL commands to create the persistence database</p>
@@ -638,27 +622,26 @@ else
 <p>There are three tables to create:</p>
 <blockquote>
 <div><ul class="simple">
-<li>eventlog.sql</li>
-<li>memlog.sql</li>
-<li>rawlog.sql</li>
+<li><p>eventlog.sql</p></li>
+<li><p>memlog.sql</p></li>
+<li><p>rawlog.sql</p></li>
 </ul>
 </div></blockquote>
 <ul>
-<li><p class="first">The source SQL can be found here:</p>
+<li><p>The source SQL can be found here:</p>
 <blockquote>
 <div><ul class="simple">
-<li>DIAS-Logging-System/sql/definitions</li>
-<li>DIAS-Development/sql/definitions</li>
+<li><p>DIAS-Logging-System/sql/definitions</p></li>
+<li><p>DIAS-Development/sql/definitions</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first">Basic database optimisations such as table partitioning and indexing are provided out of the box</p>
-</li>
+<li><p>Basic database optimisations such as table partitioning and indexing are provided out of the box</p></li>
 </ul>
-<div class="code sql highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span> <span class="n">copy</span> <span class="o">+</span> <span class="n">paste</span> <span class="n">the</span> <span class="n">SQL</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">above</span> <span class="n">mentionned</span> <span class="n">files</span> <span class="n">to</span> <span class="n">create</span> <span class="n">the</span> <span class="n">tables</span>
-<span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">eventlog</span> <span class="o">...</span>
-<span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">memlog</span> <span class="o">...</span>
-<span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">rawlog</span> <span class="o">...</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- copy + paste the SQL in the above mentionned files to create the tables</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">eventlog</span> <span class="p">...</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">memlog</span> <span class="p">...</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">rawlog</span> <span class="p">...</span>
 </pre></div>
 </div>
 <p><em>Code Snippet:</em> SQL commands to create the persistence tables</p>
@@ -666,8 +649,8 @@ else
 <div class="section" id="launch">
 <h2>Launch<a class="headerlink" href="#launch" title="Permalink to this headline">¶</a></h2>
 <p>Once the DIAS-Logging-System is installed, launch the persistence daemon (that listens for messages to be logged and writes them to the database).</p>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">DIAS</span><span class="o">-</span><span class="n">Logging</span><span class="o">-</span><span class="n">System</span>
-<span class="o">./</span><span class="n">start</span><span class="o">.</span><span class="n">daemon</span><span class="o">.</span><span class="n">sh</span> <span class="n">deployments</span><span class="o">/</span><span class="n">localhost</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> DIAS-Logging-System
+./start.daemon.sh deployments/localhost
 </pre></div>
 </div>
 <p><em>Code Snippet:</em> Commands to launch of the persistence daemon</p>
@@ -678,8 +661,8 @@ else
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Java Instrumentation: <a class="reference external" href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/instrument/Instrumentation.html">https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/instrument/Instrumentation.html</a></li>
-<li>JAMM Memory Instrumentation: <a class="reference external" href="https://github.com/jbellis/jamm">https://github.com/jbellis/jamm</a></li>
+<li><p>Java Instrumentation: <a class="reference external" href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/instrument/Instrumentation.html">https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/instrument/Instrumentation.html</a></p></li>
+<li><p>JAMM Memory Instrumentation: <a class="reference external" href="https://github.com/jbellis/jamm">https://github.com/jbellis/jamm</a></p></li>
 </ul>
 </div>
 </div>
@@ -704,11 +687,19 @@ else
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2019, Edward Gaere
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -719,7 +710,6 @@ else
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
@@ -733,9 +723,19 @@ else
     
 
   <style>
+    /*To underline text*/
+    .underline {
+      text-decoration: underline;
+    }
+
+
+      /*To underline bold text*/
+      .underlinebold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
     /* Sidebar header (and topbar for mobile) */
-
-
 
 
 
@@ -779,6 +779,10 @@ else
         color:/**#eee;*/var(--blue);
 
 
+     }
+
+     .wy-nav-content-wrap{
+       background: var(--grey);
      }
 
      .wy-menu-vertical li.toctree-l1.current>a {

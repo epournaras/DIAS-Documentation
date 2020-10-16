@@ -3,8 +3,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -14,30 +13,32 @@
   
 
   
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="DIAS Proof Of Concept Application" href="applications/DIASProoOfConcept.html" /> 
+    <link rel="prev" title="Python Script" href="applications/TelegramPlotter/PythonScript.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -51,7 +52,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> DIAS-Documentation
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> DIAS-Documentation
           
 
           
@@ -74,6 +75,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -87,7 +89,6 @@
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dias.in.detail.html">How DIAS Works</a></li>
 <li class="toctree-l1"><a class="reference internal" href="architecture.html">Deployment Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gui.html">GUIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="protopeer.html">Protopeer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dias-logging-system.html">DIAS Logging System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="applications.html">Applications</a></li>
@@ -97,6 +98,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -135,7 +137,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Glossary</li>
     
@@ -158,59 +160,106 @@
             
   <div class="section" id="glossary">
 <h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h1>
-<ul>
-<li><p class="first">DIAS</p>
-</li>
-<li><p class="first">DIAS node</p>
-</li>
-<li><p class="first">GDELT</p>
-<blockquote>
-<div><ul class="simple">
-<li>data.gdeltproject.org</li>
-</ul>
-</div></blockquote>
-</li>
-<li><p class="first">GDELT Subscription</p>
-</li>
-<li><p class="first">Mock Device</p>
-</li>
-<li><p class="first">Protopeer Framework</p>
-<blockquote>
-<div><ul class="simple">
-<li>A platform written in Java for carrying out small to medium scale peer-to-peer experiments</li>
-</ul>
-</div></blockquote>
-</li>
-<li><p class="first">DIAS Boostrap Server</p>
-</li>
-<li><p class="first">DIAS Gateway Server</p>
-</li>
-<li><p class="first">DIAS-Logging-System</p>
-<blockquote>
-<div><ul class="simple">
-<li>EventLog</li>
-<li>RawLog</li>
-<li>MemLog</li>
-<li>Persistence Client</li>
-<li>Persistence Daemon</li>
-</ul>
-</div></blockquote>
-</li>
-<li><p class="first">DIAS Network Id</p>
-</li>
-<li><p class="first">Selected state</p>
-</li>
-<li><p class="first">Possible states</p>
-</li>
-<li><p class="first">Peer Sampling Service</p>
-</li>
-<li><p class="first">Active State</p>
-</li>
-<li><p class="first">Passive State</p>
-</li>
-<li><p class="first">UNIX screen</p>
-</li>
-</ul>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Expression</p></th>
+<th class="head"><p>Brief explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Active state</p></td>
+<td><p>Every DIAS node has an active state, it is basically an acttive thread running on a timer, repeatedly doing specific tasks.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Aggregator</p></td>
+<td><p>A peerlet in a peer, the aggregator is responsible for making its local aggregations on the values of the whole network.</p></td>
+</tr>
+<tr class="row-even"><td><p>Applet</p></td>
+<td><p>Little programs, which execute a specific tast.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Bloom Filter</p></td>
+<td><p>A bloom filter is a way to store much information in little room, with the tradeoff for false positives. <a href="https://de.wikipedia.org/wiki/Bloomfilter" target="_blank">Read more</a></p></td>
+</tr>
+<tr class="row-even"><td><p>DIAS</p></td>
+<td><p>The name of the hereby described project, see <a class="reference internal" href="../index.html#dias-dynamic-intelligent-aggregation-service"><span class="std std-ref">DIAS - Dynamic Intelligent Aggregation Service</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>DIAS Bootstrap server</p></td>
+<td><p>The server, which initially interconnects the first peers in the DIAS network, see <a class="reference internal" href="architecture/bootstrap.process.html#bootstrap-process"><span class="std std-ref">Bootstrap Process</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>DIAS Gateway Server</p></td>
+<td><p>The server connecting newly created peer to the already running network, see <a class="reference internal" href="architecture/gateway.html#dias-gateway"><span class="std std-ref">DIAS Gateway</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>DIAS-Logging-System</p></td>
+<td><p>The system, which allows the distributed system to log averything to a single database with relatively little contention, see <a class="reference internal" href="architecture/dias.logging.html#dias-logging"><span class="std std-ref">DIAS Logging</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>DIAS Network Id</p></td>
+<td><p>The Network Id (oe sensor ID) is used to distinguish between different peers to be able to address a specific peer, see more here: <a class="reference internal" href="applications/DIASClientLibrary.html#the-usage-of-sensorids"><span class="std std-ref">The usage of sensorIDs</span></a>,</p></td>
+</tr>
+<tr class="row-odd"><td><p>DIAS Node</p></td>
+<td><p>One aggregating node inside the DIAS network</p></td>
+</tr>
+<tr class="row-even"><td><p>DIAS Peer</p></td>
+<td><p>One participant in the DIAS network</p></td>
+</tr>
+<tr class="row-odd"><td><p>Disseminator</p></td>
+<td><p>A peerlet in a peer, it is responsible mor the communication between the different peers, as well as keeping track what information was disseminated to what peer and which information is still valid.</p></td>
+</tr>
+<tr class="row-even"><td><p>EventLog</p></td>
+<td><p>This logger logs the data more ordered, giving the option to track which object and method invoked the logging, as well as being able to provide a specific key to filter out specific logs.</p></td>
+</tr>
+<tr class="row-odd"><td><p>GDELT</p></td>
+<td><p>GDELT is the largest publicly available collection of near real-time news feed in the World, see <a class="reference internal" href="applications/gdelt.html#gdelt"><span class="std std-ref">GDELT</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>JVM</p></td>
+<td><p>The Java Virtual Machine is a vm, in which the java program is running, it encapsulates the program and contains all data to run it.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MemLog</p></td>
+<td><p>This log is automated and tracks the memory usage of the given objects.</p></td>
+</tr>
+<tr class="row-even"><td><p>Memory Leak</p></td>
+<td><p>Incorrectly managed memory leads to allocated memory, which after not needing it anymore does not get freed again and remains in the program for the rest of its lifecycle. This results in trash laying in memory, filling up the memory usage.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mock Device</p></td>
+<td><p>A program simulating the input of real-world users for different experiments, see <a class="reference internal" href="architecture/mock.devices.html#mock-devices"><span class="std std-ref">Mock devices</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Passive state</p></td>
+<td><p>Every DIAS node has a passive state, it gets triggered upon receiving a message, handling it corresponding to the defined actions.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Peer Sampling Service</p></td>
+<td><p>The Peer Sampling Service takes a sample of all nodes in the network, it may be every peer, if not many peers exist, or a subset, if the peer set is large.</p></td>
+</tr>
+<tr class="row-even"><td><p>Peerlet</p></td>
+<td><p>A submodule in a Protopeer peer</p></td>
+</tr>
+<tr class="row-odd"><td><p>Possible states</p></td>
+<td><p>The user needs to send a node different options, from which he later chooses a single one as a selected state. see <a class="reference internal" href="dias.in.detail/change.states.html#changing-of-possible-states"><span class="std std-ref">Changing of possible states</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Postgres</p></td>
+<td><p>A popular implementation of the SQL database</p></td>
+</tr>
+<tr class="row-odd"><td><p>Protopeer Framework</p></td>
+<td><p>A platform written in Java for carrying out small to medium scale peer-to-peer experiments, see <a class="reference internal" href="protopeer.html#protopeer"><span class="std std-ref">Protopeer</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Servlet</p></td>
+<td><p>Java classes, which run on a server, serving user requests.</p></td>
+</tr>
+<tr class="row-odd"><td><p>RawLog</p></td>
+<td><p>A single String message is logged.</p></td>
+</tr>
+<tr class="row-even"><td><p>Selected state</p></td>
+<td><p>The selected state is a selected element out of the possible states, it is considered as the current active value sent from a device. see <a class="reference internal" href="dias.in.detail/change.states.html#changing-of-selected-states"><span class="std std-ref">Changing of selected states</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>UNIX Screen</p></td>
+<td><p>A UNIX command line tool, read <a href="https://kb.iu.edu/d/acuy" target="_blank">more</a></p></td>
+</tr>
+<tr class="row-even"><td><p>ZeroMQ</p></td>
+<td><p>ZeroMQ is a low level, high efficiency communication library, based on TCP. It is available for many platforms.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
@@ -222,7 +271,7 @@
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="applications/DIASProoOfConcept.html" class="btn btn-neutral float-left" title="DIAS Proof Of Concept Application" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="applications/TelegramPlotter/PythonScript.html" class="btn btn-neutral float-left" title="Python Script" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -231,11 +280,19 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2019, Edward Gaere
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -246,7 +303,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
@@ -260,9 +316,19 @@
     
 
   <style>
+    /*To underline text*/
+    .underline {
+      text-decoration: underline;
+    }
+
+
+      /*To underline bold text*/
+      .underlinebold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
     /* Sidebar header (and topbar for mobile) */
-
-
 
 
 
@@ -306,6 +372,10 @@
         color:/**#eee;*/var(--blue);
 
 
+     }
+
+     .wy-nav-content-wrap{
+       background: var(--grey);
      }
 
      .wy-menu-vertical li.toctree-l1.current>a {

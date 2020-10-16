@@ -3,8 +3,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -14,27 +13,29 @@
   
 
   
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="How DIAS Works" href="../dias.in.detail.html" />
@@ -52,7 +53,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> DIAS-Documentation
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> DIAS-Documentation
           
 
           
@@ -75,6 +76,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -91,15 +93,18 @@
 <li class="toctree-l2"><a class="reference internal" href="launch.html">Launching DIAS</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Monitoring</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#sql-queries">SQL queries</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#r-studio-plots">R-Studio plots</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#redash-dashboards">Redash dashboards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#r-studio-plots">R-Studio plots</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#example-plot-for-gdelt">Example plot for GDELT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-plots-for-general-dias">Example plots for General DIAS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../dias.in.detail.html">How DIAS Works</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">Deployment Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gui.html">GUIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../protopeer.html">Protopeer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dias-logging-system.html">DIAS Logging System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
@@ -109,6 +114,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -147,7 +153,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../quickstart.html">Quickstart</a> &raquo;</li>
         
@@ -174,63 +180,1014 @@
 <h1>Monitoring<a class="headerlink" href="#monitoring" title="Permalink to this headline">¶</a></h1>
 <p>There are several options available for monitoring a DIAS experiment in real-time :</p>
 <ul class="simple">
-<li>SQL queries</li>
-<li>R-Studio plots</li>
-<li>Redash dashboards</li>
+<li><p>SQL queries</p></li>
+<li><p>R-Studio plots</p></li>
+<li><p>Redash dashboards</p></li>
 </ul>
 <div class="section" id="sql-queries">
 <h2>SQL queries<a class="headerlink" href="#sql-queries" title="Permalink to this headline">¶</a></h2>
 <p>For fast and detailed understanding of the aggregation outcomes, it is easiest to execute queries on the Postgres database.</p>
 <p><strong>Show the last aggregation state per peer</strong></p>
-<div class="code sql highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WITH</span> <span class="n">with_last_peer_seq_id</span> <span class="n">AS</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">WITH</span> <span class="n">with_last_peer_seq_id</span> <span class="k">AS</span>
 <span class="p">(</span>
-    <span class="n">SELECT</span>
-        <span class="n">MAX</span><span class="p">(</span><span class="n">seq_id</span><span class="p">)</span> <span class="n">AS</span> <span class="n">last_peer_seq_id</span>
+    <span class="k">SELECT</span>
+        <span class="k">MAX</span><span class="p">(</span><span class="n">seq_id</span><span class="p">)</span> <span class="k">AS</span> <span class="n">last_peer_seq_id</span>
         <span class="p">,</span><span class="n">peer</span>
-    <span class="n">FROM</span>
+    <span class="k">FROM</span>
         <span class="n">aggregation</span>
-    <span class="n">GROUP</span> <span class="n">BY</span>
+    <span class="k">GROUP</span> <span class="k">BY</span>
         <span class="n">peer</span>
 <span class="p">)</span>
-<span class="n">SELECT</span>
-    <span class="n">agg</span><span class="o">.*</span>
-<span class="n">FROM</span>
+<span class="k">SELECT</span>
+    <span class="n">agg</span><span class="p">.</span><span class="o">*</span>
+<span class="k">FROM</span>
 
     <span class="n">aggregation</span> <span class="n">agg</span>
-<span class="n">INNER</span> <span class="n">JOIN</span>
+<span class="k">INNER</span> <span class="k">JOIN</span>
     <span class="n">with_last_peer_seq_id</span> <span class="n">last_records</span>
-    <span class="n">ON</span>
-    <span class="n">last_records</span><span class="o">.</span><span class="n">last_peer_seq_id</span> <span class="o">=</span> <span class="n">agg</span><span class="o">.</span><span class="n">seq_id</span>
-<span class="n">ORDER</span> <span class="n">BY</span>
-    <span class="n">peer</span> <span class="n">ASC</span>
+    <span class="k">ON</span>
+    <span class="n">last_records</span><span class="p">.</span><span class="n">last_peer_seq_id</span> <span class="o">=</span> <span class="n">agg</span><span class="p">.</span><span class="n">seq_id</span>
+<span class="k">ORDER</span> <span class="k">BY</span>
+    <span class="n">peer</span> <span class="k">ASC</span>
 <span class="p">;</span>
 </pre></div>
 </div>
 <p><strong>Show raw logs for a selected peer over a given epoch range</strong></p>
-<div class="code sql highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SELECT</span> <span class="o">*</span> <span class="n">FROM</span> <span class="n">rawlog</span> <span class="n">WHERE</span> <span class="n">peer</span> <span class="o">=</span> <span class="mi">13</span> <span class="n">AND</span> <span class="n">epoch</span> <span class="n">BETWEEN</span> <span class="p">(</span><span class="mi">1551766218</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="n">AND</span> <span class="p">(</span><span class="mi">1551766218</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span><span class="n">ORDER</span> <span class="n">BY</span> <span class="n">dt</span><span class="p">,</span> <span class="n">seq_id</span> <span class="n">ASC</span><span class="p">;</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">rawlog</span> <span class="k">WHERE</span> <span class="n">peer</span> <span class="o">=</span> <span class="mi">13</span> <span class="k">AND</span> <span class="n">epoch</span> <span class="k">BETWEEN</span> <span class="p">(</span><span class="mi">1551766218</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">AND</span> <span class="p">(</span><span class="mi">1551766218</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">dt</span><span class="p">,</span> <span class="n">seq_id</span> <span class="k">ASC</span><span class="p">;</span>
 </pre></div>
 </div>
 <p><strong>Using the event log we can observe the frequency of function calls</strong></p>
-<div class="code sql highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SELECT</span> <span class="n">classname</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="n">FROM</span> <span class="n">eventlog</span> <span class="n">GROUP</span> <span class="n">BY</span> <span class="n">classname</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">key</span> <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">classname</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">key</span> <span class="n">ASC</span><span class="p">;</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">classname</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="k">key</span><span class="p">,</span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">eventlog</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">classname</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="k">key</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">classname</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="k">key</span> <span class="k">ASC</span><span class="p">;</span>
 </pre></div>
 </div>
 <p><strong>Memory usage evolution for a selected peer</strong></p>
-<div class="code sql highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SELECT</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span>
     <span class="o">*</span>
-<span class="n">FROM</span>
+<span class="k">FROM</span>
     <span class="n">memlog</span>
-<span class="n">WHERE</span>
+<span class="k">WHERE</span>
     <span class="n">peer</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">ORDER</span> <span class="n">BY</span> <span class="n">seq_id</span> <span class="n">ASC</span><span class="p">;</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">seq_id</span> <span class="k">ASC</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>There are many more examples here (<a class="reference internal" href="../dias-logging-system.html#label-dias-logging-system"><span class="std std-ref">DIAS Logging System</span></a>).</p>
 </div>
 <div class="section" id="r-studio-plots">
 <h2>R-Studio plots<a class="headerlink" href="#r-studio-plots" title="Permalink to this headline">¶</a></h2>
+<p>One way to plot the logged data is R.
+R can be launched with <a href="https://rstudio.com/" target="_blank">RStudio</a>, or from the <a href="https://www.datacamp.com/community/tutorials/installing-R-windows-mac-ubuntu" target="_blank">command line</a> itself.</p>
+<p>When using Rstudio, one can use multiple different scripts, as the state and all variables are stored between two consecutive executions.
+For this reason, the following files are split into different parts. Further down there are also examples for combined scripts for the commandline.</p>
+<div class="section" id="example-plot-for-gdelt">
+<h3>Example plot for GDELT<a class="headerlink" href="#example-plot-for-gdelt" title="Permalink to this headline">¶</a></h3>
+<p>This sequence of queries creates a plot for the last 50000 entries of the database.</p>
+<p>It shows the following 3 data sets:</p>
+<ol class="arabic simple">
+<li><p>The true sum of GDELT Events. Those values are the ground truth and desired by the peers.</p></li>
+<li><p>The sum of selected states. This is the actual sum of the selected state over all peers. If the peer behave correctly, the true sum should be equal to this.</p></li>
+<li><p>The DIAS sum. This value is the average over all local aggregates of type SUM.</p></li>
+</ol>
+<div class="figure align-default" id="id1">
+<a class="reference internal image-reference" href="../../_images/ExampleEposPlot.png"><img alt="../../_images/ExampleEposPlot.png" src="../../_images/ExampleEposPlot.png" style="width: 30%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Example plot</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
-<div class="section" id="redash-dashboards">
-<h2>Redash dashboards<a class="headerlink" href="#redash-dashboards" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="reading-the-inferred-values-of-all-peers-from-sql-database">
+<h4>Reading the inferred values of all peers from sql database<a class="headerlink" href="#reading-the-inferred-values-of-all-peers-from-sql-database" title="Permalink to this headline">¶</a></h4>
+<p>This script reads the inferred individual aggregates of all peers from a (possibly remote) sql database.</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1">#one of both lines need to be executed</span>
+<span class="c1">#db.host &lt;- &lt;remote ip address&gt;</span>
+<span class="c1">#db.host &lt;- &#39;localhost&#39;</span>
+
+<span class="n">db.schema</span> <span class="o">&lt;-</span> <span class="s">&#39;dias&#39;</span>
+
+<span class="n">diasNetworkId</span> <span class="o">&lt;-</span> <span class="m">0</span>
+
+<span class="n">source_table</span> <span class="o">&lt;-</span> <span class="s">&#39;aggregation_event&#39;</span>
+
+<span class="nf">stopifnot</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="nf">ls</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;db.host&#39;</span>      <span class="p">)</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+<span class="nf">stopifnot</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="nf">ls</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;db.schema&#39;</span>    <span class="p">)</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+<span class="nf">stopifnot</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="nf">ls</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;diasNetworkId&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+<span class="nf">stopifnot</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="nf">ls</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;source_table&#39;</span> <span class="p">)</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;db.host : %s&#39;</span><span class="p">,</span> <span class="n">db.host</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;diasNetworkId : %s&#39;</span><span class="p">,</span> <span class="n">diasNetworkId</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;source_table : %s&#39;</span><span class="p">,</span> <span class="n">source_table</span><span class="p">))</span>
+
+<span class="c1"># include</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>         <span class="c1"># install.packages(&#39;dplyPerr&#39;)</span>
+<span class="nf">library</span><span class="p">(</span><span class="s">&quot;RPostgreSQL&quot;</span><span class="p">)</span> <span class="c1"># install.packages(&quot;RPostgreSQL&quot;)</span>
+
+<span class="c1"># constants</span>
+<span class="n">now</span> <span class="o">&lt;-</span> <span class="nf">Sys.time</span><span class="p">()</span>
+
+<span class="c1"># database settings</span>
+<span class="n">db.port</span> <span class="o">&lt;-</span> <span class="o">&lt;</span><span class="n">port</span> <span class="n">on</span> <span class="n">which</span> <span class="n">the</span> <span class="n">database</span> <span class="n">can</span> <span class="n">be</span> <span class="n">reached</span><span class="o">&gt;</span>
+<span class="n">db.user</span> <span class="o">&lt;-</span> <span class="o">&lt;</span><span class="n">sql</span> <span class="n">username</span><span class="o">&gt;</span>
+<span class="n">db.pwd</span>  <span class="o">&lt;-</span> <span class="o">&lt;</span><span class="n">password</span> <span class="n">for</span> <span class="n">sql</span> <span class="n">username</span><span class="o">&gt;</span>
+
+<span class="c1"># dataset settings</span>
+<span class="n">last.epoch</span> <span class="o">&lt;-</span> <span class="m">-1</span> <span class="c1"># no restriction on epoch</span>
+
+<span class="c1"># plot settings</span>
+<span class="n">db.rows</span> <span class="o">&lt;-</span> <span class="m">50000</span> <span class="c1"># number of (most recent) rows to retrieve from database (-1 for all rows)</span>
+
+<span class="c1"># create output dataframe</span>
+<span class="n">df.dias.all</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">()</span>
+
+<span class="c1"># loads the PostgreSQL driver</span>
+<span class="n">psql.drv</span> <span class="o">&lt;-</span> <span class="nf">dbDriver</span><span class="p">(</span><span class="s">&quot;PostgreSQL&quot;</span><span class="p">)</span>
+
+<span class="c1"># creates a connection to the postgres database</span>
+<span class="c1"># note that &quot;con&quot; will be used later in each connection to the database</span>
+<span class="n">db.con</span> <span class="o">&lt;-</span> <span class="nf">dbConnect</span><span class="p">(</span><span class="n">psql.drv</span><span class="p">,</span> <span class="n">dbname</span> <span class="o">=</span> <span class="n">db.schema</span>
+                   <span class="p">,</span><span class="n">host</span> <span class="o">=</span> <span class="n">db.host</span><span class="p">,</span> <span class="n">port</span> <span class="o">=</span> <span class="n">db.port</span>
+                   <span class="p">,</span><span class="n">user</span> <span class="o">=</span> <span class="n">db.user</span><span class="p">,</span> <span class="n">password</span> <span class="o">=</span> <span class="n">db.pwd</span><span class="p">)</span>
+
+<span class="c1"># mod eag 2018-09-11 - allow user to set a limit</span>
+<span class="n">sql</span> <span class="o">&lt;-</span> <span class="s">&#39;&#39;</span>
+<span class="nf">if</span><span class="p">(</span><span class="n">last.epoch</span> <span class="o">==</span> <span class="m">-1</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nf">if</span><span class="p">(</span><span class="n">db.rows</span> <span class="o">==</span> <span class="m">-1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">sql</span> <span class="o">&lt;-</span> <span class="nf">paste</span><span class="p">(</span><span class="s">&#39;SELECT * FROM&#39;</span><span class="p">,</span><span class="n">source_table</span><span class="p">,</span><span class="s">&#39;WHERE network =&#39;</span><span class="p">,</span> <span class="n">diasNetworkId</span><span class="p">,</span> <span class="s">&#39;ORDER BY seq_id ASC&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="n">else</span> <span class="p">{</span>
+    <span class="n">sql</span> <span class="o">&lt;-</span> <span class="nf">paste</span><span class="p">(</span><span class="s">&#39;SELECT * FROM&#39;</span><span class="p">,</span><span class="n">source_table</span><span class="p">,</span><span class="s">&#39;WHERE network =&#39;</span><span class="p">,</span> <span class="n">diasNetworkId</span><span class="p">,</span> <span class="s">&#39;AND seq_id &gt;= (SELECT MAX(seq_id) FROM&#39;</span><span class="p">,</span><span class="n">source_table</span><span class="p">,</span> <span class="s">&#39;) -&#39;</span><span class="p">,</span> <span class="n">db.rows</span> <span class="o">-</span> <span class="m">1</span><span class="p">,</span> <span class="s">&#39;ORDER BY seq_id ASC&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span><span class="n">else</span> <span class="p">{</span>
+  <span class="n">sql</span> <span class="o">&lt;-</span> <span class="nf">paste</span><span class="p">(</span><span class="s">&#39;SELECT * FROM&#39;</span><span class="p">,</span><span class="n">source_table</span><span class="p">,</span><span class="s">&#39;WHERE network =&#39;</span><span class="p">,</span> <span class="n">diasNetworkId</span><span class="p">,</span> <span class="s">&#39;AND seq_id &gt;= (SELECT MAX(seq_id) FROM&#39;</span><span class="p">,</span><span class="n">source_table</span><span class="p">,</span> <span class="s">&#39; WHERE epoch &lt;=&#39;</span><span class="p">,</span> <span class="n">last.epoch</span><span class="p">,</span><span class="s">&#39;) -&#39;</span><span class="p">,</span> <span class="n">db.rows</span> <span class="o">-</span> <span class="m">1</span><span class="p">,</span> <span class="s">&#39;ORDER BY seq_id ASC&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="s">&#39;reading data&#39;</span><span class="p">)</span>
+<span class="n">df.dias.all</span> <span class="o">&lt;-</span> <span class="nf">dbGetQuery</span><span class="p">(</span><span class="n">db.con</span><span class="p">,</span> <span class="n">sql</span><span class="p">)</span>
+<span class="n">nrows</span> <span class="o">&lt;-</span> <span class="nf">nrow</span><span class="p">(</span><span class="n">df.dias.all</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;#rows : %s&#39;</span><span class="p">,</span> <span class="n">nrows</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;epoch range : %s - %s&#39;</span><span class="p">,</span> <span class="nf">min</span><span class="p">(</span><span class="n">df.dias.all</span><span class="o">$</span><span class="n">epoch</span><span class="p">),</span> <span class="nf">max</span><span class="p">(</span><span class="n">df.dias.all</span><span class="o">$</span><span class="n">epoch</span><span class="p">)))</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">&#39;completed&#39;</span><span class="p">)</span>
+
+<span class="c1"># important to disconnect as a maximum of 16 open connections</span>
+<span class="nf">dbDisconnect</span><span class="p">(</span><span class="n">db.con</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reading-the-true-sum-from-sql-database">
+<h4>Reading the true sum from sql database<a class="headerlink" href="#reading-the-true-sum-from-sql-database" title="Permalink to this headline">¶</a></h4>
+<p>With the “true” sum, we mean the acutal sum, which should be calculated by the peers.</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1">#one of both lines need to be executed</span>
+<span class="c1">#db.host &lt;- &lt;remote ip address&gt;</span>
+<span class="c1">#db.host &lt;- &#39;localhost&#39;</span>
+
+<span class="n">db.schema</span> <span class="o">&lt;-</span> <span class="s">&#39;dias&#39;</span>
+
+<span class="n">diasNetworkId</span> <span class="o">&lt;-</span> <span class="m">0</span>
+
+<span class="nf">stopifnot</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="nf">ls</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;db.host&#39;</span>      <span class="p">)</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+<span class="nf">stopifnot</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="nf">ls</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;db.schema&#39;</span>    <span class="p">)</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+<span class="nf">stopifnot</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="nf">ls</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;diasNetworkId&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;db.host : %s&#39;</span><span class="p">,</span> <span class="n">db.host</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;diasNetworkId : %s&#39;</span><span class="p">,</span> <span class="n">diasNetworkId</span><span class="p">))</span>
+
+<span class="c1"># include</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>         <span class="c1"># install.packages(&#39;dplyr&#39;)</span>
+<span class="nf">library</span><span class="p">(</span><span class="s">&quot;RPostgreSQL&quot;</span><span class="p">)</span> <span class="c1"># install.packages(&quot;RPostgreSQL&quot;)</span>
+
+<span class="c1"># constants</span>
+<span class="n">now</span> <span class="o">&lt;-</span> <span class="nf">Sys.time</span><span class="p">()</span>
+
+<span class="c1"># database settings</span>
+<span class="n">db.port</span> <span class="o">&lt;-</span> <span class="o">&lt;</span><span class="n">port</span> <span class="n">on</span> <span class="n">which</span> <span class="n">the</span> <span class="n">database</span> <span class="n">can</span> <span class="n">be</span> <span class="n">reached</span><span class="o">&gt;</span>
+<span class="n">db.user</span> <span class="o">&lt;-</span> <span class="o">&lt;</span><span class="n">sql</span> <span class="n">username</span><span class="o">&gt;</span>
+<span class="n">db.pwd</span>  <span class="o">&lt;-</span> <span class="o">&lt;</span><span class="n">password</span> <span class="n">for</span> <span class="n">sql</span> <span class="n">username</span><span class="o">&gt;</span>
+
+<span class="c1"># plot settings</span>
+<span class="n">db.rows</span> <span class="o">&lt;-</span> <span class="m">50000</span> <span class="c1"># number of (most recent) rows to retrieve from database</span>
+
+<span class="c1"># create output dataframe</span>
+<span class="n">df.true.gdelt.sum</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">()</span>
+
+<span class="c1"># loads the PostgreSQL driver</span>
+<span class="n">psql.drv</span> <span class="o">&lt;-</span> <span class="nf">dbDriver</span><span class="p">(</span><span class="s">&quot;PostgreSQL&quot;</span><span class="p">)</span>
+
+<span class="c1"># creates a connection to the postgres database</span>
+<span class="c1"># note that &quot;con&quot; will be used later in each connection to the database</span>
+<span class="n">db.con</span> <span class="o">&lt;-</span> <span class="nf">dbConnect</span><span class="p">(</span><span class="n">psql.drv</span>      <span class="p">,</span> <span class="n">dbname</span> <span class="o">=</span> <span class="n">db.schema</span>
+                   <span class="p">,</span><span class="n">host</span> <span class="o">=</span> <span class="n">db.host</span><span class="p">,</span> <span class="n">port</span> <span class="o">=</span> <span class="n">db.port</span>
+                   <span class="p">,</span><span class="n">user</span> <span class="o">=</span> <span class="n">db.user</span><span class="p">,</span> <span class="n">password</span> <span class="o">=</span> <span class="n">db.pwd</span><span class="p">)</span>
+
+<span class="c1"># read sum of events for all peers</span>
+<span class="n">sql</span> <span class="o">&lt;-</span> <span class="s">&#39;SELECT epoch,SUM(eventcount) AS true_sum_events FROM gdeltv2c WHERE epoch is NOT NULL GROUP BY epoch ORDER BY epoch&#39;</span>
+
+
+<span class="nf">print</span><span class="p">(</span><span class="s">&#39;reading data&#39;</span><span class="p">)</span>
+<span class="n">df.true.gdelt.sum</span> <span class="o">&lt;-</span> <span class="nf">dbGetQuery</span><span class="p">(</span><span class="n">db.con</span><span class="p">,</span> <span class="n">sql</span><span class="p">)</span>
+<span class="n">nrows</span> <span class="o">&lt;-</span> <span class="nf">nrow</span><span class="p">(</span><span class="n">df.true.gdelt.sum</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;#rows : %s&#39;</span><span class="p">,</span> <span class="n">nrows</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">&#39;completed&#39;</span><span class="p">)</span>
+
+<span class="c1"># important to disconnect as a maximum of 16 open connections</span>
+<span class="nf">dbDisconnect</span><span class="p">(</span><span class="n">db.con</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="plotting-the-read-data">
+<h4>Plotting the read data<a class="headerlink" href="#plotting-the-read-data" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># verify source data frame exists</span>
+<span class="nf">stopifnot</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="nf">ls</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;df.dias.all&#39;</span>      <span class="p">)</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+<span class="nf">stopifnot</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="nf">ls</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;df.true.gdelt.sum&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+
+<span class="c1"># include</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span> <span class="c1"># install.packages(&#39;dplyr&#39;)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">tidyr</span><span class="p">)</span> <span class="c1"># spread</span>
+
+<span class="c1"># constants</span>
+<span class="n">now</span>    <span class="o">&lt;-</span> <span class="nf">Sys.time</span><span class="p">()</span>
+<span class="n">series</span> <span class="o">&lt;-</span> <span class="s">&#39;Sum&#39;</span>
+
+<span class="c1"># check there is data in the input data.frame</span>
+<span class="n">nrows</span> <span class="o">&lt;-</span> <span class="nf">nrow</span><span class="p">(</span><span class="n">df.dias.all</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;#rows : %s&#39;</span><span class="p">,</span> <span class="n">nrows</span><span class="p">))</span>
+<span class="nf">stopifnot</span><span class="p">(</span><span class="n">nrows</span> <span class="o">&gt;</span> <span class="m">0</span> <span class="p">)</span>
+
+<span class="c1"># get data range</span>
+<span class="n">dt.range</span>     <span class="o">&lt;-</span> <span class="nf">range</span><span class="p">(</span><span class="n">df.dias.all</span><span class="o">$</span><span class="n">dt</span><span class="p">)</span>
+<span class="n">dt.range.str</span> <span class="o">&lt;-</span> <span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s to %s&#39;</span><span class="p">,</span> <span class="n">dt.range</span><span class="p">[</span><span class="m">1</span><span class="p">],</span> <span class="n">dt.range</span><span class="p">[</span><span class="m">2</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;dt.range : %s&#39;</span><span class="p">,</span> <span class="n">dt.range.str</span><span class="p">))</span>
+
+<span class="c1"># get peers in the sample</span>
+<span class="n">peers</span>     <span class="o">&lt;-</span> <span class="nf">sort</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">df.dias.all</span><span class="o">$</span><span class="n">peer</span><span class="p">))</span>
+<span class="n">num.peers</span> <span class="o">&lt;-</span> <span class="nf">length</span><span class="p">(</span><span class="n">peers</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;#num.peers : %s&#39;</span><span class="p">,</span> <span class="n">num.peers</span><span class="p">))</span>
+
+<span class="c1"># align all measurements to the same grid, since some</span>
+<span class="c1"># peers leave the network and don&#39;t generate measurements when they have left</span>
+<span class="c1"># scaffolding: seq</span>
+<span class="n">min.epoch</span>  <span class="o">&lt;-</span> <span class="nf">min</span><span class="p">(</span><span class="n">df.dias.all</span><span class="o">$</span><span class="n">epoch</span><span class="p">)</span>
+<span class="n">max.epoch</span>  <span class="o">&lt;-</span> <span class="nf">max</span><span class="p">(</span><span class="n">df.dias.all</span><span class="o">$</span><span class="n">epoch</span><span class="p">)</span>
+<span class="n">num.epochs</span> <span class="o">&lt;-</span> <span class="n">max.epoch</span> <span class="o">-</span> <span class="n">min.epoch</span> <span class="o">+</span> <span class="m">1</span>
+
+<span class="c1"># need to show complete epochs! therefore don&#39;t show the very last one</span>
+<span class="c1"># this still does assume that each peer has provided an update for MAX(epoch) - 1</span>
+<span class="n">unique.epochs</span> <span class="o">&lt;-</span> <span class="nf">sort</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">df.dias.all</span><span class="o">$</span><span class="n">epoch</span><span class="p">))</span>
+
+<span class="n">len.scaffolding</span> <span class="o">&lt;-</span> <span class="nf">length</span><span class="p">(</span><span class="n">unique.epochs</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;len.scaffolding : %s&#39;</span><span class="p">,</span> <span class="n">len.scaffolding</span><span class="p">))</span>
+
+<span class="n">df.scaffolding</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">epoch</span> <span class="o">=</span> <span class="n">unique.epochs</span><span class="p">,</span> <span class="n">epoch.rebase</span> <span class="o">=</span> <span class="nf">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">len.scaffolding</span><span class="p">))</span>
+
+<span class="c1"># compute average value of each peer at each epoch</span>
+<span class="c1"># this is because in the event table, there can be many updates per epoch</span>
+<span class="n">df.peers</span> <span class="o">&lt;-</span>
+  <span class="n">df.dias.all</span> <span class="o">%&gt;%</span>
+  <span class="nf">filter </span><span class="p">(</span><span class="n">active</span> <span class="o">==</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="nf">group_by</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">peer</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="nf">summarize</span><span class="p">(</span><span class="n">state</span> <span class="o">=</span> <span class="nf">mean</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+           <span class="p">,</span><span class="n">avg</span> <span class="o">=</span> <span class="nf">mean</span><span class="p">(</span><span class="n">avg</span><span class="p">)</span>
+           <span class="p">,</span><span class="n">sum</span> <span class="o">=</span> <span class="nf">mean</span><span class="p">(</span><span class="n">sum</span><span class="p">)</span>
+           <span class="p">,</span><span class="n">cnt_obs</span> <span class="o">=</span> <span class="nf">n</span><span class="p">()</span>
+           <span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="nf">arrange</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">peer</span><span class="p">)</span>
+
+<span class="c1"># prepare baseline</span>
+<span class="n">df.baseline</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">epoch</span> <span class="o">=</span> <span class="n">unique.epochs</span>
+                         <span class="p">,</span><span class="n">epoch.rebase</span> <span class="o">=</span> <span class="nf">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">len.scaffolding</span><span class="p">)</span>
+                         <span class="p">,</span><span class="n">state</span> <span class="o">=</span> <span class="nf">numeric</span><span class="p">(</span><span class="n">len.scaffolding</span><span class="p">)</span>
+                         <span class="p">,</span><span class="n">sum</span> <span class="o">=</span> <span class="nf">numeric</span><span class="p">(</span><span class="n">len.scaffolding</span><span class="p">)</span>
+                         <span class="p">,</span><span class="n">cnt</span> <span class="o">=</span> <span class="nf">numeric</span><span class="p">(</span><span class="n">len.scaffolding</span><span class="p">)</span>
+                         <span class="p">)</span>
+
+<span class="c1"># ylim: range for the y-axis</span>
+<span class="c1"># show exact range</span>
+<span class="n">ylim</span> <span class="o">&lt;-</span> <span class="nf">range</span><span class="p">(</span><span class="n">df.peers</span><span class="o">$</span><span class="n">sum</span><span class="p">,</span> <span class="n">na.rm</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+
+<span class="c1"># prepare output for website</span>
+<span class="c1"># ouptut table contains 1 column per peer; to facilitate the construction of the output data.frame</span>
+<span class="c1"># we created an unpivoted view first, and then unpivot(spread) before saving to database</span>
+<span class="c1"># edward | 2018-09-24</span>
+
+<span class="c1"># plot each peer, one at a time</span>
+<span class="nf">for</span><span class="p">(</span><span class="n">peer.id</span> <span class="n">in</span> <span class="n">peers</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># get observations for this peer only</span>
+  <span class="n">df.this.peer</span> <span class="o">&lt;-</span>
+    <span class="n">df.peers</span> <span class="o">%&gt;%</span>
+    <span class="nf">filter</span><span class="p">(</span><span class="n">peer</span> <span class="o">==</span> <span class="n">peer.id</span><span class="p">)</span>
+
+  <span class="c1"># align to scaffolding</span>
+  <span class="n">df.plot</span> <span class="o">&lt;-</span>
+    <span class="n">df.scaffolding</span> <span class="o">%&gt;%</span>
+    <span class="nf">left_join</span><span class="p">(</span><span class="n">df.this.peer</span><span class="p">,</span> <span class="n">by</span> <span class="o">=</span> <span class="s">&#39;epoch&#39;</span><span class="p">)</span>
+
+  <span class="nf">if</span><span class="p">(</span> <span class="n">peer.id</span> <span class="o">==</span> <span class="m">1</span> <span class="p">){</span>
+    <span class="nf">plot</span><span class="p">(</span><span class="n">df.plot</span><span class="o">$</span><span class="n">epoch.rebase</span>
+        <span class="p">,</span><span class="n">df.plot</span><span class="o">$</span><span class="n">sum</span>
+        <span class="p">,</span><span class="n">xlab</span> <span class="o">=</span> <span class="nf">paste</span><span class="p">(</span> <span class="s">&#39;Epoch (rebased, starts at &#39;</span><span class="p">,</span> <span class="n">min.epoch</span><span class="p">,</span><span class="s">&#39;)&#39;</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">&#39;&#39;</span> <span class="p">)</span>
+        <span class="p">,</span><span class="n">ylab</span> <span class="o">=</span> <span class="n">series</span>
+        <span class="p">,</span><span class="n">ylim</span> <span class="o">=</span> <span class="n">ylim</span>
+        <span class="p">,</span><span class="n">main</span> <span class="o">=</span> <span class="nf">paste</span><span class="p">(</span> <span class="nf">paste</span><span class="p">(</span><span class="n">db.host</span><span class="p">,</span><span class="s">&#39;|&#39;</span><span class="p">,</span> <span class="s">&#39;network&#39;</span><span class="p">,</span><span class="n">diasNetworkId</span><span class="p">,</span><span class="s">&#39;|&#39;</span><span class="p">,</span><span class="n">series</span><span class="p">,</span><span class="s">&#39;over&#39;</span><span class="p">,</span><span class="n">num.peers</span><span class="p">,</span><span class="s">&#39;peers&#39;</span><span class="p">),</span><span class="nf">paste</span><span class="p">(</span><span class="s">&#39;last&#39;</span><span class="p">,</span><span class="n">nrows</span><span class="p">,</span><span class="s">&#39;of&#39;</span><span class="p">,</span><span class="n">db.rows</span><span class="p">,</span><span class="s">&#39;rows&#39;</span><span class="p">),</span><span class="n">dt.range.str</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">&#39;\n&#39;</span><span class="p">)</span>
+        <span class="p">,</span><span class="n">pch</span> <span class="o">=</span> <span class="m">16</span>
+        <span class="p">,</span><span class="n">cex</span> <span class="o">=</span> <span class="m">0.5</span>
+        <span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="m">4</span>
+        <span class="p">)</span>
+  <span class="p">}</span>
+  <span class="n">else</span> <span class="p">{</span>
+    <span class="nf">points</span><span class="p">(</span><span class="n">df.plot</span><span class="o">$</span><span class="n">epoch.rebase</span>
+          <span class="p">,</span><span class="n">df.plot</span><span class="o">$</span><span class="n">sum</span>
+          <span class="p">,</span><span class="n">pch</span> <span class="o">=</span> <span class="m">16</span>
+          <span class="p">,</span><span class="n">cex</span> <span class="o">=</span> <span class="m">0.5</span>
+          <span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="m">4</span>
+          <span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="c1"># update baseline</span>
+  <span class="c1"># first, fill missing values</span>
+  <span class="n">df.this.peer.fill</span> <span class="o">&lt;-</span> <span class="n">df.plot</span>
+  <span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">len.scaffolding</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">if</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">df.this.peer.fill</span><span class="o">$</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">])){</span>
+      <span class="n">prev_value</span> <span class="o">=</span> <span class="m">0.0</span>
+      <span class="nf">if</span><span class="p">(</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="m">2</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="n">prev_value</span> <span class="o">=</span> <span class="nf">if_else</span><span class="p">(</span> <span class="nf">is.na</span><span class="p">(</span><span class="n">df.this.peer.fill</span><span class="o">$</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="m">-1</span><span class="p">]),</span> <span class="m">0.0</span><span class="p">,</span> <span class="n">df.this.peer.fill</span><span class="o">$</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="m">-1</span><span class="p">])</span>
+      <span class="p">}</span>
+      <span class="n">df.this.peer.fill</span><span class="o">$</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">prev_value</span>
+    <span class="p">}</span>
+
+    <span class="nf">if</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">df.this.peer.fill</span><span class="o">$</span><span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="p">{</span>
+      <span class="n">prev_value</span> <span class="o">=</span> <span class="m">0.0</span>
+      <span class="nf">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="m">2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">prev_value</span> <span class="o">=</span> <span class="nf">if_else</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">df.this.peer.fill</span><span class="o">$</span><span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="m">-1</span><span class="p">]),</span> <span class="m">0.0</span><span class="p">,</span> <span class="n">df.this.peer.fill</span><span class="o">$</span><span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="m">-1</span><span class="p">])</span>
+      <span class="p">}</span>
+      <span class="n">df.this.peer.fill</span><span class="o">$</span><span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">prev_value</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1"># update baseline</span>
+  <span class="n">df.baseline</span><span class="o">$</span><span class="n">state</span> <span class="o">=</span> <span class="n">df.baseline</span><span class="o">$</span><span class="n">state</span> <span class="o">+</span> <span class="n">df.this.peer.fill</span><span class="o">$</span><span class="n">state</span>
+  <span class="n">df.baseline</span><span class="o">$</span><span class="n">sum</span>   <span class="o">=</span> <span class="n">df.baseline</span><span class="o">$</span><span class="n">sum</span> <span class="o">+</span> <span class="n">df.this.peer.fill</span><span class="o">$</span><span class="n">sum</span>
+  <span class="n">df.baseline</span><span class="o">$</span><span class="n">cnt</span>   <span class="o">=</span> <span class="n">df.baseline</span><span class="o">$</span><span class="n">cnt</span> <span class="o">+</span> <span class="m">1</span>
+<span class="p">}</span>
+
+<span class="c1"># compte the true sum of raw values</span>
+<span class="n">r</span> <span class="o">&lt;-</span> <span class="m">0</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">&#39;computing true sum of raw values&#39;</span><span class="p">)</span>
+<span class="nf">for</span><span class="p">(</span><span class="n">epoch_loop</span> <span class="n">in</span> <span class="n">df.baseline</span><span class="o">$</span><span class="n">epoch</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">r</span> <span class="o">&lt;-</span> <span class="n">r</span> <span class="o">+</span> <span class="m">1</span>
+
+  <span class="n">true.gdelt.sum</span> <span class="o">&lt;-</span>
+    <span class="n">df.true.gdelt.sum</span> <span class="o">%&gt;%</span>
+    <span class="nf">filter</span><span class="p">(</span><span class="n">epoch</span> <span class="o">&lt;=</span> <span class="n">epoch_loop</span><span class="p">)</span> <span class="o">%&gt;%</span>
+    <span class="nf">arrange</span><span class="p">(</span><span class="nf">desc</span><span class="p">(</span><span class="n">epoch</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">head</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="m">1</span><span class="p">)</span> <span class="o">%&gt;%</span>
+    <span class="nf">select</span><span class="p">(</span><span class="n">true_sum_events</span><span class="p">)</span> <span class="o">%&gt;%</span>
+    <span class="nf">as.numeric</span><span class="p">()</span>
+
+  <span class="c1"># save</span>
+  <span class="n">df.baseline</span><span class="o">$</span><span class="n">true_sum_events</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">true.gdelt.sum</span>
+<span class="p">}</span>
+
+<span class="c1"># -----------------------</span>
+<span class="c1"># plot true sum of events</span>
+<span class="c1"># -----------------------</span>
+
+<span class="nf">lines</span><span class="p">(</span><span class="n">df.baseline</span><span class="o">$</span><span class="n">epoch.rebase</span>
+     <span class="p">,</span><span class="n">df.baseline</span><span class="o">$</span><span class="n">true_sum_events</span>
+     <span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="s">&#39;green&#39;</span>
+     <span class="p">,</span><span class="n">lwd</span> <span class="o">=</span> <span class="m">1.5</span>
+<span class="p">)</span>
+
+<span class="c1"># -------------------------------</span>
+<span class="c1"># plot the true sum of the states</span>
+<span class="c1"># -------------------------------</span>
+
+<span class="nf">lines</span><span class="p">(</span><span class="n">df.baseline</span><span class="o">$</span><span class="n">epoch.rebase</span>
+     <span class="p">,</span><span class="n">df.baseline</span><span class="o">$</span><span class="n">state</span>
+     <span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="s">&#39;blue&#39;</span>
+     <span class="p">,</span><span class="n">lwd</span> <span class="o">=</span> <span class="m">1.5</span>
+     <span class="p">)</span>
+
+<span class="c1"># ---------------------------------</span>
+<span class="c1"># plot the average aggregated value</span>
+<span class="c1"># ---------------------------------</span>
+
+<span class="n">df.baseline</span><span class="o">$</span><span class="n">agg_sum</span> <span class="o">&lt;-</span> <span class="n">df.baseline</span><span class="o">$</span><span class="n">sum</span> <span class="o">/</span> <span class="n">df.baseline</span><span class="o">$</span><span class="n">cnt</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">df.baseline</span><span class="o">$</span><span class="n">epoch.rebase</span>
+     <span class="p">,</span><span class="n">df.baseline</span><span class="o">$</span><span class="n">agg_sum</span>
+     <span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="s">&#39;red&#39;</span>
+     <span class="p">,</span><span class="n">lwd</span> <span class="o">=</span> <span class="m">1.5</span>
+     <span class="p">)</span>
+
+<span class="c1"># legend</span>
+<span class="nf">legend</span><span class="p">(</span><span class="s">&quot;bottomleft&quot;</span><span class="p">,</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#39;True sum of GDELT events&#39;</span><span class="p">,</span> <span class="s">&#39;Sum of selected states&#39;</span><span class="p">,</span> <span class="s">&#39;DIAS sum&#39;</span><span class="p">),</span> <span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> <span class="s">&#39;red&#39;</span><span class="p">),</span> <span class="n">lwd</span><span class="o">=</span><span class="m">1.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="combined-plot-for-the-command-line">
+<h4>Combined plot for the command line<a class="headerlink" href="#combined-plot-for-the-command-line" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1">#------------------------------------------------------------- step 1</span>
+
+<span class="c1">#one of both lines need to be executed</span>
+<span class="c1">#db.host &lt;- &lt;remote ip address&gt;</span>
+<span class="c1">#db.host &lt;- &#39;localhost&#39;</span>
+
+<span class="n">db.schema</span> <span class="o">&lt;-</span> <span class="s">&#39;dias&#39;</span>
+
+<span class="n">diasNetworkId</span> <span class="o">&lt;-</span> <span class="m">0</span>
+
+<span class="n">source_table</span> <span class="o">&lt;-</span> <span class="s">&#39;aggregation_event&#39;</span>
+
+<span class="nf">stopifnot</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="nf">ls</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;db.host&#39;</span>      <span class="p">)</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+<span class="nf">stopifnot</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="nf">ls</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;db.schema&#39;</span>    <span class="p">)</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+<span class="nf">stopifnot</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="nf">ls</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;diasNetworkId&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+<span class="nf">stopifnot</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="nf">ls</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;source_table&#39;</span> <span class="p">)</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;db.host : %s&#39;</span><span class="p">,</span> <span class="n">db.host</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;diasNetworkId : %s&#39;</span><span class="p">,</span> <span class="n">diasNetworkId</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;source_table : %s&#39;</span><span class="p">,</span> <span class="n">source_table</span><span class="p">))</span>
+
+<span class="c1"># include</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span> <span class="c1"># install.packages( &#39;dplyPerr&#39;)</span>
+<span class="nf">library</span><span class="p">(</span><span class="s">&quot;RPostgreSQL&quot;</span><span class="p">)</span><span class="c1">#install.packages(&quot;RPostgreSQL&quot;)</span>
+
+<span class="c1"># constants</span>
+<span class="n">now</span> <span class="o">&lt;-</span> <span class="nf">Sys.time</span><span class="p">()</span>
+
+<span class="c1"># database settings</span>
+<span class="n">db.port</span> <span class="o">&lt;-</span> <span class="o">&lt;</span><span class="n">port</span> <span class="n">on</span> <span class="n">which</span> <span class="n">the</span> <span class="n">database</span> <span class="n">can</span> <span class="n">be</span> <span class="n">reached</span><span class="o">&gt;</span>
+<span class="n">db.user</span> <span class="o">&lt;-</span> <span class="o">&lt;</span><span class="n">sql</span> <span class="n">username</span><span class="o">&gt;</span>
+<span class="n">db.pwd</span>  <span class="o">&lt;-</span> <span class="o">&lt;</span><span class="n">password</span> <span class="n">for</span> <span class="n">sql</span> <span class="n">username</span><span class="o">&gt;</span>
+
+<span class="c1"># dataset settings</span>
+<span class="n">last.epoch</span> <span class="o">&lt;-</span> <span class="m">-1</span> <span class="c1"># no restriction on epoch</span>
+
+<span class="c1"># plot settings</span>
+<span class="n">db.rows</span> <span class="o">&lt;-</span> <span class="m">50000</span> <span class="c1"># number of (most recent) rows to retrieve from database (-1 for all rows)</span>
+
+<span class="c1"># create output dataframe</span>
+<span class="n">df.dias.all</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">()</span>
+
+<span class="c1"># loads the PostgreSQL driver</span>
+<span class="n">psql.drv</span> <span class="o">&lt;-</span> <span class="nf">dbDriver</span><span class="p">(</span><span class="s">&quot;PostgreSQL&quot;</span><span class="p">)</span>
+
+<span class="c1"># creates a connection to the postgres database</span>
+<span class="c1"># note that &quot;con&quot; will be used later in each connection to the database</span>
+<span class="n">db.con</span> <span class="o">&lt;-</span> <span class="nf">dbConnect</span><span class="p">(</span><span class="n">psql.drv</span><span class="p">,</span> <span class="n">dbname</span> <span class="o">=</span> <span class="n">db.schema</span>
+                   <span class="p">,</span><span class="n">host</span> <span class="o">=</span> <span class="n">db.host</span><span class="p">,</span> <span class="n">port</span> <span class="o">=</span> <span class="n">db.port</span>
+                   <span class="p">,</span><span class="n">user</span> <span class="o">=</span> <span class="n">db.user</span><span class="p">,</span> <span class="n">password</span> <span class="o">=</span> <span class="n">db.pwd</span><span class="p">)</span>
+
+<span class="c1"># mod eag 2018-09-11 - allow user to set a limit</span>
+<span class="n">sql</span> <span class="o">&lt;-</span> <span class="s">&#39;&#39;</span>
+<span class="nf">if</span><span class="p">(</span><span class="n">last.epoch</span> <span class="o">==</span> <span class="m">-1</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nf">if</span><span class="p">(</span><span class="n">db.rows</span> <span class="o">==</span> <span class="m">-1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">sql</span> <span class="o">&lt;-</span> <span class="nf">paste</span><span class="p">(</span><span class="s">&#39;SELECT * FROM&#39;</span><span class="p">,</span><span class="n">source_table</span><span class="p">,</span><span class="s">&#39;WHERE network =&#39;</span><span class="p">,</span> <span class="n">diasNetworkId</span><span class="p">,</span> <span class="s">&#39;ORDER BY seq_id ASC&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="n">else</span> <span class="p">{</span>
+    <span class="n">sql</span> <span class="o">&lt;-</span> <span class="nf">paste</span><span class="p">(</span><span class="s">&#39;SELECT * FROM&#39;</span><span class="p">,</span><span class="n">source_table</span><span class="p">,</span><span class="s">&#39;WHERE network =&#39;</span><span class="p">,</span> <span class="n">diasNetworkId</span><span class="p">,</span> <span class="s">&#39;AND seq_id &gt;= (SELECT MAX(seq_id) FROM&#39;</span><span class="p">,</span><span class="n">source_table</span><span class="p">,</span> <span class="s">&#39;) -&#39;</span><span class="p">,</span> <span class="n">db.rows</span> <span class="o">-</span> <span class="m">1</span><span class="p">,</span> <span class="s">&#39;ORDER BY seq_id ASC&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span><span class="n">else</span> <span class="p">{</span>
+  <span class="n">sql</span> <span class="o">&lt;-</span> <span class="nf">paste</span><span class="p">(</span><span class="s">&#39;SELECT * FROM&#39;</span><span class="p">,</span><span class="n">source_table</span><span class="p">,</span><span class="s">&#39;WHERE network =&#39;</span><span class="p">,</span> <span class="n">diasNetworkId</span><span class="p">,</span> <span class="s">&#39;AND seq_id &gt;= (SELECT MAX(seq_id) FROM&#39;</span><span class="p">,</span><span class="n">source_table</span><span class="p">,</span> <span class="s">&#39; WHERE epoch &lt;=&#39;</span><span class="p">,</span> <span class="n">last.epoch</span><span class="p">,</span><span class="s">&#39;) -&#39;</span><span class="p">,</span> <span class="n">db.rows</span> <span class="o">-</span> <span class="m">1</span><span class="p">,</span> <span class="s">&#39;ORDER BY seq_id ASC&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="s">&#39;reading data&#39;</span><span class="p">)</span>
+<span class="n">df.dias.all</span> <span class="o">&lt;-</span> <span class="nf">dbGetQuery</span><span class="p">(</span><span class="n">db.con</span><span class="p">,</span> <span class="n">sql</span><span class="p">)</span>
+<span class="n">nrows</span> <span class="o">&lt;-</span> <span class="nf">nrow</span><span class="p">(</span><span class="n">df.dias.all</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;#rows : %s&#39;</span><span class="p">,</span> <span class="n">nrows</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;epoch range : %s - %s&#39;</span><span class="p">,</span> <span class="nf">min</span><span class="p">(</span><span class="n">df.dias.all</span><span class="o">$</span><span class="n">epoch</span><span class="p">),</span> <span class="nf">max</span><span class="p">(</span><span class="n">df.dias.all</span><span class="o">$</span><span class="n">epoch</span><span class="p">)))</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">&#39;completed&#39;</span><span class="p">)</span>
+
+<span class="c1"># important to disconnect as a maximum of 16 open connections</span>
+<span class="nf">dbDisconnect</span><span class="p">(</span><span class="n">db.con</span><span class="p">)</span>
+
+
+<span class="c1">#------------------------------------------------------------- step 2</span>
+
+<span class="nf">stopifnot</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="nf">ls</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;db.host&#39;</span>      <span class="p">)</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+<span class="nf">stopifnot</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="nf">ls</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;db.schema&#39;</span>    <span class="p">)</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+<span class="nf">stopifnot</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="nf">ls</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;diasNetworkId&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;db.host : %s&#39;</span><span class="p">,</span> <span class="n">db.host</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;diasNetworkId : %s&#39;</span><span class="p">,</span> <span class="n">diasNetworkId</span><span class="p">))</span>
+
+<span class="c1"># include</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span> <span class="c1"># install.packages( &#39;dplyr&#39;)</span>
+<span class="nf">library</span><span class="p">(</span><span class="s">&quot;RPostgreSQL&quot;</span><span class="p">)</span><span class="c1">#install.packages(&quot;RPostgreSQL&quot;)</span>
+
+<span class="c1"># constants</span>
+<span class="n">now</span> <span class="o">&lt;-</span> <span class="nf">Sys.time</span><span class="p">()</span>
+
+<span class="c1"># database settings</span>
+<span class="n">db.port</span> <span class="o">&lt;-</span> <span class="o">&lt;</span><span class="n">port</span> <span class="n">on</span> <span class="n">which</span> <span class="n">the</span> <span class="n">database</span> <span class="n">can</span> <span class="n">be</span> <span class="n">reached</span><span class="o">&gt;</span>
+<span class="n">db.user</span> <span class="o">&lt;-</span> <span class="o">&lt;</span><span class="n">sql</span> <span class="n">username</span><span class="o">&gt;</span>
+<span class="n">db.pwd</span>  <span class="o">&lt;-</span> <span class="o">&lt;</span><span class="n">password</span> <span class="n">for</span> <span class="n">sql</span> <span class="n">username</span><span class="o">&gt;</span>
+
+<span class="c1"># create output dataframe</span>
+<span class="n">df.true.gdelt.sum</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">()</span>
+
+<span class="c1"># loads the PostgreSQL driver</span>
+<span class="n">psql.drv</span> <span class="o">&lt;-</span> <span class="nf">dbDriver</span><span class="p">(</span><span class="s">&quot;PostgreSQL&quot;</span><span class="p">)</span>
+
+<span class="c1"># creates a connection to the postgres database</span>
+<span class="c1"># note that &quot;con&quot; will be used later in each connection to the database</span>
+<span class="n">db.con</span> <span class="o">&lt;-</span> <span class="nf">dbConnect</span><span class="p">(</span><span class="n">psql.drv</span>      <span class="p">,</span> <span class="n">dbname</span> <span class="o">=</span> <span class="n">db.schema</span>
+                   <span class="p">,</span><span class="n">host</span> <span class="o">=</span> <span class="n">db.host</span><span class="p">,</span> <span class="n">port</span> <span class="o">=</span> <span class="n">db.port</span>
+                   <span class="p">,</span><span class="n">user</span> <span class="o">=</span> <span class="n">db.user</span><span class="p">,</span> <span class="n">password</span> <span class="o">=</span> <span class="n">db.pwd</span><span class="p">)</span>
+
+
+<span class="c1"># read sum of events for all peers</span>
+<span class="n">sql</span> <span class="o">&lt;-</span> <span class="s">&#39;SELECT epoch,SUM(eventcount) AS true_sum_events FROM gdeltv2c WHERE epoch is NOT NULL GROUP BY epoch ORDER BY epoch&#39;</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="s">&#39;reading data&#39;</span><span class="p">)</span>
+<span class="n">df.true.gdelt.sum</span> <span class="o">&lt;-</span> <span class="nf">dbGetQuery</span><span class="p">(</span><span class="n">db.con</span><span class="p">,</span> <span class="n">sql</span><span class="p">)</span>
+<span class="n">nrows</span> <span class="o">&lt;-</span> <span class="nf">nrow</span><span class="p">(</span><span class="n">df.true.gdelt.sum</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;#rows : %s&#39;</span><span class="p">,</span> <span class="n">nrows</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">&#39;completed&#39;</span><span class="p">)</span>
+
+<span class="c1"># important to disconnect as a maximum of 16 open connections</span>
+<span class="nf">dbDisconnect</span><span class="p">(</span><span class="n">db.con</span><span class="p">)</span>
+
+<span class="c1">#------------------------------------------------------------- step 3</span>
+
+<span class="c1"># verify source data frame exists</span>
+<span class="nf">stopifnot</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="nf">ls</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;df.dias.all&#39;</span>      <span class="p">)</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+<span class="nf">stopifnot</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="nf">ls</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;df.true.gdelt.sum&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+
+<span class="c1"># include</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span> <span class="c1"># install.packages(&#39;dplyr&#39;)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">tidyr</span><span class="p">)</span> <span class="c1"># spread</span>
+
+<span class="c1"># constants</span>
+<span class="n">now</span>    <span class="o">&lt;-</span> <span class="nf">Sys.time</span><span class="p">()</span>
+<span class="n">series</span> <span class="o">&lt;-</span> <span class="s">&#39;Sum&#39;</span>
+
+<span class="c1"># check there is data in the input data.frame</span>
+<span class="n">nrows</span> <span class="o">&lt;-</span> <span class="nf">nrow</span><span class="p">(</span><span class="n">df.dias.all</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;#rows : %s&#39;</span><span class="p">,</span> <span class="n">nrows</span><span class="p">))</span>
+<span class="nf">stopifnot</span><span class="p">(</span><span class="n">nrows</span> <span class="o">&gt;</span> <span class="m">0</span> <span class="p">)</span>
+
+<span class="c1"># get data range</span>
+<span class="n">dt.range</span>     <span class="o">&lt;-</span> <span class="nf">range</span><span class="p">(</span><span class="n">df.dias.all</span><span class="o">$</span><span class="n">dt</span><span class="p">)</span>
+<span class="n">dt.range.str</span> <span class="o">&lt;-</span> <span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s to %s&#39;</span><span class="p">,</span> <span class="n">dt.range</span><span class="p">[</span><span class="m">1</span><span class="p">],</span> <span class="n">dt.range</span><span class="p">[</span><span class="m">2</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;dt.range : %s&#39;</span><span class="p">,</span> <span class="n">dt.range.str</span><span class="p">))</span>
+
+<span class="c1"># get peers in the sample</span>
+<span class="n">peers</span>     <span class="o">&lt;-</span> <span class="nf">sort</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">df.dias.all</span><span class="o">$</span><span class="n">peer</span><span class="p">))</span>
+<span class="n">num.peers</span> <span class="o">&lt;-</span> <span class="nf">length</span><span class="p">(</span><span class="n">peers</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;#num.peers : %s&#39;</span><span class="p">,</span> <span class="n">num.peers</span><span class="p">))</span>
+
+<span class="c1"># align all measurements to the same grid, since some</span>
+<span class="c1"># peers leave the network and don&#39;t generate measurements when they have left</span>
+<span class="c1"># scaffolding: seq</span>
+<span class="n">min.epoch</span>  <span class="o">&lt;-</span> <span class="nf">min</span><span class="p">(</span><span class="n">df.dias.all</span><span class="o">$</span><span class="n">epoch</span><span class="p">)</span>
+<span class="n">max.epoch</span>  <span class="o">&lt;-</span> <span class="nf">max</span><span class="p">(</span><span class="n">df.dias.all</span><span class="o">$</span><span class="n">epoch</span><span class="p">)</span>
+<span class="n">num.epochs</span> <span class="o">&lt;-</span> <span class="n">max.epoch</span> <span class="o">-</span> <span class="n">min.epoch</span> <span class="o">+</span> <span class="m">1</span>
+
+<span class="c1"># need to show complete epochs! therefore don&#39;t show the very last one</span>
+<span class="c1"># this still does assume that each peer has provided an update for MAX(epoch) - 1</span>
+<span class="n">unique.epochs</span> <span class="o">&lt;-</span> <span class="nf">sort</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">df.dias.all</span><span class="o">$</span><span class="n">epoch</span><span class="p">))</span>
+
+<span class="n">len.scaffolding</span> <span class="o">&lt;-</span> <span class="nf">length</span><span class="p">(</span><span class="n">unique.epochs</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;len.scaffolding : %s&#39;</span><span class="p">,</span> <span class="n">len.scaffolding</span><span class="p">))</span>
+
+<span class="n">df.scaffolding</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">epoch</span> <span class="o">=</span> <span class="n">unique.epochs</span><span class="p">,</span> <span class="n">epoch.rebase</span> <span class="o">=</span> <span class="nf">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">len.scaffolding</span><span class="p">))</span>
+
+<span class="c1"># compute average value of each peer at each epoch</span>
+<span class="c1"># this is because in the event table, there can be many updates per epoch</span>
+<span class="n">df.peers</span> <span class="o">&lt;-</span>
+  <span class="n">df.dias.all</span> <span class="o">%&gt;%</span>
+  <span class="nf">filter </span><span class="p">(</span><span class="n">active</span> <span class="o">==</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="nf">group_by</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">peer</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="nf">summarize</span><span class="p">(</span><span class="n">state</span> <span class="o">=</span> <span class="nf">mean</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+           <span class="p">,</span><span class="n">avg</span> <span class="o">=</span> <span class="nf">mean</span><span class="p">(</span><span class="n">avg</span><span class="p">)</span>
+           <span class="p">,</span><span class="n">sum</span> <span class="o">=</span> <span class="nf">mean</span><span class="p">(</span><span class="n">sum</span><span class="p">)</span>
+           <span class="p">,</span><span class="n">cnt_obs</span> <span class="o">=</span> <span class="nf">n</span><span class="p">()</span>
+           <span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="nf">arrange</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">peer</span><span class="p">)</span>
+
+<span class="c1"># prepare baseline</span>
+<span class="n">df.baseline</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">epoch</span> <span class="o">=</span> <span class="n">unique.epochs</span>
+                         <span class="p">,</span><span class="n">epoch.rebase</span> <span class="o">=</span> <span class="nf">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">len.scaffolding</span><span class="p">)</span>
+                         <span class="p">,</span><span class="n">state</span> <span class="o">=</span> <span class="nf">numeric</span><span class="p">(</span><span class="n">len.scaffolding</span><span class="p">)</span>
+                         <span class="p">,</span><span class="n">sum</span> <span class="o">=</span> <span class="nf">numeric</span><span class="p">(</span><span class="n">len.scaffolding</span><span class="p">)</span>
+                         <span class="p">,</span><span class="n">cnt</span> <span class="o">=</span> <span class="nf">numeric</span><span class="p">(</span><span class="n">len.scaffolding</span><span class="p">)</span>
+                         <span class="p">)</span>
+
+<span class="c1"># ylim: range for the y-axis</span>
+<span class="c1"># show exact range</span>
+<span class="n">ylim</span> <span class="o">&lt;-</span> <span class="nf">range</span><span class="p">(</span><span class="n">df.peers</span><span class="o">$</span><span class="n">sum</span><span class="p">,</span> <span class="n">na.rm</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+
+<span class="c1"># prepare output for website</span>
+<span class="c1"># ouptut table contains 1 column per peer; to facilitate the construction of the output data.frame</span>
+<span class="c1"># we created an unpivoted view first, and then unpivot(spread) before saving to database</span>
+<span class="c1"># edward | 2018-09-24</span>
+
+<span class="c1"># plot each peer, one at a time</span>
+<span class="nf">for</span><span class="p">(</span><span class="n">peer.id</span> <span class="n">in</span> <span class="n">peers</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># get observations for this peer only</span>
+  <span class="n">df.this.peer</span> <span class="o">&lt;-</span>
+    <span class="n">df.peers</span> <span class="o">%&gt;%</span>
+    <span class="nf">filter</span><span class="p">(</span><span class="n">peer</span> <span class="o">==</span> <span class="n">peer.id</span><span class="p">)</span>
+
+  <span class="c1"># align to scaffolding</span>
+  <span class="n">df.plot</span> <span class="o">&lt;-</span>
+    <span class="n">df.scaffolding</span> <span class="o">%&gt;%</span>
+    <span class="nf">left_join</span><span class="p">(</span><span class="n">df.this.peer</span><span class="p">,</span> <span class="n">by</span> <span class="o">=</span> <span class="s">&#39;epoch&#39;</span><span class="p">)</span>
+
+  <span class="nf">if</span><span class="p">(</span> <span class="n">peer.id</span> <span class="o">==</span> <span class="m">1</span> <span class="p">){</span>
+    <span class="nf">plot</span><span class="p">(</span><span class="n">df.plot</span><span class="o">$</span><span class="n">epoch.rebase</span>
+        <span class="p">,</span><span class="n">df.plot</span><span class="o">$</span><span class="n">sum</span>
+        <span class="p">,</span><span class="n">xlab</span> <span class="o">=</span> <span class="nf">paste</span><span class="p">(</span> <span class="s">&#39;Epoch (rebased, starts at &#39;</span><span class="p">,</span> <span class="n">min.epoch</span><span class="p">,</span><span class="s">&#39;)&#39;</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">&#39;&#39;</span> <span class="p">)</span>
+        <span class="p">,</span><span class="n">ylab</span> <span class="o">=</span> <span class="n">series</span>
+        <span class="p">,</span><span class="n">ylim</span> <span class="o">=</span> <span class="n">ylim</span>
+        <span class="p">,</span><span class="n">main</span> <span class="o">=</span> <span class="nf">paste</span><span class="p">(</span> <span class="nf">paste</span><span class="p">(</span><span class="n">db.host</span><span class="p">,</span><span class="s">&#39;|&#39;</span><span class="p">,</span> <span class="s">&#39;network&#39;</span><span class="p">,</span><span class="n">diasNetworkId</span><span class="p">,</span><span class="s">&#39;|&#39;</span><span class="p">,</span><span class="n">series</span><span class="p">,</span><span class="s">&#39;over&#39;</span><span class="p">,</span><span class="n">num.peers</span><span class="p">,</span><span class="s">&#39;peers&#39;</span><span class="p">),</span><span class="nf">paste</span><span class="p">(</span><span class="s">&#39;last&#39;</span><span class="p">,</span><span class="n">nrows</span><span class="p">,</span><span class="s">&#39;of&#39;</span><span class="p">,</span><span class="n">db.rows</span><span class="p">,</span><span class="s">&#39;rows&#39;</span><span class="p">),</span><span class="n">dt.range.str</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">&#39;\n&#39;</span><span class="p">)</span>
+        <span class="p">,</span><span class="n">pch</span> <span class="o">=</span> <span class="m">16</span>
+        <span class="p">,</span><span class="n">cex</span> <span class="o">=</span> <span class="m">0.5</span>
+        <span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="m">4</span>
+        <span class="p">)</span>
+  <span class="p">}</span>
+  <span class="n">else</span> <span class="p">{</span>
+    <span class="nf">points</span><span class="p">(</span><span class="n">df.plot</span><span class="o">$</span><span class="n">epoch.rebase</span>
+          <span class="p">,</span><span class="n">df.plot</span><span class="o">$</span><span class="n">sum</span>
+          <span class="p">,</span><span class="n">pch</span> <span class="o">=</span> <span class="m">16</span>
+          <span class="p">,</span><span class="n">cex</span> <span class="o">=</span> <span class="m">0.5</span>
+          <span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="m">4</span>
+          <span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="c1"># update baseline</span>
+  <span class="c1"># first, fill missing values</span>
+  <span class="n">df.this.peer.fill</span> <span class="o">&lt;-</span> <span class="n">df.plot</span>
+  <span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">len.scaffolding</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">if</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">df.this.peer.fill</span><span class="o">$</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">])){</span>
+      <span class="n">prev_value</span> <span class="o">=</span> <span class="m">0.0</span>
+      <span class="nf">if</span><span class="p">(</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="m">2</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="n">prev_value</span> <span class="o">=</span> <span class="nf">if_else</span><span class="p">(</span> <span class="nf">is.na</span><span class="p">(</span><span class="n">df.this.peer.fill</span><span class="o">$</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="m">-1</span><span class="p">]),</span> <span class="m">0.0</span><span class="p">,</span> <span class="n">df.this.peer.fill</span><span class="o">$</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="m">-1</span><span class="p">])</span>
+      <span class="p">}</span>
+      <span class="n">df.this.peer.fill</span><span class="o">$</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">prev_value</span>
+    <span class="p">}</span>
+
+    <span class="nf">if</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">df.this.peer.fill</span><span class="o">$</span><span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="p">{</span>
+      <span class="n">prev_value</span> <span class="o">=</span> <span class="m">0.0</span>
+      <span class="nf">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="m">2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">prev_value</span> <span class="o">=</span> <span class="nf">if_else</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">df.this.peer.fill</span><span class="o">$</span><span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="m">-1</span><span class="p">]),</span> <span class="m">0.0</span><span class="p">,</span> <span class="n">df.this.peer.fill</span><span class="o">$</span><span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="m">-1</span><span class="p">])</span>
+      <span class="p">}</span>
+      <span class="n">df.this.peer.fill</span><span class="o">$</span><span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">prev_value</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1"># update baseline</span>
+  <span class="n">df.baseline</span><span class="o">$</span><span class="n">state</span> <span class="o">=</span> <span class="n">df.baseline</span><span class="o">$</span><span class="n">state</span> <span class="o">+</span> <span class="n">df.this.peer.fill</span><span class="o">$</span><span class="n">state</span>
+  <span class="n">df.baseline</span><span class="o">$</span><span class="n">sum</span>   <span class="o">=</span> <span class="n">df.baseline</span><span class="o">$</span><span class="n">sum</span> <span class="o">+</span> <span class="n">df.this.peer.fill</span><span class="o">$</span><span class="n">sum</span>
+  <span class="n">df.baseline</span><span class="o">$</span><span class="n">cnt</span>   <span class="o">=</span> <span class="n">df.baseline</span><span class="o">$</span><span class="n">cnt</span> <span class="o">+</span> <span class="m">1</span>
+<span class="p">}</span>
+
+<span class="c1"># compte the true sum of raw values</span>
+<span class="n">r</span> <span class="o">&lt;-</span> <span class="m">0</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">&#39;computing true sum of raw values&#39;</span><span class="p">)</span>
+<span class="nf">for</span><span class="p">(</span><span class="n">epoch_loop</span> <span class="n">in</span> <span class="n">df.baseline</span><span class="o">$</span><span class="n">epoch</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">r</span> <span class="o">&lt;-</span> <span class="n">r</span> <span class="o">+</span> <span class="m">1</span>
+
+  <span class="n">true.gdelt.sum</span> <span class="o">&lt;-</span>
+    <span class="n">df.true.gdelt.sum</span> <span class="o">%&gt;%</span>
+    <span class="nf">filter</span><span class="p">(</span><span class="n">epoch</span> <span class="o">&lt;=</span> <span class="n">epoch_loop</span><span class="p">)</span> <span class="o">%&gt;%</span>
+    <span class="nf">arrange</span><span class="p">(</span><span class="nf">desc</span><span class="p">(</span><span class="n">epoch</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">head</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="m">1</span><span class="p">)</span> <span class="o">%&gt;%</span>
+    <span class="nf">select</span><span class="p">(</span><span class="n">true_sum_events</span><span class="p">)</span> <span class="o">%&gt;%</span>
+    <span class="nf">as.numeric</span><span class="p">()</span>
+
+  <span class="c1"># save</span>
+  <span class="n">df.baseline</span><span class="o">$</span><span class="n">true_sum_events</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">true.gdelt.sum</span>
+<span class="p">}</span>
+
+<span class="c1"># -----------------------</span>
+<span class="c1"># plot true sum of events</span>
+<span class="c1"># -----------------------</span>
+
+<span class="nf">lines</span><span class="p">(</span><span class="n">df.baseline</span><span class="o">$</span><span class="n">epoch.rebase</span>
+     <span class="p">,</span><span class="n">df.baseline</span><span class="o">$</span><span class="n">true_sum_events</span>
+     <span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="s">&#39;green&#39;</span>
+     <span class="p">,</span><span class="n">lwd</span> <span class="o">=</span> <span class="m">1.5</span>
+<span class="p">)</span>
+
+<span class="c1"># -------------------------------</span>
+<span class="c1"># plot the true sum of the states</span>
+<span class="c1"># -------------------------------</span>
+
+<span class="nf">lines</span><span class="p">(</span><span class="n">df.baseline</span><span class="o">$</span><span class="n">epoch.rebase</span>
+     <span class="p">,</span><span class="n">df.baseline</span><span class="o">$</span><span class="n">state</span>
+     <span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="s">&#39;blue&#39;</span>
+     <span class="p">,</span><span class="n">lwd</span> <span class="o">=</span> <span class="m">1.5</span>
+     <span class="p">)</span>
+
+<span class="c1"># ---------------------------------</span>
+<span class="c1"># plot the average aggregated value</span>
+<span class="c1"># ---------------------------------</span>
+
+<span class="n">df.baseline</span><span class="o">$</span><span class="n">agg_sum</span> <span class="o">&lt;-</span> <span class="n">df.baseline</span><span class="o">$</span><span class="n">sum</span> <span class="o">/</span> <span class="n">df.baseline</span><span class="o">$</span><span class="n">cnt</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">df.baseline</span><span class="o">$</span><span class="n">epoch.rebase</span>
+     <span class="p">,</span><span class="n">df.baseline</span><span class="o">$</span><span class="n">agg_sum</span>
+     <span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="s">&#39;red&#39;</span>
+     <span class="p">,</span><span class="n">lwd</span> <span class="o">=</span> <span class="m">1.5</span>
+     <span class="p">)</span>
+
+<span class="c1"># legend</span>
+<span class="nf">legend</span><span class="p">(</span><span class="s">&quot;bottomleft&quot;</span><span class="p">,</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#39;True sum of GDELT events&#39;</span><span class="p">,</span> <span class="s">&#39;Sum of selected states&#39;</span><span class="p">,</span> <span class="s">&#39;DIAS sum&#39;</span><span class="p">),</span> <span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> <span class="s">&#39;red&#39;</span><span class="p">),</span> <span class="n">lwd</span><span class="o">=</span><span class="m">1.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="example-plots-for-general-dias">
+<h3>Example plots for General DIAS<a class="headerlink" href="#example-plots-for-general-dias" title="Permalink to this headline">¶</a></h3>
+<p>The following queries generate two different plots for checking the liveness of the system.</p>
+<ol class="arabic simple">
+<li><p>A plot with the avg of the selected states of all peers. With this plot one can see if the peers are working and changing their values.</p></li>
+<li><p>A plot with the count of how many peers are currently active and did thus not leave.</p></li>
+</ol>
+<p>For both plots there are some assumptions, which have to be met, in order to get some sense out of the plots.</p>
+<ol class="arabic simple">
+<li><p>For the first plot, the local selected states need to be randomised in a deterministic set, which changes over time.</p></li>
+<li><p>For the second plot, peers need to join/leave the network eventually and repeatedly.</p></li>
+</ol>
+<div class="figure align-default" id="id2">
+<a class="reference internal image-reference" href="../../_images/ExampleDIASPlotAvg.png"><img alt="../../_images/ExampleDIASPlotAvg.png" src="../../_images/ExampleDIASPlotAvg.png" style="width: 30%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Example plot for the average selected states with selected states adapting their values according to the time of day</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id3">
+<a class="reference internal image-reference" href="../../_images/ExampleDIASPlotCount.png"><img alt="../../_images/ExampleDIASPlotCount.png" src="../../_images/ExampleDIASPlotCount.png" style="width: 30%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Example plot for the number of online peers in a constantly changing network with different intensity levels</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="reading-the-dias-node-aggregates">
+<h4>Reading the DIAS node aggregates<a class="headerlink" href="#reading-the-dias-node-aggregates" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1">#one of both has to be executed</span>
+<span class="c1">#db.host &lt;- &lt;remote ip&gt;</span>
+<span class="c1">#db.host &lt;- &#39;localhost&#39;</span>
+
+<span class="n">db.schema</span> <span class="o">&lt;-</span> <span class="s">&#39;dias&#39;</span>
+
+<span class="n">diasNetworkId</span> <span class="o">&lt;-</span> <span class="m">0</span>
+
+<span class="n">source_table</span> <span class="o">&lt;-</span> <span class="s">&#39;aggregation_event&#39;</span>
+
+<span class="nf">stopifnot</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="nf">ls</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;db.host&#39;</span>      <span class="p">)</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+<span class="nf">stopifnot</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="nf">ls</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;db.schema&#39;</span>    <span class="p">)</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+<span class="nf">stopifnot</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="nf">ls</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;diasNetworkId&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+<span class="nf">stopifnot</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="nf">ls</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;source_table&#39;</span> <span class="p">)</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;db.host : %s&#39;</span><span class="p">,</span> <span class="n">db.host</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;diasNetworkId : %s&#39;</span><span class="p">,</span> <span class="n">diasNetworkId</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;source_table : %s&#39;</span><span class="p">,</span> <span class="n">source_table</span><span class="p">))</span>
+
+<span class="c1"># include</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>         <span class="c1"># install.packages( &#39;dplyPerr&#39;)</span>
+<span class="nf">library</span><span class="p">(</span><span class="s">&quot;RPostgreSQL&quot;</span><span class="p">)</span> <span class="c1"># install.packages(&quot;RPostgreSQL&quot;)</span>
+
+<span class="c1"># constants</span>
+<span class="n">now</span> <span class="o">&lt;-</span> <span class="nf">Sys.time</span><span class="p">()</span>
+
+<span class="c1"># database settings</span>
+<span class="n">db.port</span> <span class="o">&lt;-</span> <span class="o">&lt;</span><span class="n">port</span> <span class="n">on</span> <span class="n">which</span> <span class="n">the</span> <span class="n">database</span> <span class="n">can</span> <span class="n">be</span> <span class="n">reached</span><span class="o">&gt;</span>
+<span class="n">db.user</span> <span class="o">&lt;-</span> <span class="o">&lt;</span><span class="n">sql</span> <span class="n">username</span><span class="o">&gt;</span>
+<span class="n">db.pwd</span>  <span class="o">&lt;-</span> <span class="o">&lt;</span><span class="n">password</span> <span class="n">for</span> <span class="n">sql</span> <span class="n">username</span><span class="o">&gt;</span>
+
+<span class="c1"># dataset settings</span>
+<span class="n">last.epoch</span> <span class="o">&lt;-</span> <span class="m">-1</span> <span class="c1"># no restriction on epoch</span>
+
+<span class="c1"># plot settings</span>
+<span class="n">db.rows</span> <span class="o">&lt;-</span> <span class="m">50000</span> <span class="c1"># number of (most recent) rows to retrieve from database (-1 for all rows)</span>
+
+<span class="c1"># create output dataframe</span>
+<span class="n">df.dias.all</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">()</span>
+
+<span class="c1"># loads the PostgreSQL driver</span>
+<span class="n">psql.drv</span> <span class="o">&lt;-</span> <span class="nf">dbDriver</span><span class="p">(</span><span class="s">&quot;PostgreSQL&quot;</span><span class="p">)</span>
+<span class="c1"># creates a connection to the postgres database</span>
+<span class="c1"># note that &quot;con&quot; will be used later in each connection to the database</span>
+<span class="n">db.con</span> <span class="o">&lt;-</span> <span class="nf">dbConnect</span><span class="p">(</span><span class="n">psql.drv</span><span class="p">,</span> <span class="n">dbname</span> <span class="o">=</span> <span class="n">db.schema</span>
+                   <span class="p">,</span><span class="n">host</span> <span class="o">=</span> <span class="n">db.host</span><span class="p">,</span> <span class="n">port</span> <span class="o">=</span> <span class="n">db.port</span>
+                   <span class="p">,</span><span class="n">user</span> <span class="o">=</span> <span class="n">db.user</span><span class="p">,</span> <span class="n">password</span> <span class="o">=</span> <span class="n">db.pwd</span><span class="p">)</span>
+
+<span class="c1"># mod eag 2018-09-11 - allow user to set a limit</span>
+<span class="n">sql</span> <span class="o">&lt;-</span> <span class="s">&#39;&#39;</span>
+<span class="nf">if</span><span class="p">(</span> <span class="n">last.epoch</span> <span class="o">==</span> <span class="m">-1</span> <span class="p">)</span> <span class="p">{</span>
+  <span class="nf">if</span><span class="p">(</span> <span class="n">db.rows</span> <span class="o">==</span> <span class="m">-1</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="n">sql</span> <span class="o">&lt;-</span> <span class="nf">paste</span><span class="p">(</span><span class="s">&#39;SELECT * FROM&#39;</span><span class="p">,</span><span class="n">source_table</span><span class="p">,</span><span class="s">&#39;WHERE network =&#39;</span><span class="p">,</span> <span class="n">diasNetworkId</span><span class="p">,</span> <span class="s">&#39;ORDER BY seq_id ASC&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="n">else</span> <span class="p">{</span>
+    <span class="n">sql</span> <span class="o">&lt;-</span> <span class="nf">paste</span><span class="p">(</span><span class="s">&#39;SELECT * FROM&#39;</span><span class="p">,</span><span class="n">source_table</span><span class="p">,</span><span class="s">&#39;WHERE network =&#39;</span><span class="p">,</span> <span class="n">diasNetworkId</span><span class="p">,</span> <span class="s">&#39;AND seq_id &gt;= (SELECT MAX(seq_id) FROM&#39;</span><span class="p">,</span><span class="n">source_table</span><span class="p">,</span> <span class="s">&#39;) -&#39;</span><span class="p">,</span> <span class="n">db.rows</span> <span class="o">-</span> <span class="m">1</span><span class="p">,</span> <span class="s">&#39;ORDER BY seq_id ASC&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">else</span> <span class="p">{</span>
+  <span class="n">sql</span> <span class="o">&lt;-</span> <span class="nf">paste</span><span class="p">(</span><span class="s">&#39;SELECT * FROM&#39;</span><span class="p">,</span><span class="n">source_table</span><span class="p">,</span><span class="s">&#39;WHERE network =&#39;</span><span class="p">,</span> <span class="n">diasNetworkId</span><span class="p">,</span> <span class="s">&#39;AND seq_id &gt;= (SELECT MAX(seq_id) FROM&#39;</span><span class="p">,</span><span class="n">source_table</span><span class="p">,</span> <span class="s">&#39; WHERE epoch &lt;=&#39;</span><span class="p">,</span> <span class="n">last.epoch</span><span class="p">,</span><span class="s">&#39;) -&#39;</span><span class="p">,</span> <span class="n">db.rows</span> <span class="o">-</span> <span class="m">1</span><span class="p">,</span> <span class="s">&#39;ORDER BY seq_id ASC&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="s">&#39;reading data&#39;</span><span class="p">)</span>
+<span class="n">df.dias.all</span> <span class="o">&lt;-</span> <span class="nf">dbGetQuery</span><span class="p">(</span><span class="n">db.con</span><span class="p">,</span> <span class="n">sql</span><span class="p">)</span>
+<span class="n">nrows</span>       <span class="o">&lt;-</span> <span class="nf">nrow</span><span class="p">(</span><span class="n">df.dias.all</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;#rows : %s&#39;</span><span class="p">,</span> <span class="n">nrows</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;epoch range : %s - %s&#39;</span><span class="p">,</span> <span class="nf">min</span><span class="p">(</span><span class="n">df.dias.all</span><span class="o">$</span><span class="n">epoch</span><span class="p">),</span> <span class="nf">max</span><span class="p">(</span><span class="n">df.dias.all</span><span class="o">$</span><span class="n">epoch</span><span class="p">)))</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">&#39;completed&#39;</span><span class="p">)</span>
+
+<span class="c1"># important to disconnect as a maximum of 16 open connections</span>
+<span class="nf">dbDisconnect</span><span class="p">(</span><span class="n">db.con</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="plotting-the-average-plot">
+<h4>Plotting the average plot<a class="headerlink" href="#plotting-the-average-plot" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># verify source data frame exists</span>
+<span class="nf">stopifnot</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="nf">ls</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;df.dias.all&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+
+<span class="c1"># include</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span> <span class="c1"># install.packages( &#39;dplyr&#39;)</span>
+
+<span class="c1"># constants</span>
+<span class="n">now</span>    <span class="o">&lt;-</span> <span class="nf">Sys.time</span><span class="p">()</span>
+<span class="n">series</span> <span class="o">&lt;-</span> <span class="s">&#39;Average&#39;</span>
+
+<span class="c1"># check there is data in the input data.frame</span>
+<span class="n">nrows</span> <span class="o">&lt;-</span> <span class="nf">nrow</span><span class="p">(</span><span class="n">df.dias.all</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span> <span class="s">&#39;#rows : %s&#39;</span><span class="p">,</span> <span class="n">nrows</span><span class="p">))</span>
+<span class="nf">stopifnot</span><span class="p">(</span><span class="n">nrows</span> <span class="o">&gt;</span> <span class="m">0</span><span class="p">)</span>
+
+<span class="c1"># get data range</span>
+<span class="n">dt.range</span>     <span class="o">&lt;-</span> <span class="nf">range</span><span class="p">(</span><span class="n">df.dias.all</span><span class="o">$</span><span class="n">dt</span><span class="p">)</span>
+<span class="n">dt.range.str</span> <span class="o">&lt;-</span> <span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s to %s&#39;</span><span class="p">,</span> <span class="n">dt.range</span><span class="p">[</span><span class="m">1</span><span class="p">],</span> <span class="n">dt.range</span><span class="p">[</span><span class="m">2</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;dt.range : %s&#39;</span><span class="p">,</span> <span class="n">dt.range.str</span><span class="p">))</span>
+
+<span class="c1"># get peers in the sample</span>
+<span class="n">peers</span> <span class="o">&lt;-</span> <span class="nf">sort</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">df.dias.all</span><span class="o">$</span><span class="n">peer</span><span class="p">))</span>
+<span class="n">num.peers</span> <span class="o">&lt;-</span> <span class="nf">length</span><span class="p">(</span><span class="n">peers</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span> <span class="s">&#39;#num.peers : %s&#39;</span><span class="p">,</span> <span class="n">num.peers</span><span class="p">))</span>
+
+
+<span class="c1"># align all measurements to the same grid, since some</span>
+<span class="c1"># peers leave the network and don&#39;t generate measurements when they have left</span>
+<span class="c1"># scaffolding: seq</span>
+<span class="n">min.epoch</span>  <span class="o">&lt;-</span> <span class="nf">min</span><span class="p">(</span> <span class="n">df.dias.all</span><span class="o">$</span><span class="n">epoch</span> <span class="p">)</span>
+<span class="n">max.epoch</span>  <span class="o">&lt;-</span> <span class="nf">max</span><span class="p">(</span> <span class="n">df.dias.all</span><span class="o">$</span><span class="n">epoch</span> <span class="p">)</span>
+<span class="n">num.epochs</span> <span class="o">&lt;-</span> <span class="n">max.epoch</span> <span class="o">-</span> <span class="n">min.epoch</span> <span class="o">+</span> <span class="m">1</span>
+
+<span class="c1"># need to show complete epochs! therefore don&#39;t show the very last one</span>
+<span class="c1"># this still does assume that each peer has provided an update for MAX(epoch) - 1</span>
+<span class="n">epoch.rebase</span>   <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span> <span class="m">1</span><span class="p">,</span> <span class="n">num.epochs</span> <span class="o">-</span> <span class="m">2</span> <span class="p">)</span>
+
+<span class="n">df.scaffolding</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">epoch</span> <span class="o">=</span> <span class="nf">seq</span><span class="p">(</span> <span class="n">min.epoch</span> <span class="o">+</span> <span class="m">1</span><span class="p">,</span> <span class="n">max.epoch</span> <span class="o">-</span> <span class="m">1</span><span class="p">),</span> <span class="n">epoch.rebase</span> <span class="o">=</span> <span class="n">epoch.rebase</span><span class="p">)</span>
+
+
+<span class="c1"># compute baseline; this is the true mean for each epoch</span>
+<span class="c1"># some epochs may not contain an observation for all peers, so the sum used as the baseline will be incorrect</span>
+<span class="c1"># simply ignore these rows</span>
+<span class="c1"># modified eag 2018-01-15</span>
+<span class="n">df.dias.all</span> <span class="o">%&gt;%</span>
+  <span class="nf">filter </span><span class="p">(</span><span class="n">active</span> <span class="o">==</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="nf">group_by</span><span class="p">(</span><span class="n">epoch</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="nf">summarize</span><span class="p">(</span> <span class="n">baseline</span> <span class="o">=</span> <span class="nf">mean</span><span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="p">,</span> <span class="n">cnt_obs</span> <span class="o">=</span> <span class="nf">n</span><span class="p">())</span> <span class="o">-&gt;</span> <span class="n">df.baseline</span>
+
+<span class="c1"># plot baseline</span>
+<span class="n">df.scaffolding</span> <span class="o">%&gt;%</span> <span class="nf">left_join</span><span class="p">(</span><span class="n">df.baseline</span><span class="p">,</span> <span class="n">by</span> <span class="o">=</span> <span class="s">&#39;epoch&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">df.scaffolding.baseline</span>
+
+<span class="c1"># ylim: range for the y-axis</span>
+<span class="c1"># show exact range</span>
+<span class="n">ylim</span> <span class="o">&lt;-</span> <span class="nf">range</span><span class="p">(</span><span class="n">df.dias.all</span><span class="o">$</span><span class="n">avg</span><span class="p">,</span> <span class="n">na.rm</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">df.scaffolding.baseline</span><span class="o">$</span><span class="n">epoch.rebase</span>
+    <span class="p">,</span><span class="n">df.scaffolding.baseline</span><span class="o">$</span><span class="n">baseline</span>
+    <span class="p">,</span><span class="n">xlab</span> <span class="o">=</span> <span class="nf">paste</span><span class="p">(</span> <span class="s">&#39;Epoch (rebased, starts at &#39;</span><span class="p">,</span> <span class="n">min.epoch</span><span class="p">,</span><span class="s">&#39;)&#39;</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">&#39;&#39;</span> <span class="p">)</span>
+    <span class="p">,</span><span class="n">ylab</span> <span class="o">=</span> <span class="n">series</span>
+    <span class="p">,</span><span class="n">ylim</span> <span class="o">=</span> <span class="n">ylim</span>
+    <span class="p">,</span><span class="n">main</span> <span class="o">=</span> <span class="nf">paste</span><span class="p">(</span> <span class="nf">paste</span><span class="p">(</span><span class="n">db.host</span><span class="p">,</span><span class="s">&#39;|&#39;</span><span class="p">,</span> <span class="s">&#39;network&#39;</span><span class="p">,</span><span class="n">diasNetworkId</span><span class="p">,</span><span class="s">&#39;|&#39;</span><span class="p">,</span><span class="n">series</span><span class="p">,</span><span class="s">&#39;over&#39;</span><span class="p">,</span><span class="n">num.peers</span><span class="p">,</span><span class="s">&#39;peers&#39;</span><span class="p">),</span><span class="nf">paste</span><span class="p">(</span><span class="s">&#39;last&#39;</span><span class="p">,</span><span class="n">nrows</span><span class="p">,</span><span class="s">&#39;of&#39;</span><span class="p">,</span><span class="n">db.rows</span><span class="p">,</span><span class="s">&#39;rows&#39;</span><span class="p">),</span><span class="n">dt.range.str</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">&#39;\n&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+
+<span class="c1"># add peers</span>
+<span class="nf">for</span><span class="p">(</span><span class="n">peer.id</span> <span class="n">in</span> <span class="n">peers</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">df.dias.all</span> <span class="o">%&gt;%</span> <span class="nf">filter</span><span class="p">(</span><span class="n">peer</span> <span class="o">==</span> <span class="n">peer.id</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">df.this.peer</span>
+  <span class="n">df.scaffolding</span> <span class="o">%&gt;%</span> <span class="nf">left_join</span><span class="p">(</span><span class="n">df.this.peer</span><span class="p">,</span> <span class="n">by</span> <span class="o">=</span> <span class="s">&#39;epoch&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">df.scaffolding.peer</span>
+
+  <span class="nf">points</span><span class="p">(</span><span class="n">df.scaffolding.peer</span><span class="o">$</span><span class="n">epoch.rebase</span>
+        <span class="p">,</span><span class="n">df.scaffolding.peer</span><span class="o">$</span><span class="n">avg</span>
+        <span class="p">,</span><span class="n">pch</span> <span class="o">=</span> <span class="m">16</span>
+        <span class="p">,</span><span class="n">cex</span> <span class="o">=</span> <span class="m">0.5</span>
+        <span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="m">4</span>
+        <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># replot the baseline, this time using a line</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">df.scaffolding.baseline</span><span class="o">$</span><span class="n">epoch.rebase</span>
+     <span class="p">,</span><span class="n">df.scaffolding.baseline</span><span class="o">$</span><span class="n">baseline</span>
+     <span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="s">&#39;red&#39;</span>
+     <span class="p">,</span><span class="n">lwd</span> <span class="o">=</span> <span class="m">1.5</span>
+     <span class="p">)</span>
+
+
+<span class="c1"># legend</span>
+<span class="nf">legend</span><span class="p">(</span><span class="s">&quot;bottomleft&quot;</span><span class="p">,</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#39;baseline&#39;</span><span class="p">),</span> <span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;red&#39;</span><span class="p">),</span> <span class="n">lwd</span><span class="o">=</span><span class="m">1.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="plotting-the-active-peer-count">
+<h4>Plotting the active peer count<a class="headerlink" href="#plotting-the-active-peer-count" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># verify source data frame exists</span>
+<span class="nf">stopifnot</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="nf">ls</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;df.dias.all&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+
+<span class="c1"># include</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span> <span class="c1"># install.packages( &#39;dplyr&#39;)</span>
+
+<span class="c1"># constants</span>
+<span class="n">now</span>    <span class="o">&lt;-</span> <span class="nf">Sys.time</span><span class="p">()</span>
+<span class="n">series</span> <span class="o">&lt;-</span> <span class="s">&#39;Count&#39;</span>
+
+<span class="c1"># check there is data in the input data.frame</span>
+<span class="n">nrows</span> <span class="o">&lt;-</span> <span class="nf">nrow</span><span class="p">(</span><span class="n">df.dias.all</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;#rows : %s&#39;</span><span class="p">,</span> <span class="n">nrows</span><span class="p">))</span>
+<span class="nf">stopifnot</span><span class="p">(</span><span class="n">nrows</span> <span class="o">&gt;</span> <span class="m">0</span><span class="p">)</span>
+
+<span class="c1"># get data range</span>
+<span class="n">dt.range</span>     <span class="o">&lt;-</span> <span class="nf">range</span><span class="p">(</span><span class="n">df.dias.all</span><span class="o">$</span><span class="n">dt</span><span class="p">)</span>
+<span class="n">dt.range.str</span> <span class="o">&lt;-</span> <span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s to %s&#39;</span><span class="p">,</span> <span class="n">dt.range</span><span class="p">[</span><span class="m">1</span><span class="p">],</span> <span class="n">dt.range</span><span class="p">[</span><span class="m">2</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;dt.range : %s&#39;</span><span class="p">,</span> <span class="n">dt.range.str</span><span class="p">))</span>
+
+<span class="c1">#View(df.dias.all)</span>
+
+<span class="c1"># get peers in the sample</span>
+<span class="n">peers</span>     <span class="o">&lt;-</span> <span class="nf">sort</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">df.dias.all</span><span class="o">$</span><span class="n">peer</span><span class="p">))</span>
+<span class="n">num.peers</span> <span class="o">&lt;-</span> <span class="nf">length</span><span class="p">(</span><span class="n">peers</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;#num.peers : %s&#39;</span><span class="p">,</span> <span class="n">num.peers</span><span class="p">))</span>
+
+
+<span class="c1"># align all measurements to the same grid, since some</span>
+<span class="c1"># peers leave the network and don&#39;t generate measurements when they have left</span>
+<span class="c1"># scaffolding: seq</span>
+<span class="n">min.epoch</span>  <span class="o">&lt;-</span> <span class="nf">min</span><span class="p">(</span><span class="n">df.dias.all</span><span class="o">$</span><span class="n">epoch</span><span class="p">)</span>
+<span class="n">max.epoch</span>  <span class="o">&lt;-</span> <span class="nf">max</span><span class="p">(</span><span class="n">df.dias.all</span><span class="o">$</span><span class="n">epoch</span><span class="p">)</span>
+<span class="n">num.epochs</span> <span class="o">&lt;-</span> <span class="n">max.epoch</span> <span class="o">-</span> <span class="n">min.epoch</span> <span class="o">+</span> <span class="m">1</span>
+
+<span class="c1"># need to show complete epochs! therefore don&#39;t show the very last one</span>
+<span class="c1"># this still does assume that each peer has provided an update for MAX(epoch) - 1</span>
+<span class="n">epoch.rebase</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">num.epochs</span> <span class="o">-</span> <span class="m">2</span><span class="p">)</span>
+
+<span class="n">df.scaffolding</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">epoch</span> <span class="o">=</span> <span class="nf">seq</span><span class="p">(</span> <span class="n">min.epoch</span> <span class="o">+</span> <span class="m">1</span><span class="p">,</span> <span class="n">max.epoch</span> <span class="o">-</span> <span class="m">1</span><span class="p">),</span> <span class="n">epoch.rebase</span> <span class="o">=</span> <span class="n">epoch.rebase</span><span class="p">)</span>
+
+
+
+<span class="c1"># compute baseline; this is the true number for each epoch</span>
+
+<span class="c1"># some epochs may not contain an observation for all peers, so the sum used as the baseline will be incorrect</span>
+<span class="c1"># simply ignore these rows</span>
+<span class="n">df.dias.all</span> <span class="o">%&gt;%</span>
+  <span class="nf">group_by</span><span class="p">(</span><span class="n">epoch</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="nf">summarize</span><span class="p">(</span> <span class="n">baseline</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">active</span><span class="p">),</span> <span class="n">cnt_obs</span> <span class="o">=</span> <span class="nf">n</span><span class="p">()</span> <span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="nf">select</span><span class="p">(</span> <span class="n">epoch</span><span class="p">,</span><span class="n">baseline</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">df.baseline</span>
+
+
+<span class="c1"># plot baseline</span>
+<span class="n">df.scaffolding</span> <span class="o">%&gt;%</span> <span class="nf">left_join</span><span class="p">(</span><span class="n">df.baseline</span><span class="p">,</span> <span class="n">by</span> <span class="o">=</span> <span class="s">&#39;epoch&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">df.scaffolding.baseline</span>
+
+<span class="c1"># ylim</span>
+<span class="n">ylim</span> <span class="o">&lt;-</span> <span class="nf">range</span><span class="p">(</span><span class="n">df.dias.all</span><span class="o">$</span><span class="n">count</span><span class="p">,</span> <span class="n">na.rm</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">df.scaffolding.baseline</span><span class="o">$</span><span class="n">epoch.rebase</span>
+    <span class="p">,</span><span class="n">df.scaffolding.baseline</span><span class="o">$</span><span class="n">baseline</span>
+    <span class="p">,</span><span class="n">xlab</span> <span class="o">=</span> <span class="nf">paste</span><span class="p">(</span> <span class="s">&#39;Epoch (rebased, starts at &#39;</span><span class="p">,</span> <span class="n">min.epoch</span><span class="p">,</span><span class="s">&#39;)&#39;</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">&#39;&#39;</span> <span class="p">)</span>
+    <span class="p">,</span><span class="n">ylab</span> <span class="o">=</span> <span class="n">series</span>
+    <span class="p">,</span><span class="n">ylim</span> <span class="o">=</span> <span class="n">ylim</span>
+    <span class="p">,</span><span class="n">main</span> <span class="o">=</span> <span class="nf">paste</span><span class="p">(</span>  <span class="nf">paste</span><span class="p">(</span><span class="n">db.host</span><span class="p">,</span><span class="s">&#39;|&#39;</span><span class="p">,</span> <span class="s">&#39;network&#39;</span><span class="p">,</span><span class="n">diasNetworkId</span><span class="p">,</span><span class="s">&#39;|&#39;</span><span class="p">,</span><span class="n">series</span><span class="p">,</span><span class="s">&#39;over&#39;</span><span class="p">,</span><span class="n">num.peers</span><span class="p">,</span><span class="s">&#39;peers&#39;</span><span class="p">),</span><span class="nf">paste</span><span class="p">(</span><span class="s">&#39;last&#39;</span><span class="p">,</span><span class="n">nrows</span><span class="p">,</span><span class="s">&#39;of&#39;</span><span class="p">,</span><span class="n">db.rows</span><span class="p">,</span><span class="s">&#39;rows&#39;</span><span class="p">),</span><span class="n">dt.range.str</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">&#39;\n&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+
+<span class="c1"># add peers</span>
+<span class="nf">for</span><span class="p">(</span><span class="n">peer.id</span> <span class="n">in</span> <span class="n">peers</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">df.dias.all</span> <span class="o">%&gt;%</span> <span class="nf">filter</span><span class="p">(</span><span class="n">peer</span> <span class="o">==</span> <span class="n">peer.id</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">df.this.peer</span>
+  <span class="n">df.scaffolding</span> <span class="o">%&gt;%</span> <span class="nf">left_join</span><span class="p">(</span><span class="n">df.this.peer</span><span class="p">,</span> <span class="n">by</span> <span class="o">=</span> <span class="s">&#39;epoch&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">df.scaffolding.peer</span>
+
+  <span class="nf">points</span><span class="p">(</span><span class="n">df.scaffolding.peer</span><span class="o">$</span><span class="n">epoch.rebase</span>
+        <span class="p">,</span><span class="n">df.scaffolding.peer</span><span class="o">$</span><span class="n">count</span>
+        <span class="p">,</span><span class="n">pch</span> <span class="o">=</span> <span class="m">16</span>
+        <span class="p">,</span><span class="n">cex</span> <span class="o">=</span> <span class="m">0.5</span>
+        <span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="m">4</span>
+        <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># replot the baseline, this time using a line</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">df.scaffolding.baseline</span><span class="o">$</span><span class="n">epoch.rebase</span>
+     <span class="p">,</span><span class="n">df.scaffolding.baseline</span><span class="o">$</span><span class="n">baseline</span>
+     <span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="s">&#39;red&#39;</span>
+     <span class="p">,</span><span class="n">lwd</span> <span class="o">=</span> <span class="m">1.5</span>
+     <span class="p">)</span>
+
+<span class="c1"># legend</span>
+<span class="nf">legend</span><span class="p">(</span><span class="s">&quot;bottomleft&quot;</span><span class="p">,</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#39;baseline&#39;</span><span class="p">),</span> <span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;red&#39;</span><span class="p">),</span> <span class="n">lwd</span><span class="o">=</span><span class="m">1.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="combined-plotting">
+<h4>Combined plotting<a class="headerlink" href="#combined-plotting" title="Permalink to this headline">¶</a></h4>
+<p>The combination in this case is straight forward, as one simply has to combine the <a class="reference internal" href="#reading-the-dias-node-aggregates"><span class="std std-ref">Reading the DIAS node aggregates</span></a> query with either one of the plotting queries.</p>
+</div>
+</div>
+<div class="section" id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h3>
+<p>Note that if the sql database is on a remote server, postgres needs to whitelist the requesting comupter’s ip by editign the <a href="https://www.postgresql.org/docs/8.2/auth-pg-hba-conf.html" target="_blank">pg_hba.conf</a> file.</p>
+<p>Everywhere, where there is the following annotation: &lt;something&gt;, the whole statement must be replaced by some dynamic value explained by the statements inside the brackets.</p>
+</div>
 </div>
 </div>
 
@@ -254,11 +1211,19 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2019, Edward Gaere
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -269,7 +1234,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
@@ -283,9 +1247,19 @@
     
 
   <style>
+    /*To underline text*/
+    .underline {
+      text-decoration: underline;
+    }
+
+
+      /*To underline bold text*/
+      .underlinebold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
     /* Sidebar header (and topbar for mobile) */
-
-
 
 
 
@@ -329,6 +1303,10 @@
         color:/**#eee;*/var(--blue);
 
 
+     }
+
+     .wy-nav-content-wrap{
+       background: var(--grey);
      }
 
      .wy-menu-vertical li.toctree-l1.current>a {

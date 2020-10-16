@@ -8,7 +8,6 @@ How DIAS Works
 
    dias.in.detail/conceptual.architecture
    dias.in.detail/aggregation.mechanism
-   dias.in.detail/change.selected.states
-   dias.in.detail/change.possible.states
+   dias.in.detail/change.states
    dias.in.detail/join.and.leave
-   
+   dias.in.detail/Carrier.peer

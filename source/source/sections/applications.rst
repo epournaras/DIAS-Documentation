@@ -8,3 +8,4 @@ Applications
    applications/gdelt
    applications/DIASClientLibrary
    applications/DIASProoOfConcept
+   applications/TelegramPlotter
