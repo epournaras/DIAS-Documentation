@@ -45,7 +45,7 @@ Glossary
   * - Passive state
     - Every DIAS node has a passive state, it gets triggered upon receiving a message, handling it corresponding to the defined actions.
   * - Peer Sampling Service
-    - TODO
+    - The Peer Sampling Service takes a sample of all nodes in the network, it may be every peer, if not many peers exist, or a subset, if the peer set is large.
   * - Peerlet
     - A submodule in a Protopeer peer
   * - Possible states

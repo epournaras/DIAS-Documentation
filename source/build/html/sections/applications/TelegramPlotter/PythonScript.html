@@ -1,0 +1,503 @@
+
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Python Script &mdash; DIAS-Documentation 1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Glossary" href="../../glossary.html" />
+    <link rel="prev" title="Creating a Telegram Bot" href="TelegramBot.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> DIAS-Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../pre.requisites.html">Pre-requisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dias.in.detail.html">How DIAS Works</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Deployment Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protopeer.html">Protopeer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dias-logging-system.html">DIAS Logging System</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../gdelt.html">GDELT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DIASClientLibrary.html">DIASClient Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DIASProoOfConcept.html">DIAS Proof Of Concept Application</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../TelegramPlotter.html">Telegram Plotter</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="TelegramBot.html">Creating a Telegram Bot</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Python Script</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#launching-the-script">Launching the script</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">DIAS-Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../applications.html">Applications</a> &raquo;</li>
+        
+          <li><a href="../TelegramPlotter.html">Telegram Plotter</a> &raquo;</li>
+        
+      <li>Python Script</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/sections/applications/TelegramPlotter/PythonScript.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="python-script">
+<h1>Python Script<a class="headerlink" href="#python-script" title="Permalink to this headline">¶</a></h1>
+<p>Once you created a Telegram Bot, you are all set up.</p>
+<p>The script is designed for monitoring two databases on two different servers, one specifically for gdelt, and one for DIAS.</p>
+<p>GDELT has to be monitored locally, and is represented as C0</p>
+<p>DIAS can be locally or remotely (represented by C1), but should not be ran locally concurrently to any GDELT application.</p>
+<div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<p>In order to be able to run the script, python3 must be installed.</p>
+<div class="section" id="python-packages">
+<h3>Python packages<a class="headerlink" href="#python-packages" title="Permalink to this headline">¶</a></h3>
+<p>To install the python packages, one needs to run the following command in the command line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3 install python-telegram-bot Wand pexpect configparser
+</pre></div>
+</div>
+</div>
+<div class="section" id="code-setup">
+<h3>Code Setup<a class="headerlink" href="#code-setup" title="Permalink to this headline">¶</a></h3>
+<p>In order to run the script, some infos must be entered into the config file “config.conf”:</p>
+<ul class="simple">
+<li><p><strong>telegram_token:</strong> the token of your telegram bot to use (See previous section).</p></li>
+<li><p><strong>chat_id:</strong> the chat id of your chat with the bot (see previous section).</p></li>
+<li><p><strong>ip:</strong> the ip address of the remote server. If left empty, only the local server will be checked.</p></li>
+<li><p><strong>ssh_username:</strong> the username to use when connecting to the remote server</p></li>
+<li><p><strong>ssh_password:</strong> the password to use when connection to the remote server</p></li>
+<li><p><strong>run_c0:</strong> wheter the monitoring for c0 should be run or not</p></li>
+<li><p><strong>run_c1:</strong> wheter the monitoring for c1 shoule be run or not</p></li>
+<li><p><strong>hour:</strong> the hour of the day the automatic check should fire</p></li>
+<li><p><strong>minute:</strong> the minute of the hour the automatic check should fire</p></li>
+<li><p><strong>second:</strong> the second of the minute the automatic check should fire</p></li>
+<li><p><strong>microsecond:</strong> the microsecond of the second the automatic check should fire</p></li>
+<li><p><strong>interval_in_days:</strong> in what interval (in days) the autamatic check should be repeated</p></li>
+</ul>
+<p>You also need to enter some lines in the R scripts, located in the folders ‘C1’ and ‘C0’:</p>
+<p><strong>read.and.plot.aggregates.and.true.C0.R</strong>:</p>
+<ul class="simple">
+<li><p>Line 44: enter the postgres database username</p></li>
+<li><p>Line 45: enter the postgres database password</p></li>
+</ul>
+<p><strong>read.and.plot.aggregates.and.true.C1.avg.R</strong>:</p>
+<ul class="simple">
+<li><p>Line 7: enter the remote IP address (can be 127.0.0.1)</p></li>
+<li><p>Line 36: enter the postgres database username</p></li>
+<li><p>Line 37: enter the postgres database password</p></li>
+</ul>
+<p><strong>read.and.plot.aggregates.and.true.C1.count.R</strong>:</p>
+<ul class="simple">
+<li><p>Line 7: enter the remote IP address (can be 127.0.0.1)</p></li>
+<li><p>Line 36: enter the postgres database username</p></li>
+<li><p>Line 37: enter the postgres database password</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="launching-the-script">
+<h2>Launching the script<a class="headerlink" href="#launching-the-script" title="Permalink to this headline">¶</a></h2>
+<p>If you launch the script on a server, it is advised to wrap the whole setup around a unix or tmux screen.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tmux new -t python-monitoring
+</pre></div>
+</div>
+<p>Inside the tmux (or screen) session, launch the script by first traversing to the correct directory.
+Once there, launch it by entering the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 DocumentSender.py
+</pre></div>
+</div>
+<p>That’s it, you can escape the session by pressing ctrl+b, and then d (or crly+a then d with unix screen).</p>
+<p>To reattach later, type in:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tmux a -t python-monitoring
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../glossary.html" class="btn btn-neutral float-right" title="Glossary" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="TelegramBot.html" class="btn btn-neutral float-left" title="Creating a Telegram Bot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, Edward Gaere
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    
+
+  <style>
+    /*To underline text*/
+    .underline {
+      text-decoration: underline;
+    }
+
+
+      /*To underline bold text*/
+      .underlinebold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
+    /* Sidebar header (and topbar for mobile) */
+
+
+
+      :root{
+        --grey: rgb(231, 232, 233);
+        --altblue: rgb(30,115,190);
+        --blue: rgb(37, 117, 187);
+      }
+
+      /*link visited and unvisited color*/
+
+      a {
+        color: var(--grey);
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      a:visited {
+        color: var(--grey);
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      /*footer colors*/
+
+      footer{
+        color:var(--grey)
+      }
+
+      a:hover {
+        color: var(--grey);
+        text-decoration: underline;
+        cursor: pointer;
+        text-decoration-color: var(--blue);
+      }
+
+     .wy-nav-side {
+
+        /*background: rgb(30,115,190);*/
+        background: var(--grey);
+        color:/**#eee;*/var(--blue);
+
+
+     }
+
+     .wy-nav-content-wrap{
+       background: var(--grey);
+     }
+
+     .wy-menu-vertical li.toctree-l1.current>a {
+        color: var(--blue);
+     }
+
+     .wy-menu-vertical li.toctree-l2 a{
+       color: var(--blue);
+     }
+
+     .wy-menu-vertical li.toctree-l2 a:hover{
+       color: var(--grey);
+       background:var(--blue);
+     }
+
+     .wy-menu-vertical li.toctree-l2.current li.toctree-l3>a:hover{
+         color: var(--grey);
+         background:var(--blue);
+     }
+
+     .wy-menu-vertical li.toctree-l3.current li.toctree-l4>a:hover{
+           color: var(--grey);
+           background:var(--blue);
+     }
+
+    .wy-side-nav-search {
+
+        background:var(--grey); /*rgb(30,115,190);*/
+
+    }
+
+    .wy-menu-vertical a{
+      color:var(--blue);
+      text-decoration: none;
+    }
+
+    .wy-menu-vertical li.current{
+        color:var(--blue);
+    }
+
+    .wy-menu-vertical li{
+        color:var(--blue);
+    }
+
+    .wy-menu-vertival a:current {
+      color:var(--grey);
+    }
+
+    .wy-menu-vertical a:hover{
+        background-color:var(--blue);
+        color:var(--grey);
+    }
+
+    .fa-home::before, .icon-home::before {
+        content:"";
+    }
+
+    a.icon-home {
+        width: 50%;
+        margin-left: -6px;
+        font-size: 0%;
+        content:url("http://dias-net.org/wp-content/uploads/2016/08/silver-nodes-above-extended.png");
+    }
+
+    .wy-nav-content{
+        max-width: initial;
+        background:var(--blue);
+        color:var(--grey);
+    }
+
+    /*nav top current directory, delete link underline*/
+    .wy-breadcrumbs li a:first-child{
+      text-decoration: none;
+    }
+
+
+    /*buton colors*/
+    .btn-neutral {
+        color: var(--blue) !important;
+        background-color: var(--grey) !important;
+    }
+    .btn-neutral:visited {
+        color: var(--blue) !important;
+        background-color: var(--grey) !important;
+    }
+
+    /*codeblock color*/
+    .rst-content div[class^='highlight'] pre{
+      color:black;
+      border-radius:3px; /*rounded corners*/
+    }
+
+    /*make sure tables do no have white backgrounds*/
+    .rst-content table.docutils:not(.field-list) tr:nth-child(2n-1) td {
+      background-color:var(--blue)
+    }
+
+    /*color of table header*/
+    .rst-content table.docutils thead{
+      color:var(--grey) !important;
+    }
+
+    /*table title thick border*/
+    .rst-content table.docutils thead th{
+      border-bottom: solid 2px;
+      border-top: solid 2px;
+      border-left: solid 2px;
+      border-right: solid 2px;
+    }
+
+    /*code block line numbers*/
+    div.linenodiv pre{
+      color:var(--grey) !important;
+      border-radius:0 !important;
+    }
+
+    /*codeblock grey background*/
+    div.highlight pre{
+      background-color:var(--grey);
+    }
+
+    /*rounded corners on images*/
+    .rst-content .section>img{
+      border-radius:3px;
+    }
+
+    /*rounded corners on codeblocks*/
+    .rst-content div[class^='highlight']{
+        border-radius:3px;
+    }
+
+  </style>
+
+
+</body>
+</html>

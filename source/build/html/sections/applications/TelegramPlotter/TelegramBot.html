@@ -1,0 +1,533 @@
+
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Creating a Telegram Bot &mdash; DIAS-Documentation 1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Python Script" href="PythonScript.html" />
+    <link rel="prev" title="Telegram Plotter" href="../TelegramPlotter.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> DIAS-Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../pre.requisites.html">Pre-requisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dias.in.detail.html">How DIAS Works</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Deployment Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protopeer.html">Protopeer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dias-logging-system.html">DIAS Logging System</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../gdelt.html">GDELT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DIASClientLibrary.html">DIASClient Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DIASProoOfConcept.html">DIAS Proof Of Concept Application</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../TelegramPlotter.html">Telegram Plotter</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Creating a Telegram Bot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#create-a-telegram-account">Create a Telegram Account</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set-up-a-bot">Set Up a Bot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#find-out-your-chat-id">Find out your Chat ID</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="PythonScript.html">Python Script</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">DIAS-Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../applications.html">Applications</a> &raquo;</li>
+        
+          <li><a href="../TelegramPlotter.html">Telegram Plotter</a> &raquo;</li>
+        
+      <li>Creating a Telegram Bot</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/sections/applications/TelegramPlotter/TelegramBot.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="creating-a-telegram-bot">
+<h1>Creating a Telegram Bot<a class="headerlink" href="#creating-a-telegram-bot" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="create-a-telegram-account">
+<h2>Create a Telegram Account<a class="headerlink" href="#create-a-telegram-account" title="Permalink to this headline">¶</a></h2>
+<p>Go to <a class="reference external" href="https://web.telegram.org/">https://web.telegram.org/</a> and follow the steps to create an account.</p>
+</div>
+<div class="section" id="set-up-a-bot">
+<h2>Set Up a Bot<a class="headerlink" href="#set-up-a-bot" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Add <a class="reference external" href="https://t.me/botfather">https://t.me/botfather</a> to your bots on Telegram</p></li>
+<li><p>Ask the BotFather to create a bot by sending him the following message:</p></li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/newbot
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Give the bot a name, this one does not have to be unique. Just answer the Botfather with your preferred name.</p></li>
+<li><p>Give the bot a usernmae, this one has to be unique. Again jsut write it as a text message into the chat.</p></li>
+<li><p>Click on the link you receive from the botfather to connect to your bot. Write down the token the Botfather sent you as well. If you lost the key, enter /mybots in the Botfather chat, click on the bot and click on “API Token”</p></li>
+<li><p>Send the botfather the following message to edit your newly created bot:</p></li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/mybots
+</pre></div>
+</div>
+<ol class="arabic simple" start="7">
+<li><p>Click on the username for the bot you just created.</p></li>
+<li><p>Click on “Edit Bot”</p></li>
+<li><p>Click on “Edit Description”, enter the description as a text message and send it.</p></li>
+<li><p>Click “Edit Commands” and Send the following message:</p></li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>plotc0 - create a current plot fot C0 and send it
+plotc1 - create two plots for C1 once avg and once sum
+</pre></div>
+</div>
+<p>Congratualtions! You just successfully created your bot!</p>
+</div>
+<div class="section" id="find-out-your-chat-id">
+<h2>Find out your Chat ID<a class="headerlink" href="#find-out-your-chat-id" title="Permalink to this headline">¶</a></h2>
+<p>The chat id is needed for the bot to send you messages without you requesting it beforehand. Thus he can initiate messages.</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>If not yet done, connect to your bot by:</dt><dd><ul class="simple">
+<li><p>Writing /mybots to the botfather</p></li>
+<li><p>Clicking on the bot</p></li>
+<li><p>Clicking on the name with the “&#64;” in the message the BotFather sent you</p></li>
+<li><p>Clicking the button START button</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Send your bot a message, the content is not important</p></li>
+<li><p>Enter the following link into your browser, replacing &lt;token&gt; with the token of your bot:</p></li>
+</ol>
+<p>..code:: text</p>
+<blockquote>
+<div><p><a class="reference external" href="https://api.telegram.org">https://api.telegram.org</a>/bot&lt;token&gt;/getUpdates</p>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p>Your should a json in a form like the following (the fields with <a href="#id1"><span class="problematic" id="id2">**</span></a>* are censored, due to privacy reasons):</p></li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{&quot;ok&quot;:true,&quot;result&quot;:[{&quot;update_id&quot;:******,&quot;message&quot;:{&quot;message_id&quot;:2 ,&quot;from&quot;:{&quot;id&quot;: *** ,&quot;is_bot&quot;:false,&quot;first_name&quot;:&quot;***&quot;,&quot;last_name&quot;:&quot;***&quot;,&quot;language_code&quot;:&quot;en&quot;},&quot;chat&quot;:{&quot;id&quot;:***,&quot;first_name&quot;:&quot;***&quot;,&quot;last_name&quot;:&quot;***&quot;,&quot;type&quot;:&quot;private&quot;},&quot;date&quot;:1602834899,&quot;text&quot;:&quot;Hello&quot;}}]}
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>If you want, you pretty print the code with the code editor of your choice, or with an online tool like <a class="reference external" href="https://jsonformatter.org/json-pretty-print">https://jsonformatter.org/json-pretty-print</a>:</p></li>
+</ol>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>{
+    &quot;ok&quot;: true,
+    &quot;result&quot;: [
+        {
+            &quot;update_id&quot;: ******,
+            &quot;message&quot;: {
+                &quot;message_id&quot;: 2,
+                &quot;from&quot;: {
+                &quot;id&quot;: ***,
+                &quot;is_bot&quot;: false,
+                &quot;first_name&quot;: &quot;***&quot;,
+                &quot;last_name&quot;: &quot;***&quot;,
+                &quot;language_code&quot;: &quot;en&quot;
+                },
+            &quot;chat&quot;: {
+                &quot;id&quot;: ***,
+                &quot;first_name&quot;: &quot;***&quot;,
+                &quot;last_name&quot;: &quot;***&quot;,
+                &quot;type&quot;: &quot;private&quot;
+                },
+                &quot;date&quot;: 1602834899,
+                &quot;text&quot;: &quot;Hello&quot;
+            }
+        }
+    ]
+}
+</pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li><p>As you see, there are a lot of different fields, even with only one message received. We are looking for a specific result. All the results have the 3 keywords ‘update_id’, ‘message’ and ‘chat’. Look for the result which has the text that you sent in the “text” field inside the “chat” struct.</p></li>
+<li><p>In the concerning “chat” struct, look for the key “id”. This id is the chat id, with which the bot can directly send you messages, without you requesting anything in advance. Write that one down as well.</p></li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="PythonScript.html" class="btn btn-neutral float-right" title="Python Script" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../TelegramPlotter.html" class="btn btn-neutral float-left" title="Telegram Plotter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, Edward Gaere
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    
+
+  <style>
+    /*To underline text*/
+    .underline {
+      text-decoration: underline;
+    }
+
+
+      /*To underline bold text*/
+      .underlinebold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
+    /* Sidebar header (and topbar for mobile) */
+
+
+
+      :root{
+        --grey: rgb(231, 232, 233);
+        --altblue: rgb(30,115,190);
+        --blue: rgb(37, 117, 187);
+      }
+
+      /*link visited and unvisited color*/
+
+      a {
+        color: var(--grey);
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      a:visited {
+        color: var(--grey);
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      /*footer colors*/
+
+      footer{
+        color:var(--grey)
+      }
+
+      a:hover {
+        color: var(--grey);
+        text-decoration: underline;
+        cursor: pointer;
+        text-decoration-color: var(--blue);
+      }
+
+     .wy-nav-side {
+
+        /*background: rgb(30,115,190);*/
+        background: var(--grey);
+        color:/**#eee;*/var(--blue);
+
+
+     }
+
+     .wy-nav-content-wrap{
+       background: var(--grey);
+     }
+
+     .wy-menu-vertical li.toctree-l1.current>a {
+        color: var(--blue);
+     }
+
+     .wy-menu-vertical li.toctree-l2 a{
+       color: var(--blue);
+     }
+
+     .wy-menu-vertical li.toctree-l2 a:hover{
+       color: var(--grey);
+       background:var(--blue);
+     }
+
+     .wy-menu-vertical li.toctree-l2.current li.toctree-l3>a:hover{
+         color: var(--grey);
+         background:var(--blue);
+     }
+
+     .wy-menu-vertical li.toctree-l3.current li.toctree-l4>a:hover{
+           color: var(--grey);
+           background:var(--blue);
+     }
+
+    .wy-side-nav-search {
+
+        background:var(--grey); /*rgb(30,115,190);*/
+
+    }
+
+    .wy-menu-vertical a{
+      color:var(--blue);
+      text-decoration: none;
+    }
+
+    .wy-menu-vertical li.current{
+        color:var(--blue);
+    }
+
+    .wy-menu-vertical li{
+        color:var(--blue);
+    }
+
+    .wy-menu-vertival a:current {
+      color:var(--grey);
+    }
+
+    .wy-menu-vertical a:hover{
+        background-color:var(--blue);
+        color:var(--grey);
+    }
+
+    .fa-home::before, .icon-home::before {
+        content:"";
+    }
+
+    a.icon-home {
+        width: 50%;
+        margin-left: -6px;
+        font-size: 0%;
+        content:url("http://dias-net.org/wp-content/uploads/2016/08/silver-nodes-above-extended.png");
+    }
+
+    .wy-nav-content{
+        max-width: initial;
+        background:var(--blue);
+        color:var(--grey);
+    }
+
+    /*nav top current directory, delete link underline*/
+    .wy-breadcrumbs li a:first-child{
+      text-decoration: none;
+    }
+
+
+    /*buton colors*/
+    .btn-neutral {
+        color: var(--blue) !important;
+        background-color: var(--grey) !important;
+    }
+    .btn-neutral:visited {
+        color: var(--blue) !important;
+        background-color: var(--grey) !important;
+    }
+
+    /*codeblock color*/
+    .rst-content div[class^='highlight'] pre{
+      color:black;
+      border-radius:3px; /*rounded corners*/
+    }
+
+    /*make sure tables do no have white backgrounds*/
+    .rst-content table.docutils:not(.field-list) tr:nth-child(2n-1) td {
+      background-color:var(--blue)
+    }
+
+    /*color of table header*/
+    .rst-content table.docutils thead{
+      color:var(--grey) !important;
+    }
+
+    /*table title thick border*/
+    .rst-content table.docutils thead th{
+      border-bottom: solid 2px;
+      border-top: solid 2px;
+      border-left: solid 2px;
+      border-right: solid 2px;
+    }
+
+    /*code block line numbers*/
+    div.linenodiv pre{
+      color:var(--grey) !important;
+      border-radius:0 !important;
+    }
+
+    /*codeblock grey background*/
+    div.highlight pre{
+      background-color:var(--grey);
+    }
+
+    /*rounded corners on images*/
+    .rst-content .section>img{
+      border-radius:3px;
+    }
+
+    /*rounded corners on codeblocks*/
+    .rst-content div[class^='highlight']{
+        border-radius:3px;
+    }
+
+  </style>
+
+
+</body>
+</html>

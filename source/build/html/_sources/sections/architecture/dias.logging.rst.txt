@@ -236,4 +236,4 @@ SQL Table
 
 .. |logging-system| raw:: html
 
-   <a href="https://github.com/epournaras/Logging-System" target="_blank">Github</a>
+   <a href="https://github.com/epournaras/Livelog" target="_blank">Github</a>

@@ -35,11 +35,11 @@ For example, the number 200 (on the y-axis) indicates that 200 news events were 
 
 **Figure 4.2** DIAS-GDELT aggregation process. Each blue dot represents the estimated sum from each DIAS node. The green line shows the true sum of news events from GDELT. The blue line shows the true sum of selected states, whilst the red line shows the sum of the DIAS aggregates.
 
-You can also view the same aggregation process on the DIAS website, http://dias-net.org/gdelt/
+You can also view the same aggregation process on the DIAS website, http://dias-net.org/dias-gdelt-live/
 
 .. image:: gdelt/fig4.3.png
 
-**Figure 4.3** DIAS-GDELT aggregation process as viewed in the webpage http://dias-net.org/gdelt/
+**Figure 4.3** DIAS-GDELT aggregation process as viewed in the webpage http://dias-net.org/dias-gdelt-live/
 
 Getting Started
 ---------------
