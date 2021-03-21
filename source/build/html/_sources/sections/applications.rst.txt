@@ -9,3 +9,4 @@ Applications
    applications/DIASClientLibrary
    applications/DIASProoOfConcept
    applications/TelegramPlotter
+   applications/GDELTWebPlotter

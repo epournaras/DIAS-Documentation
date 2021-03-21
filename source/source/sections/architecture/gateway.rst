@@ -12,3 +12,5 @@ The gateway establishes initial connections between external devices and DIAS pe
 The device is expected to keep the received connection, but the gateway is able to return the peer address again, in case the device lost it for some reason.
 
 The connection mapping is a mapping between (deviceID, sensorID) and peerAddress.
+
+

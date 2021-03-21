@@ -1,0 +1,686 @@
+
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Data Plotter &mdash; DIAS-Documentation 1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Glossary" href="../../glossary.html" />
+    <link rel="prev" title="Database Helper" href="GDELT_Custom_Chart_Service.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> DIAS-Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../pre.requisites.html">Pre-requisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dias.in.detail.html">How DIAS Works</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Deployment Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protopeer.html">Protopeer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dias-logging-system.html">DIAS Logging System</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../gdelt.html">GDELT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DIASClientLibrary.html">DIASClient Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DIASProoOfConcept.html">DIAS Proof Of Concept Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../TelegramPlotter.html">Telegram Plotter</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../GDELTWebPlotter.html">GDELT Web plotter</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="GDELT_Custom_Chart_Service.html">Database Helper</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Data Plotter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#flipclock">Flipclock</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#update-timer">Update timer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#graph">Graph</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">DIAS-Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../applications.html">Applications</a> &raquo;</li>
+        
+          <li><a href="../GDELTWebPlotter.html">GDELT Web plotter</a> &raquo;</li>
+        
+      <li>Data Plotter</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/sections/applications/GDELTWebPlot/GDELT_Custom_Chart.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="data-plotter">
+<h1>Data Plotter<a class="headerlink" href="#data-plotter" title="Permalink to this headline">¶</a></h1>
+<p>The file “GDELT_Custom_Chart.php” contains the following features:</p>
+<ol class="arabic simple">
+<li><p>A flipclock, which shows the time since the experiment is running</p></li>
+<li><p>A timer showing when the next update to the nodes is made</p></li>
+<li><p>A graph showing the queried data visually</p></li>
+</ol>
+<p>In the following, the three parts from above are briefly explained.</p>
+<div class="section" id="flipclock">
+<h2>Flipclock<a class="headerlink" href="#flipclock" title="Permalink to this headline">¶</a></h2>
+<p>The javascript source code for the flipclock can be found <a href="https://gist.github.com/danichim/8da99dbd742b7cebbaa3b20b4468f48c" target="_blank">here</a>. In the case of this project, the file was renamed to “flipclock.js” and is located in a subfolder called “js”.
+The css source code from <a href="https://github.com/objectivehtml/FlipClock/blob/master/src/flipclock/css/flipclock.css" target="_blank">here</a> was slighlty modified and is located in the folder “css”.</p>
+<p>To create a clock, one simply has to create an empty div with a unique class or id, in our case the div is the following:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#39;clock&#39;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>To setup the clock, the following code needs to be run:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">clock</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.clock&#39;</span><span class="p">).</span><span class="nx">FlipClock</span><span class="p">(</span><span class="nx">difSeconds</span><span class="p">,{</span>
+                    <span class="nx">clockFace</span><span class="o">:</span> <span class="s1">&#39;DailyCounter&#39;</span>
+                <span class="p">});</span>
+</pre></div>
+</div>
+<p>The difSeconds can be derived with:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">difSeconds</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">()</span><span class="o">/</span><span class="mi">1000</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>In our case, the initial setup time needs to be removed, such that we see only the days form that day on:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">uptimeDate</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">result</span><span class="p">).</span><span class="nx">r3</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">upDateTime</span> <span class="o">=</span> <span class="nx">uptimeDate</span><span class="p">.</span><span class="nx">min</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">year</span> <span class="o">=</span>  <span class="nx">upDateTime</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">month</span> <span class="o">=</span> <span class="nx">upDateTime</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">date</span> <span class="o">=</span>  <span class="nx">upDateTime</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">hour</span> <span class="o">=</span>  <span class="nx">upDateTime</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">mint</span> <span class="o">=</span>  <span class="nx">upDateTime</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">sec</span> <span class="o">=</span>   <span class="nx">upDateTime</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+
+<span class="c1">//month are counted from 0 to 11 so 1 is subtracted from month</span>
+<span class="kd">var</span> <span class="nx">uptimeDTSeconds</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">year</span><span class="p">,</span><span class="nx">month</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="nx">date</span><span class="p">,</span><span class="nx">hour</span><span class="p">,</span><span class="nx">mint</span><span class="p">,</span><span class="nx">sec</span><span class="p">).</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">currentDTSeconds</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">()</span><span class="o">/</span><span class="mi">1000</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">difSeconds</span> <span class="o">=</span> <span class="nx">currentDTSeconds</span> <span class="o">-</span> <span class="nx">uptimeDTSeconds</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;up= &#39;</span><span class="p">,</span><span class="nx">uptimeDTSeconds</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;cur= &#39;</span><span class="p">,</span><span class="nx">currentDTSeconds</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;dif= &#39;</span><span class="p">,</span><span class="nx">difSeconds</span><span class="p">);</span>
+
+<span class="nx">clock</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.clock&#39;</span><span class="p">).</span><span class="nx">FlipClock</span><span class="p">(</span><span class="nx">difSeconds</span><span class="p">,{</span>
+    <span class="nx">clockFace</span><span class="o">:</span> <span class="s1">&#39;DailyCounter&#39;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>‘result’ is the json string descripbed in <a class="reference internal" href="GDELT_Custom_Chart_Service.html#database-helper"><span class="std std-ref">Database Helper</span></a>.</p>
+</div>
+<div class="section" id="update-timer">
+<h2>Update timer<a class="headerlink" href="#update-timer" title="Permalink to this headline">¶</a></h2>
+<p>The source code from the update timer can be found here: <a class="reference external" href="https://github.com/wimbarelds/TimeCircles/blob/master/inc/TimeCircles.js">https://github.com/wimbarelds/TimeCircles/blob/master/inc/TimeCircles.js</a>
+The ‘TimeCircles.js’ file is again found under ‘js’, the ‘TimeCircles.css’ file under ‘css’.</p>
+<p>As with the FlipClock, a simple empty div with distinct class or id needs to be created:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#39;update_timer&#39;</span> <span class="na">data-timer</span><span class="o">=</span><span class="s">&#39;900&#39;</span> <span class="na">style</span><span class="o">=</span><span class="s">&#39;width:50px;height:50px;&#39;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>Then, for initializing it, the dollowing code gets executed:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.update_timer&#39;</span><span class="p">).</span><span class="nx">TimeCircles</span><span class="p">({</span>
+<span class="nx">time</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">Days</span><span class="o">:</span> <span class="p">{</span> <span class="nx">show</span><span class="o">:</span> <span class="kc">false</span> <span class="p">},</span>
+    <span class="nx">Hours</span><span class="o">:</span> <span class="p">{</span> <span class="nx">show</span><span class="o">:</span> <span class="kc">false</span> <span class="p">},</span>
+    <span class="nx">Minutes</span><span class="o">:</span> <span class="p">{</span> <span class="nx">show</span><span class="o">:</span> <span class="kc">false</span> <span class="p">},</span>
+    <span class="nx">Seconds</span><span class="o">:</span> <span class="p">{</span> <span class="nx">show</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span><span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#1e73be&#39;</span><span class="p">}</span>
+<span class="p">},</span>
+<span class="nx">text_size</span><span class="o">:</span> <span class="mf">0.15</span><span class="p">,</span>
+<span class="nx">number_size</span><span class="o">:</span> <span class="mf">0.20</span><span class="p">,</span>
+<span class="nx">total_duration</span><span class="o">:</span> <span class="mi">900</span><span class="p">,</span>
+<span class="nx">circle_bg_color</span><span class="o">:</span> <span class="s1">&#39;#f7f8f9&#39;</span><span class="p">,</span>
+<span class="nx">fg_width</span><span class="o">:</span> <span class="mf">0.03</span>
+<span class="p">});</span>
+<span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.update_timer .textDiv_Seconds&#39;</span><span class="p">);</span>
+<span class="nx">container</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;h4&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">original</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">clone</span> <span class="o">=</span> <span class="nx">original</span><span class="p">.</span><span class="nx">clone</span><span class="p">().</span><span class="nx">appendTo</span><span class="p">(</span><span class="nx">container</span><span class="p">);</span>
+<span class="nx">original</span><span class="p">.</span><span class="nx">hide</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>We also add a listener to the timer:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.update_timer&#39;</span><span class="p">).</span><span class="nx">TimeCircles</span><span class="p">().</span><span class="nx">addListener</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">unit</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">total</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">total</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="nx">total</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">minutes</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">total</span> <span class="o">/</span> <span class="mi">60</span><span class="p">)</span> <span class="o">%</span> <span class="mi">60</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">seconds</span> <span class="o">=</span> <span class="nx">total</span> <span class="o">%</span> <span class="mi">60</span><span class="p">;</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">seconds</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)</span> <span class="nx">seconds</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span> <span class="o">+</span> <span class="nx">seconds</span><span class="p">;</span>
+    <span class="nx">clone</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">minutes</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="nx">seconds</span><span class="p">);</span>
+<span class="p">},</span> <span class="s1">&#39;all&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The variable ‘clone’ is the variable from the code block before.</p>
+<p>This whole process creates the Timer, but with a slight adaptation:
+The original seconds hand gets hidden and e replacement gets added.
+Every second, the value of the real second box gets read and, if less that 10, a leading 0 gets added.</p>
+<p>Whenever there is an error with a file not beign able to be loaded, the Timer gets restarted:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.update_timer&#39;</span><span class="p">).</span><span class="nx">TimeCircles</span><span class="p">().</span><span class="nx">restart</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="graph">
+<h2>Graph<a class="headerlink" href="#graph" title="Permalink to this headline">¶</a></h2>
+<p>For the graph, the plotly library was used (<a class="reference external" href="https://plotly.com/javascript/">https://plotly.com/javascript/</a>).</p>
+<p>Also for plotly, an empty div <strong>with a unique id</strong> needs to be created.</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#39;cvs&#39;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>Then, the plot needs to be initiated:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">Plotly</span><span class="p">.</span><span class="nx">react</span><span class="p">(</span><span class="s1">&#39;cvs&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">layout</span><span class="p">,{</span><span class="nx">displaylogo</span><span class="o">:</span> <span class="kc">false</span><span class="p">})</span>
+<span class="nx">Plotly</span><span class="p">.</span><span class="nx">setPlotConfig</span><span class="p">({</span>
+    <span class="nx">modeBarButtonsToRemove</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;sendDataToCloud&#39;</span><span class="p">]</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>The display and layout variables are initiated like in the following:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">res</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">result</span><span class="p">).</span><span class="nx">r1</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">rangeStartingDt</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">((</span><span class="nx">res</span><span class="p">[</span><span class="nx">res</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="nx">epoch</span><span class="o">-</span><span class="p">((</span><span class="nx">res</span><span class="p">[</span><span class="nx">res</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="nx">epoch</span><span class="o">-</span><span class="nx">res</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">epoch</span><span class="p">)</span><span class="o">/</span><span class="mi">7</span><span class="p">))</span> <span class="o">*</span><span class="mi">1000</span><span class="p">).</span><span class="nx">toLocaleDateString</span><span class="p">(</span><span class="s1">&#39;ko-KR&#39;</span><span class="p">);</span>
+<span class="nx">rangeStartingDt</span> <span class="o">=</span> <span class="p">((</span><span class="nx">rangeStartingDt</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;. &#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">)).</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;. &#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">)).</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">rangeStartingTm</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">((</span><span class="nx">res</span><span class="p">[</span><span class="nx">res</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="nx">epoch</span><span class="o">-</span><span class="p">((</span><span class="nx">res</span><span class="p">[</span><span class="nx">res</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="nx">epoch</span><span class="o">-</span><span class="nx">res</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">epoch</span><span class="p">)</span><span class="o">/</span><span class="mi">7</span><span class="p">))</span> <span class="o">*</span><span class="mi">1000</span><span class="p">).</span><span class="nx">toLocaleTimeString</span><span class="p">(</span><span class="s1">&#39;en-GB&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">rangeStartingTime</span> <span class="o">=</span> <span class="nx">rangeStartingDt</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="nx">rangeStartingTm</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">rangeEndingDt</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">((</span><span class="nx">res</span><span class="p">[</span><span class="nx">res</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="nx">epoch</span><span class="o">-</span><span class="p">((</span><span class="nx">res</span><span class="p">[</span><span class="nx">res</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="nx">epoch</span><span class="o">-</span><span class="nx">res</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">epoch</span><span class="p">)</span><span class="o">/</span><span class="mi">7</span><span class="p">))</span> <span class="o">*</span><span class="mi">1000</span><span class="p">).</span><span class="nx">toLocaleDateString</span><span class="p">(</span><span class="s1">&#39;ko-KR&#39;</span><span class="p">);</span>
+<span class="nx">rangeEndingDt</span> <span class="o">=</span> <span class="p">((</span><span class="nx">rangeEndingDt</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;. &#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">)).</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;. &#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">)).</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">rangeEndingTime</span> <span class="o">=</span> <span class="nx">rangeEndingDt</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="nx">endingTm</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">xAxisTitle</span> <span class="o">=</span> <span class="nx">startingTime</span><span class="o">+</span><span class="s1">&#39;                            to                          &#39;</span><span class="o">+</span><span class="nx">endingTime</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">yAxisTitle</span> <span class="o">=</span> <span class="s1">&#39;Total Number of Event News&#39;</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">layout</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">autosize</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mi">1150</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span><span class="mi">600</span><span class="p">,</span>
+    <span class="nx">paper_bgcolor</span><span class="o">:</span><span class="s1">&#39;#e7e8e9&#39;</span><span class="p">,</span>
+    <span class="nx">plot_bgcolor</span><span class="o">:</span><span class="s1">&#39;#e7e8e9&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;titlefont&#39;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s1">&#39;size&#39;</span><span class="o">:</span> <span class="mi">12</span>
+    <span class="p">},</span>
+    <span class="nx">xaxis</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">title</span><span class="o">:</span> <span class="nx">xAxisTitle</span><span class="p">,</span>
+        <span class="nx">titlefont</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">family</span><span class="o">:</span> <span class="s1">&#39;Open Sans, verdana, arial, sans-serif&#39;</span><span class="p">,</span>
+            <span class="nx">size</span><span class="o">:</span> <span class="mi">14</span><span class="p">,</span>
+            <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#444444&#39;</span>
+        <span class="p">},</span>
+        <span class="nx">range</span><span class="o">:</span><span class="p">[</span><span class="nx">rangeStartingTime</span><span class="p">,</span> <span class="nx">rangeEndingTime</span><span class="p">],</span>
+        <span class="nx">rangeslider</span><span class="o">:</span> <span class="p">{},</span>
+    <span class="p">},</span>
+    <span class="nx">yaxis</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">title</span><span class="o">:</span> <span class="nx">yAxisTitle</span><span class="p">,</span>
+        <span class="nx">titlefont</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">family</span><span class="o">:</span> <span class="s1">&#39;Open Sans, verdana, arial, sans-serif&#39;</span><span class="p">,</span>
+        <span class="nx">size</span><span class="o">:</span> <span class="mi">14</span><span class="p">,</span>
+        <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#444444&#39;</span>
+        <span class="p">},</span>
+        <span class="nx">range</span><span class="o">:</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="nx">legend</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="nx">xanchor</span><span class="o">:</span><span class="s1">&#39;left&#39;</span><span class="p">,</span>
+                    <span class="nx">yanchor</span><span class="o">:</span><span class="s1">&#39;top&#39;</span><span class="p">,</span>
+                    <span class="nx">y</span><span class="o">:</span><span class="mf">1.5</span><span class="p">,</span>
+                    <span class="nx">x</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
+                    <span class="nx">orientation</span><span class="o">:</span> <span class="s1">&#39;h&#39;</span>
+        <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[</span><span class="nx">trace1</span><span class="p">,</span><span class="nx">trace2</span><span class="p">,</span><span class="nx">trace3</span><span class="p">,</span><span class="nx">trace4</span><span class="p">,</span><span class="nx">trace5</span><span class="p">,</span><span class="nx">trace6</span><span class="p">,</span><span class="nx">trace7</span><span class="p">,</span><span class="nx">trace8</span><span class="p">,</span><span class="nx">trace9</span><span class="p">,</span><span class="nx">trace10</span><span class="p">,</span><span class="nx">trace11</span><span class="p">,</span><span class="nx">trace12</span><span class="p">,</span><span class="nx">trace13</span><span class="p">,</span><span class="nx">trace14</span><span class="p">,</span><span class="nx">trace15</span><span class="p">,</span><span class="nx">trace16</span><span class="p">,</span><span class="nx">trace17</span><span class="p">,</span><span class="nx">trace18</span><span class="p">,</span><span class="nx">trace19</span><span class="p">,</span><span class="nx">trace20</span><span class="p">,</span><span class="nx">trace21</span><span class="p">,</span><span class="nx">trace22</span><span class="p">,</span><span class="nx">trace23</span><span class="p">,</span><span class="nx">trace24</span><span class="p">,</span><span class="nx">trace25</span><span class="p">,</span><span class="nx">trace26</span><span class="p">,</span><span class="nx">trace27</span><span class="p">,</span><span class="nx">trace28</span><span class="p">,</span><span class="nx">trueSumTraces</span><span class="p">,</span><span class="nx">SumStatesTraces</span><span class="p">,</span><span class="nx">DiasSumTraces</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>As trace1 to trace28 are almost identical, only one of them is shown in the following, plus the additional data fields:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">res</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">result</span><span class="p">).</span><span class="nx">r1</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">countries</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">result</span><span class="p">).</span><span class="nx">r2</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">xAxisValue</span><span class="o">&lt;</span><span class="nx">no</span><span class="p">.</span><span class="o">&gt;=</span><span class="p">[];</span> <span class="c1">//eg. xAxisValue1</span>
+<span class="kd">var</span> <span class="nx">yAxisValue</span><span class="o">&lt;</span><span class="nx">no</span><span class="p">.</span><span class="o">&gt;=</span><span class="p">[];</span>
+
+<span class="kd">var</span> <span class="nx">peers</span><span class="o">=</span><span class="p">[];</span>
+
+<span class="kd">var</span> <span class="nx">xAxisTrueSumOfStateVals</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="kd">var</span> <span class="nx">yAxisTrueSumOfStateVals</span> <span class="o">=</span> <span class="p">[];</span>
+
+<span class="kd">var</span> <span class="nx">xAxisDIASSumOfStateVals</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="kd">var</span> <span class="nx">yAxisDIASSumOfStateVals</span> <span class="o">=</span> <span class="p">[];</span>
+
+<span class="kd">var</span> <span class="nx">xAxisSumofSelectedStateVals</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="kd">var</span> <span class="nx">yAxisSumofSelectedStateVals</span> <span class="o">=</span> <span class="p">[];</span>
+
+<span class="k">for</span><span class="p">(</span><span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">res</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+    <span class="kd">var</span> <span class="nx">epochValDt</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">((</span><span class="nx">res</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">epoch</span><span class="p">)</span><span class="o">*</span><span class="mi">1000</span><span class="p">).</span><span class="nx">toLocaleDateString</span><span class="p">(</span><span class="s1">&#39;ko-KR&#39;</span><span class="p">);</span>
+    <span class="nx">epochValDt</span> <span class="o">=</span> <span class="p">((</span><span class="nx">epochValDt</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;. &#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">)).</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;. &#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">)).</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+
+    <span class="kd">var</span> <span class="nx">epochValTm</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">((</span><span class="nx">res</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">epoch</span><span class="p">)</span><span class="o">*</span><span class="mi">1000</span><span class="p">).</span><span class="nx">toLocaleTimeString</span><span class="p">(</span><span class="s1">&#39;en-GB&#39;</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">epochVal</span> <span class="o">=</span> <span class="nx">epochValDt</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="nx">epochValTm</span><span class="p">;</span>
+
+    <span class="nx">xAxisTrueSumOfStateVals</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">epochVal</span><span class="p">);</span>
+    <span class="nx">xAxisDIASSumOfStateVals</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">epochVal</span><span class="p">);</span>
+    <span class="nx">xAxisSumofSelectedStateVals</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">epochVal</span><span class="p">);</span>
+
+    <span class="nx">yAxisTrueSumOfStateVals</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">res</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">true_sum_gdelt_events</span><span class="p">));</span>
+    <span class="nx">yAxisDIASSumOfStateVals</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">res</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">dias_sum_selected_states</span><span class="p">));</span>
+    <span class="nx">yAxisSumofSelectedStateVals</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">res</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">sum_selected_states</span><span class="p">));</span>
+
+    <span class="nx">xAxisValue</span><span class="o">&lt;</span><span class="nx">no</span><span class="p">.</span><span class="o">&gt;</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">epochVal</span><span class="p">);</span> <span class="c1">//eg. xAxisValue1</span>
+    <span class="nx">yAxisValue</span><span class="o">&lt;</span><span class="nx">no</span><span class="p">.</span><span class="o">&gt;</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">res</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">peer</span><span class="o">&lt;</span><span class="nx">no</span><span class="p">.</span><span class="o">&gt;</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">trueSumTraces</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="nx">xAxisTrueSumOfStateVals</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="nx">yAxisTrueSumOfStateVals</span><span class="p">,</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;GDELT Actual&#39;</span><span class="p">,</span>
+    <span class="nx">mode</span><span class="o">:</span> <span class="s1">&#39;line&#39;</span><span class="p">,</span>
+
+    <span class="nx">line</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">dash</span><span class="o">:</span> <span class="s1">&#39;dot&#39;</span><span class="p">,</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#3785ba&#39;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;visible&#39;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">SumStatesTraces</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="nx">xAxisSumofSelectedStateVals</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="nx">yAxisSumofSelectedStateVals</span><span class="p">,</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;DIAS Actual&#39;</span><span class="p">,</span>
+    <span class="nx">mode</span><span class="o">:</span> <span class="s1">&#39;line&#39;</span><span class="p">,</span>
+    <span class="nx">marker</span><span class="o">:</span> <span class="p">{</span><span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;rgb(152, 156, 152)&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;visible&#39;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">DiasSumTraces</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="nx">xAxisDIASSumOfStateVals</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="nx">yAxisDIASSumOfStateVals</span><span class="p">,</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;DIAS Estimated&#39;</span><span class="p">,</span>
+    <span class="nx">marker</span><span class="o">:</span> <span class="p">{</span><span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#2ca02c&#39;</span><span class="p">},</span>
+    <span class="nx">mode</span><span class="o">:</span> <span class="s1">&#39;line&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;visible&#39;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">trace</span><span class="o">&lt;</span><span class="nx">no</span><span class="p">.</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span> <span class="c1">//eg. trace1</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="nx">xAxisValue</span><span class="o">&lt;</span><span class="nx">no</span><span class="p">.</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">//eg. xAxisValue1</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="nx">yAxisValue</span><span class="o">&lt;</span><span class="nx">no</span><span class="p">.</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">//eg. yAxisValue1</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="nx">countries</span><span class="p">[</span><span class="o">&lt;</span><span class="nx">no</span><span class="p">.</span> <span class="o">-</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">].</span><span class="nx">actiongeo_countrycode</span><span class="p">,</span> <span class="c1">//eg countries[0]</span>
+    <span class="nx">mode</span><span class="o">:</span> <span class="s1">&#39;markers&#39;</span><span class="p">,</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;scatter&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;visible&#39;</span><span class="o">:</span> <span class="s1">&#39;legendonly&#39;</span><span class="p">,</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../glossary.html" class="btn btn-neutral float-right" title="Glossary" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="GDELT_Custom_Chart_Service.html" class="btn btn-neutral float-left" title="Database Helper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, Edward Gaere
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    
+
+  <style>
+    /*To underline text*/
+    .underline {
+      text-decoration: underline;
+    }
+
+
+      /*To underline bold text*/
+      .underlinebold{
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
+    /* Sidebar header (and topbar for mobile) */
+
+
+
+      :root{
+        --grey: rgb(231, 232, 233);
+        --altblue: rgb(30,115,190);
+        --blue: rgb(37, 117, 187);
+      }
+
+      /*link visited and unvisited color*/
+
+      a {
+        color: var(--grey);
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      a:visited {
+        color: var(--grey);
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      /*footer colors*/
+
+      footer{
+        color:var(--grey)
+      }
+
+      a:hover {
+        color: var(--grey);
+        text-decoration: underline;
+        cursor: pointer;
+        text-decoration-color: var(--blue);
+      }
+
+     .wy-nav-side {
+
+        /*background: rgb(30,115,190);*/
+        background: var(--grey);
+        color:/**#eee;*/var(--blue);
+
+
+     }
+
+     .wy-nav-content-wrap{
+       background: var(--grey);
+     }
+
+     .wy-menu-vertical li.toctree-l1.current>a {
+        color: var(--blue);
+     }
+
+     .wy-menu-vertical li.toctree-l2 a{
+       color: var(--blue);
+     }
+
+     .wy-menu-vertical li.toctree-l2 a:hover{
+       color: var(--grey);
+       background:var(--blue);
+     }
+
+     .wy-menu-vertical li.toctree-l2.current li.toctree-l3>a:hover{
+         color: var(--grey);
+         background:var(--blue);
+     }
+
+     .wy-menu-vertical li.toctree-l3.current li.toctree-l4>a:hover{
+           color: var(--grey);
+           background:var(--blue);
+     }
+
+    .wy-side-nav-search {
+
+        background:var(--grey); /*rgb(30,115,190);*/
+
+    }
+
+    .wy-menu-vertical a{
+      color:var(--blue);
+      text-decoration: none;
+    }
+
+    .wy-menu-vertical li.current{
+        color:var(--blue);
+    }
+
+    .wy-menu-vertical li{
+        color:var(--blue);
+    }
+
+    .wy-menu-vertival a:current {
+      color:var(--grey);
+    }
+
+    .wy-menu-vertical a:hover{
+        background-color:var(--blue);
+        color:var(--grey);
+    }
+
+    .fa-home::before, .icon-home::before {
+        content:"";
+    }
+
+    a.icon-home {
+        width: 50%;
+        margin-left: -6px;
+        font-size: 0%;
+        content:url("http://dias-net.org/wp-content/uploads/2016/08/silver-nodes-above-extended.png");
+    }
+
+    .wy-nav-content{
+        max-width: initial;
+        background:var(--blue);
+        color:var(--grey);
+    }
+
+    /*nav top current directory, delete link underline*/
+    .wy-breadcrumbs li a:first-child{
+      text-decoration: none;
+    }
+
+
+    /*buton colors*/
+    .btn-neutral {
+        color: var(--blue) !important;
+        background-color: var(--grey) !important;
+    }
+    .btn-neutral:visited {
+        color: var(--blue) !important;
+        background-color: var(--grey) !important;
+    }
+
+    /*codeblock color*/
+    .rst-content div[class^='highlight'] pre{
+      color:black;
+      border-radius:3px; /*rounded corners*/
+    }
+
+    /*make sure tables do no have white backgrounds*/
+    .rst-content table.docutils:not(.field-list) tr:nth-child(2n-1) td {
+      background-color:var(--blue)
+    }
+
+    /*color of table header*/
+    .rst-content table.docutils thead{
+      color:var(--grey) !important;
+    }
+
+    /*table title thick border*/
+    .rst-content table.docutils thead th{
+      border-bottom: solid 2px;
+      border-top: solid 2px;
+      border-left: solid 2px;
+      border-right: solid 2px;
+    }
+
+    /*code block line numbers*/
+    div.linenodiv pre{
+      color:var(--grey) !important;
+      border-radius:0 !important;
+    }
+
+    /*codeblock grey background*/
+    div.highlight pre{
+      background-color:var(--grey);
+    }
+
+    /*rounded corners on images*/
+    .rst-content .section>img{
+      border-radius:3px;
+    }
+
+    /*rounded corners on codeblocks*/
+    .rst-content div[class^='highlight']{
+        border-radius:3px;
+    }
+
+  </style>
+
+
+</body>
+</html>
